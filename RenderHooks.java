@@ -10,45 +10,9 @@ import org.lwjgl.opengl.GL11;
 import net.minecraft.client.Minecraft;
 
 
-public class RenderHooks extends EntityRendererProxy {
+public class RenderHooks extends bu {
 
-	Method setupCameraTransform;
-	Method renderHudItem;
-	Field zoom;
-	public RenderHooks(Minecraft minecraft) {
-		super(minecraft);
-		try {
-			setupCameraTransform=oy.class.getDeclaredMethod("a", float.class, int.class);
-			renderHudItem=oy.class.getDeclaredMethod("b", float.class, int.class);
-			zoom=oy.class.getDeclaredField("C");
-		}  catch (Throwable e) {
-			// TODO Auto-generated catch block
-			throw new RuntimeException(e);
-		}
-		renderHudItem.setAccessible(true);
-		setupCameraTransform.setAccessible(true);
-		zoom.setAccessible(true);
-	}
-	
-	//copied from mw.c
-	public void c(float renderTick) {
-		double prevzoom = 1.0;
-		try {
-			prevzoom = zoom.getDouble(this);
-		
-    		zoom.set(this, (Double) 1.001);
-    		super.c(renderTick);
-    		zoom.set(this, (Double) prevzoom);
-		} catch (Throwable e) {
-            throw new RuntimeException(e);
-        }
-		
-		try {
-			setupCameraTransform.invoke(this, renderTick, 0);
-		}  catch (Throwable e) {
-			throw new RuntimeException(e);
-		}
-		a(0);
+	public void render(float renderTick) {
 		((t)null).a();
 		if (arrhooks == null) { arrhooks = hooks.toArray(new Renderhook[0]); }
 		Minecraft game = ModLoader.getMinecraftInstance();
@@ -58,23 +22,6 @@ public class RenderHooks extends EntityRendererProxy {
 			arrhooks[i].worldRender(game, renderTick);
 		}
 		((t)null).b();
-		ty targetblock = game.x;
-		kw entityliving = game.h;
-		if((entityliving instanceof gh) && targetblock != null && !game.h.a(kr.f)) {
-            gh gh2 = (gh)entityliving;
-            GL11.glDisable(3008 /*GL_ALPHA_TEST*/);
-            m renderglobal = game.f;
-            renderglobal.a(gh2, targetblock, 0, gh2.f.b(), renderTick);
-            renderglobal.b(gh2, targetblock, 0, gh2.f.b(), renderTick);
-            GL11.glEnable(3008 /*GL_ALPHA_TEST*/);
-        }
-		GL11.glClear(256);
-        try {
-			renderHudItem.invoke(this, renderTick, 0);
-		} catch (Throwable e) {
-			// TODO Auto-generated catch block
-			throw new RuntimeException(e);
-		}
 	}
 	protected static Renderhook[] arrhooks;
 	protected static ArrayList<Renderhook> hooks = new ArrayList<Renderhook>();
@@ -89,5 +36,13 @@ public class RenderHooks extends EntityRendererProxy {
 		hooks.remove(hook);
 		arrhooks = hooks.toArray(new Renderhook[0]);
 	}
+    /* (non-Javadoc)
+     * @see bu#a(si, double, double, double, float, float)
+     */
+    @Override
+    public void a(si arg0, double arg1, double arg2, double arg3, float arg4, float arg5)
+    {
+        render(arg5);
+    }
 
 }

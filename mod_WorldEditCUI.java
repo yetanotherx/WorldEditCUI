@@ -34,7 +34,7 @@ public class mod_WorldEditCUI extends BaseMod implements Renderhook, ChatHookabl
 
     private void drawBoundingBox(float red, float green, float blue, float alpha, double minX, double minY,
                                  double minZ, double maxX, double maxY, double maxZ) {
-        na tessellator = na.a;
+        ns tessellator = ns.a;
         
         // Draw bottom face using LineStrip
         tessellator.a(3);
@@ -78,7 +78,7 @@ public class mod_WorldEditCUI extends BaseMod implements Renderhook, ChatHookabl
     private void drawLatticeBox(float red, float green, float blue, float alpha, double minX, double minY,
                                  double minZ, double maxX, double maxY, double maxZ)
     {
-        na tessellator = na.a;
+        ns tessellator = ns.a;
     	tessellator.a(1);
         tessellator.a(red, green, blue, alpha);
         //XY plane
@@ -114,7 +114,7 @@ public class mod_WorldEditCUI extends BaseMod implements Renderhook, ChatHookabl
     private void drawGridSurface(float red, float green, float blue, float alpha, double minX, double minY,
                                  double minZ, double maxX, double maxY, double maxZ)
     {
-        na tessellator = na.a;
+        ns tessellator = ns.a;
     	tessellator.a(1);
         tessellator.a(red, green, blue, alpha);
         double x,y,z;
@@ -234,9 +234,9 @@ public class mod_WorldEditCUI extends BaseMod implements Renderhook, ChatHookabl
     private void renderColouredBoundingBox(Minecraft mc, float red, float green, float blue, float alpha, double minX, double minY, double minZ, double maxX, double maxY,
                                            double maxZ) {
     	double playerPosX, playerPosY, playerPosZ;
-    	playerPosX=mc.g.bj+((mc.g.aK-mc.g.bj)*curRenderTick);
-    	playerPosY=mc.g.bk+((mc.g.aL-mc.g.bk)*curRenderTick);
-    	playerPosZ=mc.g.bl+((mc.g.aM-mc.g.bl)*curRenderTick);
+    	playerPosX=mc.h.aJ+((mc.h.aM-mc.h.aJ)*curRenderTick);
+    	playerPosY=mc.h.aK+((mc.h.aN-mc.h.aK)*curRenderTick);
+    	playerPosZ=mc.h.aL+((mc.h.aO-mc.h.aL)*curRenderTick);
         drawBoundingBox(red, green, blue, alpha, minX - 0.002D - playerPosX, minY - 0.002D - playerPosY, minZ - 0.002D - playerPosZ, (maxX + 0.002D) - playerPosX, (maxY + 0.002D) - playerPosY, (maxZ + 0.002D) - playerPosZ);
         
     }
@@ -244,9 +244,9 @@ public class mod_WorldEditCUI extends BaseMod implements Renderhook, ChatHookabl
             double maxZ)
     {
     	double playerPosX, playerPosY, playerPosZ;
-    	playerPosX=mc.g.bj+((mc.g.aK-mc.g.bj)*curRenderTick);
-    	playerPosY=mc.g.bk+((mc.g.aL-mc.g.bk)*curRenderTick);
-    	playerPosZ=mc.g.bl+((mc.g.aM-mc.g.bl)*curRenderTick);
+        playerPosX=mc.h.aJ+((mc.h.aM-mc.h.aJ)*curRenderTick);
+        playerPosY=mc.h.aK+((mc.h.aN-mc.h.aK)*curRenderTick);
+        playerPosZ=mc.h.aL+((mc.h.aO-mc.h.aL)*curRenderTick);
     	drawGridSurface(red, green, blue, alpha, minX - playerPosX, minY - playerPosY, minZ - playerPosZ, maxX - playerPosX, maxY - playerPosY, maxZ - playerPosZ);
         
     }
@@ -255,9 +255,9 @@ public class mod_WorldEditCUI extends BaseMod implements Renderhook, ChatHookabl
             double maxZ)
     {
     	double playerPosX, playerPosY, playerPosZ;
-    	playerPosX=mc.g.bj+((mc.g.aK-mc.g.bj)*curRenderTick);
-    	playerPosY=mc.g.bk+((mc.g.aL-mc.g.bk)*curRenderTick);
-    	playerPosZ=mc.g.bl+((mc.g.aM-mc.g.bl)*curRenderTick);
+        playerPosX=mc.h.aJ+((mc.h.aM-mc.h.aJ)*curRenderTick);
+        playerPosY=mc.h.aK+((mc.h.aN-mc.h.aK)*curRenderTick);
+        playerPosZ=mc.h.aL+((mc.h.aO-mc.h.aL)*curRenderTick);
     	drawLatticeBox(red, green, blue, alpha, minX - playerPosX, minY - playerPosY, minZ - playerPosZ, maxX - playerPosX, maxY - playerPosY, maxZ - playerPosZ);
         
     }
@@ -424,8 +424,8 @@ public class mod_WorldEditCUI extends BaseMod implements Renderhook, ChatHookabl
 			//handshake
 			if(matcher.group(1).equals(""))
 			{
-				if(ModLoader.getMinecraftInstance().k()) //isMultiplayerWorld
-					ModLoader.getMinecraftInstance().g.a("/worldedit cui");
+				if(ModLoader.getMinecraftInstance().l()) //isMultiplayerWorld
+					ModLoader.getMinecraftInstance().h.a("/worldedit cui");
 				else
 					System.out.println("/worldedit cui");
 			}
