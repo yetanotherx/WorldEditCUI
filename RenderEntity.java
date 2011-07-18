@@ -37,7 +37,7 @@ public class RenderEntity extends sn {
 
     @Override
     public void w_() {
-        this.d(mc.h.aM, mc.h.aN, mc.h.aO);
+        this.e(mc.h.aM, mc.h.aN, mc.h.aO);
     }
 
     @Override

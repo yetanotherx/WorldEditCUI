@@ -6,6 +6,11 @@ import org.lwjgl.opengl.GL11;
 
 public class RenderHooks extends bw {
 
+    public RenderHooks()
+    {
+        System.out.println("Attaching worldeditcui renderer step 2");
+    }
+    
     @SuppressWarnings("static-access")
     public void render(float renderTick) {
         ((u) null).a();

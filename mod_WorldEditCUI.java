@@ -7,7 +7,7 @@ import org.lwjgl.opengl.GL11;
 
 public class mod_WorldEditCUI extends BaseMod implements Renderhook, ChatHookable {
 
-    public static final boolean WORLDEDIT_CUI_DEBUG = false;
+    public static final boolean WORLDEDIT_CUI_DEBUG = true;
     
     public static int     testBlockX[]      = new int[2];
     public static int     testBlockY[]      = new int[2];
