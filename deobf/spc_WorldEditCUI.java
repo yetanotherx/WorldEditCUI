@@ -1,8 +1,13 @@
+package deobf;
+import net.lahwran.WECUIEvent;
+import net.lahwran.fevents.EventManager;
+import net.lahwran.wecui.WorldEditCUI;
+
 public class spc_WorldEditCUI extends SPCPlugin {
    
     @Override
     public String getVersion() {
-        return "1.7_01";
+        return WorldEditCUI.version;
     }
     
     @Override
@@ -12,6 +17,6 @@ public class spc_WorldEditCUI extends SPCPlugin {
     
     @Override
     public void handleCUIEvent(String type, String params[]) {
-        mod_WorldEditCUI.handleEvent(type, params);
+        EventManager.callEvent(new WECUIEvent(type, params));
     }
 }
