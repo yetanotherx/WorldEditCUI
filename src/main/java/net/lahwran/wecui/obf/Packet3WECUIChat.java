@@ -38,8 +38,8 @@ public class Packet3WECUIChat extends abb {
         registered = true;
         try {
             Class<gt> packetclass = gt.class;
-            Field idstoclassesfield = packetclass.getDeclaredField("a");
-            Field classestoidsfield = packetclass.getDeclaredField("b");
+            Field idstoclassesfield = packetclass.getDeclaredField("j");
+            Field classestoidsfield = packetclass.getDeclaredField("a");
             idstoclassesfield.setAccessible(true);
             classestoidsfield.setAccessible(true);
             ob idstoclasses = (ob) idstoclassesfield.get(null);
