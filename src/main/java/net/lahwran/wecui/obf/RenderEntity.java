@@ -40,7 +40,7 @@ public class RenderEntity extends ia {
 
     @Override
     public void a() {
-        this.d(mc.h.o, mc.h.p, mc.h.q);
+        this.d(mc.h.s, mc.h.t, mc.h.u);
     }
 
     @Override

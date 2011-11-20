@@ -42,15 +42,15 @@ public class ObfHub {
 
     public double getPlayerX(float renderTick) {
         di plyr = minecraft.h;
-        return plyr.m + ((plyr.s - plyr.m) * renderTick);
+        return plyr.p + ((plyr.s - plyr.p) * renderTick);
     }
     public double getPlayerY(float renderTick) {
         di plyr = minecraft.h;
-        return plyr.n + ((plyr.t - plyr.n) * renderTick);
+        return plyr.q + ((plyr.t - plyr.q) * renderTick);
     }
     public double getPlayerZ(float renderTick) {
         di plyr = minecraft.h;
-        return plyr.o + ((plyr.u - plyr.o) * renderTick);
+        return plyr.r + ((plyr.u - plyr.r) * renderTick);
     }
 
     public void addVertex(double x, double y, double z) {

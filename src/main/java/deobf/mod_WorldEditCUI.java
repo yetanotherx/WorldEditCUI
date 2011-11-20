@@ -14,7 +14,9 @@ public class mod_WorldEditCUI extends BaseMod {
     static {
         WorldEditCUI.initialize(ModLoader.getMinecraftInstance());
     }
-    public String Version() {
+
+    @Override
+    public String getVersion() {
         return WorldEditCUI.version;
     }
 
@@ -33,7 +35,8 @@ public class mod_WorldEditCUI extends BaseMod {
         WorldEditCUI.debug("spawned render entity");
     }
 
-    public boolean OnTickInGame(Minecraft mc) {
+    @Override
+    public boolean OnTickInGame(Minecraft mc, float partialticks) {
         if (mc.f != lastworld) {
             spawn(mc);
             lastworld = mc.f;
@@ -41,9 +44,13 @@ public class mod_WorldEditCUI extends BaseMod {
         return true;
     }
 
+    @Override
+    public void load() {}
     
+    @Override
     public void AddRenderer(Map map) {
         WorldEditCUI.debug("Attaching worldeditcui renderer");
         map.put(RenderEntity.class, new RenderHooks());
     }/**/
+
 }
