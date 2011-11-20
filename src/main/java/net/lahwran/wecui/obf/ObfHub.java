@@ -5,8 +5,8 @@ package net.lahwran.wecui.obf;
 
 import java.io.File;
 
-import deobf.kj;
-import deobf.xe;
+import deobf.di;
+import deobf.cv;
 import net.minecraft.client.Minecraft;
 
 /**
@@ -19,7 +19,7 @@ public class ObfHub {
 
     private Minecraft minecraft;
 
-    private xe tessellator = xe.a;
+    private cv tessellator = cv.a;
     /**
      * @param minecraft
      */
@@ -41,16 +41,16 @@ public class ObfHub {
     }
 
     public double getPlayerX(float renderTick) {
-        kj plyr = minecraft.h;
-        return plyr.l + ((plyr.o - plyr.l) * renderTick);
+        di plyr = minecraft.h;
+        return plyr.m + ((plyr.s - plyr.m) * renderTick);
     }
     public double getPlayerY(float renderTick) {
-        kj plyr = minecraft.h;
-        return plyr.m + ((plyr.p - plyr.m) * renderTick);
+        di plyr = minecraft.h;
+        return plyr.n + ((plyr.t - plyr.n) * renderTick);
     }
     public double getPlayerZ(float renderTick) {
-        kj plyr = minecraft.h;
-        return plyr.n + ((plyr.q - plyr.n) * renderTick);
+        di plyr = minecraft.h;
+        return plyr.o + ((plyr.u - plyr.o) * renderTick);
     }
 
     public void addVertex(double x, double y, double z) {

@@ -11,16 +11,16 @@ import net.lahwran.ChatEvent;
 import net.lahwran.fevents.EventManager;
 
 
-import deobf.kx;
-import deobf.vc;
-import deobf.vl;
-import deobf.yc;
+import deobf.fe;
+import deobf.abb;
+import deobf.ob;
+import deobf.gt;
 
 /**
  * @author lahwran
  *
  */
-public class Packet3WECUIChat extends yc {
+public class Packet3WECUIChat extends abb {
     private static boolean registered = false;
 
     public Packet3WECUIChat() {
@@ -37,12 +37,12 @@ public class Packet3WECUIChat extends yc {
             return;
         registered = true;
         try {
-            Class<vl> packetclass = vl.class;
+            Class<gt> packetclass = gt.class;
             Field idstoclassesfield = packetclass.getDeclaredField("a");
             Field classestoidsfield = packetclass.getDeclaredField("b");
             idstoclassesfield.setAccessible(true);
             classestoidsfield.setAccessible(true);
-            vc idstoclasses = (vc) idstoclassesfield.get(null);
+            ob idstoclasses = (ob) idstoclassesfield.get(null);
             Map<Class<?>, Integer> classestoids = (Map<Class<?>, Integer>) classestoidsfield.get(null);
             idstoclasses.a(3, Packet3WECUIChat.class);
             classestoids.put(Packet3WECUIChat.class, 3);
@@ -50,10 +50,10 @@ public class Packet3WECUIChat extends yc {
             throw new RuntimeException("Error inserting chat handler - WorldEditClientUserInterface will not work!", e);
         }
     }
-    public void a(kx kx1) {
+    public void a(fe nethandler) {
         ChatEvent chatevent = new ChatEvent(a);
         EventManager.callEvent(chatevent);
         if (!chatevent.isCancelled())
-            kx1.a(this);
+            nethandler.a(this);
     }
 }

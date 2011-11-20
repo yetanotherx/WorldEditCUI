@@ -7,7 +7,8 @@ import net.lahwran.wecui.obf.RenderEntity;
 import net.lahwran.wecui.obf.RenderHooks;
 import net.minecraft.client.Minecraft;
 
-import deobf.kj;
+import deobf.ia;
+import deobf.ry;
 
 public class mod_WorldEditCUI extends BaseMod {
     static {
@@ -21,14 +22,14 @@ public class mod_WorldEditCUI extends BaseMod {
         ModLoader.SetInGameHook(this, true, true); // the last true is because we don't want to iterate the entity list too often
     }
 
-    public static rv lastworld = null;
+    public static ry lastworld = null;
     public static RenderEntity entity;
 
     public static void spawn(Minecraft mc) {
         entity = new RenderEntity(mc, mc.f);
-        entity.d(mc.h.o, mc.h.p, mc.h.q);
-        mc.f.a((kj) entity);
-        entity.d(mc.h.o, mc.h.p, mc.h.q);
+        entity.d(mc.h.s, mc.h.t, mc.h.u);
+        mc.f.a((ia) entity);
+        entity.d(mc.h.s, mc.h.t, mc.h.u);
         WorldEditCUI.debug("spawned render entity");
     }
 

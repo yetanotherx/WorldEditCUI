@@ -7,11 +7,11 @@ import net.minecraft.client.Minecraft;
 
 import org.lwjgl.opengl.GL11;
 
-import deobf.kj;
-import deobf.ow;
-import deobf.px;
+import deobf.ia;
+import deobf.rt;
+import deobf.rg;
 
-public class RenderHooks extends px {
+public class RenderHooks extends rg {
 
     public RenderHooks()
     {
@@ -19,14 +19,14 @@ public class RenderHooks extends px {
     }
 
     private void render(float renderTick) {
-        ow.a();
+        rt.a();
         WorldRenderEvent renderEvent = WorldRenderEvent.update(renderTick);
         EventManager.callEvent(renderEvent);
-        ow.b();
+        rt.b();
     }
 
     @Override
-    public void a(kj arg0, double arg1, double arg2, double arg3, float arg4, float arg5) {
+    public void a(ia arg0, double arg1, double arg2, double arg3, float arg4, float arg5) {
         render(arg5);
     }
 
