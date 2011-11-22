@@ -33,6 +33,11 @@ public class CUIx_events_ChatListener implements CUIx_fevent_Listener<CUIx_event
 
                 CUIx_events_CUIEvent cuievent = new CUIx_events_CUIEvent(type, args.split("[|]"));
                 CUIx_fevent_EventManager.callEvent(cuievent);
+                
+                if( !cuievent.isHandled() ) {
+                    cuievent.markInvalid("Invalid message type. Update both CUIx and WorldEdit.");
+                }
+                
                 event.setCancelled(cuievent.isHandled());
             }
         }
