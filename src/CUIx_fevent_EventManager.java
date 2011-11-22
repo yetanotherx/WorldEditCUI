@@ -1,25 +1,25 @@
 /**
  * 
  */
-package net.lahwran.fevents;
+
 
 /**
  * This class doesn't actually need to exist, but it feels wrong to have this
  * part of the event call logic inside Event
  * @author lahwran
  */
-public class EventManager {
+public class CUIx_fevent_EventManager {
     /**
      * Call an event.
      * 
      * @param <TEvent> Event subclass
      * @param event Event to handle
      */
-    public static <TEvent extends Event<TEvent>> void callEvent(TEvent event) {
-        HandlerList<TEvent> handlerlist = event.getHandlers();
+    public static <TEvent extends CUIx_fevent_Event<TEvent>> void callEvent(TEvent event) {
+        CUIx_fevent_HandlerList<TEvent> handlerlist = event.getHandlers();
         handlerlist.bake();
 
-        Listener<TEvent>[][] handlers = handlerlist.handlers;
+        CUIx_fevent_Listener<TEvent>[][] handlers = handlerlist.handlers;
         int[] handlerids = handlerlist.handlerids;
 
         for (int arrayidx=0; arrayidx<handlers.length; arrayidx++) {

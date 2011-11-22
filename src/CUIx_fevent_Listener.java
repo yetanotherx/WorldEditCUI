@@ -1,13 +1,10 @@
-/**
- * 
- */
-package net.lahwran.fevents;
 
 /**
  * @author lahwran
  * @param <TEvent> Event type
  */
-public interface Listener<TEvent extends Event<TEvent>> {
+public interface CUIx_fevent_Listener<TEvent extends CUIx_fevent_Event<TEvent>> {
+
     /**
      * Handle an event
      * @param event Event to handle

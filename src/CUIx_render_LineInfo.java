@@ -1,15 +1,14 @@
-/**
- * 
- */
-package net.lahwran.wecui.rendering;
 
 import org.lwjgl.opengl.GL11;
 
 /**
+ * Stores data about a line that can be rendered
+ * 
  * @author lahwran
- *
+ * @author yetanotherx
+ * 
  */
-public class LineInfo {
+public class CUIx_render_LineInfo {
 
     public float lineWidth;
     public float red;
@@ -18,7 +17,7 @@ public class LineInfo {
     public float alpha;
     public int depthfunc;
 
-    public LineInfo(float lineWidth, float r, float g, float b, float a, int depthfunc) {
+    public CUIx_render_LineInfo(float lineWidth, float r, float g, float b, float a, int depthfunc) {
         this.lineWidth = lineWidth;
         this.red = r;
         this.green = g;
@@ -27,11 +26,11 @@ public class LineInfo {
         this.depthfunc = depthfunc;
     }
 
-    public LineInfo(float lineWidth, float r, float g, float b) {
+    public CUIx_render_LineInfo(float lineWidth, float r, float g, float b) {
         this(lineWidth, r, g, b, 1.0f, GL11.GL_LEQUAL);
     }
 
-    public LineInfo(LineInfo orig) {
+    public CUIx_render_LineInfo(CUIx_render_LineInfo orig) {
         this.lineWidth = orig.lineWidth;
         this.red = orig.red;
         this.green = orig.green;

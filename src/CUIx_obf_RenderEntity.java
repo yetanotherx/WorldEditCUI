@@ -1,29 +1,25 @@
-package net.lahwran.wecui.obf;
-import deobf.ia;
-import deobf.ry;
-import deobf.ik;
-import net.lahwran.wecui.WorldEditCUI;
+
 import net.minecraft.client.Minecraft;
 
 /**
+ * Custom entity renderer, attached in the ModLoader class
  * 
- */
-
-/**
  * @author lahwran
+ * @author yetanotherx
  * 
  */
-public class RenderEntity extends ia {
+public class CUIx_obf_RenderEntity extends ia {
 
     private Minecraft mc;
+
     /**
      * @param arg0
      */
-    public RenderEntity(Minecraft mc, ry arg0) {
+    public CUIx_obf_RenderEntity(Minecraft mc, ry arg0) {
         super(arg0);
         ao = true; // ignoreFrustumCheck \o/
         this.mc = mc;
-        WorldEditCUI.debug("Entity spawned");
+        CUIx.debug("Entity spawned");
     }
 
     @Override

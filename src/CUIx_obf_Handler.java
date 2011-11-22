@@ -1,31 +1,28 @@
-/**
- * 
- */
-package net.lahwran.wecui.obf;
 
 import java.io.File;
 
-import deobf.di;
-import deobf.cv;
 import net.minecraft.client.Minecraft;
 
 /**
+ * Main obfuscation class
+ * Combines all obfuscated classes and methods into a single class
+ * Eases updates, cleans up the rest of the codebase.
+ * 
  * @author lahwran
- *
+ * @author yetanotherx
  */
-public class ObfHub {
+public class CUIx_obf_Handler {
 
-    public static ObfHub inst;
-
+    public static CUIx_obf_Handler instance;
     private Minecraft minecraft;
-
     private cv tessellator = cv.a;
+
     /**
      * @param minecraft
      */
-    public ObfHub(Minecraft minecraft) {
+    public CUIx_obf_Handler(Minecraft minecraft) {
         this.minecraft = minecraft;
-        inst = this;
+        instance = this;
     }
 
     public boolean isMultiplayerWorld() {
@@ -44,10 +41,12 @@ public class ObfHub {
         di plyr = minecraft.h;
         return plyr.p + ((plyr.s - plyr.p) * renderTick);
     }
+
     public double getPlayerY(float renderTick) {
         di plyr = minecraft.h;
         return plyr.q + ((plyr.t - plyr.q) * renderTick);
     }
+
     public double getPlayerZ(float renderTick) {
         di plyr = minecraft.h;
         return plyr.r + ((plyr.u - plyr.r) * renderTick);

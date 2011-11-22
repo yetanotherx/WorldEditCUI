@@ -1,32 +1,31 @@
+
 /**
+ * Listener class for CUIx_events_CUIEvent
+ * 
+ * @author lahwran
+ * @author yetanotherx
  * 
  */
-package net.lahwran.wecui;
+public class CUIx_events_CUIListener implements CUIx_fevent_Listener<CUIx_events_CUIEvent> {
 
-import net.lahwran.WECUIEvent;
-import net.lahwran.fevents.Listener;
+    /**
+     * CUIx main class. Prevents calling singleton every time it is used
+     */
+    private final CUIx cuix;
 
-/**
- * @author lahwran
- *
- */
-public class WECUIListener implements Listener<WECUIEvent> {
-
-    private final WorldEditCUI wecui;
-
-    public WECUIListener(WorldEditCUI wecui) {
-        this.wecui = wecui;
+    public CUIx_events_CUIListener(CUIx cuix) {
+        this.cuix = cuix;
     }
 
-    public void onEvent(WECUIEvent event) {
-        if (event.type.equals("")) {
+    public void onEvent(CUIx_events_CUIEvent event) {
+        if (event.type.isEmpty()) {
             if (event.params.length > 0 && event.params[0].length() > 0) {
                 event.markInvalid("handshake event takes no parameters.");
             }
-            if (wecui.getObfHub().isMultiplayerWorld()) {
-                wecui.getObfHub().sendChat("/worldedit cui");
+            if (cuix.getObfuscation().isMultiplayerWorld()) {
+                cuix.getObfuscation().sendChat("/worldedit cui");
             }
-            WorldEditCUI.debug("/worldedit cui");
+            CUIx.debug("/worldedit cui");
         } else if (event.type.equals("s")) {
             if (event.params.length == 0) {
                 event.markInvalid("selection type event requires parameters.");
@@ -35,11 +34,11 @@ public class WECUIListener implements Listener<WECUIEvent> {
             }
 
             if (event.params[0].equals("cuboid")) {
-                wecui.setSelection(new CuboidRegion());
+                cuix.setSelection(new CUIx_render_CuboidRegion());
             } else if (event.params[0].equals("polygon2d")) {
-                wecui.setSelection(new Polygon2DRegion());
+                cuix.setSelection(new CUIx_render_Polygon2DRegion());
             }
-            event.markHandled();
+            event.setHandled(true);
         } else if (event.type.equals("p")) { // point
             if (event.params.length < 5 || event.params.length > 6) {
                 event.markInvalid("point event requires either 5 or 6 parameters.");
@@ -50,9 +49,8 @@ public class WECUIListener implements Listener<WECUIEvent> {
             int y = event.getInt(2);
             int z = event.getInt(3);
             int regionSize = event.getInt(4);
-            wecui.getSelection().setPoint(id, x, y, z, regionSize);
-            event.markHandled();
+            cuix.getSelection().setPoint(id, x, y, z, regionSize);
+            event.setHandled(true);
         }
     }
-
 }

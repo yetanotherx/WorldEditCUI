@@ -1,14 +1,16 @@
-/**
- * 
- */
-package net.lahwran.wecui;
 
 /**
+ * Base class for the two types of regions: cuboid and poly.
+ * 
  * @author lahwran
+ * @author yetanotherx
  *
  */
-public abstract class CuiRegion {
+public abstract class CUIx_render_CuiRegion {
 
+    /**
+     * Number of blocks in the region
+     */
     protected int regionSize;
 
     public abstract void render();
@@ -21,5 +23,4 @@ public abstract class CuiRegion {
      * @param regionSize
      */
     public abstract void setPoint(int id, int x, int y, int z, int regionSize);
-
 }

@@ -1,7 +1,3 @@
-/**
- * 
- */
-package net.lahwran.fevents;
 
 /**
  * Event superclass. should be extended as: 
@@ -19,11 +15,13 @@ package net.lahwran.fevents;
  *         }
  *     }
  * </pre>
+ * 
  * @author lahwran
+ * 
  * @param <TEvent> Event class
  *
  */
-public abstract class Event<TEvent extends Event<TEvent>> {
+public abstract class CUIx_fevent_Event<TEvent extends CUIx_fevent_Event<TEvent>> {
 
     /**
      * Stores cancelled status. will be false unless a subclass publishes
@@ -36,7 +34,7 @@ public abstract class Event<TEvent extends Event<TEvent>> {
      * 
      * @return HandlerList to call event with
      */
-    protected abstract HandlerList<TEvent> getHandlers();
+    protected abstract CUIx_fevent_HandlerList<TEvent> getHandlers();
 
     /**
      * Get event type name.
@@ -46,7 +44,7 @@ public abstract class Event<TEvent extends Event<TEvent>> {
     protected abstract String getEventName();
 
     public String toString() {
-        return getEventName()+" ("+this.getClass().getName()+")";
+        return getEventName() + " (" + this.getClass().getName() + ")";
     }
 
     /**

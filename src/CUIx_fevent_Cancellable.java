@@ -1,12 +1,12 @@
-/**
- * 
- */
-package net.lahwran.fevents;
 
 /**
+ * Sets the setCancelled() method of events to public.
+ * Implement this interface to use the cancelling methods
+ * 
  * @author lahwran
+ * 
  */
-public interface Cancellable {
+public interface CUIx_fevent_Cancellable {
 
     /**
      * If an event stops propogating (ie, is cancelled) partway through an even

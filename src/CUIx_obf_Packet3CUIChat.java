@@ -1,40 +1,35 @@
-/**
- * 
- */
-package net.lahwran.wecui.obf;
 
-import java.io.DataInputStream;
 import java.lang.reflect.Field;
 import java.util.Map;
 
-import net.lahwran.ChatEvent;
-import net.lahwran.fevents.EventManager;
-
-
-import deobf.fe;
-import deobf.abb;
-import deobf.ob;
-import deobf.gt;
-
 /**
+ * Replacement for Packet3Chat, in order to listen 
+ * to incoming chat without conflicting with mods
+ * 
+ * This uses reflection to be set as the packet.
+ * Don't look at it, it's horribly ugly.
+ * 
  * @author lahwran
+ * @author yetanotherx
  *
  */
-public class Packet3WECUIChat extends abb {
+public class CUIx_obf_Packet3CUIChat extends abb {
+
     private static boolean registered = false;
 
-    public Packet3WECUIChat() {
+    public CUIx_obf_Packet3CUIChat() {
         super();
     }
 
-    public Packet3WECUIChat(String s) {
+    public CUIx_obf_Packet3CUIChat(String s) {
         super(s);
     }
 
     @SuppressWarnings("unchecked")
     public static void register() {
-        if (registered)
+        if (registered) {
             return;
+        }
         registered = true;
         try {
             Class<gt> packetclass = gt.class;
@@ -44,16 +39,18 @@ public class Packet3WECUIChat extends abb {
             classestoidsfield.setAccessible(true);
             ob idstoclasses = (ob) idstoclassesfield.get(null);
             Map<Class<?>, Integer> classestoids = (Map<Class<?>, Integer>) classestoidsfield.get(null);
-            idstoclasses.a(3, Packet3WECUIChat.class);
-            classestoids.put(Packet3WECUIChat.class, 3);
+            idstoclasses.a(3, CUIx_obf_Packet3CUIChat.class);
+            classestoids.put(CUIx_obf_Packet3CUIChat.class, 3);
         } catch (Exception e) {
             throw new RuntimeException("Error inserting chat handler - WorldEditClientUserInterface will not work!", e);
         }
     }
+
     public void a(fe nethandler) {
-        ChatEvent chatevent = new ChatEvent(a);
-        EventManager.callEvent(chatevent);
-        if (!chatevent.isCancelled())
+        CUIx_events_IncomingChatEvent chatevent = new CUIx_events_IncomingChatEvent(a);
+        CUIx_fevent_EventManager.callEvent(chatevent);
+        if (!chatevent.isCancelled()) {
             nethandler.a(this);
+        }
     }
 }

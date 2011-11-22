@@ -1,13 +1,14 @@
-/**
- * 
- */
-package net.lahwran.wecui;
 
 /**
+ * Stores data for a poly-based region.
+ * 
+ * TODO: Merge from branch
+ * 
  * @author lahwran
- *
+ * @author yetanotherx
+ * 
  */
-public class Polygon2DRegion extends CuiRegion {
+public class CUIx_render_Polygon2DRegion extends CUIx_render_CuiRegion {
 
     /* (non-Javadoc)
      * @see mc.lahwran.wecui.CuiRegion#render()
