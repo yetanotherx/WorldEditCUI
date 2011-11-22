@@ -17,13 +17,9 @@ public class CUIx_render_HighlightPosition {
     public final CUIx_render_LineInfo drawnormal;
     public final CUIx_render_LineInfo drawhidden;
 
-    public CUIx_render_HighlightPosition(CUIx_render_LineInfo color, float alphanormal, float alphahidden) {
-        this.drawhidden = new CUIx_render_LineInfo(color);
-        drawhidden.alpha = alphahidden;
-        drawhidden.depthfunc = GL11.GL_GEQUAL;
-        this.drawnormal = new CUIx_render_LineInfo(color);
-        drawnormal.alpha = alphanormal;
-        drawnormal.depthfunc = GL11.GL_LESS;
+    public CUIx_render_HighlightPosition(CUIx_render_LineInfo drawnormal, CUIx_render_LineInfo drawhidden) {
+        this.drawhidden = drawhidden;
+        this.drawnormal = drawnormal;
     }
 
     public void render() {

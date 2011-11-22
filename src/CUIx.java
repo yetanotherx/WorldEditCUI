@@ -49,7 +49,7 @@ public class CUIx {
          * Register listeners for each event
          */
         CUIx_events_CUIEvent.handlers.register(new CUIx_events_CUIListener(this), CUIx_fevent_Order.Default);
-        CUIx_events_IncomingChatEvent.handlers.register(new CUIx_events_IncomingChatListener(this), CUIx_fevent_Order.Default);
+        CUIx_events_ChatEvent.handlers.register(new CUIx_events_ChatListener(this), CUIx_fevent_Order.Default);
         CUIx_events_WorldRenderEvent.handlers.register(new CUIx_events_WorldRenderListener(this), CUIx_fevent_Order.Default);
 
     }

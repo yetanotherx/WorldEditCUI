@@ -18,7 +18,8 @@ public class mod_CUIx extends BaseMod {
         CUIx.setInstance(ModLoader.getMinecraftInstance());
         ModLoader.SetInGameHook(this, true, true); // the last true is because we don't want to iterate the entity list too often
     }
-    public static ry lastworld = null;
+    public static ry lastworld;
+    public static di lastplayer;
     public static CUIx_obf_RenderEntity entity;
 
     public static void spawn(Minecraft mc) {
@@ -31,9 +32,10 @@ public class mod_CUIx extends BaseMod {
 
     @Override
     public boolean OnTickInGame(float partialticks, Minecraft mc) {
-        if (mc.f != lastworld) {
+        if (mc.f != lastworld || mc.h != lastplayer) {
             spawn(mc);
             lastworld = mc.f;
+            lastplayer = mc.h;
         }
         return true;
     }
