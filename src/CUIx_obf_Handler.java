@@ -10,6 +10,8 @@ import net.minecraft.client.Minecraft;
  * 
  * @author lahwran
  * @author yetanotherx
+ * 
+ * @obfuscated
  */
 public class CUIx_obf_Handler {
 

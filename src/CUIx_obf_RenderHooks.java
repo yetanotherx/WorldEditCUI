@@ -5,6 +5,7 @@
  * @author lahwran
  * @author yetanotherx
  * 
+ * @obfuscated
  */
 public class CUIx_obf_RenderHooks extends rg {
 

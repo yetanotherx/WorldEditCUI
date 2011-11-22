@@ -12,6 +12,7 @@ import java.util.Map;
  * @author lahwran
  * @author yetanotherx
  *
+ * @obfuscated
  */
 public class CUIx_obf_Packet3CUIChat extends abb {
 
