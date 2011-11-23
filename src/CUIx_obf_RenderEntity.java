@@ -20,7 +20,7 @@ public class CUIx_obf_RenderEntity extends ia {
         super(arg0);
         ao = true; // ignoreFrustumCheck \o/
         this.mc = mc;
-        CUIx.debug("Entity spawned");
+        CUIx.getInstance().getDebugger().debug("Entity spawned");
     }
 
     @Override

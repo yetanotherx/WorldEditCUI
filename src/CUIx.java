@@ -1,8 +1,7 @@
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.StringWriter;
 
 import net.minecraft.client.Minecraft;
 
@@ -30,11 +29,18 @@ public class CUIx {
      * Obfuscater instance
      */
     private CUIx_obf_Handler obfuscation;
-    //TODO: Better debugging
-    private static boolean stdoutdebug = new File(CUIx_obf_Handler.getAppDir("minecraft"), "wecui-stdout-debug.txt").exists();
-    private static File debugfile = new File(CUIx_obf_Handler.getAppDir("minecraft"), "wecui-debug.txt");
-    private static boolean debug = debugfile.exists();
-    private static BufferedWriter debugwriter = null;
+    /**
+     * Debugger class
+     */
+    private CUIx_util_Debug debugger;
+    /**
+     * Properties class
+     */
+    private CUIx_util_Settings settings;
+    /**
+     * File that contains mod-specific data
+     */
+    public static File dataFolder = new File(CUIx_obf_Handler.getAppDir("minecraft"), new StringWriter().append("mods").append(File.separator).append("CUIx").toString());
 
     /**
      * Initialize CUIx instance
@@ -42,15 +48,22 @@ public class CUIx {
      * 
      */
     private CUIx(CUIx_obf_Handler obfuscation) {
+        try {
+            this.obfuscation = obfuscation;
+            this.settings = new CUIx_util_Settings(new File(dataFolder, "settings.cfg"));
+            this.settings.load();
+            this.debugger = new CUIx_util_Debug(this, new File(dataFolder, "debug-output.txt"));
 
-        this.obfuscation = obfuscation;
-
-        /**
-         * Register listeners for each event
-         */
-        CUIx_events_CUIEvent.handlers.register(new CUIx_events_CUIListener(this), CUIx_fevent_Order.Default);
-        CUIx_events_ChatEvent.handlers.register(new CUIx_events_ChatListener(this), CUIx_fevent_Order.Default);
-        CUIx_events_WorldRenderEvent.handlers.register(new CUIx_events_WorldRenderListener(this), CUIx_fevent_Order.Default);
+            /**
+             * Register listeners for each event
+             */
+            CUIx_events_CUIEvent.handlers.register(new CUIx_events_CUIListener(this), CUIx_fevent_Order.Default);
+            CUIx_events_ChatEvent.handlers.register(new CUIx_events_ChatListener(this), CUIx_fevent_Order.Default);
+            CUIx_events_WorldRenderEvent.handlers.register(new CUIx_events_WorldRenderListener(this), CUIx_fevent_Order.Default);
+        
+        } catch (IOException ex) {
+            ex.printStackTrace(System.err);
+        }
 
     }
 
@@ -81,35 +94,6 @@ public class CUIx {
         CUIx_obf_Packet3CUIChat.register();
     }
 
-    public static void debug(String message) {
-        if (debug) {
-            try {
-                if (debugwriter == null) {
-                    debugwriter = new BufferedWriter(new FileWriter(debugfile, true));
-                    Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-
-                        public void run() {
-                            try {
-                                CUIx.debugwriter.close();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }));
-                }
-                debugwriter.write(message + "\n");
-            } catch (IOException e) {
-                debug = false;
-                stdoutdebug = true;
-                debug("Could not write to debug file! turning on stdout log ...");
-                e.printStackTrace();
-            }
-        }
-        if (stdoutdebug) {
-            System.out.println("WECUI DEBUG: " + message);
-        }
-    }
-
     /**
      * Sets the currently active region
      * @param region
@@ -133,4 +117,13 @@ public class CUIx {
     public CUIx_obf_Handler getObfuscation() {
         return obfuscation;
     }
+
+    public CUIx_util_Debug getDebugger() {
+        return debugger;
+    }
+
+    public CUIx_util_Settings getSettings() {
+        return settings;
+    }
+    
 }

@@ -27,7 +27,7 @@ public class mod_CUIx extends BaseMod {
         entity.d(mc.h.s, mc.h.t, mc.h.u);
         mc.f.a((ia) entity);
         entity.d(mc.h.s, mc.h.t, mc.h.u);
-        CUIx.debug("spawned render entity");
+        CUIx.getInstance().getDebugger().debug("spawned render entity");
     }
 
     @Override
@@ -46,9 +46,9 @@ public class mod_CUIx extends BaseMod {
 
     @Override
     public void AddRenderer(Map map) {
-        CUIx.debug("Attaching worldeditcui renderer");
+        CUIx.getInstance().getDebugger().debug("Attaching worldeditcui renderer");
         map.put(CUIx_obf_RenderEntity.class, new CUIx_obf_RenderHooks());
-    }/**/
+    }
 
 
     @Override

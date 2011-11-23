@@ -25,7 +25,7 @@ public class CUIx_events_CUIListener implements CUIx_fevent_Listener<CUIx_events
             if (cuix.getObfuscation().isMultiplayerWorld()) {
                 cuix.getObfuscation().sendChat("/worldedit cui");
             }
-            CUIx.debug("/worldedit cui");
+            CUIx.getInstance().getDebugger().debug("/worldedit cui");
         } else if (event.type.equals("s")) {
             if (event.params.length == 0) {
                 event.markInvalid("selection type event requires parameters.");

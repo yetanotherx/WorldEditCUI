@@ -29,7 +29,7 @@ public class CUIx_events_ChatListener implements CUIx_fevent_Listener<CUIx_event
             if (matcher.find()) {
                 String type = matcher.group(1);
                 String args = matcher.group(2);
-                CUIx.debug("server-sent event: '" + type + "'  '" + args + "'");
+                this.cuix.getDebugger().debug("server-sent event: '" + type + "'  '" + args + "'");
 
                 CUIx_events_CUIEvent cuievent = new CUIx_events_CUIEvent(type, args.split("[|]"));
                 CUIx_fevent_EventManager.callEvent(cuievent);

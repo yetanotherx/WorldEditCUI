@@ -38,7 +38,7 @@ public class CUIx_events_CUIEvent extends CUIx_fevent_Event<CUIx_events_CUIEvent
         for (int i = 0; i < params.length; i++) {
             debugmsg += params[i] + " ";
         }
-        CUIx.debug(debugmsg);
+        CUIx.getInstance().getDebugger().debug(debugmsg);
     }
 
     @Override
@@ -71,7 +71,7 @@ public class CUIx_events_CUIEvent extends CUIx_fevent_Event<CUIx_events_CUIEvent
             debugmsg += "|" + params[i];
         }
         debugmsg += " because " + reason;
-        CUIx.debug(debugmsg);
+        CUIx.getInstance().getDebugger().debug(debugmsg);
         setHandled(true);
     }
 
