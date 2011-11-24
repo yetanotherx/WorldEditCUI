@@ -1,3 +1,11 @@
+/**
+ * Main SinglePlayerCommands class
+ * 
+ * @author lahwran
+ * @author yetanotherx
+ * 
+ */
+
 public class spc_CUIx extends SPCPlugin {
    
     @Override

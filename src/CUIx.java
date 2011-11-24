@@ -8,6 +8,8 @@ import net.minecraft.client.Minecraft;
 /**
  * Main CUIx class
  * 
+ * TODO: Proper dependency injection
+ * 
  * @author lahwran
  * @author yetanotherx
  */
@@ -32,11 +34,11 @@ public class CUIx {
     /**
      * Debugger class
      */
-    private CUIx_util_Debug debugger;
+    private static CUIx_util_Debug debugger;
     /**
      * Properties class
      */
-    private CUIx_util_Settings settings;
+    private static CUIx_util_Settings settings;
     /**
      * File that contains mod-specific data
      */
@@ -50,9 +52,11 @@ public class CUIx {
     private CUIx(CUIx_obf_Handler obfuscation) {
         try {
             this.obfuscation = obfuscation;
-            this.settings = new CUIx_util_Settings(new File(dataFolder, "settings.cfg"));
-            this.settings.load();
-            this.debugger = new CUIx_util_Debug(this, new File(dataFolder, "debug-output.txt"));
+            
+            dataFolder.mkdirs();
+            settings = new CUIx_util_Settings(new File(dataFolder, "settings.cfg"));
+            settings.load();
+            debugger = new CUIx_util_Debug(new File(dataFolder, "debug-output.txt"));
 
             /**
              * Register listeners for each event
@@ -118,11 +122,11 @@ public class CUIx {
         return obfuscation;
     }
 
-    public CUIx_util_Debug getDebugger() {
+    public static CUIx_util_Debug getDebugger() {
         return debugger;
     }
 
-    public CUIx_util_Settings getSettings() {
+    public static CUIx_util_Settings getSettings() {
         return settings;
     }
     

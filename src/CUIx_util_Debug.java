@@ -3,11 +3,11 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Debugging helper class
+ * 
+ * TODO: Add debug statements in ALL the places!
  * 
  * @author lahwran
  * @author yetanotherx
@@ -17,12 +17,13 @@ public class CUIx_util_Debug {
 
     protected File debugFile;
     protected BufferedWriter writer;
-    protected CUIx cuix;
+    protected boolean debugMode = false;
+    protected static String CRLF = System.getProperty("line.separator");
 
-    public CUIx_util_Debug(CUIx cuix, File debugFile) throws IOException {
-        this.cuix = cuix;
+    public CUIx_util_Debug(File debugFile) throws IOException {
         this.debugFile = debugFile;
         this.writer = new BufferedWriter(new FileWriter(debugFile));
+        this.debugMode = CUIx.getSettings().getProperty("debugMode").equals("true");
         
         Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
 
@@ -38,7 +39,7 @@ public class CUIx_util_Debug {
     }
     
     public void debug(String message) {
-        if( cuix.getSettings().getProperty("debugMode").equals("true") ) {
+        if( debugMode ) {
             this.info(message);
         }
     }
@@ -46,9 +47,11 @@ public class CUIx_util_Debug {
     public void info(String message) {
         try {
             System.out.println(message);
-            writer.write(message);
-        } catch (IOException ex) {
-            ex.printStackTrace();
+            writer.write(message + CRLF );
+            writer.flush();
+            //TODO: Timestamps and don't clear the log!
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

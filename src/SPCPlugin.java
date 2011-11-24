@@ -1,6 +1,9 @@
 /**
- * Dummy class
+ * Dummy class for SinglePlayerCommands
+ * 
  * @author lahwran
+ * @author yetanotherx
+ * 
  */
 public class SPCPlugin {
 

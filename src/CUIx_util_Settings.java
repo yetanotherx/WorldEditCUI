@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-
 /**
  * Stores and reads CUIx settings
  * 
@@ -13,6 +12,7 @@ import java.util.Properties;
  */
 public class CUIx_util_Settings extends Properties {
     
+    private static final long serialVersionUID = 1L;
     protected File propertiesFile;
 
     public CUIx_util_Settings(File propertiesFile) {
@@ -20,11 +20,11 @@ public class CUIx_util_Settings extends Properties {
     }    
     
     public void load() throws IOException {
-        if( this.propertiesFile != null ) {
+        if( this.propertiesFile == null ) {
             throw new RuntimeException("Internal error: Properties file is not set.");
         }
         else {
-            this.propertiesFile.createNewFile();
+            this.saveDefaultUnlessExists();
         }
         
         FileInputStream istream = new FileInputStream(this.propertiesFile);
@@ -32,25 +32,26 @@ public class CUIx_util_Settings extends Properties {
     }
     
     public void save() throws IOException {
-        if( this.propertiesFile != null ) {
+        if( this.propertiesFile == null ) {
             throw new RuntimeException("Internal error: Properties file is not set.");
         }
         else {
-            this.propertiesFile.createNewFile();
+            this.saveDefaultUnlessExists();
         }
         
         FileOutputStream ostream = new FileOutputStream(this.propertiesFile);
-        this.store(ostream, null);
+        this.store(ostream, "CUIx properties file");
     }
     
-    public void saveDefaultUnlessExists() throws IOException {
-        if( this.propertiesFile != null ) {
+    protected void saveDefaultUnlessExists() throws IOException {
+        if( this.propertiesFile == null ) {
             throw new RuntimeException("Internal error: Properties file is not set.");
         }
         else {
             if( !this.propertiesFile.exists() ) {
                 this.setProperty("debugMode", "false");
                 
+                this.propertiesFile.createNewFile();
                 FileOutputStream ostream = new FileOutputStream(this.propertiesFile);
                 this.store(ostream, "CUIx properties file");
             }

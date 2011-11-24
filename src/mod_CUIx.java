@@ -17,6 +17,7 @@ public class mod_CUIx extends BaseMod {
     public mod_CUIx() {
         CUIx.setInstance(ModLoader.getMinecraftInstance());
         ModLoader.SetInGameHook(this, true, true); // the last true is because we don't want to iterate the entity list too often
+        CUIx.getDebugger().info("CUIx version " + CUIx.VERSION + " enabled!");
     }
     public static ry lastworld;
     public static di lastplayer;
@@ -27,7 +28,7 @@ public class mod_CUIx extends BaseMod {
         entity.d(mc.h.s, mc.h.t, mc.h.u);
         mc.f.a((ia) entity);
         entity.d(mc.h.s, mc.h.t, mc.h.u);
-        CUIx.getInstance().getDebugger().debug("spawned render entity");
+        CUIx.getDebugger().debug("RenderEntity spawned");
     }
 
     @Override
@@ -45,8 +46,9 @@ public class mod_CUIx extends BaseMod {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public void AddRenderer(Map map) {
-        CUIx.getInstance().getDebugger().debug("Attaching worldeditcui renderer");
+        CUIx.getDebugger().debug("Attaching renderer to ModLoader");
         map.put(CUIx_obf_RenderEntity.class, new CUIx_obf_RenderHooks());
     }
 
