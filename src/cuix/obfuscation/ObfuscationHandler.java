@@ -1,6 +1,5 @@
 package cuix.obfuscation;
 
-
 import deobf.cv;
 import deobf.di;
 import java.io.File;
@@ -68,7 +67,7 @@ public class ObfuscationHandler {
     public static File getAppDir(String app) {
         return Minecraft.a(app);
     }
-    
+
     public static File getMinecraftDir() {
         return Minecraft.b();
     }

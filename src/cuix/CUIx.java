@@ -29,40 +29,16 @@ import net.minecraft.client.Minecraft;
  */
 public class CUIx {
 
-    /**
-     * Version identifier
-     */
     public static final String VERSION = "1.0beta for Minecraft version 1.0";
-    /**
-     * Singleton instance
-     */
+    
+    
     private static CUIx instance;
-    /**
-     * Current region selection.
-     */
     private CUIRegion selection;
-    /**
-     * Obfuscater instance
-     */
     private ObfuscationHandler obfuscation;
-    /**
-     * Debugger class
-     */
     private static CUIDebug debugger;
-    /**
-     * Properties class
-     */
     private static CUISettings settings;
-    /**
-     * File that contains mod-specific data
-     */
     public static File dataFolder = new File(ObfuscationHandler.getAppDir("minecraft"), new StringWriter().append("mods").append(File.separator).append("CUIx").toString());
 
-    /**
-     * Initialize CUIx instance
-     * @param obfuscation Obfuscation handler class
-     * 
-     */
     private CUIx(ObfuscationHandler obfuscation) {
         try {
             this.obfuscation = obfuscation;
@@ -112,26 +88,14 @@ public class CUIx {
         Packet3CUIChat.register();
     }
 
-    /**
-     * Sets the currently active region
-     * @param region
-     */
     public void setSelection(CUIRegion region) {
         selection = region;
     }
 
-    /**
-     * Gets the currently active region
-     * @return 
-     */
     public CUIRegion getSelection() {
         return selection;
     }
 
-    /**
-     * Gets the obfuscation class
-     * @return 
-     */
     public ObfuscationHandler getObfuscation() {
         return obfuscation;
     }

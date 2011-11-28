@@ -1,17 +1,16 @@
 package cuix.event;
 
-
-/**
- * 
- */
 import cuix.fevents.Listener;
 import cuix.obfuscation.ObfuscationHandler;
 import cuix.CUIx;
 import org.lwjgl.opengl.GL11;
 
 /**
+ * Listener for WorldRenderEvent
+ * 
  * @author lahwran
- *
+ * @author yetanotherx
+ * 
  */
 public class WorldRenderListener implements Listener<WorldRenderEvent> {
 
@@ -46,7 +45,7 @@ public class WorldRenderListener implements Listener<WorldRenderEvent> {
             }
         } catch (Exception e) {
         }
-        
+
         GL11.glDepthFunc(GL11.GL_LEQUAL);
         GL11.glPopMatrix();
 

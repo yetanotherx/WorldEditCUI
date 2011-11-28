@@ -1,6 +1,5 @@
 package cuix.obfuscation;
 
-
 import cuix.CUIx;
 import deobf.ia;
 import deobf.ik;
@@ -26,7 +25,7 @@ public class RenderEntity extends ia {
         super(arg0);
         ao = true; // ignoreFrustumCheck \o/
         this.mc = mc;
-        CUIx.getInstance().getDebugger().debug("Entity spawned");
+        CUIx.getDebugger().debug("Entity spawned");
     }
 
     @Override

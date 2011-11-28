@@ -1,6 +1,5 @@
 package cuix.obfuscation;
 
-
 import cuix.event.ChatCommandEvent;
 import cuix.event.ChatEvent;
 import cuix.fevents.EventManager;
@@ -40,8 +39,9 @@ public class Packet3CUIChat extends abb {
         if (!chatevent.isCancelled() && s.startsWith("/") && s.length() > 1) {
             ChatCommandEvent commandevent = new ChatCommandEvent(s);
             EventManager.callEvent(chatevent);
-            if (commandevent.isHandled())
+            if (commandevent.isHandled()) {
                 cancelled = true;
+            }
         } else {
             cancelled = true;
         }
@@ -79,10 +79,11 @@ public class Packet3CUIChat extends abb {
             throw new RuntimeException("Error inserting chat handler - CUIx and anything that depends on it will not work!", e);
         }
     }
-    
+
     public void a(DataOutputStream dataoutputstream) {
-        if (!cancelled)
+        if (!cancelled) {
             a(a, dataoutputstream);
+        }
     }
 
     public void a(fe nethandler) {

@@ -19,14 +19,14 @@ import net.minecraft.client.Minecraft;
  */
 public class mod_CUIx extends BaseMod {
 
-    public mod_CUIx() {
-        CUIx.setInstance(ModLoader.getMinecraftInstance());
-        ModLoader.SetInGameHook(this, true, true); // the last true is because we don't want to iterate the entity list too often
-        CUIx.getDebugger().info("CUIx version " + CUIx.VERSION + " enabled!");
-    }
     public static ry lastworld;
     public static di lastplayer;
     public static RenderEntity entity;
+
+    public mod_CUIx() {
+        CUIx.setInstance(ModLoader.getMinecraftInstance());
+        ModLoader.SetInGameHook(this, true, true); // the last true is because we don't want to iterate the entity list too often
+    }
 
     public static void spawn(Minecraft mc) {
         entity = new RenderEntity(mc, mc.f);
@@ -56,7 +56,6 @@ public class mod_CUIx extends BaseMod {
         CUIx.getDebugger().debug("Attaching renderer to ModLoader");
         map.put(RenderEntity.class, new RenderHooks());
     }
-
 
     @Override
     public String getVersion() {

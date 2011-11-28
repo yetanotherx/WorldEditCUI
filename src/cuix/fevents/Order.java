@@ -1,6 +1,5 @@
 package cuix.fevents;
 
-
 /**
  * Order of event listener calls.
  * 
@@ -63,7 +62,6 @@ public enum Order {
      * event has been cancelled.
      */
     Monitor(9);
-    
     private int index;
 
     Order(int index) {

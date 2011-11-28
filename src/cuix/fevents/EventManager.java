@@ -1,16 +1,13 @@
 package cuix.fevents;
 
 /**
- * 
- */
-
-
-/**
  * This class doesn't actually need to exist, but it feels wrong to have this
  * part of the event call logic inside Event
+ * 
  * @author lahwran
  */
 public class EventManager {
+
     /**
      * Call an event.
      * 
@@ -24,17 +21,17 @@ public class EventManager {
         Listener<TEvent>[][] handlers = handlerlist.handlers;
         int[] handlerids = handlerlist.handlerids;
 
-        for (int arrayidx=0; arrayidx<handlers.length; arrayidx++) {
+        for (int arrayidx = 0; arrayidx < handlers.length; arrayidx++) {
 
             // if the order slot is even and the event has stopped propogating
-            if (event.isCancelled() && (handlerids[arrayidx] & 1) == 0)
+            if (event.isCancelled() && (handlerids[arrayidx] & 1) == 0) {
                 continue; // then don't call this order slot
-
+            }
             for (int handler = 0; handler < handlers[arrayidx].length; handler++) {
                 try {
                     handlers[arrayidx][handler].onEvent(event);
                 } catch (Throwable t) {
-                    System.err.println("Error while passing event "+event);
+                    System.err.println("Error while passing event " + event);
                     t.printStackTrace();
                 }
             }

@@ -18,7 +18,6 @@ import deobf.rt;
 public class RenderHooks extends rg {
 
     public RenderHooks() {
-        System.out.println("Attaching worldeditcui renderer step 2");
     }
 
     private void render(float renderTick) {

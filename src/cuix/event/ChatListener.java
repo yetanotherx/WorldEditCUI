@@ -1,6 +1,5 @@
 package cuix.event;
 
-
 import cuix.fevents.EventManager;
 import cuix.fevents.Listener;
 import cuix.CUIx;
@@ -19,7 +18,7 @@ import java.util.regex.Pattern;
 public class ChatListener implements Listener<ChatEvent> {
 
     public static Pattern commandpattern = Pattern.compile("\u00a75\u00a76\u00a74\u00a75([^|]*)\\|?(.*)");
-    private final CUIx cuix;
+    protected final CUIx cuix;
 
     public ChatListener(CUIx cuix) {
         this.cuix = cuix;
@@ -30,19 +29,18 @@ public class ChatListener implements Listener<ChatEvent> {
         if (event.direction == ChatEvent.Direction.INCOMING) {
             Matcher matcher = commandpattern.matcher(event.message);
 
-
             if (matcher.find()) {
                 String type = matcher.group(1);
                 String args = matcher.group(2);
-                this.cuix.getDebugger().debug("server-sent event: '" + type + "'  '" + args + "'");
+                CUIx.getDebugger().debug("Received CUI event from server: " + event.message);
 
                 CUIEvent cuievent = new CUIEvent(type, args.split("[|]"));
                 EventManager.callEvent(cuievent);
-                
-                if( !cuievent.isHandled() ) {
+
+                if (!cuievent.isHandled()) {
                     cuievent.markInvalid("Invalid message type. Update both CUIx and WorldEdit.");
                 }
-                
+
                 event.setCancelled(cuievent.isHandled());
             }
         }

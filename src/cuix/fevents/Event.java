@@ -1,6 +1,5 @@
 package cuix.fevents;
 
-
 /**
  * Event superclass. should be extended as: 
  * <pre>

@@ -43,7 +43,7 @@ public class CUIDebug {
     
     public void debug(String message) {
         if( debugMode ) {
-            this.info(message);
+            this.info("CUIx Debug - " + message);
         }
     }
     

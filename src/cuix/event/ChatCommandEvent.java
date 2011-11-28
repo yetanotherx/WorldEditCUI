@@ -1,6 +1,5 @@
 package cuix.event;
 
-
 import cuix.fevents.Event;
 import cuix.fevents.HandlerList;
 import java.util.HashMap;
@@ -14,29 +13,19 @@ import java.util.HashMap;
  */
 public class ChatCommandEvent extends Event<ChatCommandEvent> {
 
-    /**
-     * Raw message, with /command
-     */
-    public final String chat;
-    
-    /**
-     * /command name
-     */
-    public final String command;
-    
-    /**
-     * Arguments given
-     */
-    public final String[] args;
-    private boolean handled;
-    
-    public static final HashMap<String, HandlerList<ChatCommandEvent>> allhandlers =
+    protected final String rawMessage;
+    protected final String command;
+    protected final String[] args;
+    protected boolean handled;
+    protected static final HashMap<String, HandlerList<ChatCommandEvent>> allhandlers =
             new HashMap<String, HandlerList<ChatCommandEvent>>();
-    public static final HandlerList<ChatCommandEvent> defaulthandlers =
+    protected static final HandlerList<ChatCommandEvent> defaulthandlers =
             new HandlerList<ChatCommandEvent>();
 
     public ChatCommandEvent(String chat) {
-        this.chat = chat;
+
+        this.rawMessage = chat;
+
         int firstspace = chat.indexOf(' ');
         if (firstspace < 0) {
             this.command = chat.substring(1);
@@ -55,7 +44,7 @@ public class ChatCommandEvent extends Event<ChatCommandEvent> {
     protected String getEventName() {
         return "ChatCommandEvent";
     }
-    
+
     public static HandlerList<ChatCommandEvent> getHandlers(String command) {
         HandlerList<ChatCommandEvent> handlers = allhandlers.get(command);
         if (handlers == null) {

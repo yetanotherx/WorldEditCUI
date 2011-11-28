@@ -1,6 +1,5 @@
 package cuix.fevents;
 
-
 /**
  * @author lahwran
  * @param <TEvent> Event type

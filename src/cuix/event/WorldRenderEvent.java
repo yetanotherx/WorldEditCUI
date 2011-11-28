@@ -1,9 +1,7 @@
 package cuix.event;
 
-
 import cuix.fevents.Event;
 import cuix.fevents.HandlerList;
-
 
 /**
  * Singleton event class triggered at world rendering
@@ -15,17 +13,8 @@ import cuix.fevents.HandlerList;
  */
 public class WorldRenderEvent extends Event<WorldRenderEvent> {
 
-    /**
-     * List of event handlers
-     */
     public static final HandlerList<WorldRenderEvent> handlers = new HandlerList<WorldRenderEvent>();
-    /**
-     * Event instance (singleton)
-     */
     private static final WorldRenderEvent instance = new WorldRenderEvent();
-    /**
-     * Rendering rick
-     */
     public float partialTick;
 
     /**

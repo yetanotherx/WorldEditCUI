@@ -1,10 +1,8 @@
 package cuix.event;
 
-
 import cuix.fevents.Cancellable;
 import cuix.fevents.Event;
 import cuix.fevents.HandlerList;
-
 
 /**
  * Events for chat messages to/from server
@@ -15,17 +13,8 @@ import cuix.fevents.HandlerList;
  */
 public class ChatEvent extends Event<ChatEvent> implements Cancellable {
 
-    /**
-     * Message content
-     */
     public String message;
-    /**
-     * Direction of chat
-     */
     public final Direction direction;
-    /**
-     * List of event handlers
-     */
     public static final HandlerList<ChatEvent> handlers = new HandlerList<ChatEvent>();
 
     public ChatEvent(String message, Direction direction) {
@@ -43,17 +32,15 @@ public class ChatEvent extends Event<ChatEvent> implements Cancellable {
         return handlers;
     }
 
-    /**
-     * Cancels the event, preventing it from being handled.
-     * @param cancelled 
-     */
     public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
-    
+
     public static enum Direction {
+
         INCOMING,
         OUTGOING;
+
         public String toString() {
             return name().toLowerCase();
         }

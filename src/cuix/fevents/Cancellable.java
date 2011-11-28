@@ -1,6 +1,5 @@
 package cuix.fevents;
 
-
 /**
  * Sets the setCancelled() method of events to public.
  * Implement this interface to use the cancelling methods

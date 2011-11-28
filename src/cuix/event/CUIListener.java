@@ -1,14 +1,12 @@
 package cuix.event;
 
-
 import cuix.fevents.Listener;
 import cuix.render.CuboidRegion;
 import cuix.render.Polygon2DRegion;
 import cuix.CUIx;
 
-
 /**
- * Listener class for CUIx_events_CUIEvent
+ * Listener class for CUIEvent
  * 
  * @author lahwran
  * @author yetanotherx
@@ -16,9 +14,6 @@ import cuix.CUIx;
  */
 public class CUIListener implements Listener<CUIEvent> {
 
-    /**
-     * CUIx main class. Prevents calling singleton every time it is used
-     */
     private final CUIx cuix;
 
     public CUIListener(CUIx cuix) {
@@ -26,30 +21,38 @@ public class CUIListener implements Listener<CUIEvent> {
     }
 
     public void onEvent(CUIEvent event) {
+        String[] params = event.params;
+
         if (event.type.isEmpty()) {
-            if (event.params.length > 0 && event.params[0].length() > 0) {
-                event.markInvalid("handshake event takes no parameters.");
+
+            if (params.length > 0 && params[0].length() > 0) {
+                event.markInvalid("Handshake event takes no parameters.");
             }
             if (cuix.getObfuscation().isMultiplayerWorld()) {
                 cuix.getObfuscation().sendChat("/worldedit cui");
             }
-            CUIx.getInstance().getDebugger().debug("/worldedit cui");
+            CUIx.getDebugger().debug("Received handshake event, sending CUI command.");
+
         } else if (event.type.equals("s")) {
-            if (event.params.length == 0) {
-                event.markInvalid("selection type event requires parameters.");
-            } else if (event.params.length > 1) {
-                event.markInvalid("selection type event only takes one parameter.");
+
+            if (params.length == 0) {
+                event.markInvalid("Selection type event requires parameters.");
+            } else if (params.length > 1) {
+                event.markInvalid("Selection type event only takes one parameter.");
             }
 
-            if (event.params[0].equals("cuboid")) {
+            if (params[0].equals("cuboid")) {
                 cuix.setSelection(new CuboidRegion());
-            } else if (event.params[0].equals("polygon2d")) {
+            } else if (params[0].equals("polygon2d")) {
                 cuix.setSelection(new Polygon2DRegion());
             }
             event.setHandled(true);
+            CUIx.getDebugger().debug("Received selection event, initalizing new region instance.");
+
         } else if (event.type.equals("p")) { // point
-            if (event.params.length < 5 || event.params.length > 6) {
-                event.markInvalid("point event requires either 5 or 6 parameters.");
+
+            if (params.length < 5 || params.length > 6) {
+                event.markInvalid("Point event requires either 5 or 6 parameters.");
             }
 
             int id = event.getInt(0);
@@ -59,9 +62,12 @@ public class CUIListener implements Listener<CUIEvent> {
             int regionSize = event.getInt(4);
             cuix.getSelection().setPoint(id, x, y, z, regionSize);
             event.setHandled(true);
+            CUIx.getDebugger().debug("Setting point #" + id);
+
         } else if (event.type.equals("p2")) { // point2d
-            if (event.params.length < 4 || event.params.length > 5) {
-                event.markInvalid("point2d event requires either 4 or 5 parameters.");
+
+            if (params.length < 4 || params.length > 5) {
+                event.markInvalid("Point2d event requires either 4 or 5 parameters.");
             }
 
             int id = event.getInt(0);
@@ -70,14 +76,20 @@ public class CUIListener implements Listener<CUIEvent> {
             int regionSize = event.getInt(3);
             cuix.getSelection().setPoint(id, x, z, regionSize);
             event.setHandled(true);
+            CUIx.getDebugger().debug("Setting point2d #" + id);
+
         } else if (event.type.equals("mm")) { // minmax
-            if (event.params.length < 2 || event.params.length > 3) {
-                event.markInvalid("minmax event requires either 2 or 3 parameters.");
+            
+            if (params.length < 2 || params.length > 3) {
+                event.markInvalid("Minmax event requires either 2 or 3 parameters.");
             }
+            
             int min = event.getInt(0);
             int max = event.getInt(1);
             cuix.getSelection().setMinMax(min, max);
             event.setHandled(true);
+            CUIx.getDebugger().debug("Expanding/contracting selection.");
+            
         }
     }
 }
