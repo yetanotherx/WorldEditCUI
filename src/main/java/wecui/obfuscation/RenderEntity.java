@@ -18,9 +18,6 @@ public class RenderEntity extends ia {
 
     private Minecraft mc;
 
-    /**
-     * @param arg0
-     */
     public RenderEntity(Minecraft mc, ry arg0) {
         super(arg0);
         ao = true; // ignoreFrustumCheck \o/

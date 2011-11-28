@@ -31,8 +31,6 @@ import net.minecraft.client.Minecraft;
 public class WorldEditCUI {
 
     public static final String VERSION = "1.0beta for Minecraft version 1.0";
-    
-    
     private static WorldEditCUI instance;
     private CUIRegion selection;
     private ObfuscationHandler obfuscation;

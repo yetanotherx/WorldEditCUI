@@ -1,0 +1,6 @@
+/target
+/plugin
+/compile
+/server
+/build-client.sh
+/build-plugin.sh
