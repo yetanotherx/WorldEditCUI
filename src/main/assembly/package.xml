@@ -1,3 +1,4 @@
+
 <assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0 http://maven.apache.org/xsd/assembly-1.1.0.xsd">
     <id>${project.version}</id>
     <includeBaseDirectory>true</includeBaseDirectory>
@@ -10,16 +11,19 @@
             <directory>${project.basedir}</directory>
             <outputDirectory>/</outputDirectory>
             <includes>
-                <include>readme.md</include>
                 <include>INSTALL</include>
             </includes>
         </fileSet>
         <fileSet>
-            <directory>${project.build.directory}/classes/</directory>
-            <outputDirectory>/classes/</outputDirectory>
+            <directory>${project.build.directory}/classes</directory>
+            <outputDirectory>/</outputDirectory>
             <includes>
-                <include>*</include>
+                <include>/**</include>
             </includes>
+            <excludes>
+                <exclude>deobf</exclude>
+                <exclude>SPCPlugin.class</exclude>
+            </excludes>
         </fileSet>
     </fileSets>
     <files></files>
