@@ -28,10 +28,14 @@ public class CUIListener implements Listener<CUIEvent> {
             if (params.length > 0 && params[0].length() > 0) {
                 event.markInvalid("Handshake event takes no parameters.");
             }
+            
             if (controller.getObfuscation().isMultiplayerWorld()) {
+                WorldEditCUI.getDebugger().debug("Received handshake event, sending CUI command.");
                 controller.getObfuscation().sendChat("/worldedit cui");
             }
-            WorldEditCUI.getDebugger().debug("Received handshake event, sending CUI command.");
+            
+            this.controller.setSelection(new CuboidRegion());
+            event.setHandled(true);
 
         } else if (event.type.equals("s")) {
 

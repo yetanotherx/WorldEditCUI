@@ -69,6 +69,16 @@
                                     <from>deobf</from>
                                     <to></to>
                                 </rename>
+                                <rename>
+                                    <from>doclass</from>
+                                    <to>do</to>
+                                    <packageOnly>false</packageOnly>
+                                </rename>
+                                <rename>
+                                    <from>ifclass</from>
+                                    <to>if</to>
+                                    <packageOnly>false</packageOnly>
+                                </rename>
                             </renames>
                         </configuration>
                     </execution>
