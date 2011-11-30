@@ -24,7 +24,12 @@ public class CUIListener implements Listener<CUIEvent> {
 
     public void onEvent(CUIEvent event) {
         try {
-            Constructor[] constructors = CUIEventType.getTypeFromKey(event.type).getEventClass().getDeclaredConstructors();
+            CUIEventType eventType = CUIEventType.getTypeFromKey(event.type);
+            if( eventType == null ) {
+                event.markInvalid("Unknown CUIEvent identifier.");
+            }
+            
+            Constructor[] constructors = eventType.getEventClass().getDeclaredConstructors();
             if (constructors == null || constructors.length == 0) {
                 return;
             }

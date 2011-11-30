@@ -15,22 +15,27 @@ public abstract class CUIBaseEvent {
     public abstract String run();
 
     public abstract CUIEventType getEventType();
-    
+
     public String getEventName() {
-        String name = this.getEventName().toLowerCase();
+        String name = this.getEventType().name().toLowerCase();
         name = name.substring(0, 1).toUpperCase() + name.substring(1);
         return name;
     }
 
-    public final boolean isValid() {
+    public boolean isValid() {
         int max = this.getEventType().getMaxParameters();
         int min = this.getEventType().getMinParameters();
-        
+
         if (max == min) {
-            if( this.args.length != max ) return false;
+            if (this.args.length != max) {
+                return false;
+            }
         } else {
+            if (this.args.length > max || this.args.length < min) {
+                return false;
+            }
         }
-        
+
         return true;
 
     }
@@ -39,27 +44,31 @@ public abstract class CUIBaseEvent {
         if (controller == null || args == null) {
             throw new RuntimeException("Controller and parameters must both be set.");
         }
-        
-        if( !this.isValid() ) {
+
+        if (!this.isValid()) {
             String message = "Invalid number of parameters. " + this.getEventName() + " event requires ";
-            if( this.getEventType().getMaxParameters() == this.getEventType().getMinParameters() ) {
-                message += this.getEventType().getMaxParameters() + " parameters.";
+            if (this.getEventType().getMaxParameters() == this.getEventType().getMinParameters()) {
+                message += this.getEventType().getMaxParameters() + " parameters. ";
+            } else {
+                message += "between " + this.getEventType().getMinParameters() + " and " + this.getEventType().getMaxParameters() + " parameters. ";
             }
-            else {
-                message += "between " + this.getEventType().getMinParameters() + " and " + this.getEventType().getMaxParameters() + " parameters.";
+
+            message += "Received " + args.length + " parameters instead. ";
+            for (String arg : args) {
+                message += arg + " ";
             }
-            
+
             throw new RuntimeException(message);
+        } else {
+            return this.run();
         }
 
-        return this.run();
-
     }
-    
+
     public int getInt(int index) {
         return (int) Float.parseFloat(args[index]);
     }
-    
+
     public String getString(int index) {
         return args[index];
     }

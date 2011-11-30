@@ -24,7 +24,7 @@ public class HighlightPosition {
     public void render() {
         if (!active)
             return;
-        double off = 0.03f;
+        double off = 0;//0.03f;
         RenderShapes.drawBox(drawhidden, x-off, y-off, z-off, x+1+off, y+1+off, z+1+off);
         RenderShapes.drawBox(drawnormal, x-off, y-off, z-off, x+1+off, y+1+off, z+1+off);
     }

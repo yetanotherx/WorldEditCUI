@@ -21,6 +21,11 @@ public class CUIEvent extends Event<CUIEvent> {
 
     public CUIEvent(String type, String[] params) {
         this.type = type;
+        
+        if (params.length == 1 && params[0].length() == 0) {
+            params = new String[]{};
+        }
+        
         this.params = params;
         String debugmsg = "CUI event: " + type + " ";
         for (int i = 0; i < params.length; i++) {
@@ -62,7 +67,7 @@ public class CUIEvent extends Event<CUIEvent> {
     public int getInt(int index) {
         return (int) Float.parseFloat(params[index]);
     }
-    
+
     public String getString(int index) {
         return params[index];
     }

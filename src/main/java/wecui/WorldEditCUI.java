@@ -53,9 +53,6 @@ public class WorldEditCUI {
             settings.load();
             debugger = new CUIDebug(new File(dataFolder, "debug-output.txt"));
 
-            /**
-             * Register listeners for each event
-             */
             CUIEvent.handlers.register(new CUIListener(this), Order.Default);
             ChatEvent.handlers.register(new ChatListener(this), Order.Default);
             WorldRenderEvent.handlers.register(new WorldRenderListener(this), Order.Default);
