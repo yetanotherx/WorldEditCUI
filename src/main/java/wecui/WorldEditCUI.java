@@ -37,6 +37,8 @@ public class WorldEditCUI {
     private static CUIDebug debugger;
     private static CUISettings settings;
     public static File dataFolder = new File(ObfuscationHandler.getAppDir("minecraft"), new StringWriter().append("mods").append(File.separator).append("WorldEditCUI").toString());
+    public static String pluginVersion;
+    public static String doWorldEditVersionsMatch;
 
     private WorldEditCUI(ObfuscationHandler obfuscation) {
         try {

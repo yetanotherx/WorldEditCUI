@@ -1,9 +1,11 @@
 package wecui.event;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import wecui.fevents.Listener;
-import wecui.render.CuboidRegion;
-import wecui.render.Polygon2DRegion;
 import wecui.WorldEditCUI;
+import wecui.event.cui.CUIBaseEvent;
+import wecui.event.cui.CUIEventType;
 
 /**
  * Listener class for CUIEvent
@@ -21,79 +23,24 @@ public class CUIListener implements Listener<CUIEvent> {
     }
 
     public void onEvent(CUIEvent event) {
-        String[] params = event.params;
-
-        if (event.type.isEmpty()) {
-
-            if (params.length > 0 && params[0].length() > 0) {
-                event.markInvalid("Handshake event takes no parameters.");
+        try {
+            Constructor[] constructors = CUIEventType.getTypeFromKey(event.type).getEventClass().getDeclaredConstructors();
+            if (constructors == null || constructors.length == 0) {
+                return;
             }
-            
-            if (controller.getObfuscation().isMultiplayerWorld()) {
-                WorldEditCUI.getDebugger().debug("Received handshake event, sending CUI command.");
-                controller.getObfuscation().sendChat("/worldedit cui");
-            }
-            
-            this.controller.setSelection(new CuboidRegion());
-            event.setHandled(true);
+            CUIBaseEvent newEvent = (CUIBaseEvent) constructors[0].newInstance(this.controller, event.params);
 
-        } else if (event.type.equals("s")) {
-
-            if (params.length == 0) {
-                event.markInvalid("Selection type event requires parameters.");
-            } else if (params.length > 1) {
-                event.markInvalid("Selection type event only takes one parameter.");
+            String result = newEvent.doRun();
+            if (result != null) {
+                event.markInvalid(result);
+            } else {
+                event.setHandled(true);
             }
 
-            if (params[0].equals("cuboid")) {
-                controller.setSelection(new CuboidRegion());
-            } else if (params[0].equals("polygon2d")) {
-                controller.setSelection(new Polygon2DRegion());
-            }
-            event.setHandled(true);
-            WorldEditCUI.getDebugger().debug("Received selection event, initalizing new region instance.");
-
-        } else if (event.type.equals("p")) { // point
-
-            if (params.length < 5 || params.length > 6) {
-                event.markInvalid("Point event requires either 5 or 6 parameters.");
-            }
-
-            int id = event.getInt(0);
-            int x = event.getInt(1);
-            int y = event.getInt(2);
-            int z = event.getInt(3);
-            int regionSize = event.getInt(4);
-            controller.getSelection().setPoint(id, x, y, z, regionSize);
-            event.setHandled(true);
-            WorldEditCUI.getDebugger().debug("Setting point #" + id);
-
-        } else if (event.type.equals("p2")) { // point2d
-
-            if (params.length < 4 || params.length > 5) {
-                event.markInvalid("Point2d event requires either 4 or 5 parameters.");
-            }
-
-            int id = event.getInt(0);
-            int x = event.getInt(1);
-            int z = event.getInt(2);
-            int regionSize = event.getInt(3);
-            controller.getSelection().setPoint(id, x, z, regionSize);
-            event.setHandled(true);
-            WorldEditCUI.getDebugger().debug("Setting point2d #" + id);
-
-        } else if (event.type.equals("mm")) { // minmax
-            
-            if (params.length < 2 || params.length > 3) {
-                event.markInvalid("Minmax event requires either 2 or 3 parameters.");
-            }
-            
-            int min = event.getInt(0);
-            int max = event.getInt(1);
-            controller.getSelection().setMinMax(min, max);
-            event.setHandled(true);
-            WorldEditCUI.getDebugger().debug("Expanding/contracting selection.");
-            
+        } catch (InstantiationException ex) {
+        } catch (IllegalAccessException ex) {
+        } catch (IllegalArgumentException ex) {
+        } catch (InvocationTargetException ex) {
         }
     }
 }

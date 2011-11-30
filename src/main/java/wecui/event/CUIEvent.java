@@ -6,7 +6,7 @@ import wecui.WorldEditCUI;
 
 /**
  * CUI communication event
- * Called when a CUIEvent is sent from the server.
+ * Called when a CUI event is sent from the server.
  * 
  * @author lahwran
  * @author yetanotherx
@@ -61,6 +61,10 @@ public class CUIEvent extends Event<CUIEvent> {
 
     public int getInt(int index) {
         return (int) Float.parseFloat(params[index]);
+    }
+    
+    public String getString(int index) {
+        return params[index];
     }
 
     public boolean isHandled() {
