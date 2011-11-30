@@ -1,6 +1,5 @@
 package wecui.render;
 
-
 import wecui.obfuscation.ObfuscationHandler;
 import org.lwjgl.opengl.GL11;
 
@@ -25,7 +24,7 @@ public class RenderShapes {
      * @param y2 Y of second vertex
      * @param z2 Z of second vertex
      */
-    public static void box(LineInfo info, double x1, double y1, double z1, double x2, double y2, double z2) {
+    public static void drawBox(LineInfo info, double x1, double y1, double z1, double x2, double y2, double z2) {
         info.prepareRender();
 
         ObfuscationHandler o = ObfuscationHandler.instance;
@@ -78,7 +77,7 @@ public class RenderShapes {
      * @param y2 Y of second vertex
      * @param z2 Z of second vertex
      */
-    public static void gridSurface(LineInfo info, double x1, double y1, double z1, double x2, double y2, double z2) {
+    public static void drawGridSurface(LineInfo info, double x1, double y1, double z1, double x2, double y2, double z2) {
         info.prepareRender();
         ObfuscationHandler o = ObfuscationHandler.instance;
         o.draw_begin(GL11.GL_LINES);
@@ -192,6 +191,35 @@ public class RenderShapes {
             }
         }
 
+        o.draw();
+    }
+
+    public static void draw2DLines(LineInfo info, double off, HighlightPosition2D[] pts, int min, int max) {
+        info.prepareRender();
+        ObfuscationHandler o = ObfuscationHandler.instance;
+        o.draw_begin(GL11.GL_LINES);
+        info.prepareColor();
+
+        for (int i = 0; i < pts.length; i++) {
+            if (pts[i] != null) {
+                o.addVertex(pts[i].x + 0.5, min + off, pts[i].z + 0.5);
+                o.addVertex(pts[i].x + 0.5, max + 1 + off, pts[i].z + 0.5);
+            }
+        }
+        o.draw();
+    }
+    
+    public static void draw2DPolygon(LineInfo info, double height, HighlightPosition2D[] pts) {
+        info.prepareRender();
+        ObfuscationHandler o = ObfuscationHandler.instance;
+
+        o.draw_begin(GL11.GL_LINE_LOOP);
+        info.prepareColor();
+        for (int i = 0; i < pts.length; i++) {
+            if (pts[i] != null) {
+                o.addVertex(pts[i].x + 0.5, height, pts[i].z + 0.5);
+            }
+        }
         o.draw();
     }
 }

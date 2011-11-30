@@ -26,10 +26,10 @@ public class CuboidRegion extends CUIRegion {
         points[0].render();
         points[1].render();
         if (points[0].active && points[1].active) {
-            RenderShapes.gridSurface(Colors.gridnormal, x1, y1, z1, x2, y2, z2);
-            RenderShapes.gridSurface(Colors.gridhidden, x1, y1, z1, x2, y2, z2);
-            RenderShapes.box(Colors.boxhidden, x1, y1, z1, x2, y2, z2);
-            RenderShapes.box(Colors.boxnormal, x1, y1, z1, x2, y2, z2);
+            RenderShapes.drawGridSurface(Colors.gridnormal, x1, y1, z1, x2, y2, z2);
+            RenderShapes.drawGridSurface(Colors.gridhidden, x1, y1, z1, x2, y2, z2);
+            RenderShapes.drawBox(Colors.boxhidden, x1, y1, z1, x2, y2, z2);
+            RenderShapes.drawBox(Colors.boxnormal, x1, y1, z1, x2, y2, z2);
         }
     }
 

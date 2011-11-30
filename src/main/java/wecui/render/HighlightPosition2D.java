@@ -26,7 +26,7 @@ public class HighlightPosition2D {
             return;
         }
         double off = 0.03f;
-        RenderShapes.box(drawhidden, x - off, ymin - off, z - off, x + 1 + off, ymax + 1 + off, z + 1 + off);
-        RenderShapes.box(drawnormal, x - off, ymin - off, z - off, x + 1 + off, ymax + 1 + off, z + 1 + off);
+        RenderShapes.drawBox(drawhidden, x - off, ymin - off, z - off, x + 1 + off, ymax + 1 + off, z + 1 + off);
+        RenderShapes.drawBox(drawnormal, x - off, ymin - off, z - off, x + 1 + off, ymax + 1 + off, z + 1 + off);
     }
 }

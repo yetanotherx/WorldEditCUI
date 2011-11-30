@@ -1,15 +1,9 @@
 package wecui.render;
 
-
-import wecui.obfuscation.ObfuscationHandler;
 import java.util.ArrayList;
-import org.lwjgl.opengl.GL11;
-
 
 /**
  * Stores data for a poly-based region.
- * 
- * TODO: Move some of this to rendershapes
  * 
  * @author lahwran
  * @author yetanotherx
@@ -19,64 +13,36 @@ public class Polygon2DRegion extends CUIRegion {
 
     private ArrayList<HighlightPosition2D> dynamicpoints = new ArrayList<HighlightPosition2D>();
     private HighlightPosition2D[] pts;
-
-
     private int min;
     private int max;
 
     @Override
     public void render() {
-        if (pts == null)
+        if (pts == null) {
             return;
+        }
         for (int point = 0; point < pts.length; point++) {
             if (pts[point] != null) {
                 pts[point].render(min, max);
-                
+
             }
         }
         double off = 0.03;
-        renderLines(Colors.boxnormal, off);
-        renderLines(Colors.boxhidden, off);
-        double half = min + (double)(min-max)/2;
-        for (double height = min; height <= max+1; height++) {
+        RenderShapes.draw2DLines(Colors.boxnormal, off, pts, min, max);
+        RenderShapes.draw2DLines(Colors.boxhidden, off, pts, min, max);
 
-            if (height == min || height == max+1) {
-                renderPolygon(Colors.boxnormal, height + off);
-                renderPolygon(Colors.boxhidden, height + off);
+
+        double half = min + (double) (min - max) / 2;
+        for (double height = min; height <= max + 1; height++) {
+
+            if (height == min || height == max + 1) {
+                RenderShapes.draw2DPolygon(Colors.boxnormal, height + off, pts);
+                RenderShapes.draw2DPolygon(Colors.boxhidden, height + off, pts);
             } else {
-                renderPolygon(Colors.gridnormal, height + off);
-                renderPolygon(Colors.gridhidden, height + off);
+                RenderShapes.draw2DPolygon(Colors.gridnormal, height + off, pts);
+                RenderShapes.draw2DPolygon(Colors.gridhidden, height + off, pts);
             }
         }
-    }
-
-    private void renderLines(LineInfo color, double off) {
-        color.prepareRender();
-        ObfuscationHandler o = ObfuscationHandler.instance;
-
-        o.draw_begin(GL11.GL_LINES);
-        color.prepareColor();
-        for (int i = 0; i < pts.length; i++) {
-            if (pts[i] != null) {
-                o.addVertex(pts[i].x+0.5, min+off, pts[i].z+0.5);
-                o.addVertex(pts[i].x+0.5, max+1+off, pts[i].z+0.5);
-            }
-        }
-        o.draw();
-    }
-
-    private void renderPolygon(LineInfo color, double height) {
-        color.prepareRender();
-        ObfuscationHandler o = ObfuscationHandler.instance;
-
-        o.draw_begin(GL11.GL_LINE_LOOP);
-        color.prepareColor();
-        for (int i = 0; i < pts.length; i++) {
-            if (pts[i] != null) {
-                o.addVertex(pts[i].x+0.5, height, pts[i].z+0.5);
-            }
-        }
-        o.draw();
     }
 
     @Override
@@ -90,7 +56,7 @@ public class Polygon2DRegion extends CUIRegion {
         if (id < dynamicpoints.size()) {
             dynamicpoints.set(id, position);
         } else {
-            for (int i=0; i < id - dynamicpoints.size(); i++) {
+            for (int i = 0; i < id - dynamicpoints.size(); i++) {
                 dynamicpoints.add(null);
             }
             dynamicpoints.add(position);
@@ -102,5 +68,4 @@ public class Polygon2DRegion extends CUIRegion {
         this.min = min;
         this.max = max;
     }
-
 }
