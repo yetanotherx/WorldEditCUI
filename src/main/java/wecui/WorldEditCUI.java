@@ -1,5 +1,6 @@
 package wecui;
 
+import deobf.spc_WorldEditCUI;
 import wecui.event.CUIEvent;
 import wecui.event.CUIListener;
 import wecui.event.ChatEvent;
@@ -7,24 +8,22 @@ import wecui.event.ChatListener;
 import wecui.event.WorldRenderEvent;
 import wecui.event.WorldRenderListener;
 import wecui.fevents.Order;
-import wecui.obfuscation.ObfuscationHandler;
-import wecui.obfuscation.Packet3CUIChat;
+import wecui.obfuscation.Obfuscation;
 import wecui.render.CUIRegion;
-import wecui.util.CUIDebug;
-import wecui.util.CUISettings;
-import deobf.ModLoader;
-import java.io.File;
-import java.io.IOException;
-import java.io.StringWriter;
 
 import net.minecraft.client.Minecraft;
+import wecui.exception.InitializationException;
+import wecui.fevents.EventManager;
+import wecui.obfuscation.Packet3CUIChat;
+import wecui.render.CuboidRegion;
 
 /**
  * Main controller class
  * 
  * TODO: Comment code where needed
  * TODO: Don't use a data folder, no need.
- * TODO: Don't use singleton pattern
+ * TODO: Weird version message still being shown.
+ * TODO: Publics to protecteds
  * 
  * TODO: Localize plugin jar
  * TODO: GUI
@@ -35,78 +34,79 @@ import net.minecraft.client.Minecraft;
 public class WorldEditCUI {
 
     public static final String VERSION = "1.0beta for Minecraft version 1.0";
-    private static WorldEditCUI instance;
-    private CUIRegion selection;
-    private ObfuscationHandler obfuscation;
-    private static CUIDebug debugger;
-    private static CUISettings settings;
-    public static File dataFolder = new File(ObfuscationHandler.getAppDir("minecraft"), new StringWriter().append("mods").append(File.separator).append("WorldEditCUI").toString());
-    public static String pluginVersion;
-    public static String doWorldEditVersionsMatch;
+    protected Minecraft minecraft;
+    protected EventManager eventManager;
+    protected Obfuscation obfuscation;
+    protected CUIRegion selection;
+    protected CUIDebug debugger;
+    protected CUISettings settings;
+    protected LocalPlugin localPlugin;
 
-    private WorldEditCUI(ObfuscationHandler obfuscation) {
+    public WorldEditCUI(Minecraft minecraft) {
+        this.minecraft = minecraft;
+    }
+
+    public void initialize() {
+        this.eventManager = new EventManager(this);
+        this.obfuscation = new Obfuscation(this);
+        this.selection = new CuboidRegion(this);
+        this.settings = new CUISettings(this);
+        this.debugger = new CUIDebug(this);
+        this.localPlugin = new LocalPlugin(this);
+
         try {
-            this.obfuscation = obfuscation;
-
-            dataFolder.mkdirs();
-            settings = new CUISettings(new File(dataFolder, "settings.cfg"));
-            settings.load();
-            debugger = new CUIDebug(new File(dataFolder, "debug-output.txt"));
-
-            CUIEvent.handlers.register(new CUIListener(this), Order.Default);
-            ChatEvent.handlers.register(new ChatListener(this), Order.Default);
-            WorldRenderEvent.handlers.register(new WorldRenderListener(this), Order.Default);
-
-        } catch (IOException ex) {
-            ex.printStackTrace(System.err);
-        }
-
-    }
-
-    /**
-     * Singleton getter
-     * @return 
-     */
-    public static WorldEditCUI getInstance() {
-        if (WorldEditCUI.instance == null) {
-            WorldEditCUI.setInstance(ModLoader.getMinecraftInstance());
-        }
-        return WorldEditCUI.instance;
-    }
-
-    /**
-     * Singleton setter
-     * Ideally, this should be set manually, instead of 
-     * relying on the ModLoader global instance.
-     * 
-     * @param minecraft Minecraft main class instance
-     */
-    public static void setInstance(Minecraft minecraft) {
-        if (WorldEditCUI.instance != null) {
+            this.eventManager.initialize();
+            this.obfuscation.initialize();
+            this.selection.initialize();
+            this.settings.initialize();
+            this.debugger.initialize();
+            this.localPlugin.initialize();
+        } catch (InitializationException e) {
+            e.printStackTrace(System.err);
             return;
         }
+        
+        this.registerListeners();
+        spc_WorldEditCUI.setController(this);
+        Packet3CUIChat.register(this);
 
-        WorldEditCUI.instance = new WorldEditCUI(new ObfuscationHandler(minecraft));
-        Packet3CUIChat.register();
     }
 
-    public void setSelection(CUIRegion region) {
-        selection = region;
+    protected void registerListeners() {
+        CUIEvent.handlers.register(new CUIListener(this), Order.Default);
+        ChatEvent.handlers.register(new ChatListener(this), Order.Default);
+        WorldRenderEvent.handlers.register(new WorldRenderListener(this), Order.Default);
+    }
+
+    public CUIDebug getDebugger() {
+        return debugger;
+    }
+
+    public LocalPlugin getLocalPlugin() {
+        return localPlugin;
+    }
+
+    public Minecraft getMinecraft() {
+        return minecraft;
+    }
+
+    public Obfuscation getObfuscation() {
+        return obfuscation;
     }
 
     public CUIRegion getSelection() {
         return selection;
     }
 
-    public ObfuscationHandler getObfuscation() {
-        return obfuscation;
+    public void setSelection(CUIRegion selection) {
+        this.selection = selection;
     }
 
-    public static CUIDebug getDebugger() {
-        return debugger;
-    }
-
-    public static CUISettings getSettings() {
+    public CUISettings getSettings() {
         return settings;
+    }
+
+    public EventManager getEventManager() {
+        return eventManager;
     }
 }

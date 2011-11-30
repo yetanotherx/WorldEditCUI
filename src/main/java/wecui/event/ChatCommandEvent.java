@@ -3,6 +3,7 @@ package wecui.event;
 import wecui.fevents.Event;
 import wecui.fevents.HandlerList;
 import java.util.HashMap;
+import wecui.WorldEditCUI;
 
 /**
  * Events for outgoing commands to server
@@ -13,17 +14,18 @@ import java.util.HashMap;
  */
 public class ChatCommandEvent extends Event<ChatCommandEvent> {
 
-    protected final String rawMessage;
-    protected final String command;
-    protected final String[] args;
+    protected WorldEditCUI controller;
+    protected String rawMessage;
+    protected String command;
+    protected String[] args;
     protected boolean handled;
     protected static final HashMap<String, HandlerList<ChatCommandEvent>> allhandlers =
             new HashMap<String, HandlerList<ChatCommandEvent>>();
     protected static final HandlerList<ChatCommandEvent> defaulthandlers =
             new HandlerList<ChatCommandEvent>();
 
-    public ChatCommandEvent(String chat) {
-
+    public ChatCommandEvent(WorldEditCUI controller, String chat) {
+        this.controller = controller;
         this.rawMessage = chat;
 
         int firstspace = chat.indexOf(' ');

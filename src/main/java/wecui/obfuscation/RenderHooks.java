@@ -5,6 +5,7 @@ import wecui.fevents.EventManager;
 import deobf.ia;
 import deobf.rg;
 import deobf.rt;
+import wecui.WorldEditCUI;
 
 
 /**
@@ -17,13 +18,18 @@ import deobf.rt;
  */
 public class RenderHooks extends rg {
 
-    public RenderHooks() {
-    }
+    protected WorldEditCUI controller;
+    protected WorldRenderEvent event;
+
+    public RenderHooks(WorldEditCUI controller) {
+        this.controller = controller;
+        this.event = new WorldRenderEvent(controller);
+    }    
 
     private void render(float renderTick) {
         rt.a();
-        WorldRenderEvent renderEvent = WorldRenderEvent.setTickAndGetInstance(renderTick);
-        EventManager.callEvent(renderEvent);
+        event.setPartialTick(renderTick);
+        controller.getEventManager().callEvent(event);
         rt.b();
     }
 

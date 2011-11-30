@@ -15,10 +15,10 @@ public class CUIVersionEvent extends CUIBaseEvent {
 
     @Override
     public String run() {
-        WorldEditCUI.pluginVersion = this.getString(0);
+        /*WorldEditCUI.pluginVersion = this.getString(0);
         
         WorldEditCUI.getDebugger().debug("WorldEdit version - " + WorldEditCUI.pluginVersion);
-        
+        */
         //TODO: Check for version compatibility here. Only do once interface for the local copy exists.
         return null;
     }

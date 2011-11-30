@@ -22,7 +22,7 @@ public class CUIPointEvent extends CUIBaseEvent {
         int regionSize = this.getInt(4);
         controller.getSelection().setPoint(id, x, y, z, regionSize);
 
-        WorldEditCUI.getDebugger().debug("Setting point #" + id);
+        controller.getDebugger().debug("Setting point #" + id);
 
         return null;
     }

@@ -1,6 +1,7 @@
 package wecui.render;
 
 import java.util.ArrayList;
+import wecui.WorldEditCUI;
 
 /**
  * Stores data for a poly-based region.
@@ -16,6 +17,10 @@ public class Polygon2DRegion extends CUIRegion {
     private int min;
     private int max;
 
+    public Polygon2DRegion(WorldEditCUI controller) {
+        super(controller);
+    }
+
     @Override
     public void render() {
         if (pts == null) {
@@ -28,26 +33,26 @@ public class Polygon2DRegion extends CUIRegion {
             }
         }
         double off = 0.03;
-        RenderShapes.draw2DLines(Colors.boxnormal, off, pts, min, max);
-        RenderShapes.draw2DLines(Colors.boxhidden, off, pts, min, max);
+        renderer.draw2DLines(Colors.boxnormal, off, pts, min, max);
+        renderer.draw2DLines(Colors.boxhidden, off, pts, min, max);
 
 
         double half = min + (double) (min - max) / 2;
         for (double height = min; height <= max + 1; height++) {
 
             if (height == min || height == max + 1) {
-                RenderShapes.draw2DPolygon(Colors.boxnormal, height + off, pts);
-                RenderShapes.draw2DPolygon(Colors.boxhidden, height + off, pts);
+                renderer.draw2DPolygon(Colors.boxnormal, height + off, pts);
+                renderer.draw2DPolygon(Colors.boxhidden, height + off, pts);
             } else {
-                RenderShapes.draw2DPolygon(Colors.gridnormal, height + off, pts);
-                RenderShapes.draw2DPolygon(Colors.gridhidden, height + off, pts);
+                renderer.draw2DPolygon(Colors.gridnormal, height + off, pts);
+                renderer.draw2DPolygon(Colors.gridhidden, height + off, pts);
             }
         }
     }
 
     @Override
     public void setPoint(int id, int x, int z, int regionSize) {
-        HighlightPosition2D position = new HighlightPosition2D(Colors.polynormal, Colors.polyhidden);
+        HighlightPosition2D position = new HighlightPosition2D(renderer, Colors.polynormal, Colors.polyhidden);
         position.x = x;
         position.z = z;
         position.active = true;

@@ -14,12 +14,14 @@ import wecui.WorldEditCUI;
  */
 public class CUIEvent extends Event<CUIEvent> {
 
+    protected WorldEditCUI controller;
     public String type;
     public String[] params;
     private boolean handled = false;
     public static final HandlerList<CUIEvent> handlers = new HandlerList<CUIEvent>();
 
-    public CUIEvent(String type, String[] params) {
+    public CUIEvent(WorldEditCUI controller, String type, String[] params) {
+        this.controller = controller;
         this.type = type;
         
         if (params.length == 1 && params[0].length() == 0) {
@@ -31,7 +33,8 @@ public class CUIEvent extends Event<CUIEvent> {
         for (int i = 0; i < params.length; i++) {
             debugmsg += params[i] + " ";
         }
-        WorldEditCUI.getDebugger().debug(debugmsg);
+        this.controller.getDebugger().debug(debugmsg);
+        
     }
 
     @Override
@@ -60,7 +63,7 @@ public class CUIEvent extends Event<CUIEvent> {
             debugmsg += "|" + params[i];
         }
         debugmsg += " because " + reason;
-        WorldEditCUI.getDebugger().debug(debugmsg);
+        this.controller.getDebugger().debug(debugmsg);
         setHandled(true);
     }
 

@@ -13,19 +13,21 @@ public class HighlightPosition {
     public int y;
     public int z;
     public boolean active = false;
+    protected RenderShapes renderer;
     public final LineInfo drawnormal;
     public final LineInfo drawhidden;
 
-    public HighlightPosition(LineInfo drawnormal, LineInfo drawhidden) {
-        this.drawhidden = drawhidden;
+    public HighlightPosition(RenderShapes renderer, LineInfo drawnormal, LineInfo drawhidden) {
+        this.renderer = renderer;
         this.drawnormal = drawnormal;
+        this.drawhidden = drawhidden;
     }
-
+    
     public void render() {
         if (!active)
             return;
-        double off = 0;//0.03f;
-        RenderShapes.drawBox(drawhidden, x-off, y-off, z-off, x+1+off, y+1+off, z+1+off);
-        RenderShapes.drawBox(drawnormal, x-off, y-off, z-off, x+1+off, y+1+off, z+1+off);
+        double off = 0.03f;
+        renderer.drawBox(drawhidden, x-off, y-off, z-off, x+1+off, y+1+off, z+1+off);
+        renderer.drawBox(drawnormal, x-off, y-off, z-off, x+1+off, y+1+off, z+1+off);
     }
 }

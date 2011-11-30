@@ -1,5 +1,6 @@
 package wecui.event;
 
+import wecui.WorldEditCUI;
 import wecui.fevents.Cancellable;
 import wecui.fevents.Event;
 import wecui.fevents.HandlerList;
@@ -13,11 +14,13 @@ import wecui.fevents.HandlerList;
  */
 public class ChatEvent extends Event<ChatEvent> implements Cancellable {
 
+    protected WorldEditCUI controller;
     public String message;
     public final Direction direction;
     public static final HandlerList<ChatEvent> handlers = new HandlerList<ChatEvent>();
 
-    public ChatEvent(String message, Direction direction) {
+    public ChatEvent(WorldEditCUI controller, String message, Direction direction) {
+        this.controller = controller;
         this.message = message;
         this.direction = direction;
     }

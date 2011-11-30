@@ -1,7 +1,7 @@
 package wecui.event;
 
 import wecui.fevents.Listener;
-import wecui.obfuscation.ObfuscationHandler;
+import wecui.obfuscation.Obfuscation;
 import wecui.WorldEditCUI;
 import org.lwjgl.opengl.GL11;
 
@@ -34,7 +34,7 @@ public class WorldRenderListener implements Listener<WorldRenderEvent> {
         GL11.glPushMatrix();
 
         try {
-            ObfuscationHandler obf = controller.getObfuscation();
+            Obfuscation obf = controller.getObfuscation();
 
             GL11.glTranslated(-obf.getPlayerX(event.partialTick),
                     -obf.getPlayerY(event.partialTick),

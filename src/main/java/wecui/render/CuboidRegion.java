@@ -1,5 +1,7 @@
 package wecui.render;
 
+import wecui.WorldEditCUI;
+
 /**
  * Stores data for a cuboid-based region.
  * 
@@ -15,10 +17,15 @@ public class CuboidRegion extends CUIRegion {
     
     public double x1, y1, z1, x2, y2, z2;
 
-    public CuboidRegion() {
+    public CuboidRegion(WorldEditCUI controller) {
+        super(controller);
+    }
+    
+    @Override
+    public void initialize() {
         points = new HighlightPosition[2];
-        points[0] = new HighlightPosition(Colors.firstnormal, Colors.firsthidden);
-        points[1] = new HighlightPosition(Colors.secondnormal, Colors.secondhidden);
+        points[0] = new HighlightPosition(renderer, Colors.firstnormal, Colors.firsthidden);
+        points[1] = new HighlightPosition(renderer, Colors.secondnormal, Colors.secondhidden);
     }
 
     @Override
@@ -26,10 +33,10 @@ public class CuboidRegion extends CUIRegion {
         points[0].render();
         points[1].render();
         if (points[0].active && points[1].active) {
-            RenderShapes.drawGridSurface(Colors.gridnormal, x1, y1, z1, x2, y2, z2);
-            RenderShapes.drawGridSurface(Colors.gridhidden, x1, y1, z1, x2, y2, z2);
-            RenderShapes.drawBox(Colors.boxhidden, x1, y1, z1, x2, y2, z2);
-            RenderShapes.drawBox(Colors.boxnormal, x1, y1, z1, x2, y2, z2);
+            renderer.drawGridSurface(Colors.gridnormal, x1, y1, z1, x2, y2, z2);
+            renderer.drawGridSurface(Colors.gridhidden, x1, y1, z1, x2, y2, z2);
+            renderer.drawBox(Colors.boxhidden, x1, y1, z1, x2, y2, z2);
+            renderer.drawBox(Colors.boxnormal, x1, y1, z1, x2, y2, z2);
         }
     }
 

@@ -10,7 +10,7 @@ public class CUIPoint2DEvent extends CUIBaseEvent {
 
     @Override
     public CUIEventType getEventType() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return CUIEventType.POINT2D;
     }
 
     @Override
@@ -22,7 +22,7 @@ public class CUIPoint2DEvent extends CUIBaseEvent {
         int regionSize = this.getInt(3);
         controller.getSelection().setPoint(id, x, z, regionSize);
         
-        WorldEditCUI.getDebugger().debug("Setting point2d #" + id);
+        controller.getDebugger().debug("Setting point2d #" + id);
         
         return null;
     }

@@ -16,7 +16,7 @@ import wecui.event.cui.CUIEventType;
  */
 public class CUIListener implements Listener<CUIEvent> {
 
-    private final WorldEditCUI controller;
+    protected WorldEditCUI controller;
 
     public CUIListener(WorldEditCUI controller) {
         this.controller = controller;

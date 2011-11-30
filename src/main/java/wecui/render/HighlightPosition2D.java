@@ -13,20 +13,22 @@ public class HighlightPosition2D {
     public int x;
     public int z;
     public boolean active = false;
+    protected RenderShapes renderer;
     public final LineInfo drawnormal;
     public final LineInfo drawhidden;
 
-    public HighlightPosition2D(LineInfo drawnormal, LineInfo drawhidden) {
-        this.drawhidden = drawhidden;
+    public HighlightPosition2D(RenderShapes renderer, LineInfo drawnormal, LineInfo drawhidden) {
+        this.renderer = renderer;
         this.drawnormal = drawnormal;
+        this.drawhidden = drawhidden;
     }
 
     public void render(int ymin, int ymax) {
         if (!active) {
             return;
         }
-        double off = 0;//0.03f;
-        RenderShapes.drawBox(drawhidden, x - off, ymin - off, z - off, x + 1 + off, ymax + 1 + off, z + 1 + off);
-        RenderShapes.drawBox(drawnormal, x - off, ymin - off, z - off, x + 1 + off, ymax + 1 + off, z + 1 + off);
+        double off = 0.03f;
+        renderer.drawBox(drawhidden, x - off, ymin - off, z - off, x + 1 + off, ymax + 1 + off, z + 1 + off);
+        renderer.drawBox(drawnormal, x - off, ymin - off, z - off, x + 1 + off, ymax + 1 + off, z + 1 + off);
     }
 }

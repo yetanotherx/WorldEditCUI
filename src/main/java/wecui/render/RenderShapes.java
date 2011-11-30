@@ -1,7 +1,8 @@
 package wecui.render;
 
-import wecui.obfuscation.ObfuscationHandler;
+import wecui.obfuscation.Obfuscation;
 import org.lwjgl.opengl.GL11;
+import wecui.WorldEditCUI;
 
 /**
  * Actually renders various shapes. 
@@ -12,6 +13,12 @@ import org.lwjgl.opengl.GL11;
  */
 public class RenderShapes {
 
+    protected WorldEditCUI controller;
+
+    public RenderShapes(WorldEditCUI controller) {
+        this.controller = controller;
+    }
+    
     /**
      * Draws a box between two points.
      * First draws the bottom face and top face, then fills in the four other lines.
@@ -24,10 +31,10 @@ public class RenderShapes {
      * @param y2 Y of second vertex
      * @param z2 Z of second vertex
      */
-    public static void drawBox(LineInfo info, double x1, double y1, double z1, double x2, double y2, double z2) {
+    public void drawBox(LineInfo info, double x1, double y1, double z1, double x2, double y2, double z2) {
         info.prepareRender();
 
-        ObfuscationHandler o = ObfuscationHandler.instance;
+        Obfuscation o = controller.getObfuscation();
 
         // Draw bottom face
         o.draw_begin(GL11.GL_LINE_LOOP);
@@ -77,11 +84,12 @@ public class RenderShapes {
      * @param y2 Y of second vertex
      * @param z2 Z of second vertex
      */
-    public static void drawGridSurface(LineInfo info, double x1, double y1, double z1, double x2, double y2, double z2) {
+    public void drawGridSurface(LineInfo info, double x1, double y1, double z1, double x2, double y2, double z2) {
         info.prepareRender();
-        ObfuscationHandler o = ObfuscationHandler.instance;
+        Obfuscation o = controller.getObfuscation();
         o.draw_begin(GL11.GL_LINES);
         info.prepareColor();
+        
         double x, y, z;
         double offsetSize = 1.0;
 
@@ -194,9 +202,9 @@ public class RenderShapes {
         o.draw();
     }
 
-    public static void draw2DLines(LineInfo info, double off, HighlightPosition2D[] pts, int min, int max) {
+    public void draw2DLines(LineInfo info, double off, HighlightPosition2D[] pts, int min, int max) {
         info.prepareRender();
-        ObfuscationHandler o = ObfuscationHandler.instance;
+        Obfuscation o = controller.getObfuscation();
         o.draw_begin(GL11.GL_LINES);
         info.prepareColor();
 
@@ -209,9 +217,9 @@ public class RenderShapes {
         o.draw();
     }
     
-    public static void draw2DPolygon(LineInfo info, double height, HighlightPosition2D[] pts) {
+    public void draw2DPolygon(LineInfo info, double height, HighlightPosition2D[] pts) {
         info.prepareRender();
-        ObfuscationHandler o = ObfuscationHandler.instance;
+        Obfuscation o = controller.getObfuscation();
 
         o.draw_begin(GL11.GL_LINE_LOOP);
         info.prepareColor();

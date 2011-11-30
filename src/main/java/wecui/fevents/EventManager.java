@@ -1,5 +1,9 @@
 package wecui.fevents;
 
+import wecui.InitializationFactory;
+import wecui.WorldEditCUI;
+import wecui.exception.InitializationException;
+
 /**
  * This class doesn't actually need to exist, but it feels wrong to have this
  * part of the event call logic inside Event
@@ -8,15 +12,21 @@ package wecui.fevents;
  * 
  * @author lahwran
  */
-public class EventManager {
+public class EventManager implements InitializationFactory {
 
+    protected WorldEditCUI controller;
+
+    public EventManager(WorldEditCUI controller) {
+        this.controller = controller;
+    }
+    
     /**
      * Call an event.
      * 
      * @param <TEvent> Event subclass
      * @param event Event to handle
      */
-    public static <TEvent extends Event<TEvent>> void callEvent(TEvent event) {
+    public <TEvent extends Event<TEvent>> void callEvent(TEvent event) {
         HandlerList<TEvent> handlerlist = event.getHandlers();
         handlerlist.bake();
 
@@ -38,5 +48,9 @@ public class EventManager {
                 }
             }
         }
+    }
+
+    @Override
+    public void initialize() throws InitializationException {
     }
 }

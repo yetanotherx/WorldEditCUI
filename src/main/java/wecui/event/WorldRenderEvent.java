@@ -1,5 +1,6 @@
 package wecui.event;
 
+import wecui.WorldEditCUI;
 import wecui.fevents.Event;
 import wecui.fevents.HandlerList;
 
@@ -13,14 +14,15 @@ import wecui.fevents.HandlerList;
  */
 public class WorldRenderEvent extends Event<WorldRenderEvent> {
 
+    protected WorldEditCUI controller;
     public static final HandlerList<WorldRenderEvent> handlers = new HandlerList<WorldRenderEvent>();
-    private static final WorldRenderEvent instance = new WorldRenderEvent();
     public float partialTick;
 
-    /**
-     * Protected constructor to enforce singleton
-     */
-    protected WorldRenderEvent() {
+    public WorldRenderEvent(WorldEditCUI controller) {
+    }
+
+    public void setPartialTick(float partialTick) {
+        this.partialTick = partialTick;
     }
 
     @Override
@@ -33,14 +35,4 @@ public class WorldRenderEvent extends Event<WorldRenderEvent> {
         return handlers;
     }
 
-    /**
-     * Sets the rendering tick and returns the instance
-     * 
-     * @param partialTick
-     * @return 
-     */
-    public static WorldRenderEvent setTickAndGetInstance(float partialTick) {
-        instance.partialTick = partialTick;
-        return instance;
-    }
 }

@@ -18,11 +18,14 @@ public class CUIHandshakeEvent extends CUIBaseEvent {
     public String run() {
         
         if (controller.getObfuscation().isMultiplayerWorld()) {
-            WorldEditCUI.getDebugger().debug("Received handshake event, sending CUI command.");
+            controller.getDebugger().debug("Received handshake event, sending CUI command.");
             controller.getObfuscation().sendChat("/worldedit cui");
         }
-
-        this.controller.setSelection(new CuboidRegion());
+        
+        CuboidRegion cuboidRegion = new CuboidRegion(controller);
+        cuboidRegion.initialize();
+        
+        this.controller.setSelection(cuboidRegion);
 
         return null;
     }

@@ -19,7 +19,7 @@ public class CUIMinMaxEvent extends CUIBaseEvent {
         int max = this.getInt(1);
         controller.getSelection().setMinMax(min, max);
         
-        WorldEditCUI.getDebugger().debug("Expanding/contracting selection.");
+        controller.getDebugger().debug("Expanding/contracting selection.");
         
         return null;
     }

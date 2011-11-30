@@ -1,6 +1,7 @@
 package wecui.event.cui;
 
 import wecui.WorldEditCUI;
+import wecui.render.CUIRegion;
 import wecui.render.CuboidRegion;
 import wecui.render.Polygon2DRegion;
 
@@ -18,14 +19,24 @@ public class CUISelectionEvent extends CUIBaseEvent {
     @Override
     public String run() {
 
+        CUIRegion newRegion = null;
+        
         if (this.getString(0).equals("cuboid")) {
-            controller.setSelection(new CuboidRegion());
+            
+            newRegion = new CuboidRegion(controller);
+            newRegion.initialize();
+            
         } else if (this.getString(0).equals("polygon2d")) {
-            controller.setSelection(new Polygon2DRegion());
+            
+            newRegion = new Polygon2DRegion(controller);
+            newRegion.initialize();
+            
         } else {
             return "Invalid selection type. Must be either cuboid or polygon2d.";
         }
-        WorldEditCUI.getDebugger().debug("Received selection event, initalizing new region instance.");
+        
+        controller.setSelection(newRegion);
+        controller.getDebugger().debug("Received selection event, initalizing new region instance.");
 
         return null;
     }

@@ -19,37 +19,44 @@ import net.minecraft.client.Minecraft;
  */
 public class mod_WorldEditCUI extends BaseMod {
 
-    public static ry lastworld;
-    public static di lastplayer;
-    public static RenderEntity entity;
+    protected WorldEditCUI controller;
+    protected ry lastworld;
+    protected di lastplayer;
+    protected RenderEntity entity;
+
+    public void mod_WorldEditCUI() {
+    }
+
+    @Override
+    public void load() {
+        this.controller = new WorldEditCUI(ModLoader.getMinecraftInstance());
+        this.controller.initialize();
+        ModLoader.SetInGameHook(this, true, true); // the last true is because we don't want to iterate the entity list too often
+    }
 
     @Override
     public boolean OnTickInGame(float partialticks, Minecraft mc) {
         if (mc.f != lastworld || mc.h != lastplayer) {
 
-            entity = new RenderEntity(mc, mc.f);
-            entity.d(mc.h.s, mc.h.t, mc.h.u);
-            mc.f.a((ia) entity);
-            entity.d(mc.h.s, mc.h.t, mc.h.u);
-            WorldEditCUI.getDebugger().debug("RenderEntity spawned");
+            Minecraft newMC = this.controller.getMinecraft();
+            
+            entity = new RenderEntity(this.controller, newMC.f);
+            entity.d(newMC.h.s, newMC.h.t, newMC.h.u);
+            newMC.f.a((ia) entity);
+            entity.d(newMC.h.s, newMC.h.t, newMC.h.u);
+            controller.getDebugger().debug("RenderEntity spawned");
 
-            lastworld = mc.f;
-            lastplayer = mc.h;
+            lastworld = newMC.f;
+            lastplayer = newMC.h;
         }
         return true;
     }
 
     @Override
-    public void load() {
-        WorldEditCUI.setInstance(ModLoader.getMinecraftInstance());
-        ModLoader.SetInGameHook(this, true, true); // the last true is because we don't want to iterate the entity list too often
-    }
-
-    @Override
     @SuppressWarnings("unchecked")
     public void AddRenderer(Map map) {
-        WorldEditCUI.getDebugger().debug("Attaching renderer to ModLoader");
-        map.put(RenderEntity.class, new RenderHooks());
+        controller.getDebugger().debug("Attaching renderer to ModLoader");
+        map.put(RenderEntity.class, new RenderHooks(controller));
     }
 
     @Override

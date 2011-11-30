@@ -10,6 +10,7 @@ import deobf.ob;
 import java.io.DataOutputStream;
 import java.lang.reflect.Field;
 import java.util.Map;
+import wecui.WorldEditCUI;
 
 /**
  * Replacement for Packet3Chat, in order to listen 
@@ -25,6 +26,7 @@ import java.util.Map;
  */
 public class Packet3CUIChat extends abb {
 
+    protected static WorldEditCUI controller;
     private static boolean registered = false;
     private boolean cancelled = false;
 
@@ -34,11 +36,11 @@ public class Packet3CUIChat extends abb {
 
     public Packet3CUIChat(String s) {
         super(s);
-        ChatEvent chatevent = new ChatEvent(s, ChatEvent.Direction.OUTGOING);
-        EventManager.callEvent(chatevent);
+        ChatEvent chatevent = new ChatEvent(controller, s, ChatEvent.Direction.OUTGOING);
+        controller.getEventManager().callEvent(chatevent);
         if (!chatevent.isCancelled() && s.startsWith("/") && s.length() > 1) {
-            ChatCommandEvent commandevent = new ChatCommandEvent(s);
-            EventManager.callEvent(chatevent);
+            ChatCommandEvent commandevent = new ChatCommandEvent(controller, s);
+            controller.getEventManager().callEvent(chatevent);
             if (commandevent.isHandled()) {
                 cancelled = true;
             }
@@ -48,11 +50,13 @@ public class Packet3CUIChat extends abb {
     }
 
     @SuppressWarnings("unchecked")
-    public static void register() {
+    public static void register(WorldEditCUI controller) {
         if (registered) {
             return;
         }
         registered = true;
+        Packet3CUIChat.controller = controller;
+        
         try {
             Class<gt> packetclass = gt.class;
             Field idstoclassesfield;
@@ -91,8 +95,8 @@ public class Packet3CUIChat extends abb {
      * @param nethandler 
      */
     public void a(fe nethandler) {
-        ChatEvent chatevent = new ChatEvent(a, ChatEvent.Direction.INCOMING);
-        EventManager.callEvent(chatevent);
+        ChatEvent chatevent = new ChatEvent(controller, a, ChatEvent.Direction.INCOMING);
+        controller.getEventManager().callEvent(chatevent);
         if (!chatevent.isCancelled()) {
             nethandler.a(this);
         }

@@ -17,8 +17,8 @@ import java.util.regex.Pattern;
  */
 public class ChatListener implements Listener<ChatEvent> {
 
-    public static Pattern commandpattern = Pattern.compile("\u00a75\u00a76\u00a74\u00a75([^|]*)\\|?(.*)");
-    protected final WorldEditCUI controller;
+    public final static Pattern commandpattern = Pattern.compile("\u00a75\u00a76\u00a74\u00a75([^|]*)\\|?(.*)");
+    protected WorldEditCUI controller;
 
     public ChatListener(WorldEditCUI controller) {
         this.controller = controller;
@@ -32,10 +32,10 @@ public class ChatListener implements Listener<ChatEvent> {
             if (matcher.find()) {
                 String type = matcher.group(1);
                 String args = matcher.group(2);
-                WorldEditCUI.getDebugger().debug("Received CUI event from server: " + event.message);
+                this.controller.getDebugger().debug("Received CUI event from server: " + event.message);
 
-                CUIEvent cuievent = new CUIEvent(type, args.split("[|]"));
-                EventManager.callEvent(cuievent);
+                CUIEvent cuievent = new CUIEvent(this.controller, type, args.split("[|]"));
+                this.controller.getEventManager().callEvent(cuievent);
 
                 if (!cuievent.isHandled()) {
                     cuievent.markInvalid("Invalid message type. Update WorldEditCUI to the latest version.");

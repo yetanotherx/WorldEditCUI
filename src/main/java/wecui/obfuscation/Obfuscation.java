@@ -4,6 +4,8 @@ import deobf.cv;
 import deobf.di;
 import java.io.File;
 import net.minecraft.client.Minecraft;
+import wecui.InitializationFactory;
+import wecui.WorldEditCUI;
 
 /**
  * Main obfuscation class
@@ -15,18 +17,19 @@ import net.minecraft.client.Minecraft;
  * 
  * @obfuscated
  */
-public class ObfuscationHandler {
+public class Obfuscation implements InitializationFactory {
 
-    public static ObfuscationHandler instance;
+    protected WorldEditCUI controller;
     private Minecraft minecraft;
     private cv tessellator = cv.a;
 
-    /**
-     * @param minecraft
-     */
-    public ObfuscationHandler(Minecraft minecraft) {
-        this.minecraft = minecraft;
-        this.instance = this;
+    public Obfuscation(WorldEditCUI controller) {
+        this.controller = controller;
+    }
+
+    @Override
+    public void initialize() {
+        this.minecraft = this.controller.getMinecraft();
     }
 
     public boolean isMultiplayerWorld() {

@@ -16,13 +16,13 @@ import net.minecraft.client.Minecraft;
  */
 public class RenderEntity extends ia {
 
-    private Minecraft mc;
+    protected WorldEditCUI controller;
 
-    public RenderEntity(Minecraft mc, ry arg0) {
+    public RenderEntity(WorldEditCUI controller, ry arg0) {
         super(arg0);
+        this.controller = controller;
         ao = true; // ignoreFrustumCheck \o/
-        this.mc = mc;
-        WorldEditCUI.getDebugger().debug("Entity spawned");
+        controller.getDebugger().debug("Entity spawned");
     }
 
     @Override
@@ -39,6 +39,7 @@ public class RenderEntity extends ia {
 
     @Override
     public void a() {
+        Minecraft mc = controller.getMinecraft();
         this.d(mc.h.s, mc.h.t, mc.h.u);
     }
 

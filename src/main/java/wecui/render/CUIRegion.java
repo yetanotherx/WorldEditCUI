@@ -1,5 +1,8 @@
 package wecui.render;
 
+import wecui.InitializationFactory;
+import wecui.WorldEditCUI;
+
 /**
  * Base class for the two types of regions: cuboid and poly.
  * 
@@ -7,13 +10,24 @@ package wecui.render;
  * @author yetanotherx
  *
  */
-public abstract class CUIRegion {
+public abstract class CUIRegion implements InitializationFactory {
 
     /**
      * size of the region
      */
     protected int regionSize;
+    protected WorldEditCUI controller;
+    protected RenderShapes renderer;
 
+    public CUIRegion(WorldEditCUI controller) {
+        this.controller = controller;
+        this.renderer = new RenderShapes(controller);
+    }
+
+    @Override
+    public void initialize() {
+    }
+    
     /**
      * render the region lines and such
      */
