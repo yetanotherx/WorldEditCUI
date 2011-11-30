@@ -8,7 +8,7 @@
     </formats>
     <fileSets>
         <fileSet>
-            <directory>${project.basedir}</directory>
+            <directory>${project.build.directory}/classes</directory>
             <outputDirectory>/</outputDirectory>
             <includes>
                 <include>INSTALL</include>
@@ -16,13 +16,14 @@
         </fileSet>
         <fileSet>
             <directory>${project.build.directory}/classes</directory>
-            <outputDirectory>/classes</outputDirectory>
+            <outputDirectory>/WorldEditCUI</outputDirectory>
             <includes>
                 <include>/**</include>
             </includes>
             <excludes>
                 <exclude>deobf</exclude>
                 <exclude>SPCPlugin.class</exclude>
+                <exclude>INSTALL</exclude>
             </excludes>
         </fileSet>
     </fileSets>

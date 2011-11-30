@@ -85,6 +85,16 @@
                 </executions>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <targetPath>.</targetPath>
+                <filtering>true</filtering>
+                <directory>${basedir}/src/main/resources/</directory>
+                <includes>
+                    <include>INSTALL</include>
+                </includes>
+            </resource>
+        </resources>
     </build>
 </project>
 
