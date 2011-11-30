@@ -81,6 +81,7 @@ public class CuboidRegion extends CUIRegion {
             points[id].y = y;
             points[id].z = z;
             points[id].active = true;
+            this.regionSize = regionSize;
             calcBounds();
         }
     }

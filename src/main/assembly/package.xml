@@ -15,15 +15,8 @@
             </includes>
         </fileSet>
         <fileSet>
-            <directory>${project.basedir}/src/main/resources</directory>
-            <outputDirectory>/</outputDirectory>
-            <includes>
-                <include>settings.cfg</include>
-            </includes>
-        </fileSet>
-        <fileSet>
             <directory>${project.build.directory}/classes</directory>
-            <outputDirectory>/</outputDirectory>
+            <outputDirectory>/classes</outputDirectory>
             <includes>
                 <include>/**</include>
             </includes>

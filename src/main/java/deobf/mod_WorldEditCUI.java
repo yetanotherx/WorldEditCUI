@@ -23,23 +23,16 @@ public class mod_WorldEditCUI extends BaseMod {
     public static di lastplayer;
     public static RenderEntity entity;
 
-    public mod_WorldEditCUI() {
-        WorldEditCUI.setInstance(ModLoader.getMinecraftInstance());
-        ModLoader.SetInGameHook(this, true, true); // the last true is because we don't want to iterate the entity list too often
-    }
-
-    public static void spawn(Minecraft mc) {
-        entity = new RenderEntity(mc, mc.f);
-        entity.d(mc.h.s, mc.h.t, mc.h.u);
-        mc.f.a((ia) entity);
-        entity.d(mc.h.s, mc.h.t, mc.h.u);
-        WorldEditCUI.getDebugger().debug("RenderEntity spawned");
-    }
-
     @Override
     public boolean OnTickInGame(float partialticks, Minecraft mc) {
         if (mc.f != lastworld || mc.h != lastplayer) {
-            spawn(mc);
+
+            entity = new RenderEntity(mc, mc.f);
+            entity.d(mc.h.s, mc.h.t, mc.h.u);
+            mc.f.a((ia) entity);
+            entity.d(mc.h.s, mc.h.t, mc.h.u);
+            WorldEditCUI.getDebugger().debug("RenderEntity spawned");
+
             lastworld = mc.f;
             lastplayer = mc.h;
         }
@@ -48,6 +41,8 @@ public class mod_WorldEditCUI extends BaseMod {
 
     @Override
     public void load() {
+        WorldEditCUI.setInstance(ModLoader.getMinecraftInstance());
+        ModLoader.SetInGameHook(this, true, true); // the last true is because we don't want to iterate the entity list too often
     }
 
     @Override

@@ -9,6 +9,8 @@ import java.util.Properties;
 /**
  * Stores and reads WorldEditCUI settings
  * 
+ * TODO: Use yaml instead
+ * 
  * @author yetanotherx
  */
 public class CUISettings extends Properties {

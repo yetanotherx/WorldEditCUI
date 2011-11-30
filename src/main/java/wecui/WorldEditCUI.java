@@ -24,6 +24,10 @@ import net.minecraft.client.Minecraft;
  * 
  * TODO: Comment code where needed
  * TODO: Don't use a data folder, no need.
+ * TODO: Don't use singleton pattern
+ * 
+ * TODO: Localize plugin jar
+ * TODO: GUI
  * 
  * @author lahwran
  * @author yetanotherx
