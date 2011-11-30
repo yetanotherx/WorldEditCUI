@@ -15,9 +15,9 @@ import wecui.WorldEditCUI;
 public class CUIEvent extends Event<CUIEvent> {
 
     protected WorldEditCUI controller;
-    public String type;
-    public String[] params;
-    private boolean handled = false;
+    protected String type;
+    protected String[] params;
+    protected boolean handled = false;
     public static final HandlerList<CUIEvent> handlers = new HandlerList<CUIEvent>();
 
     public CUIEvent(WorldEditCUI controller, String type, String[] params) {
@@ -82,4 +82,13 @@ public class CUIEvent extends Event<CUIEvent> {
     public boolean isCancelled() {
         return isHandled();
     }
+
+    public String[] getParams() {
+        return params;
+    }
+
+    public String getType() {
+        return type;
+    }
+    
 }

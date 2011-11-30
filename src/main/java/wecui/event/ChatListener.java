@@ -1,6 +1,5 @@
 package wecui.event;
 
-import wecui.fevents.EventManager;
 import wecui.fevents.Listener;
 import wecui.WorldEditCUI;
 import java.util.regex.Matcher;

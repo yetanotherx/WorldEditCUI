@@ -12,10 +12,9 @@ import wecui.WorldEditCUI;
  */
 public class Polygon2DRegion extends CUIRegion {
 
-    private ArrayList<HighlightPosition2D> dynamicpoints = new ArrayList<HighlightPosition2D>();
-    private HighlightPosition2D[] pts;
-    private int min;
-    private int max;
+    protected ArrayList<HighlightPosition2D> dynamicpoints = new ArrayList<HighlightPosition2D>();
+    protected HighlightPosition2D[] pts;
+    protected int min, max;
 
     public Polygon2DRegion(WorldEditCUI controller) {
         super(controller);

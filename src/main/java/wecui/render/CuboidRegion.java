@@ -14,8 +14,7 @@ import wecui.WorldEditCUI;
 public class CuboidRegion extends CUIRegion {
 
     protected HighlightPosition[] points;
-    
-    public double x1, y1, z1, x2, y2, z2;
+    protected double x1, y1, z1, x2, y2, z2;
 
     public CuboidRegion(WorldEditCUI controller) {
         super(controller);

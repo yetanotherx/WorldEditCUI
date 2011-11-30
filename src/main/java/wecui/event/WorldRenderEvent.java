@@ -15,8 +15,8 @@ import wecui.fevents.HandlerList;
 public class WorldRenderEvent extends Event<WorldRenderEvent> {
 
     protected WorldEditCUI controller;
+    protected float partialTick;
     public static final HandlerList<WorldRenderEvent> handlers = new HandlerList<WorldRenderEvent>();
-    public float partialTick;
 
     public WorldRenderEvent(WorldEditCUI controller) {
     }

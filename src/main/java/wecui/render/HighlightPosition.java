@@ -14,8 +14,8 @@ public class HighlightPosition {
     public int z;
     public boolean active = false;
     protected RenderShapes renderer;
-    public final LineInfo drawnormal;
-    public final LineInfo drawhidden;
+    protected final LineInfo drawnormal;
+    protected final LineInfo drawhidden;
 
     public HighlightPosition(RenderShapes renderer, LineInfo drawnormal, LineInfo drawhidden) {
         this.renderer = renderer;

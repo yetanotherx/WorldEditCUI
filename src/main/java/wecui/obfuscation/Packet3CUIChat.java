@@ -27,8 +27,8 @@ import wecui.WorldEditCUI;
 public class Packet3CUIChat extends abb {
 
     protected static WorldEditCUI controller;
-    private static boolean registered = false;
-    private boolean cancelled = false;
+    protected static boolean registered = false;
+    protected boolean cancelled = false;
 
     public Packet3CUIChat() {
         super();
@@ -82,6 +82,8 @@ public class Packet3CUIChat extends abb {
         } catch (Exception e) {
             throw new RuntimeException("Error inserting chat handler - WorldEditCUI and anything that depends on it will not work!", e);
         }
+        
+        controller.getDebugger().debug("Chat handler registered.");
     }
 
     public void a(DataOutputStream dataoutputstream) {

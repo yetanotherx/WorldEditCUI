@@ -22,7 +22,7 @@ import wecui.render.CuboidRegion;
  * 
  * TODO: Comment code where needed
  * TODO: Weird version message still being shown.
- * TODO: Publics to protecteds
+ * TODO: Give another attempt at adjusting maven-renamer plugin to accept a file input
  * 
  * TODO: Localize plugin jar
  * TODO: GUI

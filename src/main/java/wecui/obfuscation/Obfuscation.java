@@ -20,8 +20,8 @@ import wecui.WorldEditCUI;
 public class Obfuscation implements InitializationFactory {
 
     protected WorldEditCUI controller;
-    private Minecraft minecraft;
-    private cv tessellator = cv.a;
+    protected Minecraft minecraft;
+    protected cv tessellator = cv.a;
 
     public Obfuscation(WorldEditCUI controller) {
         this.controller = controller;
