@@ -21,7 +21,6 @@ import wecui.render.CuboidRegion;
  * Main controller class
  * 
  * TODO: Comment code where needed
- * TODO: Don't use a data folder, no need.
  * TODO: Weird version message still being shown.
  * TODO: Publics to protecteds
  * 

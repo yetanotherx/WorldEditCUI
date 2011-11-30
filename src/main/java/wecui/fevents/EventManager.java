@@ -8,8 +8,6 @@ import wecui.exception.InitializationException;
  * This class doesn't actually need to exist, but it feels wrong to have this
  * part of the event call logic inside Event
  * 
- * TODO: Make this not static 
- * 
  * @author lahwran
  */
 public class EventManager implements InitializationFactory {

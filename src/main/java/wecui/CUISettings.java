@@ -11,8 +11,6 @@ import wecui.obfuscation.Obfuscation;
 /**
  * Stores and reads WorldEditCUI settings
  * 
- * TODO: Use yaml instead
- * 
  * @author yetanotherx
  */
 @SuppressWarnings("serial") //Suppressed because this class _should_ never need to be serialized
