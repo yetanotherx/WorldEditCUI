@@ -1,6 +1,6 @@
 package wecui.event;
 
-import wecui.WECUIUtils;
+import wecui.util.WECUIUtils;
 import wecui.fevents.Event;
 import wecui.fevents.HandlerList;
 import wecui.WorldEditCUI;

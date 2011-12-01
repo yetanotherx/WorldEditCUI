@@ -1,8 +1,13 @@
 package wecui.obfuscation;
 
 import deobf.EntityPlayerSP;
+import deobf.GuiChat;
+import deobf.GuiScreen;
 import deobf.Tessellator;
 import java.io.File;
+import java.lang.reflect.Method;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.minecraft.client.Minecraft;
 import wecui.InitializationFactory;
 import wecui.WorldEditCUI;
@@ -39,6 +44,22 @@ public class Obfuscation implements InitializationFactory {
     public void sendChat(String chat) {
         minecraft.h.a(chat);
     }
+    
+    public void showChatMessage(String chat) {
+        minecraft.h.b(chat);
+    }
+    
+    public void showGuiScreenIfGuiChat(GuiScreen screen) {
+        GuiScreen currentScreen = minecraft.s;
+        if( currentScreen == null || currentScreen.getClass() == GuiChat.class ) {
+            try {
+                Method setScreen = minecraft.getClass().getDeclaredMethod("a", GuiScreen.class);
+                setScreen.invoke(minecraft, (GuiScreen)null);
+                setScreen.invoke(minecraft, screen);
+            } catch (Exception ex) {
+            }
+        }
+    }
 
     public void draw_begin(int type) {
         tessellator.a(type);
@@ -73,5 +94,10 @@ public class Obfuscation implements InitializationFactory {
 
     public static File getMinecraftDir() {
         return Minecraft.b();
+    }
+
+    public void switchToInGame() {
+        minecraft.a((GuiScreen)null);
+        minecraft.g();
     }
 }

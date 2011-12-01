@@ -24,6 +24,7 @@ import wecui.render.CuboidRegion;
  * TODO: Weird version message still being shown.
  * TODO: Localize plugin jar
  * TODO: GUI
+ * TODO: Move the new outgoing chat code to obfhub and add @obfuscated
  * 
  * @author lahwran
  * @author yetanotherx
@@ -74,7 +75,9 @@ public class WorldEditCUI {
         ChatEvent.handlers.register(new ChatListener(this), Order.Default);
         WorldRenderEvent.handlers.register(new WorldRenderListener(this), Order.Default);
         
-        ChatCommandEvent.getHandlers("worldedit").register(new WorldEditCommandListener(this), Order.Default);
+        WorldEditCommandListener commListener = new WorldEditCommandListener(this);
+        ChatCommandEvent.getHandlers("worldedit").register(commListener, Order.Default);
+        ChatCommandEvent.getHandlers("we").register(commListener, Order.Default);
     }
 
     public CUIDebug getDebugger() {

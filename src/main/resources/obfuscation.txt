@@ -56,3 +56,6 @@ renames:
   - notch: hc
     wecui: NetworkManager
     packageOnly: false
+  - notch: gx
+    wecui: GuiChat
+    packageOnly: false

@@ -4,6 +4,7 @@ import wecui.fevents.Event;
 import wecui.fevents.HandlerList;
 import java.util.HashMap;
 import wecui.WorldEditCUI;
+import wecui.fevents.Cancellable;
 
 /**
  * Events for outgoing commands to server. 
@@ -13,7 +14,7 @@ import wecui.WorldEditCUI;
  * @author yetanotherx
  *
  */
-public class ChatCommandEvent extends Event<ChatCommandEvent> {
+public class ChatCommandEvent extends Event<ChatCommandEvent> implements Cancellable {
 
     protected WorldEditCUI controller;
     protected String rawMessage;
@@ -75,10 +76,6 @@ public class ChatCommandEvent extends Event<ChatCommandEvent> {
         return handled;
     }
 
-    public boolean isCancelled() {
-        return isHandled();
-    }
-
     public String[] getArgs() {
         return args;
     }
@@ -89,6 +86,15 @@ public class ChatCommandEvent extends Event<ChatCommandEvent> {
 
     public String getRawMessage() {
         return rawMessage;
+    }
+    
+    @Override
+    public boolean isCancelled() {
+        return cancelled;
+    }
+
+    public void setCancelled(boolean cancelled) {
+        this.cancelled = cancelled;
     }
     
 }
