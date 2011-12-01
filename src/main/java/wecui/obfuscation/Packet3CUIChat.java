@@ -92,7 +92,6 @@ public class Packet3CUIChat extends Packet3Chat {
     }
 
     /**
-     * TODO: Apparently this doesn't work right yet
      * @param nethandler 
      */
     public void a(NetHandler nethandler) {
