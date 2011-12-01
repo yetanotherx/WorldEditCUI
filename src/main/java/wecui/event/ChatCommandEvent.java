@@ -41,6 +41,7 @@ public class ChatCommandEvent extends Event<ChatCommandEvent> {
                 this.args = new String[0];
             }
         }
+        
     }
 
     @Override
@@ -77,4 +78,17 @@ public class ChatCommandEvent extends Event<ChatCommandEvent> {
     public boolean isCancelled() {
         return isHandled();
     }
+
+    public String[] getArgs() {
+        return args;
+    }
+
+    public String getCommand() {
+        return command;
+    }
+
+    public String getRawMessage() {
+        return rawMessage;
+    }
+    
 }

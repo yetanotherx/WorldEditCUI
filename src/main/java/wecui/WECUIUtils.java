@@ -1,7 +1,11 @@
 package wecui;
 
+import java.lang.reflect.Field;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class WECUIUtils {
-    
+
     // Joining
     //-----------------------------------------------------------------------
     /**
@@ -114,5 +118,4 @@ public class WECUIUtils {
         }
         return buf.toString();
     }
-    
 }

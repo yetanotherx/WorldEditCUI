@@ -3,10 +3,12 @@ package wecui;
 import deobf.spc_WorldEditCUI;
 import net.minecraft.client.Minecraft;
 import wecui.event.CUIEvent;
+import wecui.event.ChatCommandEvent;
 import wecui.event.listeners.CUIListener;
 import wecui.event.ChatEvent;
 import wecui.event.listeners.ChatListener;
 import wecui.event.WorldRenderEvent;
+import wecui.event.listeners.WorldEditCommandListener;
 import wecui.event.listeners.WorldRenderListener;
 import wecui.exception.InitializationException;
 import wecui.fevents.EventManager;
@@ -20,7 +22,6 @@ import wecui.render.CuboidRegion;
  * Main controller class
  * 
  * TODO: Weird version message still being shown.
- * 
  * TODO: Localize plugin jar
  * TODO: GUI
  * 
@@ -72,6 +73,8 @@ public class WorldEditCUI {
         CUIEvent.handlers.register(new CUIListener(this), Order.Default);
         ChatEvent.handlers.register(new ChatListener(this), Order.Default);
         WorldRenderEvent.handlers.register(new WorldRenderListener(this), Order.Default);
+        
+        ChatCommandEvent.getHandlers("worldedit").register(new WorldEditCommandListener(this), Order.Default);
     }
 
     public CUIDebug getDebugger() {

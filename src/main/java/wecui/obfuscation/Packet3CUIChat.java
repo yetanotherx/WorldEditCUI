@@ -35,17 +35,6 @@ public class Packet3CUIChat extends Packet3Chat {
 
     public Packet3CUIChat(String s) {
         super(s);
-        ChatEvent chatevent = new ChatEvent(controller, s, ChatEvent.Direction.OUTGOING);
-        controller.getEventManager().callEvent(chatevent);
-        if (!chatevent.isCancelled() && s.startsWith("/") && s.length() > 1) {
-            ChatCommandEvent commandevent = new ChatCommandEvent(controller, s);
-            controller.getEventManager().callEvent(chatevent);
-            if (commandevent.isHandled()) {
-                cancelled = true;
-            }
-        } else {
-            cancelled = true;
-        }
     }
 
     /**

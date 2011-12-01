@@ -47,3 +47,12 @@ renames:
   - notch: rt
     wecui: RenderHelper
     packageOnly: false
+  - notch: cx
+    wecui: EntityClientPlayerMP
+    packageOnly: false
+  - notch: abp
+    wecui: NetClientHandler
+    packageOnly: false
+  - notch: hc
+    wecui: NetworkManager
+    packageOnly: false
