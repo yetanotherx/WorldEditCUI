@@ -1,9 +1,10 @@
-package wecui.event;
+package wecui.event.listeners;
 
 import wecui.fevents.Listener;
 import wecui.obfuscation.Obfuscation;
 import wecui.WorldEditCUI;
 import org.lwjgl.opengl.GL11;
+import wecui.event.WorldRenderEvent;
 
 /**
  * Listener for WorldRenderEvent
@@ -36,9 +37,9 @@ public class WorldRenderListener implements Listener<WorldRenderEvent> {
         try {
             Obfuscation obf = controller.getObfuscation();
 
-            GL11.glTranslated(-obf.getPlayerX(event.partialTick),
-                    -obf.getPlayerY(event.partialTick),
-                    -obf.getPlayerZ(event.partialTick));
+            GL11.glTranslated(-obf.getPlayerX(event.getPartialTick()),
+                    -obf.getPlayerY(event.getPartialTick()),
+                    -obf.getPlayerZ(event.getPartialTick()));
             GL11.glColor3f(1.0f, 1.0f, 1.0f);
             if (controller.getSelection() != null) {
                 controller.getSelection().render();

@@ -1,5 +1,6 @@
 package wecui.event;
 
+import wecui.WECUIUtils;
 import wecui.fevents.Event;
 import wecui.fevents.HandlerList;
 import wecui.WorldEditCUI;
@@ -23,18 +24,15 @@ public class CUIEvent extends Event<CUIEvent> {
     public CUIEvent(WorldEditCUI controller, String type, String[] params) {
         this.controller = controller;
         this.type = type;
-        
+
+        //split("[|]" returns String[] {""} for some reason,  instead of String[] {}.
         if (params.length == 1 && params[0].length() == 0) {
             params = new String[]{};
         }
-        
+
         this.params = params;
-        String debugmsg = "CUI event: " + type + " ";
-        for (int i = 0; i < params.length; i++) {
-            debugmsg += params[i] + " ";
-        }
-        this.controller.getDebugger().debug(debugmsg);
-        
+        this.controller.getDebugger().debug("CUI Event (" + type + ") - Params: " + WECUIUtils.join(params, ", "));
+
     }
 
     @Override
@@ -58,11 +56,7 @@ public class CUIEvent extends Event<CUIEvent> {
      * @param reason Error message
      */
     public void markInvalid(String reason) {
-        String debugmsg = "WARNING - INVALID WECUIEvent " + type;
-        for (int i = 0; i < params.length; i++) {
-            debugmsg += "|" + params[i];
-        }
-        debugmsg += " because " + reason;
+        String debugmsg = "WARNING - INVALID WECUIEvent " + type + " - " + WECUIUtils.join(params, "|") + " - Reason: " + reason;
         this.controller.getDebugger().debug(debugmsg);
         setHandled(true);
     }
@@ -90,5 +84,4 @@ public class CUIEvent extends Event<CUIEvent> {
     public String getType() {
         return type;
     }
-    
 }

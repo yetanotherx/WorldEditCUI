@@ -5,8 +5,8 @@ import wecui.fevents.Event;
 import wecui.fevents.HandlerList;
 
 /**
- * Singleton event class triggered at world rendering
- * Called at each rendering tick
+ * Event class triggered at world rendering, called at each rendering tick.
+ * Only one instance of this class should exist, to save processing time.
  * 
  * @author lahwran
  * @author yetanotherx
@@ -23,6 +23,10 @@ public class WorldRenderEvent extends Event<WorldRenderEvent> {
 
     public void setPartialTick(float partialTick) {
         this.partialTick = partialTick;
+    }
+
+    public float getPartialTick() {
+        return partialTick;
     }
 
     @Override

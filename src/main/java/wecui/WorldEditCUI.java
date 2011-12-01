@@ -1,26 +1,24 @@
 package wecui;
 
 import deobf.spc_WorldEditCUI;
-import wecui.event.CUIEvent;
-import wecui.event.CUIListener;
-import wecui.event.ChatEvent;
-import wecui.event.ChatListener;
-import wecui.event.WorldRenderEvent;
-import wecui.event.WorldRenderListener;
-import wecui.fevents.Order;
-import wecui.obfuscation.Obfuscation;
-import wecui.render.CUIRegion;
-
 import net.minecraft.client.Minecraft;
+import wecui.event.CUIEvent;
+import wecui.event.listeners.CUIListener;
+import wecui.event.ChatEvent;
+import wecui.event.listeners.ChatListener;
+import wecui.event.WorldRenderEvent;
+import wecui.event.listeners.WorldRenderListener;
 import wecui.exception.InitializationException;
 import wecui.fevents.EventManager;
+import wecui.fevents.Order;
+import wecui.obfuscation.Obfuscation;
 import wecui.obfuscation.Packet3CUIChat;
+import wecui.render.CUIRegion;
 import wecui.render.CuboidRegion;
 
 /**
  * Main controller class
  * 
- * TODO: Comment code where needed
  * TODO: Weird version message still being shown.
  * 
  * TODO: Localize plugin jar
@@ -63,7 +61,7 @@ public class WorldEditCUI {
             e.printStackTrace(System.err);
             return;
         }
-        
+
         this.registerListeners();
         spc_WorldEditCUI.setController(this);
         Packet3CUIChat.register(this);

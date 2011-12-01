@@ -17,11 +17,16 @@ public abstract class CUIBaseEvent {
     public abstract CUIEventType getEventType();
 
     public String getEventName() {
+        //Hack for String.uppercaseFirstLetter, which doesn't exist.
         String name = this.getEventType().name().toLowerCase();
         name = name.substring(0, 1).toUpperCase() + name.substring(1);
         return name;
     }
 
+    /**
+     * Checks if the parameters match the required length.
+     * @return 
+     */
     public boolean isValid() {
         int max = this.getEventType().getMaxParameters();
         int min = this.getEventType().getMinParameters();

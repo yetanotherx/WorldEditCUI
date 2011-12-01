@@ -1,9 +1,11 @@
-package wecui.event;
+package wecui.event.listeners;
 
 import wecui.fevents.Listener;
 import wecui.WorldEditCUI;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import wecui.event.CUIEvent;
+import wecui.event.ChatEvent;
 
 /**
  * Parses incoming/outgoing chat messages, and calls a CUIEvent if it matches the WorldEdit CUI header
@@ -25,13 +27,15 @@ public class ChatListener implements Listener<ChatEvent> {
 
     @Override
     public void onEvent(ChatEvent event) {
-        if (event.direction == ChatEvent.Direction.INCOMING) {
-            Matcher matcher = commandpattern.matcher(event.message);
+        if (event.getDirection() == ChatEvent.Direction.INCOMING) {
+            Matcher matcher = commandpattern.matcher(event.getMessage());
 
+            //Checks if the incoming message contains the 8-byte CUI header (4 color codes)
+            //If so, parses the message and creates a new CUIEvent
             if (matcher.find()) {
                 String type = matcher.group(1);
                 String args = matcher.group(2);
-                this.controller.getDebugger().debug("Received CUI event from server: " + event.message);
+                this.controller.getDebugger().debug("Received CUI event from server: " + event.getMessage());
 
                 CUIEvent cuievent = new CUIEvent(this.controller, type, args.split("[|]"));
                 this.controller.getEventManager().callEvent(cuievent);

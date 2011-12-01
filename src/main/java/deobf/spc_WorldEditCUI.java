@@ -2,7 +2,6 @@ package deobf;
 
 import wecui.WorldEditCUI;
 import wecui.event.CUIEvent;
-import wecui.fevents.EventManager;
 
 /**
  * Main SinglePlayerCommands class

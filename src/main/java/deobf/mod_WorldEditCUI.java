@@ -1,8 +1,8 @@
 package deobf;
 
 import wecui.WorldEditCUI;
-import wecui.obfuscation.RenderEntity;
-import wecui.obfuscation.RenderHooks;
+import wecui.render.RenderEntity;
+import wecui.render.RenderHooks;
 import java.util.Map;
 
 import net.minecraft.client.Minecraft;
@@ -15,7 +15,6 @@ import net.minecraft.client.Minecraft;
  * @author yetanotherx
  * 
  * @obfuscated
- * 
  */
 public class mod_WorldEditCUI extends BaseMod {
 
@@ -36,6 +35,10 @@ public class mod_WorldEditCUI extends BaseMod {
 
     @Override
     public boolean OnTickInGame(float partialticks, Minecraft mc) {
+        
+        //Checks if the world or player has changed from the last time we checked.
+        //If it's changed, spawn a new render entity and update accordingly.
+        //Boy, don't obfuscated methods make this fun.
         if (mc.f != lastworld || mc.h != lastplayer) {
 
             Minecraft newMC = this.controller.getMinecraft();

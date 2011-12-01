@@ -6,7 +6,8 @@ import java.util.HashMap;
 import wecui.WorldEditCUI;
 
 /**
- * Events for outgoing commands to server
+ * Events for outgoing commands to server. 
+ * Handlers can be registered to a certain command.
  * 
  * @author lahwran
  * @author yetanotherx

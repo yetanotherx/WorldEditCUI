@@ -1,4 +1,4 @@
-package wecui.obfuscation;
+package wecui.render;
 
 import deobf.Entity;
 import deobf.Render;

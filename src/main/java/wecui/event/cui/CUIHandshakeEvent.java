@@ -25,6 +25,7 @@ public class CUIHandshakeEvent extends CUIBaseEvent {
         CuboidRegion cuboidRegion = new CuboidRegion(controller);
         cuboidRegion.initialize();
         
+        //Initiates a new blank cuboid region.
         this.controller.setSelection(cuboidRegion);
 
         return null;

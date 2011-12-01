@@ -19,5 +19,4 @@ public class SPCPlugin {
 
     public void handleCUIEvent(String type, String[] params) {
     }
-
 }

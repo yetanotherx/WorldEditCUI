@@ -10,10 +10,11 @@ import wecui.obfuscation.Obfuscation;
 
 /**
  * Stores and reads WorldEditCUI settings
+ * Serialized warnings are suppressed because this class _should_ never need to be serialized
  * 
  * @author yetanotherx
  */
-@SuppressWarnings("serial") //Suppressed because this class _should_ never need to be serialized
+@SuppressWarnings("serial")
 public class CUISettings extends Properties implements InitializationFactory {
 
     protected File propertiesFile;
@@ -48,6 +49,11 @@ public class CUISettings extends Properties implements InitializationFactory {
 
     }
 
+    /**
+     * Saves a default configuration file if the file doesn't exist.
+     * 
+     * @throws IOException 
+     */
     protected void saveDefaultUnlessExists() throws IOException {
         if (!this.propertiesFile.exists()) {
             
