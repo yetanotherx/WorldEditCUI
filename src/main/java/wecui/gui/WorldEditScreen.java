@@ -1,7 +1,7 @@
 package wecui.gui;
 
-import wecui.gui.element.Screen;
+import deobf.GuiScreen;
 
-public class WorldEditScreen extends Screen {
+public class WorldEditScreen extends GuiScreen {
     
 }

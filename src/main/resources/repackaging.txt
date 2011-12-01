@@ -1,0 +1,3 @@
+renames: 
+  - notch: 
+    wecui: deobf

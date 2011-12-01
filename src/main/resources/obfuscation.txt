@@ -1,0 +1,49 @@
+renames:
+  - notch: do
+    wecui: doclass
+    packageOnly: false
+  - notch: if
+    wecui: ifclass
+    packageOnly: false
+  - notch: ct
+    wecui: GuiButton
+    packageOnly: false
+  - notch: xe
+    wecui: GuiScreen
+    packageOnly: false
+  - notch: abs
+    wecui: GuiSmallButton
+    packageOnly: false
+  - notch: cv
+    wecui: Tessellator
+    packageOnly: false
+  - notch: ry
+    wecui: World
+    packageOnly: false
+  - notch: di
+    wecui: EntityPlayerSP
+    packageOnly: false
+  - notch: ia
+    wecui: Entity
+    packageOnly: false
+  - notch: abb
+    wecui: Packet3Chat
+    packageOnly: false
+  - notch: fe
+    wecui: NetHandler
+    packageOnly: false
+  - notch: gt
+    wecui: Packet
+    packageOnly: false
+  - notch: ob
+    wecui: IntHashMap
+    packageOnly: false
+  - notch: ik
+    wecui: NBTTagCompound
+    packageOnly: false
+  - notch: rg
+    wecui: Render
+    packageOnly: false
+  - notch: rt
+    wecui: RenderHelper
+    packageOnly: false

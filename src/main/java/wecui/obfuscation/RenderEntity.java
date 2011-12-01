@@ -1,9 +1,9 @@
 package wecui.obfuscation;
 
+import deobf.Entity;
+import deobf.NBTTagCompound;
+import deobf.World;
 import wecui.WorldEditCUI;
-import deobf.ia;
-import deobf.ik;
-import deobf.ry;
 import net.minecraft.client.Minecraft;
 
 /**
@@ -14,11 +14,11 @@ import net.minecraft.client.Minecraft;
  * 
  * @obfuscated
  */
-public class RenderEntity extends ia {
+public class RenderEntity extends Entity {
 
     protected WorldEditCUI controller;
 
-    public RenderEntity(WorldEditCUI controller, ry arg0) {
+    public RenderEntity(WorldEditCUI controller, World arg0) {
         super(arg0);
         this.controller = controller;
         ao = true; // ignoreFrustumCheck \o/
@@ -26,7 +26,7 @@ public class RenderEntity extends ia {
     }
 
     @Override
-    protected void a(ik arg0) {
+    protected void a(NBTTagCompound arg0) {
     } // Entity.readEntityFromNBT
 
     @Override
@@ -34,7 +34,7 @@ public class RenderEntity extends ia {
     } // Entity.entityInit
 
     @Override
-    protected void b(ik arg0) {
+    protected void b(NBTTagCompound arg0) {
     }
 
     @Override

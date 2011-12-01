@@ -1,12 +1,11 @@
 package wecui.obfuscation;
 
+import deobf.IntHashMap;
+import deobf.NetHandler;
+import deobf.Packet;
+import deobf.Packet3Chat;
 import wecui.event.ChatCommandEvent;
 import wecui.event.ChatEvent;
-import wecui.fevents.EventManager;
-import deobf.abb;
-import deobf.fe;
-import deobf.gt;
-import deobf.ob;
 import java.io.DataOutputStream;
 import java.lang.reflect.Field;
 import java.util.Map;
@@ -24,7 +23,7 @@ import wecui.WorldEditCUI;
  *
  * @obfuscated
  */
-public class Packet3CUIChat extends abb {
+public class Packet3CUIChat extends Packet3Chat {
 
     protected static WorldEditCUI controller;
     protected static boolean registered = false;
@@ -58,16 +57,16 @@ public class Packet3CUIChat extends abb {
         Packet3CUIChat.controller = controller;
         
         try {
-            Class<gt> packetclass = gt.class;
+            Class<Packet> packetClass = Packet.class;
             Field idstoclassesfield;
             Field classestoidsfield;
             try {
-                idstoclassesfield = packetclass.getDeclaredField("j");
-                classestoidsfield = packetclass.getDeclaredField("a");
+                idstoclassesfield = packetClass.getDeclaredField("j");
+                classestoidsfield = packetClass.getDeclaredField("a");
             } catch (NoSuchFieldException e) {
                 try {
-                    idstoclassesfield = packetclass.getDeclaredField("packetIdToClassMap");
-                    classestoidsfield = packetclass.getDeclaredField("packetClassToIdMap");
+                    idstoclassesfield = packetClass.getDeclaredField("packetIdToClassMap");
+                    classestoidsfield = packetClass.getDeclaredField("packetClassToIdMap");
                 } catch (NoSuchFieldException e1) {
                     e.printStackTrace();
                     throw e1;
@@ -75,7 +74,7 @@ public class Packet3CUIChat extends abb {
             }
             idstoclassesfield.setAccessible(true);
             classestoidsfield.setAccessible(true);
-            ob idstoclasses = (ob) idstoclassesfield.get(null);
+            IntHashMap idstoclasses = (IntHashMap) idstoclassesfield.get(null);
             Map<Class<?>, Integer> classestoids = (Map<Class<?>, Integer>) classestoidsfield.get(null);
             idstoclasses.a(3, Packet3CUIChat.class);
             classestoids.put(Packet3CUIChat.class, 3);
@@ -96,7 +95,7 @@ public class Packet3CUIChat extends abb {
      * TODO: Apparently this doesn't work right yet
      * @param nethandler 
      */
-    public void a(fe nethandler) {
+    public void a(NetHandler nethandler) {
         ChatEvent chatevent = new ChatEvent(controller, a, ChatEvent.Direction.INCOMING);
         controller.getEventManager().callEvent(chatevent);
         if (!chatevent.isCancelled()) {

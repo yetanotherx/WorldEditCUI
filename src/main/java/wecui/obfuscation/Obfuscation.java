@@ -1,7 +1,7 @@
 package wecui.obfuscation;
 
-import deobf.cv;
-import deobf.di;
+import deobf.EntityPlayerSP;
+import deobf.Tessellator;
 import java.io.File;
 import net.minecraft.client.Minecraft;
 import wecui.InitializationFactory;
@@ -21,7 +21,7 @@ public class Obfuscation implements InitializationFactory {
 
     protected WorldEditCUI controller;
     protected Minecraft minecraft;
-    protected cv tessellator = cv.a;
+    protected Tessellator tessellator = Tessellator.a;
 
     public Obfuscation(WorldEditCUI controller) {
         this.controller = controller;
@@ -45,17 +45,17 @@ public class Obfuscation implements InitializationFactory {
     }
 
     public double getPlayerX(float renderTick) {
-        di plyr = minecraft.h;
+        EntityPlayerSP plyr = minecraft.h;
         return plyr.p + ((plyr.s - plyr.p) * renderTick);
     }
 
     public double getPlayerY(float renderTick) {
-        di plyr = minecraft.h;
+        EntityPlayerSP plyr = minecraft.h;
         return plyr.q + ((plyr.t - plyr.q) * renderTick);
     }
 
     public double getPlayerZ(float renderTick) {
-        di plyr = minecraft.h;
+        EntityPlayerSP plyr = minecraft.h;
         return plyr.r + ((plyr.u - plyr.r) * renderTick);
     }
 

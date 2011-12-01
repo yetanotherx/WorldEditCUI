@@ -20,8 +20,8 @@ import net.minecraft.client.Minecraft;
 public class mod_WorldEditCUI extends BaseMod {
 
     protected WorldEditCUI controller;
-    protected ry lastworld;
-    protected di lastplayer;
+    protected World lastworld;
+    protected EntityPlayerSP lastplayer;
     protected RenderEntity entity;
 
     public void mod_WorldEditCUI() {
@@ -42,7 +42,7 @@ public class mod_WorldEditCUI extends BaseMod {
             
             entity = new RenderEntity(this.controller, newMC.f);
             entity.d(newMC.h.s, newMC.h.t, newMC.h.u);
-            newMC.f.a((ia) entity);
+            newMC.f.a((Entity) entity);
             entity.d(newMC.h.s, newMC.h.t, newMC.h.u);
             controller.getDebugger().debug("RenderEntity spawned");
 

@@ -1,0 +1,52 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>net.minecraft</groupId>
+    <artifactId>minecraft-deobf</artifactId>
+    <version>1.0-wecui</version>
+    <name>WorldEditCUI deobfuscator</name>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>net.lahwran</groupId>
+                <artifactId>renamer-maven-plugin</artifactId>
+                <version>1.0</version>
+                <executions>
+                    <execution>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>rename-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <refereceArtifacts>
+                                <includes>
+                                    <include>net.minecraft:minecraft</include>         
+                                </includes>
+                            </refereceArtifacts>
+                            <renames></renames>
+                            <renameFiles>
+                                <renameFile>
+                                    <from>notch</from>
+                                    <to>wecui</to>
+                                    <file>${basedir}/../src/main/resources/obfuscation.txt</file>
+                                </renameFile>
+                                <renameFile>
+                                    <from>notch</from>
+                                    <to>wecui</to>
+                                    <file>${basedir}/../src/main/resources/repackaging.txt</file>
+                                </renameFile>
+                            </renameFiles>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
+        <dependency>
+            <groupId>net.minecraft</groupId>
+            <artifactId>minecraft</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
+</project>

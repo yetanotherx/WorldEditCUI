@@ -9,7 +9,7 @@
         <dependency>
             <groupId>net.minecraft</groupId>
             <artifactId>minecraft-deobf</artifactId>
-            <version>1.0</version>
+            <version>1.0-wecui</version>
         </dependency>
         <dependency>
             <groupId>org.lwjgl.lwjgl</groupId>
@@ -64,22 +64,19 @@
                                     <include>net.minecraft:minecraft-deobf</include>         
                                 </includes>
                             </refereceArtifacts>
-                            <renames>
-                                <rename>
-                                    <from>deobf</from>
-                                    <to></to>
-                                </rename>
-                                <rename>
-                                    <from>doclass</from>
-                                    <to>do</to>
-                                    <packageOnly>false</packageOnly>
-                                </rename>
-                                <rename>
-                                    <from>ifclass</from>
-                                    <to>if</to>
-                                    <packageOnly>false</packageOnly>
-                                </rename>
-                            </renames>
+                            <renames></renames>
+                            <renameFiles>
+                                <renameFile>
+                                    <from>wecui</from>
+                                    <to>notch</to>
+                                    <file>${basedir}/src/main/resources/repackaging.txt</file>
+                                </renameFile>
+                                <renameFile>
+                                    <from>wecui</from>
+                                    <to>notch</to>
+                                    <file>${basedir}/src/main/resources/obfuscation.txt</file>
+                                </renameFile>
+                            </renameFiles>
                         </configuration>
                     </execution>
                 </executions>

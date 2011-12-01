@@ -1,10 +1,9 @@
 package wecui.obfuscation;
 
+import deobf.Entity;
+import deobf.Render;
+import deobf.RenderHelper;
 import wecui.event.WorldRenderEvent;
-import wecui.fevents.EventManager;
-import deobf.ia;
-import deobf.rg;
-import deobf.rt;
 import wecui.WorldEditCUI;
 
 
@@ -16,7 +15,7 @@ import wecui.WorldEditCUI;
  * 
  * @obfuscated
  */
-public class RenderHooks extends rg {
+public class RenderHooks extends Render {
 
     protected WorldEditCUI controller;
     protected WorldRenderEvent event;
@@ -27,14 +26,14 @@ public class RenderHooks extends rg {
     }    
 
     private void render(float renderTick) {
-        rt.a();
+        RenderHelper.a();
         event.setPartialTick(renderTick);
         controller.getEventManager().callEvent(event);
-        rt.b();
+        RenderHelper.b();
     }
 
     @Override
-    public void a(ia arg0, double arg1, double arg2, double arg3, float arg4, float arg5) {
+    public void a(Entity arg0, double arg1, double arg2, double arg3, float arg4, float arg5) {
         render(arg5);
     }
 }
