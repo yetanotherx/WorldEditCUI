@@ -28,12 +28,12 @@
                                 <renameFile>
                                     <from>notch</from>
                                     <to>wecui</to>
-                                    <file>${basedir}/../src/main/resources/obfuscation.txt</file>
+                                    <file>${basedir}/obfuscation.txt</file>
                                 </renameFile>
                                 <renameFile>
                                     <from>notch</from>
                                     <to>wecui</to>
-                                    <file>${basedir}/../src/main/resources/repackaging.txt</file>
+                                    <file>${basedir}/repackaging.txt</file>
                                 </renameFile>
                             </renameFiles>
                         </configuration>
