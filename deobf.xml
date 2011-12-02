@@ -36,7 +36,7 @@
                                 <renameFile>
                                     <from>notch</from>
                                     <to>wecui</to>
-                                    <file>${basedir}/obfuscation.txt</file>
+                                    <file>${basedir}/obfuscatin.txt</file>
                                 </renameFile>
                                 <renameFile>
                                     <from>notch</from>
