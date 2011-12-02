@@ -1,10 +1,9 @@
 package wecui.obfuscation;
 
-import deobf.IntHashMap;
 import deobf.NetHandler;
 import deobf.Packet;
 import deobf.Packet3Chat;
-import wecui.event.ChatCommandEvent;
+import deobf.UnknownClass;
 import wecui.event.ChatEvent;
 import java.io.DataOutputStream;
 import java.lang.reflect.Field;
@@ -44,44 +43,37 @@ public class Packet3CUIChat extends Packet3Chat {
     @SuppressWarnings("unchecked")
     public static void register(WorldEditCUI controller) {
         //I'm warning you...
-        
+
         if (registered) {
             return;
         }
         registered = true;
-        
+
         //Last chance...
-        
+
         Packet3CUIChat.controller = controller;
-        
+
         try {
             Class<Packet> packetClass = Packet.class;
             Field idstoclassesfield;
             Field classestoidsfield;
-            try {
-                idstoclassesfield = packetClass.getDeclaredField("j");
-                classestoidsfield = packetClass.getDeclaredField("a");
-            } catch (NoSuchFieldException e) {
-                try {
-                    idstoclassesfield = packetClass.getDeclaredField("packetIdToClassMap");
-                    classestoidsfield = packetClass.getDeclaredField("packetClassToIdMap");
-                } catch (NoSuchFieldException e1) {
-                    e.printStackTrace();
-                    throw e1;
-                }
-            }
+
+            idstoclassesfield = packetClass.getDeclaredField("j");
+            classestoidsfield = packetClass.getDeclaredField("a");
+
             idstoclassesfield.setAccessible(true);
             classestoidsfield.setAccessible(true);
-            IntHashMap idstoclasses = (IntHashMap) idstoclassesfield.get(null);
+
+            UnknownClass idstoclasses = (UnknownClass) idstoclassesfield.get(null);
             Map<Class<?>, Integer> classestoids = (Map<Class<?>, Integer>) classestoidsfield.get(null);
             idstoclasses.a(3, Packet3CUIChat.class);
             classestoids.put(Packet3CUIChat.class, 3);
-            
+
             //See why I told you not to read this method?
         } catch (Exception e) {
             throw new RuntimeException("Error inserting chat handler - WorldEditCUI and anything that depends on it will not work!", e);
         }
-        
+
         controller.getDebugger().debug("Chat handler registered.");
     }
 

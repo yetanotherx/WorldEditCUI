@@ -2,6 +2,12 @@ package wecui.event.cui;
 
 import wecui.WorldEditCUI;
 
+/**
+ * Called when resize event is received
+ * 
+ * @author lahwran
+ * @author yetanotherx
+ */
 public class CUIMinMaxEvent extends CUIBaseEvent {
 
     public CUIMinMaxEvent(WorldEditCUI controller, String[] args) {

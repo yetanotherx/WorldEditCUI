@@ -5,6 +5,8 @@ import java.util.Map;
 
 /**
  * All supported color values for chat
+ * 
+ * @author bukkit
  */
 public enum ChatColor {
 

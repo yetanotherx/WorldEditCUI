@@ -2,6 +2,12 @@ package wecui.event.cui;
 
 import wecui.WorldEditCUI;
 
+/**
+ * Called when point event is received
+ * 
+ * @author lahwran
+ * @author yetanotherx
+ */
 public class CUIPointEvent extends CUIBaseEvent {
 
     public CUIPointEvent(WorldEditCUI controller, String[] args) {

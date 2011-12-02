@@ -2,6 +2,12 @@ package wecui.event.cui;
 
 import wecui.WorldEditCUI;
 
+/**
+ * Called when version event is received
+ * 
+ * @author lahwran
+ * @author yetanotherx
+ */
 public class CUIVersionEvent extends CUIBaseEvent {
 
     public CUIVersionEvent(WorldEditCUI controller, String[] args) {

@@ -36,7 +36,7 @@ renames:
     wecui: Packet
     packageOnly: false
   - notch: ob
-    wecui: IntHashMap
+    wecui: UnknownClass
     packageOnly: false
   - notch: ik
     wecui: NBTTagCompound

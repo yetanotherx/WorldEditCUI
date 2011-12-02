@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Enum for command events. Stores the event class and any aliases.
+ * 
+ * @author yetanotherx
+ * 
+ */
 public enum CommandEventType {
     
     GUI(GUICommandEvent.class),

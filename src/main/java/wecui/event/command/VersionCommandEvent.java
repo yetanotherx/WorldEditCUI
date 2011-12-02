@@ -3,6 +3,12 @@ package wecui.event.command;
 import wecui.WorldEditCUI;
 import wecui.util.ChatColor;
 
+/**
+ * Called when /we version is called. Inserts a WECUI version message.
+ * 
+ * @author yetanotherx
+ * 
+ */
 public class VersionCommandEvent extends CommandEventBase {
 
     public VersionCommandEvent(WorldEditCUI controller, String[] args) {

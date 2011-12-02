@@ -1,6 +1,6 @@
 package wecui.event;
 
-import wecui.util.WECUIUtils;
+import wecui.util.Utilities;
 import wecui.fevents.Event;
 import wecui.fevents.HandlerList;
 import wecui.WorldEditCUI;
@@ -31,7 +31,7 @@ public class CUIEvent extends Event<CUIEvent> {
         }
 
         this.params = params;
-        this.controller.getDebugger().debug("CUI Event (" + type + ") - Params: " + WECUIUtils.join(params, ", "));
+        this.controller.getDebugger().debug("CUI Event (" + type + ") - Params: " + Utilities.join(params, ", "));
 
     }
 
@@ -56,7 +56,7 @@ public class CUIEvent extends Event<CUIEvent> {
      * @param reason Error message
      */
     public void markInvalid(String reason) {
-        String debugmsg = "WARNING - INVALID WECUIEvent " + type + " - " + WECUIUtils.join(params, "|") + " - Reason: " + reason;
+        String debugmsg = "WARNING - INVALID WECUIEvent " + type + " - " + Utilities.join(params, "|") + " - Reason: " + reason;
         this.controller.getDebugger().debug(debugmsg);
         setHandled(true);
     }

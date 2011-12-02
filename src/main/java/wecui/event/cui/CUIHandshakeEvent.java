@@ -3,6 +3,12 @@ package wecui.event.cui;
 import wecui.WorldEditCUI;
 import wecui.render.CuboidRegion;
 
+/**
+ * Called when handshake event is received
+ * 
+ * @author lahwran
+ * @author yetanotherx
+ */
 public class CUIHandshakeEvent extends CUIBaseEvent {
 
     public CUIHandshakeEvent(WorldEditCUI controller, String[] args) {

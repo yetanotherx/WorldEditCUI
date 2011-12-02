@@ -13,6 +13,14 @@ import wecui.WorldEditCUI;
 import wecui.event.ChatCommandEvent;
 import wecui.event.ChatEvent;
 
+/**
+ * Overrides the dataPacket list in NetworkManager
+ * Uses reflection to replace the list with this. It overrides the add()
+ * method to check if it's a Packet3Chat event.
+ * 
+ * @author yetanotherx
+ * 
+ */
 public class DataPacketList<T> extends ArrayList<T> {
 
     private static final long serialVersionUID = 1L;

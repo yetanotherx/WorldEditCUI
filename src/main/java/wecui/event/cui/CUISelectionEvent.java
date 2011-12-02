@@ -5,6 +5,12 @@ import wecui.render.CUIRegion;
 import wecui.render.CuboidRegion;
 import wecui.render.Polygon2DRegion;
 
+/**
+ * Called when selection event is received
+ * 
+ * @author lahwran
+ * @author yetanotherx
+ */
 public class CUISelectionEvent extends CUIBaseEvent {
 
     public CUISelectionEvent(WorldEditCUI controller, String[] args) {

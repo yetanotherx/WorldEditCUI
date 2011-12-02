@@ -1,5 +1,11 @@
 package wecui.event.cui;
 
+/**
+ * Event type enum for CUI events. Also stores class, arguments, and key for each value.
+ * 
+ * @author yetanotherx
+ * 
+ */
 public enum CUIEventType {
 
     HANDSHAKE(CUIHandshakeEvent.class, "", 0),

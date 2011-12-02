@@ -2,6 +2,12 @@ package wecui.event.cui;
 
 import wecui.WorldEditCUI;
 
+/**
+ * Called when poly point event is received
+ * 
+ * @author lahwran
+ * @author yetanotherx
+ */
 public class CUIPoint2DEvent extends CUIBaseEvent {
 
     public CUIPoint2DEvent(WorldEditCUI controller, String[] args) {

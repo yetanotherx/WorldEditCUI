@@ -1,10 +1,6 @@
 package wecui.util;
 
-import java.lang.reflect.Field;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-public class WECUIUtils {
+public class Utilities {
 
     // Joining
     //-----------------------------------------------------------------------

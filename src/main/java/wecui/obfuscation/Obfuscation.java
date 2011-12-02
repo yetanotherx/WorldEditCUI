@@ -6,8 +6,6 @@ import deobf.GuiScreen;
 import deobf.Tessellator;
 import java.io.File;
 import java.lang.reflect.Method;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import net.minecraft.client.Minecraft;
 import wecui.InitializationFactory;
 import wecui.WorldEditCUI;
