@@ -6,7 +6,15 @@
     <version>1.0-wecui</version>
     <name>WorldEditCUI deobfuscator</name>
     <build>
+        <sourceDirectory>deobf</sourceDirectory>
         <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>net.lahwran</groupId>
                 <artifactId>renamer-maven-plugin</artifactId>

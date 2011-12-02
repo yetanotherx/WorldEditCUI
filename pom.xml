@@ -69,12 +69,12 @@
                                 <renameFile>
                                     <from>wecui</from>
                                     <to>notch</to>
-                                    <file>${basedir}/src/main/resources/repackaging.txt</file>
+                                    <file>${basedir}/repackaging.txt</file>
                                 </renameFile>
                                 <renameFile>
                                     <from>wecui</from>
                                     <to>notch</to>
-                                    <file>${basedir}/src/main/resources/obfuscation.txt</file>
+                                    <file>${basedir}/obfuscation.txt</file>
                                 </renameFile>
                             </renameFiles>
                         </configuration>
