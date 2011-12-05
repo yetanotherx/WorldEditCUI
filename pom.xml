@@ -16,12 +16,43 @@
             <artifactId>lwjgl</artifactId>
             <version>2.8.2</version>
         </dependency>
+        <dependency>
+            <groupId>com.sk89q</groupId>
+            <artifactId>worldedit</artifactId>
+            <version>${WEVersion}</version>
+        </dependency>
     </dependencies>
+    <properties>
+        <WEVersion>4.8-SNAPSHOT</WEVersion>
+    </properties>
     <build>
         <finalName>WorldEditCUI</finalName>
         <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
         <defaultGoal>clean install</defaultGoal>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.3</version>
+                <executions>
+                    <execution>
+                        <id>copy</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>com.sk89q</groupId>
+                                    <artifactId>worldedit</artifactId>
+                                    <version>${WEVersion}</version>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
@@ -89,6 +120,7 @@
                 <directory>${basedir}/src/main/resources/</directory>
                 <includes>
                     <include>INSTALL</include>
+                    <include>*.txt</include>
                 </includes>
             </resource>
         </resources>

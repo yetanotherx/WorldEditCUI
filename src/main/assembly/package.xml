@@ -2,7 +2,7 @@
 <assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0 http://maven.apache.org/xsd/assembly-1.1.0.xsd">
     <id>${project.version}</id>
     <includeBaseDirectory>true</includeBaseDirectory>
-    <baseDirectory>${project.build.finalName}-${project.version}</baseDirectory>
+    <baseDirectory>${project.build.finalName}-build</baseDirectory>
     <formats>
         <format>zip</format>
     </formats>
@@ -23,9 +23,16 @@
             <excludes>
                 <exclude>deobf</exclude>
                 <exclude>SPCPlugin.class</exclude>
+                <exclude>StartMC.class</exclude>
                 <exclude>INSTALL</exclude>
             </excludes>
         </fileSet>
     </fileSets>
-    <files></files>
+    <files>
+        <file>
+            <source>${project.build.directory}/dependency/WorldEdit-${WEVersion}.jar</source>
+            <outputDirectory>/WorldEditCUI</outputDirectory>
+            <destName>WorldEdit.jar</destName>
+        </file>
+    </files>
 </assembly>

@@ -1,7 +1,3 @@
 /target
-/src/main/resources/target
-/plugin
-/compile
-/server
-/build-client.sh
-/build-plugin.sh
+/run
+/build.sh

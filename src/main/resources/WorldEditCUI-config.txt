@@ -1,0 +1,2 @@
+#WorldEditCUI properties file
+debugMode=false

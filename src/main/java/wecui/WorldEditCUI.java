@@ -65,8 +65,14 @@ public class WorldEditCUI {
         }
 
         this.registerListeners();
-        spc_WorldEditCUI.setController(this);
         Packet3CUIChat.register(this);
+        
+        try {
+            Class.forName("SPCPlugin");
+            spc_WorldEditCUI.setController(this); //forName throws an exception if SPC isn't here
+        }
+        catch( Exception e ) {
+        }
 
     }
 
