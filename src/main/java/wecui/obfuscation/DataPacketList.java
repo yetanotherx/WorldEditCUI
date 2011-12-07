@@ -20,7 +20,6 @@ import wecui.event.ChatEvent;
  * 
  * @author yetanotherx
  * 
- * @obfuscated
  */
 public class DataPacketList<T> extends ArrayList<T> {
 
@@ -45,7 +44,7 @@ public class DataPacketList<T> extends ArrayList<T> {
         if (packet instanceof Packet3Chat) {
             
             boolean cancelled = false;
-            String s = ((Packet3Chat) packet).a;
+            String s = Obfuscation.getChatMessage((Packet3Chat) packet);
 
             ChatEvent chatevent = new ChatEvent(controller, s, ChatEvent.Direction.OUTGOING);
             controller.getEventManager().callEvent(chatevent);
@@ -75,24 +74,23 @@ public class DataPacketList<T> extends ArrayList<T> {
     public static void register(WorldEditCUI controller) {
 
         DataPacketList<Packet> list = new DataPacketList<Packet>(controller, Packet.class);
+        Obfuscation obf = controller.getObfuscation();
 
-        Minecraft mc = controller.getMinecraft();
-        
         //Checks if it's a multiplayer world
-        if (!mc.f.I) {
+        if (!obf.isMultiplayerWorld()) {
             return;
         }
 
-        EntityClientPlayerMP player = (EntityClientPlayerMP) mc.h;
+        EntityClientPlayerMP player = (EntityClientPlayerMP) obf.getPlayer();
 
         try {
-            NetClientHandler nch = player.a;
+            NetClientHandler nch = obf.getNetClientHandler(player);
 
-            Field nmField = NetClientHandler.class.getDeclaredField("g");
+            Field nmField = NetClientHandler.class.getDeclaredField(MethodObfuscation.NETWORKMANAGER.getVariable());
             nmField.setAccessible(true);
             NetworkManager nm = (NetworkManager) nmField.get(nch);
 
-            Field listField = NetworkManager.class.getDeclaredField("n");
+            Field listField = NetworkManager.class.getDeclaredField(MethodObfuscation.PACKETLIST.getVariable());
             listField.setAccessible(true);
             List oldPacketList = (List) listField.get(nm);
             for (Object item : oldPacketList) {
@@ -100,8 +98,8 @@ public class DataPacketList<T> extends ArrayList<T> {
             }
 
             listField.set(nm, list);
-
             nmField.set(nch, nm);
+            
         } catch (Exception e) {
             throw new RuntimeException("Error inserting outgoing chat handler - Certain parts of WorldEditCUI will not work!", e);
         }

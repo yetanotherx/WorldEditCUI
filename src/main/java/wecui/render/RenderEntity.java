@@ -4,7 +4,7 @@ import deobf.Entity;
 import deobf.NBTTagCompound;
 import deobf.World;
 import wecui.WorldEditCUI;
-import net.minecraft.client.Minecraft;
+import wecui.obfuscation.Obfuscation;
 
 /**
  * Custom entity renderer, attached in the ModLoader class
@@ -18,8 +18,8 @@ public class RenderEntity extends Entity {
 
     protected WorldEditCUI controller;
 
-    public RenderEntity(WorldEditCUI controller, World arg0) {
-        super(arg0);
+    public RenderEntity(WorldEditCUI controller, World world) {
+        super(world);
         this.controller = controller;
         ao = true; // ignoreFrustumCheck \o/
         controller.getDebugger().debug("Entity spawned");
@@ -39,8 +39,7 @@ public class RenderEntity extends Entity {
 
     @Override
     public void a() {
-        Minecraft mc = controller.getMinecraft();
-        this.d(mc.h.s, mc.h.t, mc.h.u);
+        Obfuscation.doSomethingWithEntityCoordinates(controller.getMinecraft(), this);
     }
 
     @Override

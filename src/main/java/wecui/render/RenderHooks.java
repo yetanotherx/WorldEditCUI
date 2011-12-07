@@ -2,9 +2,9 @@ package wecui.render;
 
 import deobf.Entity;
 import deobf.Render;
-import deobf.RenderHelper;
 import wecui.event.WorldRenderEvent;
 import wecui.WorldEditCUI;
+import wecui.obfuscation.Obfuscation;
 
 
 /**
@@ -26,10 +26,10 @@ public class RenderHooks extends Render {
     }    
 
     private void render(float renderTick) {
-        RenderHelper.a();
+        Obfuscation.disableLighting();
         event.setPartialTick(renderTick);
         controller.getEventManager().callEvent(event);
-        RenderHelper.b();
+        Obfuscation.enableLighting();
     }
 
     @Override

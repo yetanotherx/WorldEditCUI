@@ -3,7 +3,6 @@ package wecui.obfuscation;
 import deobf.NetHandler;
 import deobf.Packet;
 import deobf.Packet3Chat;
-import deobf.UnknownClass;
 import wecui.event.ChatEvent;
 import java.io.DataOutputStream;
 import java.lang.reflect.Field;
@@ -55,15 +54,15 @@ public class Packet3CUIChat extends Packet3Chat {
             Field idstoclassesfield;
             Field classestoidsfield;
 
-            idstoclassesfield = packetClass.getDeclaredField("j");
-            classestoidsfield = packetClass.getDeclaredField("a");
+            idstoclassesfield = packetClass.getDeclaredField(MethodObfuscation.IDSTOCLASSES.getVariable());
+            classestoidsfield = packetClass.getDeclaredField(MethodObfuscation.CLASSESTOIDS.getVariable());
 
             idstoclassesfield.setAccessible(true);
             classestoidsfield.setAccessible(true);
 
-            UnknownClass idstoclasses = (UnknownClass) idstoclassesfield.get(null);
+            MCHash idstoclasses = (MCHash) idstoclassesfield.get(null);
             Map<Class<?>, Integer> classestoids = (Map<Class<?>, Integer>) classestoidsfield.get(null);
-            idstoclasses.a(3, Packet3CUIChat.class);
+            Obfuscation.putToMCHash(idstoclasses, 3, Packet3CUIChat.class);
             classestoids.put(Packet3CUIChat.class, 3);
 
         } catch (Exception e) {
