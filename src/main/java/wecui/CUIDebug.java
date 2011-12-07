@@ -2,15 +2,15 @@ package wecui;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import wecui.exception.InitializationException;
 import wecui.obfuscation.Obfuscation;
+import wecui.util.ConsoleLogFormatter;
 
 /**
  * Debugging helper class
- * 
- * TODO: Prettier output. Hack it off of CraftBukkit if you want. :P
  * 
  * @author yetanotherx
  * 
@@ -29,12 +29,21 @@ public class CUIDebug implements InitializationFactory {
     @Override
     public void initialize() throws InitializationException {
 
+        ConsoleLogFormatter formatter = new ConsoleLogFormatter();
+        ConsoleHandler handler = new ConsoleHandler();
+        handler.setFormatter(formatter);
+        
+        logger.setUseParentHandlers(false);
+        logger.addHandler(handler);
+        
         try {
             this.debugFile = new File(Obfuscation.getModDir(), "WorldEditCUI-debug.txt");
             this.debugMode = controller.getSettings().getProperty("debugMode").equals("true");
             
             if (this.debugMode) {
-                logger.addHandler(new FileHandler(this.debugFile.getAbsolutePath()));
+                FileHandler newHandler = new FileHandler(this.debugFile.getAbsolutePath());
+                newHandler.setFormatter(formatter);
+                logger.addHandler(newHandler);
             }
 
         } catch (IOException e) {
