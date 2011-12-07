@@ -1,6 +1,9 @@
 package wecui.gui;
 
-import deobf.nd;
+import deobf.GuiChat;
+import java.util.Map;
+import wecui.WorldEditCUI;
+import wecui.util.Utilities;
 
 /**
  * Main GUI class for WorldEdit commands
@@ -8,37 +11,53 @@ import deobf.nd;
  * This doesn't work.
  * 
  * @author yetanotherx
+ * 
+ * @obfuscated
  */
-public class WorldEditScreen extends nd {
+public class WorldEditScreen extends GuiChat {
 
-    /*protected WorldEditCUI controller;
+    protected WorldEditCUI controller;
 
     public WorldEditScreen(WorldEditCUI controller) {
+        super();
         this.controller = controller;
     }
 
-    public void a() {
-        int width = this.m;
-        int height = this.n;
-
-        o.clear();
-        byte byte0 = -16;
-        //o.add(new GuiButton(5, width / 2 - 100, height / 4 + 48 + byte0, 98, 20, StatCollector.translateToLocal("gui.achievements")));
-        //o.add(new GuiButton(6, width / 2 + 2, height / 4 + 48 + byte0, 98, 20, StatCollector.translateToLocal("gui.stats")));
-    }
-
-    protected void a(GuiButton guibutton) {
-        if (guibutton.f == 0) {
+    /**
+     * Draws the screen
+     */
+    @Override
+    public void a(int i, int i1, float f) {
+        if( !this.getMessage().isEmpty() && this.getMessage().substring(0, 1).equals("/") ) {
+            Map<String, String> commands = controller.getLocalPlugin().getPlugin().getCommands();
+            String command = getCommand(this.getMessage());
+            
+            if( commands.containsKey(command.substring(1)) ) {
+                drawString("  " + command + " " + commands.get(command.substring(1)), 4, this.n - 24, 0xe0e0e0);
+            }
         }
-        if (guibutton.f == 1) {
-            this.controller.getObfuscation().switchToInGame();
-        }
+        super.a(i, i1, f);
     }
-
-    public void a(int i, int j, float f) {
-        j();
-        this.a(this.q, "WorldEdit GUI", this.m / 2, 40, 0xffffff);
-        super.a(i, j, f);
-    }*/
     
+    protected void setMessage(String message) {
+        this.a = message;
+    }
+    
+    protected String getMessage() {
+        return this.a;
+    }
+    
+    protected void drawString(String string, int x, int y, int color) {
+        this.b(this.q, string, x, y, color);
+    }
+    
+    protected String getCommand(String text) {
+        String[] args = text.split(" ");
+
+        if (args.length == 0) {
+            return "";
+        }
+
+        return args[0].toLowerCase();
+    }
 }

@@ -12,7 +12,6 @@ import deobf.RenderHelper;
 import deobf.Tessellator;
 import deobf.World;
 import java.io.File;
-import java.lang.reflect.Method;
 import net.minecraft.client.Minecraft;
 import wecui.InitializationFactory;
 import wecui.WorldEditCUI;
@@ -63,14 +62,10 @@ public class Obfuscation implements InitializationFactory {
 
     public void showGuiScreenIfGuiChat(GuiScreen screen) {
         GuiScreen currentScreen = minecraft.s;
-        if (currentScreen == null || currentScreen.getClass() == GuiChat.class) {
-            try {
-                Method setScreen = minecraft.getClass().getDeclaredMethod("a", GuiScreen.class);
-                setScreen.invoke(minecraft, (GuiScreen) null);
-                setScreen.invoke(minecraft, screen);
-            } catch (Exception ex) {
-            }
+        if (currentScreen != null) {
+            minecraft.a((GuiScreen)null);
         }
+        minecraft.a(screen);
     }
 
     public double getPlayerXGuess(float renderTick) {

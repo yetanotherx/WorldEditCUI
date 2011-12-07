@@ -6,6 +6,8 @@ import wecui.render.RenderHooks;
 import java.util.Map;
 
 import net.minecraft.client.Minecraft;
+import org.lwjgl.input.Keyboard;
+import wecui.gui.WorldEditScreen;
 import wecui.obfuscation.DataPacketList;
 import wecui.obfuscation.Obfuscation;
 
@@ -23,6 +25,7 @@ public class mod_WorldEditCUI extends BaseMod {
     protected World lastworld;
     protected EntityPlayerSP lastplayer;
     protected RenderEntity entity;
+    protected KeyBinding key;
 
     public void mod_WorldEditCUI() {
     }
@@ -31,7 +34,9 @@ public class mod_WorldEditCUI extends BaseMod {
     public void load() {
         this.controller = new WorldEditCUI(ModLoader.getMinecraftInstance());
         this.controller.initialize();
+        this.key = new KeyBinding("CUIKey", Keyboard.getKeyIndex(this.controller.getSettings().getProperty("guiKey")));
         ModLoader.SetInGameHook(this, true, true); // the last true is because we don't want to iterate the entity list too often
+        ModLoader.RegisterKey(this, key, false);
     }
 
     @Override
@@ -43,13 +48,20 @@ public class mod_WorldEditCUI extends BaseMod {
         if (Obfuscation.getWorld(mc) != lastworld || Obfuscation.getPlayer(mc) != lastplayer) {
 
             controller.getObfuscation().spawnEntity(entity);
-            
+
             lastworld = Obfuscation.getWorld(mc);
             lastplayer = Obfuscation.getPlayer(mc);
-            
+
             DataPacketList.register(controller);
         }
         return true;
+    }
+
+    @Override
+    public void KeyboardEvent(KeyBinding event) {
+        if (event.equals(key)) {
+            controller.getObfuscation().showGuiScreenIfGuiChat(new WorldEditScreen(controller));
+        }
     }
 
     @Override

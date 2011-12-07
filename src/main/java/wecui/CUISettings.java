@@ -59,6 +59,7 @@ public class CUISettings extends Properties implements InitializationFactory {
         if (!this.propertiesFile.exists()) {
             
             this.setProperty("debugMode", "false");
+            this.setProperty("guiKey", "G");
 
             this.propertiesFile.createNewFile();
             FileOutputStream ostream = new FileOutputStream(this.propertiesFile);

@@ -13,11 +13,22 @@ public enum MethodObfuscation {
      * Location of the .minecraft directory
      */
     MINECRAFTDIR("aj"),
+    /**
+     * NetworkManager instance in NetClientHandler
+     */
     NETWORKMANAGER("g"),
+    /**
+     * Packet stream in NetworkManager
+     */
     PACKETLIST("n"),
+    /**
+     * ID->Class hashmap for packets
+     */
     IDSTOCLASSES("j"),
+    /**
+     * Class->ID hashmap for packets
+     */
     CLASSESTOIDS("a");
-    
     protected String variable;
 
     private MethodObfuscation(String variable) {
@@ -27,12 +38,8 @@ public enum MethodObfuscation {
     public String getVariable() {
         return variable;
     }
-    
+
     public static String getVariable(MethodObfuscation type) {
         return type.getVariable();
-    }
-    
-    public String toString() {
-        return getVariable();
     }
 }

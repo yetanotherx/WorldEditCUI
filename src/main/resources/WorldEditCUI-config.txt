@@ -1,2 +1,3 @@
 #WorldEditCUI properties file
 debugMode=false
+guiKey=G
