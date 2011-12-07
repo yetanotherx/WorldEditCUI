@@ -13,7 +13,7 @@ import wecui.WorldEditCUI;
 public abstract class CUIRegion implements InitializationFactory {
 
     /**
-     * size of the region
+     * Size of the region in blocks
      */
     protected int regionSize;
     protected WorldEditCUI controller;

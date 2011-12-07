@@ -40,6 +40,7 @@ public class RenderEntity extends Entity {
     @Override
     public void a() {
         Minecraft mc = controller.getMinecraft();
+        //TODO: Wrap these three variables into an Obfuscsation method
         this.d(mc.h.s, mc.h.t, mc.h.u);
     }
 

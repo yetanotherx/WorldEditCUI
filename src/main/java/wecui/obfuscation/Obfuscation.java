@@ -43,8 +43,14 @@ public class Obfuscation implements InitializationFactory {
         minecraft.h.a(chat);
     }
     
+    /**
+     * Displays a chat message on the screen, if the player is currently playing
+     * @param chat 
+     */
     public void showChatMessage(String chat) {
-        minecraft.h.b(chat);
+        if( minecraft.h != null ) {
+            minecraft.h.b(chat);
+        }
     }
     
     public void showGuiScreenIfGuiChat(GuiScreen screen) {
@@ -93,9 +99,9 @@ public class Obfuscation implements InitializationFactory {
     public static File getMinecraftDir() {
         return Minecraft.b();
     }
-
-    public void switchToInGame() {
-        minecraft.a((GuiScreen)null);
-        minecraft.g();
+    
+    public static File getModDir() {
+        return new File(getMinecraftDir(), "mods" + File.separator + "WorldEditCUI");
     }
+
 }

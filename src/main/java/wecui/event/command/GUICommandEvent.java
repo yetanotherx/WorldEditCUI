@@ -24,7 +24,7 @@ public class GUICommandEvent extends CommandEventBase {
     @Override
     public void run() {
         this.setCancelled(true);
-        controller.getObfuscation().showGuiScreenIfGuiChat(new WorldEditScreen());
+        //controller.getObfuscation().showGuiScreenIfGuiChat(new WorldEditScreen());
     }
     
 }

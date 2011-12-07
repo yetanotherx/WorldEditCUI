@@ -32,9 +32,9 @@ public class WorldEditCommandListener implements Listener<ChatCommandEvent> {
         CommandEventType commEventType = CommandEventType.getTypeFromCommand(event.getArgs()[0]);
         
         if (commEventType != null) {
-
             try {
 
+                //Create a new command class instance
                 Constructor[] constructors = commEventType.getEventClass().getDeclaredConstructors();
                 if (constructors == null || constructors.length == 0) {
                     return;

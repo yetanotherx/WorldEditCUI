@@ -2,6 +2,13 @@ package wecui.gui;
 
 import deobf.nd;
 
+/**
+ * Main GUI class for WorldEdit commands
+ * 
+ * This doesn't work.
+ * 
+ * @author yetanotherx
+ */
 public class WorldEditScreen extends nd {
 
     /*protected WorldEditCUI controller;

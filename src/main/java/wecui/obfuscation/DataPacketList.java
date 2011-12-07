@@ -20,6 +20,7 @@ import wecui.event.ChatEvent;
  * 
  * @author yetanotherx
  * 
+ * @obfuscated
  */
 public class DataPacketList<T> extends ArrayList<T> {
 
@@ -32,11 +33,19 @@ public class DataPacketList<T> extends ArrayList<T> {
         this.typeClass = typeClass;
     }
 
-    public boolean add(T e) {
-        if (e instanceof Packet3Chat) {
+    /**
+     * Overrides the packet addition class. If a Packet3Chat is added, there's an outgoing
+     * message and we need to parse it. If it's a command, send a command event. If it's 
+     * cancelled, let's not add it at all.
+     * 
+     * @param packet
+     * @return 
+     */
+    public boolean add(T packet) {
+        if (packet instanceof Packet3Chat) {
             
             boolean cancelled = false;
-            String s = ((Packet3Chat) e).a;
+            String s = ((Packet3Chat) packet).a;
 
             ChatEvent chatevent = new ChatEvent(controller, s, ChatEvent.Direction.OUTGOING);
             controller.getEventManager().callEvent(chatevent);
@@ -51,18 +60,25 @@ public class DataPacketList<T> extends ArrayList<T> {
             }
 
             if (!cancelled) {
-                return super.add((T) e);
+                return super.add((T) packet);
             }
             return true;
         }
-        return super.add((T) e);
+        return super.add((T) packet);
     }
 
+    /**
+     * Attaches the new packet handler to the actual NetworkManager class
+     * 
+     * @param controller 
+     */
     public static void register(WorldEditCUI controller) {
 
         DataPacketList<Packet> list = new DataPacketList<Packet>(controller, Packet.class);
 
         Minecraft mc = controller.getMinecraft();
+        
+        //Checks if it's a multiplayer world
         if (!mc.f.I) {
             return;
         }

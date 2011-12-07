@@ -2,6 +2,12 @@ package wecui.event.cui;
 
 import wecui.WorldEditCUI;
 
+/**
+ * Base event for CUI events, handles parameter validation and running the logic
+ * 
+ * @author yetanotherx
+ * 
+ */
 public abstract class CUIBaseEvent {
 
     protected WorldEditCUI controller;

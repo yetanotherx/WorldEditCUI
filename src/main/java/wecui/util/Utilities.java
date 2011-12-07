@@ -1,5 +1,11 @@
 package wecui.util;
 
+/**
+ * Common utilities which are useful to always have.
+ * 
+ * @author yetanotherx
+ * @author Apache Commons
+ */
 public class Utilities {
 
     // Joining

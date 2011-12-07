@@ -3,6 +3,13 @@ package wecui.event.command;
 import wecui.WorldEditCUI;
 import wecui.fevents.Cancellable;
 
+/**
+ * Base event for /commands being sent from the client to the server
+ * Serves to clean the individual commands into unique classes
+ * 
+ * @author yetanotherx
+ * 
+ */
 public abstract class CommandEventBase implements Cancellable {
 
     protected WorldEditCUI controller;

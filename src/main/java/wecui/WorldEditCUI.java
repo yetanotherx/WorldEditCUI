@@ -1,5 +1,6 @@
 package wecui;
 
+import wecui.plugin.LocalPlugin;
 import deobf.spc_WorldEditCUI;
 import net.minecraft.client.Minecraft;
 import wecui.event.CUIEvent;
@@ -20,11 +21,9 @@ import wecui.render.CuboidRegion;
 
 /**
  * Main controller class
- * 
- * TODO: Weird version message still being shown.
- * TODO: Localize plugin jar
+ * =
  * TODO: GUI
- * TODO: Move the new outgoing chat code to obfhub and add @obfuscated
+ * TODO: Multiworld brekas it
  * 
  * @author lahwran
  * @author yetanotherx
@@ -68,8 +67,11 @@ public class WorldEditCUI {
         Packet3CUIChat.register(this);
         
         try {
+            //Loads the SPC class, unless SPC isn't installed. 
+            //Doing Class.forName will throw an exception if it's not found, 
+            //so only set the controller if it doesn't throw an exception.
             Class.forName("SPCPlugin");
-            spc_WorldEditCUI.setController(this); //forName throws an exception if SPC isn't here
+            spc_WorldEditCUI.setController(this);
         }
         catch( Exception e ) {
         }
@@ -81,6 +83,7 @@ public class WorldEditCUI {
         ChatEvent.handlers.register(new ChatListener(this), Order.Default);
         WorldRenderEvent.handlers.register(new WorldRenderListener(this), Order.Default);
         
+        //Register the individual /commands
         WorldEditCommandListener commListener = new WorldEditCommandListener(this);
         ChatCommandEvent.getHandlers("worldedit").register(commListener, Order.Default);
         ChatCommandEvent.getHandlers("we").register(commListener, Order.Default);

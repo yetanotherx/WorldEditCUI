@@ -37,19 +37,16 @@ public class Packet3CUIChat extends Packet3Chat {
     }
 
     /**
-     * I warn you, do not read this method.
+     * Replaces the incoming packet ID 3 with this class
      * @param controller 
      */
     @SuppressWarnings("unchecked")
     public static void register(WorldEditCUI controller) {
-        //I'm warning you...
 
         if (registered) {
             return;
         }
         registered = true;
-
-        //Last chance...
 
         Packet3CUIChat.controller = controller;
 
@@ -69,7 +66,6 @@ public class Packet3CUIChat extends Packet3Chat {
             idstoclasses.a(3, Packet3CUIChat.class);
             classestoids.put(Packet3CUIChat.class, 3);
 
-            //See why I told you not to read this method?
         } catch (Exception e) {
             throw new RuntimeException("Error inserting chat handler - WorldEditCUI and anything that depends on it will not work!", e);
         }
@@ -84,6 +80,7 @@ public class Packet3CUIChat extends Packet3Chat {
     }
 
     /**
+     * Called on incoming Packet3Chat, calls a new ChatEvent
      * @param nethandler 
      */
     public void a(NetHandler nethandler) {

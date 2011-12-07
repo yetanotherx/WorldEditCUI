@@ -1,16 +1,17 @@
 package wecui;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
 import wecui.exception.InitializationException;
 import wecui.obfuscation.Obfuscation;
 
 /**
  * Debugging helper class
  * 
- * @author lahwran
+ * TODO: Prettier output. Hack it off of CraftBukkit if you want. :P
+ * 
  * @author yetanotherx
  * 
  */
@@ -18,9 +19,8 @@ public class CUIDebug implements InitializationFactory {
 
     protected WorldEditCUI controller;
     protected File debugFile;
-    protected BufferedWriter writer;
     protected boolean debugMode = false;
-    protected final static String CRLF = System.getProperty("line.separator");
+    protected final static Logger logger = Logger.getLogger("WorldEditCUI");
 
     public CUIDebug(WorldEditCUI controller) {
         this.controller = controller;
@@ -30,21 +30,12 @@ public class CUIDebug implements InitializationFactory {
     public void initialize() throws InitializationException {
 
         try {
-            this.debugFile = new File(Obfuscation.getMinecraftDir(), "WorldEditCUI-debug.txt");
-            this.writer = new BufferedWriter(new FileWriter(debugFile));
+            this.debugFile = new File(Obfuscation.getModDir(), "WorldEditCUI-debug.txt");
             this.debugMode = controller.getSettings().getProperty("debugMode").equals("true");
-
-            //Closes the writer once the client stops.
-            Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-
-                public void run() {
-                    try {
-                        writer.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }));
+            
+            if (this.debugMode) {
+                logger.addHandler(new FileHandler(this.debugFile.getAbsolutePath()));
+            }
 
         } catch (IOException e) {
             e.printStackTrace(System.err);
@@ -60,13 +51,6 @@ public class CUIDebug implements InitializationFactory {
     }
 
     public void info(String message) {
-        try {
-            System.out.println(message);
-            writer.write(message + CRLF);
-            writer.flush();
-            //TODO: Timestamps and don't clear the log!
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        logger.info(message);
     }
 }
