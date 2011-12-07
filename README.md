@@ -16,12 +16,16 @@ Compiling
 ---------
 
 You need to have Maven installed (http://maven.apache.org), as that will
-include the necessary dependencies and package the mod automatically. 
+include the necessary dependencies and package the mod automatically. If
+there are any missing dependencies, you may need to download and build 
+them manually. 
+
 Note: For Maven to work properly, be sure to add Maven to your "PATH".
 
 Once installed, there is a setup process before building WorldEditCUI.
 
 1) Put the most recent minecraft.jar into the root WorldEditCUI folder.
+Note that minecraft.jar needs to have the most recent ModLoader installed.
 Afterwards, run the following code:
 
     mvn install:install-file -Dfile=minecraft.jar -DpomFile=minecraft.pom
