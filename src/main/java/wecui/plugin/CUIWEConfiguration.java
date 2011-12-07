@@ -17,7 +17,7 @@ public class CUIWEConfiguration extends PropertiesConfiguration {
     protected File directory;
     
     public CUIWEConfiguration(WorldEditCUI controller) {
-        super(new File(Obfuscation.getModDir(), "WorldEdit-config.txt"));
+        super(new File(Obfuscation.getWorldEditCUIDir(), "WorldEdit-config.txt"));
         this.controller = controller;
     }
     

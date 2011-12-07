@@ -37,7 +37,7 @@ public class CUIDebug implements InitializationFactory {
         logger.addHandler(handler);
         
         try {
-            this.debugFile = new File(Obfuscation.getModDir(), "WorldEditCUI-debug.txt");
+            this.debugFile = new File(Obfuscation.getWorldEditCUIDir(), "WorldEditCUI-debug.txt");
             this.debugMode = controller.getSettings().getProperty("debugMode").equals("true");
             
             if (this.debugMode) {

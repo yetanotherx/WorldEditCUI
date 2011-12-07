@@ -33,7 +33,7 @@ public class LocalPlugin implements InitializationFactory {
     public void initialize() {
         try {
 
-            loadJar(new File(Obfuscation.getModDir(), "WorldEdit.jar"));
+            loadJar(new File(Obfuscation.getWorldEditCUIDir(), "WorldEdit.jar"));
             clazz = WorldEdit.class;
 
         } catch (Exception ex) {

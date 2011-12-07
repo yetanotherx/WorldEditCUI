@@ -37,25 +37,25 @@ public class RenderShapes {
         Obfuscation o = controller.getObfuscation();
 
         // Draw bottom face
-        o.draw_begin(GL11.GL_LINE_LOOP);
+        o.startDrawing(GL11.GL_LINE_LOOP);
         info.prepareColor();
         o.addVertex(x1, y1, z1);
         o.addVertex(x2, y1, z1);
         o.addVertex(x2, y1, z2);
         o.addVertex(x1, y1, z2);
-        o.draw();
+        o.finishDrawing();
 
         // Draw top face
-        o.draw_begin(GL11.GL_LINE_LOOP);
+        o.startDrawing(GL11.GL_LINE_LOOP);
         info.prepareColor();
         o.addVertex(x1, y2, z1);
         o.addVertex(x2, y2, z1);
         o.addVertex(x2, y2, z2);
         o.addVertex(x1, y2, z2);
-        o.draw();
+        o.finishDrawing();
 
         // Draw join top and bottom faces
-        o.draw_begin(GL11.GL_LINES);
+        o.startDrawing(GL11.GL_LINES);
         info.prepareColor();
 
         o.addVertex(x1, y1, z1);
@@ -70,7 +70,7 @@ public class RenderShapes {
         o.addVertex(x1, y1, z2);
         o.addVertex(x1, y2, z2);
 
-        o.draw();
+        o.finishDrawing();
     }
 
     /**
@@ -87,7 +87,7 @@ public class RenderShapes {
     public void drawGridSurface(LineInfo info, double x1, double y1, double z1, double x2, double y2, double z2) {
         info.prepareRender();
         Obfuscation o = controller.getObfuscation();
-        o.draw_begin(GL11.GL_LINES);
+        o.startDrawing(GL11.GL_LINES);
         info.prepareColor();
         
         double x, y, z;
@@ -199,13 +199,13 @@ public class RenderShapes {
             }
         }
 
-        o.draw();
+        o.finishDrawing();
     }
 
     public void draw2DLines(LineInfo info, double off, HighlightPosition2D[] pts, int min, int max) {
         info.prepareRender();
         Obfuscation o = controller.getObfuscation();
-        o.draw_begin(GL11.GL_LINES);
+        o.startDrawing(GL11.GL_LINES);
         info.prepareColor();
 
         for (int i = 0; i < pts.length; i++) {
@@ -214,20 +214,20 @@ public class RenderShapes {
                 o.addVertex(pts[i].x + 0.5, max + 1 + off, pts[i].z + 0.5);
             }
         }
-        o.draw();
+        o.finishDrawing();
     }
     
     public void draw2DPolygon(LineInfo info, double height, HighlightPosition2D[] pts) {
         info.prepareRender();
         Obfuscation o = controller.getObfuscation();
 
-        o.draw_begin(GL11.GL_LINE_LOOP);
+        o.startDrawing(GL11.GL_LINE_LOOP);
         info.prepareColor();
         for (int i = 0; i < pts.length; i++) {
             if (pts[i] != null) {
                 o.addVertex(pts[i].x + 0.5, height, pts[i].z + 0.5);
             }
         }
-        o.draw();
+        o.finishDrawing();
     }
 }

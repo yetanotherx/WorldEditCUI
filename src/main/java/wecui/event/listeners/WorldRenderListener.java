@@ -37,9 +37,9 @@ public class WorldRenderListener implements Listener<WorldRenderEvent> {
         try {
             Obfuscation obf = controller.getObfuscation();
 
-            GL11.glTranslated(-obf.getPlayerX(event.getPartialTick()),
-                    -obf.getPlayerY(event.getPartialTick()),
-                    -obf.getPlayerZ(event.getPartialTick()));
+            GL11.glTranslated(-obf.getPlayerXGuess(event.getPartialTick()),
+                    -obf.getPlayerYGuess(event.getPartialTick()),
+                    -obf.getPlayerZGuess(event.getPartialTick()));
             GL11.glColor3f(1.0f, 1.0f, 1.0f);
             if (controller.getSelection() != null) {
                 controller.getSelection().render();

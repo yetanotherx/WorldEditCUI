@@ -44,7 +44,7 @@ public class DataPacketList<T> extends ArrayList<T> {
         if (packet instanceof Packet3Chat) {
             
             boolean cancelled = false;
-            String s = Obfuscation.getChatMessage((Packet3Chat) packet);
+            String s = Obfuscation.getChatFromPacket((Packet3Chat) packet);
 
             ChatEvent chatevent = new ChatEvent(controller, s, ChatEvent.Direction.OUTGOING);
             controller.getEventManager().callEvent(chatevent);

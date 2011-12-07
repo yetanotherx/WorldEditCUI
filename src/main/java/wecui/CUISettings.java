@@ -27,7 +27,7 @@ public class CUISettings extends Properties implements InitializationFactory {
     @Override
     public void initialize() throws InitializationException {
         try {
-            this.propertiesFile = new File(Obfuscation.getModDir(), "WorldEditCUI-config.txt");
+            this.propertiesFile = new File(Obfuscation.getWorldEditCUIDir(), "WorldEditCUI-config.txt");
 
             this.saveDefaultUnlessExists();
 

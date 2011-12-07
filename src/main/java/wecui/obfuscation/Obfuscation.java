@@ -23,8 +23,6 @@ import wecui.render.RenderEntity;
  * Combines all obfuscated classes and methods into a single class
  * Eases updates, cleans up the rest of the codebase.
  * 
- * TODO: Clean this up
- * 
  * @author lahwran
  * @author yetanotherx
  * 
@@ -45,12 +43,8 @@ public class Obfuscation implements InitializationFactory {
         this.minecraft = this.controller.getMinecraft();
     }
 
-    public static boolean isMultiplayerWorld(Minecraft mc) {
-        return mc.l();
-    }
-
     public boolean isMultiplayerWorld() {
-        return isMultiplayerWorld(minecraft);
+        return minecraft.l();
     }
 
     public void sendChat(String chat) {
@@ -79,55 +73,35 @@ public class Obfuscation implements InitializationFactory {
         }
     }
 
-    public void draw_begin(int type) {
-        tessellator.a(type);
-    }
-
-    public double getPlayerX(float renderTick) {
+    public double getPlayerXGuess(float renderTick) {
         EntityPlayerSP plyr = minecraft.h;
         return plyr.p + ((plyr.s - plyr.p) * renderTick);
     }
 
-    public double getPlayerY(float renderTick) {
+    public double getPlayerYGuess(float renderTick) {
         EntityPlayerSP plyr = minecraft.h;
         return plyr.q + ((plyr.t - plyr.q) * renderTick);
     }
 
-    public double getPlayerZ(float renderTick) {
+    public double getPlayerZGuess(float renderTick) {
         EntityPlayerSP plyr = minecraft.h;
         return plyr.r + ((plyr.u - plyr.r) * renderTick);
     }
-
-    public static double getPlayerX(EntityPlayerSP player) {
-        return player.s;
-    }
-
-    public static double getPlayerY(EntityPlayerSP player) {
-        return player.t;
-    }
-
-    public static double getPlayerZ(EntityPlayerSP player) {
-        return player.u;
+    
+    public void startDrawing(int type) {
+        tessellator.a(type);
     }
 
     public void addVertex(double x, double y, double z) {
         tessellator.a(x, y, z);
     }
 
-    public void draw() {
+    public void finishDrawing() {
         tessellator.a();
-    }
-
-    public static EntityPlayerSP getPlayer(Minecraft mc) {
-        return mc.h;
     }
 
     public EntityPlayerSP getPlayer() {
         return getPlayer(minecraft);
-    }
-
-    public static World getWorld(Minecraft mc) {
-        return mc.f;
     }
 
     public World getWorld() {
@@ -143,6 +117,26 @@ public class Obfuscation implements InitializationFactory {
         doSomethingWithEntityCoordinates(mc, entity);
         controller.getDebugger().debug("RenderEntity spawned");
 
+    }
+
+    public static double getPlayerX(EntityPlayerSP player) {
+        return player.s;
+    }
+
+    public static double getPlayerY(EntityPlayerSP player) {
+        return player.t;
+    }
+
+    public static double getPlayerZ(EntityPlayerSP player) {
+        return player.u;
+    }
+    
+    public static EntityPlayerSP getPlayer(Minecraft mc) {
+        return mc.h;
+    }
+    
+    public static World getWorld(Minecraft mc) {
+        return mc.f;
     }
 
     public static void doSomethingWithEntityCoordinates(Minecraft mc, Entity entity) {
@@ -161,7 +155,7 @@ public class Obfuscation implements InitializationFactory {
         return player.a;
     }
 
-    public static String getChatMessage(Packet3Chat packet) {
+    public static String getChatFromPacket(Packet3Chat packet) {
         return packet.a;
     }
 
@@ -169,15 +163,11 @@ public class Obfuscation implements InitializationFactory {
         hash.a(first, second);
     }
 
-    public static File getAppDir(String app) {
-        return Minecraft.a(app);
-    }
-
     public static File getMinecraftDir() {
         return Minecraft.b();
     }
 
-    public static File getModDir() {
+    public static File getWorldEditCUIDir() {
         return new File(getMinecraftDir(), "mods" + File.separator + "WorldEditCUI");
     }
 }
