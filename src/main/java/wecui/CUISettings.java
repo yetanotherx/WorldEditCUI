@@ -13,6 +13,7 @@ import wecui.obfuscation.Obfuscation;
  * Serialized warnings are suppressed because this class _should_ never need to be serialized
  * 
  * @author yetanotherx
+ * 
  */
 @SuppressWarnings("serial")
 public class CUISettings extends Properties implements InitializationFactory {
