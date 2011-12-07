@@ -7,8 +7,6 @@ import wecui.WorldEditCUI;
  * 
  * Contains, X/Y/Z values for the first and second points and the boxes for each corner.
  * 
- * TODO: Rework HighlightPoints array into a better class
- * 
  * @author lahwran
  * @author yetanotherx
  * 

@@ -1,5 +1,7 @@
 package wecui.util;
 
+import java.util.Map;
+
 /**
  * Common utilities which are useful to always have.
  * 
@@ -119,5 +121,15 @@ public class Utilities {
             }
         }
         return buf.toString();
+    }
+    
+    public static String debugMap(Map<?, ?> map) {
+        StringBuilder build = new StringBuilder();
+        
+        for( Object key : map.keySet() ) { 
+            build.append(key).append(" - ").append(map.get(key)).append("\n");
+        }
+        
+        return build.toString();
     }
 }
