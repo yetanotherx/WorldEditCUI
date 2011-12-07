@@ -25,6 +25,7 @@ import wecui.render.CuboidRegion;
  * TODO: GUI
  * TODO: Multiworld brekas it
  * TODO: Ensure that this works by putting into both mods/ and minecraft.jar/
+ * TODO: Guess local commands
  * 
  * @author lahwran
  * @author yetanotherx
