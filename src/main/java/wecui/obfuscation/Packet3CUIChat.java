@@ -1,5 +1,6 @@
 package wecui.obfuscation;
 
+import deobf.MCHash;
 import deobf.NetHandler;
 import deobf.Packet;
 import deobf.Packet3Chat;

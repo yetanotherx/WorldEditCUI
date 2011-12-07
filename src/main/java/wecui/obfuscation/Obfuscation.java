@@ -5,6 +5,7 @@ import deobf.EntityClientPlayerMP;
 import deobf.EntityPlayerSP;
 import deobf.GuiChat;
 import deobf.GuiScreen;
+import deobf.MCHash;
 import deobf.NetClientHandler;
 import deobf.Packet3Chat;
 import deobf.RenderHelper;
@@ -164,7 +165,7 @@ public class Obfuscation implements InitializationFactory {
         return packet.a;
     }
 
-    public static void putToMCHash(MCHash hash, Object first, Object second) {
+    public static void putToMCHash(MCHash hash, int first, Object second) {
         hash.a(first, second);
     }
 
