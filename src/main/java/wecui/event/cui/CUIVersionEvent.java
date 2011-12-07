@@ -47,10 +47,14 @@ public class CUIVersionEvent extends CUIBaseEvent {
         
         controller.getDebugger().debug("Server version - " + plugin + " | Local version - " + local);
         
-        //Checks version compatibility. Ideally, this would work if the versions are slightly different. TODO?
         if (!local.equals(plugin)) {
             controller.getLocalPlugin().setEnabled(false);
             return "Server and local versions of WorldEdit do not match!";
+        }
+        
+        if( !WorldEditCUI.WEVERSIONS.contains(local) ) {
+            controller.getLocalPlugin().setEnabled(false);
+            return "WorldEdit version is not compatible with WorldEditCUI! Certain features will not work!";
         }
         
         try {

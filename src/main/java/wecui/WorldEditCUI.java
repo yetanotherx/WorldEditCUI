@@ -2,6 +2,8 @@ package wecui;
 
 import wecui.plugin.LocalPlugin;
 import deobf.spc_WorldEditCUI;
+import java.util.ArrayList;
+import java.util.List;
 import net.minecraft.client.Minecraft;
 import wecui.event.CUIEvent;
 import wecui.event.ChatCommandEvent;
@@ -21,11 +23,9 @@ import wecui.render.CuboidRegion;
 
 /**
  * Main controller class
- * =
- * TODO: GUI
+ * 
  * TODO: Multiworld brekas it
  * TODO: Ensure that this works by putting into both mods/ and minecraft.jar/
- * TODO: Guess local commands
  * 
  * @author lahwran
  * @author yetanotherx
@@ -33,6 +33,7 @@ import wecui.render.CuboidRegion;
 public class WorldEditCUI {
 
     public static final String VERSION = "1.0beta for Minecraft version 1.0";
+    public static final List<String> WEVERSIONS;
     protected Minecraft minecraft;
     protected EventManager eventManager;
     protected Obfuscation obfuscation;
@@ -40,6 +41,13 @@ public class WorldEditCUI {
     protected CUIDebug debugger;
     protected CUISettings settings;
     protected LocalPlugin localPlugin;
+    
+    static {
+        List<String> list = new ArrayList<String>();
+        list.add("4.8");
+        list.add("4.8-SNAPSHOT");
+        WEVERSIONS = list;
+    }
 
     public WorldEditCUI(Minecraft minecraft) {
         this.minecraft = minecraft;

@@ -12,7 +12,6 @@ import java.util.List;
  */
 public enum CommandEventType {
     
-    GUI(GUICommandEvent.class),
     VERSION(VersionCommandEvent.class, "ver");
     
     protected final Class<? extends CommandEventBase> eventClass;
