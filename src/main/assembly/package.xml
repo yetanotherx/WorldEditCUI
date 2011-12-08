@@ -30,7 +30,7 @@
     </fileSets>
     <files>
         <file>
-            <source>${project.build.directory}/dependency/WorldEdit-${WEVersion}.jar</source>
+            <source>${project.build.directory}/dependency/worldedit-${WEVersion}.jar</source>
             <outputDirectory>/WorldEditCUI</outputDirectory>
             <destName>WorldEdit.jar</destName>
         </file>
