@@ -54,8 +54,6 @@ public class DataPacketList<T> extends ArrayList<T> {
                 if (commandevent.isHandled()) {
                     cancelled = true;
                 }
-            } else {
-                cancelled = true;
             }
 
             if (!cancelled) {
