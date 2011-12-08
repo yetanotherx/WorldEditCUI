@@ -9,13 +9,6 @@
     <fileSets>
         <fileSet>
             <directory>${project.build.directory}/classes</directory>
-            <outputDirectory>/</outputDirectory>
-            <includes>
-                <include>INSTALL.md</include>
-            </includes>
-        </fileSet>
-        <fileSet>
-            <directory>${project.build.directory}/classes</directory>
             <outputDirectory>/WorldEditCUI</outputDirectory>
             <includes>
                 <include>/**</include>
@@ -33,6 +26,11 @@
             <source>${project.build.directory}/dependency/worldedit-${WEVersion}.jar</source>
             <outputDirectory>/WorldEditCUI</outputDirectory>
             <destName>WorldEdit.jar</destName>
+        </file>
+        <file>
+            <source>${project.build.directory}/classes/INSTALL.md</source>
+            <outputDirectory>/</outputDirectory>
+            <destName>INSTALL</destName>
         </file>
     </files>
 </assembly>
