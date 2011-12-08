@@ -25,6 +25,16 @@
     <properties>
         <WEVersion>4.8-SNAPSHOT</WEVersion>
     </properties>
+    <repositories>
+        <repository>
+            <id>sk89q-mvn2</id>
+            <url>http://mvn2.sk89q.com/repo</url>
+        </repository>
+        <repository>
+            <id>bukkit-repo</id>
+            <url>http://repo.bukkit.org/artifactory/repo</url>
+        </repository>
+    </repositories>
     <build>
         <finalName>WorldEditCUI</finalName>
         <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
