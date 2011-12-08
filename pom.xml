@@ -137,7 +137,7 @@
                 <filtering>true</filtering>
                 <directory>${basedir}/</directory>
                 <includes>
-                    <include>INSTALL</include>
+                    <include>INSTALL.md</include>
                 </includes>
             </resource>
         </resources>

@@ -11,7 +11,7 @@
             <directory>${project.build.directory}/classes</directory>
             <outputDirectory>/</outputDirectory>
             <includes>
-                <include>INSTALL</include>
+                <include>INSTALL.md</include>
             </includes>
         </fileSet>
         <fileSet>
@@ -24,7 +24,7 @@
                 <exclude>deobf</exclude>
                 <exclude>SPCPlugin.class</exclude>
                 <exclude>StartMC.class</exclude>
-                <exclude>INSTALL</exclude>
+                <exclude>INSTALL.md</exclude>
             </excludes>
         </fileSet>
     </fileSets>
