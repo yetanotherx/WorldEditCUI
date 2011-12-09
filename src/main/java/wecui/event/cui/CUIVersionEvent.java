@@ -69,11 +69,13 @@ public class CUIVersionEvent extends CUIBaseEvent {
             
             lp.setPlugin((WorldEdit) consts[0].newInstance(lp.getServerInterface(), lp.getConfiguration()));
         
+            //Set localPlugin if SPC already loaded it.
+            controller.getLocalPlugin().setEnabled(true);
+            return null;
         } catch (Exception ex) {
             controller.getLocalPlugin().setEnabled(false);
             return ex.getMessage();
         }
         
-        return null;
     }
 }

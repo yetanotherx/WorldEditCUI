@@ -34,6 +34,7 @@ public class mod_WorldEditCUI extends BaseMod {
     public void load() {
         this.controller = new WorldEditCUI(ModLoader.getMinecraftInstance());
         this.controller.initialize();
+        //TODO Settings doesn't work?
         this.key = new KeyBinding("CUIKey", Keyboard.getKeyIndex(this.controller.getSettings().getProperty("guiKey")));
         ModLoader.SetInGameHook(this, true, true); // the last true is because we don't want to iterate the entity list too often
         ModLoader.RegisterKey(this, key, false);
