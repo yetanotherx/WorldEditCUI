@@ -3,6 +3,8 @@ package wecui.render;
 /**
  * Stores data for each corner of a region
  * 
+ * TODO: Store all points in a better point controller class
+ * 
  * @author lahwran
  * @author yetanotherx
  *

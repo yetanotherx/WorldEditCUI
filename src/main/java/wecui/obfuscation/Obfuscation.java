@@ -3,7 +3,6 @@ package wecui.obfuscation;
 import deobf.Entity;
 import deobf.EntityClientPlayerMP;
 import deobf.EntityPlayerSP;
-import deobf.GuiChat;
 import deobf.GuiScreen;
 import deobf.MCHash;
 import deobf.NetClientHandler;
@@ -47,7 +46,7 @@ public class Obfuscation implements InitializationFactory {
     }
 
     public void sendChat(String chat) {
-        minecraft.h.a(chat);
+        getPlayer().a(chat);
     }
 
     /**
@@ -55,34 +54,34 @@ public class Obfuscation implements InitializationFactory {
      * @param chat 
      */
     public void showChatMessage(String chat) {
-        if (minecraft.h != null) {
-            minecraft.h.b(chat);
+        if (getPlayer() != null) {
+            getPlayer().b(chat);
         }
     }
 
     public void showGuiScreenIfGuiChat(GuiScreen screen) {
-        GuiScreen currentScreen = minecraft.s;
+        GuiScreen currentScreen = getCurrentScreen();
         if (currentScreen != null) {
-            minecraft.a((GuiScreen)null);
+            minecraft.a((GuiScreen) null);
         }
         minecraft.a(screen);
     }
 
     public double getPlayerXGuess(float renderTick) {
-        EntityPlayerSP plyr = minecraft.h;
+        EntityPlayerSP plyr = getPlayer();
         return plyr.p + ((plyr.s - plyr.p) * renderTick);
     }
 
     public double getPlayerYGuess(float renderTick) {
-        EntityPlayerSP plyr = minecraft.h;
+        EntityPlayerSP plyr = getPlayer();
         return plyr.q + ((plyr.t - plyr.q) * renderTick);
     }
 
     public double getPlayerZGuess(float renderTick) {
-        EntityPlayerSP plyr = minecraft.h;
+        EntityPlayerSP plyr = getPlayer();
         return plyr.r + ((plyr.u - plyr.r) * renderTick);
     }
-    
+
     public void startDrawing(int type) {
         tessellator.a(type);
     }
@@ -101,6 +100,10 @@ public class Obfuscation implements InitializationFactory {
 
     public World getWorld() {
         return getWorld(minecraft);
+    }
+
+    public GuiScreen getCurrentScreen() {
+        return getCurrentScreen(minecraft);
     }
 
     public void spawnEntity(Entity entity) {
@@ -125,15 +128,24 @@ public class Obfuscation implements InitializationFactory {
     public static double getPlayerZ(EntityPlayerSP player) {
         return player.u;
     }
-    
+
     public static EntityPlayerSP getPlayer(Minecraft mc) {
         return mc.h;
     }
-    
+
     public static World getWorld(Minecraft mc) {
         return mc.f;
     }
+    
+    public static GuiScreen getCurrentScreen(Minecraft mc) {
+        return mc.s;
+    }
 
+    /**
+     * TODO: Find out what this does.§
+     * @param mc
+     * @param entity 
+     */
     public static void doSomethingWithEntityCoordinates(Minecraft mc, Entity entity) {
         entity.d(getPlayerX(mc.h), getPlayerY(mc.h), getPlayerZ(mc.h));
     }

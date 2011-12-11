@@ -6,8 +6,6 @@ import wecui.event.CUIEvent;
 /**
  * Main SinglePlayerCommands class
  * 
- * TODO: Ensure SPC support.
- * 
  * @author lahwran
  * @author yetanotherx
  * 

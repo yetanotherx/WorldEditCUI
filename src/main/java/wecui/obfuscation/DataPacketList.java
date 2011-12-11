@@ -8,7 +8,6 @@ import deobf.Packet3Chat;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-import net.minecraft.client.Minecraft;
 import wecui.WorldEditCUI;
 import wecui.event.ChatCommandEvent;
 import wecui.event.ChatEvent;
@@ -57,11 +56,11 @@ public class DataPacketList<T> extends ArrayList<T> {
             }
 
             if (!cancelled) {
-                return super.add((T) packet);
+                return super.add(packet);
             }
             return true;
         }
-        return super.add((T) packet);
+        return super.add(packet);
     }
 
     /**

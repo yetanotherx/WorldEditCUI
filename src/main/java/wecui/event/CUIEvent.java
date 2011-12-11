@@ -56,8 +56,7 @@ public class CUIEvent extends Event<CUIEvent> {
      * @param reason Error message
      */
     public void markInvalid(String reason) {
-        String debugmsg = "WARNING - INVALID WECUIEvent " + type + " - " + Utilities.join(params, "|") + " - Reason: " + reason;
-        this.controller.getDebugger().debug(debugmsg);
+        this.controller.getDebugger().debug("INVALID WECUIEvent " + type + " - " + Utilities.join(params, "|") + " - Reason: " + reason);
         setHandled(true);
     }
 

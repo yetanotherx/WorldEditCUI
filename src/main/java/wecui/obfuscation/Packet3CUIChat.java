@@ -51,12 +51,8 @@ public class Packet3CUIChat extends Packet3Chat {
         Packet3CUIChat.controller = controller;
 
         try {
-            Class<Packet> packetClass = Packet.class;
-            Field idstoclassesfield;
-            Field classestoidsfield;
-
-            idstoclassesfield = packetClass.getDeclaredField(MethodObfuscation.IDSTOCLASSES.getVariable());
-            classestoidsfield = packetClass.getDeclaredField(MethodObfuscation.CLASSESTOIDS.getVariable());
+            Field idstoclassesfield = Packet.class.getDeclaredField(MethodObfuscation.IDSTOCLASSES.getVariable());
+            Field classestoidsfield = Packet.class.getDeclaredField(MethodObfuscation.CLASSESTOIDS.getVariable());
 
             idstoclassesfield.setAccessible(true);
             classestoidsfield.setAccessible(true);

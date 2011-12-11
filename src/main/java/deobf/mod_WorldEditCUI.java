@@ -22,22 +22,18 @@ import wecui.obfuscation.Obfuscation;
 public class mod_WorldEditCUI extends BaseMod {
 
     protected WorldEditCUI controller;
-    protected World lastworld;
-    protected EntityPlayerSP lastplayer;
-    protected RenderEntity entity;
-    protected KeyBinding key;
-
-    public void mod_WorldEditCUI() {
-    }
+    protected World lastWorld;
+    protected EntityPlayerSP lastPlayer;
+    protected RenderEntity renderEntity;
+    protected KeyBinding guiKey;
 
     @Override
     public void load() {
         this.controller = new WorldEditCUI(ModLoader.getMinecraftInstance());
         this.controller.initialize();
-        //TODO Settings doesn't work?
-        this.key = new KeyBinding("CUIKey", Keyboard.getKeyIndex(this.controller.getSettings().getProperty("guiKey")));
+        this.guiKey = new KeyBinding("CUIKey", Keyboard.getKeyIndex(this.controller.getSettings().getProperty("guiKey")));
         ModLoader.SetInGameHook(this, true, true); // the last true is because we don't want to iterate the entity list too often
-        ModLoader.RegisterKey(this, key, false);
+        ModLoader.RegisterKey(this, guiKey, false);
     }
 
     @Override
@@ -45,13 +41,12 @@ public class mod_WorldEditCUI extends BaseMod {
 
         //Checks if the world or player has changed from the last time we checked.
         //If it's changed, spawn a new render entity and update accordingly.
-        //Boy, don't obfuscated methods make this fun.
-        if (Obfuscation.getWorld(mc) != lastworld || Obfuscation.getPlayer(mc) != lastplayer) {
+        if (Obfuscation.getWorld(mc) != lastWorld || Obfuscation.getPlayer(mc) != lastPlayer) {
 
-            controller.getObfuscation().spawnEntity(entity);
+            controller.getObfuscation().spawnEntity(renderEntity);
 
-            lastworld = Obfuscation.getWorld(mc);
-            lastplayer = Obfuscation.getPlayer(mc);
+            lastWorld = Obfuscation.getWorld(mc);
+            lastPlayer = Obfuscation.getPlayer(mc);
 
             DataPacketList.register(controller);
         }
@@ -60,7 +55,11 @@ public class mod_WorldEditCUI extends BaseMod {
 
     @Override
     public void KeyboardEvent(KeyBinding event) {
-        if (event.equals(key)) {
+        
+        //Shows a new WorldEdit GUI screen when the GUI key is pressed.
+        //TODO: Merge this with regular chat?
+        if (event.equals(guiKey) && controller.getObfuscation().getCurrentScreen() != null ) {
+            //TODO: Stray G key?
             controller.getObfuscation().showGuiScreenIfGuiChat(new WorldEditScreen(controller));
         }
     }

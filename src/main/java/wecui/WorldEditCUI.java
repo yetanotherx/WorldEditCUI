@@ -24,8 +24,10 @@ import wecui.render.CuboidRegion;
 /**
  * Main controller class
  * 
- * TODO: Multiworld brekas it
- * TODO: Ensure that this works by putting into both mods/ and minecraft.jar/
+ * TODO: Multiworld breaks it
+ * TODO: Preview mode
+ * TODO: Command transactions
+ * TODO: SPC
  * 
  * @author lahwran
  * @author yetanotherx
@@ -33,7 +35,7 @@ import wecui.render.CuboidRegion;
 public class WorldEditCUI {
 
     public static final String VERSION = "1.0beta for Minecraft version 1.0";
-    public static final List<String> WEVERSIONS;
+    public static final List<String> WEVERSIONS; //List of compatible WorldEdit versions
     protected Minecraft minecraft;
     protected EventManager eventManager;
     protected Obfuscation obfuscation;
@@ -41,7 +43,7 @@ public class WorldEditCUI {
     protected CUIDebug debugger;
     protected CUISettings settings;
     protected LocalPlugin localPlugin;
-    
+
     static {
         List<String> list = new ArrayList<String>();
         list.add("4.8");
@@ -75,15 +77,14 @@ public class WorldEditCUI {
 
         this.registerListeners();
         Packet3CUIChat.register(this);
-        
+
         try {
             //Loads the SPC class, unless SPC isn't installed. 
             //Doing Class.forName will throw an exception if it's not found, 
             //so only set the controller if it doesn't throw an exception.
             Class.forName("SPCPlugin");
             spc_WorldEditCUI.setController(this);
-        }
-        catch( Exception e ) {
+        } catch (Exception e) {
         }
 
     }
@@ -92,11 +93,14 @@ public class WorldEditCUI {
         CUIEvent.handlers.register(new CUIListener(this), Order.Default);
         ChatEvent.handlers.register(new ChatListener(this), Order.Default);
         WorldRenderEvent.handlers.register(new WorldRenderListener(this), Order.Default);
-        
+
         //Register the individual /commands
         WorldEditCommandListener commListener = new WorldEditCommandListener(this);
         ChatCommandEvent.getHandlers("worldedit").register(commListener, Order.Default);
         ChatCommandEvent.getHandlers("we").register(commListener, Order.Default);
+
+        //ChatCommandEvent.getHandlers("/preview").register(new PreviewCommandListener(this), Order.Default);
+        //ChatCommandEvent.getHandlers("/commit").register(new CommitCommandListener(this), Order.Default);
     }
 
     public CUIDebug getDebugger() {
