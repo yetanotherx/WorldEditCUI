@@ -59,7 +59,7 @@ public class Obfuscation implements InitializationFactory {
         }
     }
 
-    public void showGuiScreenIfGuiChat(GuiScreen screen) {
+    public void showGuiScreen(GuiScreen screen) {
         GuiScreen currentScreen = getCurrentScreen();
         if (currentScreen != null) {
             minecraft.a((GuiScreen) null);

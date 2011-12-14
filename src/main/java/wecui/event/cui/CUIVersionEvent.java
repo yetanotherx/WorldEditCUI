@@ -29,16 +29,20 @@ public class CUIVersionEvent extends CUIBaseEvent {
     @Override
     public String run() {
         //If for some reason, the local plugin is already disabled, let's not continue.
-        if (!controller.getLocalPlugin().isEnabled()) {
-            return "WorldEdit not found! Ignoring message!";
+        if (controller.getLocalPlugin().isInitialized()) {
+            return null;
         }
+        
+        controller.getLocalPlugin().setInitialized(true);
         
         //Check if the WorldEdit class exists.
         try {
             Class.forName("com.sk89q.worldedit.WorldEdit");
         } catch (Exception e) {
             controller.getLocalPlugin().setEnabled(false);
-            return "WorldEdit not found! Certain features will not work as expected!";
+            String error = "WorldEdit not found! Certain features will not work as expected!";
+            controller.getObfuscation().showChatMessage(error);
+            return error;
         }
         
         String plugin = this.getString(0);
@@ -48,12 +52,16 @@ public class CUIVersionEvent extends CUIBaseEvent {
         
         if (!local.equals(plugin)) {
             controller.getLocalPlugin().setEnabled(false);
-            return "Server and local versions of WorldEdit do not match!";
+            String error = "Server and local versions of WorldEdit do not match!";
+            controller.getObfuscation().showChatMessage(error);
+            return error;
         }
         
         if( !WorldEditCUI.WEVERSIONS.contains(local) ) {
             controller.getLocalPlugin().setEnabled(false);
-            return "WorldEdit version is not compatible with WorldEditCUI! Certain features will not work!";
+            String error = "WorldEdit version is not compatible with WorldEditCUI! Certain features will not work!";
+            controller.getObfuscation().showChatMessage(error);
+            return error;
         }
         
         try {
@@ -76,6 +84,8 @@ public class CUIVersionEvent extends CUIBaseEvent {
             return null;
         } catch (Exception ex) {
             controller.getLocalPlugin().setEnabled(false);
+            controller.getObfuscation().showChatMessage("Internal WorldEditCUI exception! See console for errors.");
+            ex.printStackTrace(System.err);
             return ex.getMessage();
         }
         

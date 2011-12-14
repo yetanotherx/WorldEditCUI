@@ -65,7 +65,8 @@ public class mod_WorldEditCUI extends BaseMod {
         //TODO: Merge this with regular chat?
         if (event.equals(guiKey) && controller.getObfuscation().getCurrentScreen() == null ) {
             //TODO: Stray G key?
-            controller.getObfuscation().showGuiScreenIfGuiChat(new WorldEditScreen(controller));
+            //TODO: ....... now it's sticking to H? what is this?
+            controller.getObfuscation().showGuiScreen(new WorldEditScreen(controller));
         }
     }
 

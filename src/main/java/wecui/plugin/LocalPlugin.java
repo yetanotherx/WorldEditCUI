@@ -20,7 +20,8 @@ import wecui.obfuscation.Obfuscation;
 public class LocalPlugin implements InitializationFactory {
 
     protected WorldEditCUI controller;
-    protected boolean enabled = true;
+    protected boolean enabled = false;
+    protected boolean initialized = false;
     protected Class<?> clazz;
     protected WorldEdit plugin;
     protected CUIWEConfiguration conf;
@@ -117,6 +118,14 @@ public class LocalPlugin implements InitializationFactory {
 
     public void setSession(LocalSession session) {
         this.session = session;
+    }
+
+    public boolean isInitialized() {
+        return initialized;
+    }
+
+    public void setInitialized(boolean initialized) {
+        this.initialized = initialized;
     }
     
 }
