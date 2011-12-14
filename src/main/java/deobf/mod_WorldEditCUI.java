@@ -27,13 +27,18 @@ public class mod_WorldEditCUI extends BaseMod {
     protected RenderEntity renderEntity;
     protected KeyBinding guiKey;
 
-    @Override
-    public void load() {
+    public mod_WorldEditCUI() {
         this.controller = new WorldEditCUI(ModLoader.getMinecraftInstance());
         this.controller.initialize();
+        
         this.guiKey = new KeyBinding("CUIKey", Keyboard.getKeyIndex(this.controller.getSettings().getProperty("guiKey")));
+
         ModLoader.SetInGameHook(this, true, true); // the last true is because we don't want to iterate the entity list too often
         ModLoader.RegisterKey(this, guiKey, false);
+    }
+
+    @Override
+    public void load() {
     }
 
     @Override
@@ -60,7 +65,6 @@ public class mod_WorldEditCUI extends BaseMod {
         //TODO: Merge this with regular chat?
         if (event.equals(guiKey) && controller.getObfuscation().getCurrentScreen() == null ) {
             //TODO: Stray G key?
-            //TODO: This is broken
             controller.getObfuscation().showGuiScreenIfGuiChat(new WorldEditScreen(controller));
         }
     }
