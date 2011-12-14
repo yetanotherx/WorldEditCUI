@@ -58,8 +58,9 @@ public class mod_WorldEditCUI extends BaseMod {
         
         //Shows a new WorldEdit GUI screen when the GUI key is pressed.
         //TODO: Merge this with regular chat?
-        if (event.equals(guiKey) && controller.getObfuscation().getCurrentScreen() != null ) {
+        if (event.equals(guiKey) && controller.getObfuscation().getCurrentScreen() == null ) {
             //TODO: Stray G key?
+            //TODO: This is broken
             controller.getObfuscation().showGuiScreenIfGuiChat(new WorldEditScreen(controller));
         }
     }
