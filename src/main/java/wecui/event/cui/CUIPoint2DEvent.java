@@ -8,7 +8,7 @@ import wecui.WorldEditCUI;
  * @author lahwran
  * @author yetanotherx
  */
-public class CUIPoint2DEvent extends CUIBaseEvent {
+public class CUIPoint2DEvent extends CUIPointEvent {
 
     public CUIPoint2DEvent(WorldEditCUI controller, String[] args) {
         super(controller, args);

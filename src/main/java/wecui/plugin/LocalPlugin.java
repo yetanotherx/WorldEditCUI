@@ -1,5 +1,6 @@
 package wecui.plugin;
 
+import com.sk89q.worldedit.LocalSession;
 import com.sk89q.worldedit.WorldEdit;
 import java.io.File;
 import java.lang.reflect.Method;
@@ -24,6 +25,8 @@ public class LocalPlugin implements InitializationFactory {
     protected WorldEdit plugin;
     protected CUIWEConfiguration conf;
     protected CUIServerInterface serv;
+    protected CUIWorld world;
+    protected LocalSession session;
 
     public LocalPlugin(WorldEditCUI controller) {
         this.controller = controller;
@@ -99,6 +102,21 @@ public class LocalPlugin implements InitializationFactory {
     public void setServerInterface(CUIServerInterface serv) {
         this.serv = serv;
     }
-    
+
+    public CUIWorld getWorld() {
+        return world;
+    }
+
+    public void setWorld(CUIWorld world) {
+        this.world = world;
+    }
+
+    public LocalSession getSession() {
+        return session;
+    }
+
+    public void setSession(LocalSession session) {
+        this.session = session;
+    }
     
 }
