@@ -132,8 +132,4 @@ public class Utilities {
         
         return build.toString();
     }
-    
-    public static boolean equals(String one, String two) {
-        return one.equals(two);
-    }
 }
