@@ -68,6 +68,16 @@ WorldEditCUI on GitHub, add your changes, and then submit a pull request. We'll
 look at it, make comments, and merge it if we think your changes are good enough.
 
 
+Continuous Integration
+----------------------
+
+WorldEditCUI is continuously integrated, which means that each time a commit is
+made to the repository, it is also build and packaged automatically. WorldEditCUI
+uses Bamboo, and it is hosted at [bamboo.thezomg.com](http://bamboo.thezomg.com).
+
+Development builds are run automatically, and should not be relied upon. 
+ 
+
 Credits
 -------
 
