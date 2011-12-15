@@ -18,6 +18,7 @@ import wecui.fevents.EventManager;
 import wecui.fevents.Order;
 import wecui.obfuscation.Obfuscation;
 import wecui.obfuscation.Packet3CUIChat;
+import wecui.plugin.LocalPluginInitializer;
 import wecui.render.CUIRegion;
 import wecui.render.CuboidRegion;
 
@@ -42,6 +43,7 @@ public class WorldEditCUI {
     protected CUIDebug debugger;
     protected CUISettings settings;
     protected LocalPlugin localPlugin;
+    protected LocalPluginInitializer localPluginInit;
 
     static {
         List<String> list = new ArrayList<String>();
@@ -60,7 +62,7 @@ public class WorldEditCUI {
         this.selection = new CuboidRegion(this);
         this.settings = new CUISettings(this);
         this.debugger = new CUIDebug(this);
-        this.localPlugin = new LocalPlugin(this);
+        this.localPluginInit = new LocalPluginInitializer(this);
 
         try {
             this.eventManager.initialize();
@@ -68,7 +70,7 @@ public class WorldEditCUI {
             this.selection.initialize();
             this.settings.initialize();
             this.debugger.initialize();
-            this.localPlugin.initialize();
+            this.localPluginInit.initialize();
         } catch (InitializationException e) {
             e.printStackTrace(System.err);
             return;
@@ -108,6 +110,10 @@ public class WorldEditCUI {
 
     public LocalPlugin getLocalPlugin() {
         return localPlugin;
+    }
+
+    public void setLocalPlugin(LocalPlugin localPlugin) {
+        this.localPlugin = localPlugin;
     }
 
     public Minecraft getMinecraft() {

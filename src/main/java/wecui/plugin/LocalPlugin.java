@@ -2,22 +2,17 @@ package wecui.plugin;
 
 import com.sk89q.worldedit.LocalSession;
 import com.sk89q.worldedit.WorldEdit;
-import java.io.File;
-import java.lang.reflect.Method;
-import java.net.URL;
-import java.net.URLClassLoader;
-import wecui.InitializationFactory;
+import java.lang.reflect.Constructor;
 import wecui.WorldEditCUI;
-import wecui.exception.InitializationException;
-import wecui.obfuscation.Obfuscation;
 
 /**
- * WorldEdit local plugin controller. Handles registering, class loading, and
- * stores the configuration and server interface
+ * WorldEdit local plugin controller.
+ * 
+ * WARNING: Do not use this class unless you are sure that WorldEdit.jar is loaded!
  * 
  * @author yetanotherx
  */
-public class LocalPlugin implements InitializationFactory {
+public class LocalPlugin {
 
     protected WorldEditCUI controller;
     protected boolean enabled = false;
@@ -33,32 +28,52 @@ public class LocalPlugin implements InitializationFactory {
         this.controller = controller;
     }
 
-    @Override
-    public void initialize() {
+    public String onVersionEvent(String plugin) {
+        //If for some reason, the local plugin is already disabled, let's not continue.
+        if (controller.getLocalPlugin().isInitialized()) {
+            return null;
+        }
+
+        controller.getLocalPlugin().setInitialized(true);
+
+        //Check if the WorldEdit class exists.
+        try {
+            Class.forName("com.sk89q.worldedit.WorldEdit");
+        } catch (Exception e) {
+            return throwError("WorldEdit not found! Certain features will not work as expected!");
+        }
+
+        String local = WorldEdit.getVersion();
+
+        controller.getDebugger().debug("Server version - " + plugin + " | Local version - " + local);
+
+        if (!local.equals(plugin)) {
+            return throwError("Server and local versions of WorldEdit do not match!");
+        }
+
+        if (!WorldEditCUI.WEVERSIONS.contains(local)) {
+            return throwError("WorldEdit version is not compatible with WorldEditCUI! Certain features will not work!");
+        }
+
         try {
 
-            loadJar(new File(Obfuscation.getWorldEditCUIDir(), "WorldEdit.jar"));
-            clazz = WorldEdit.class;
+            //Initializes plugin class
+            this.setConfiguration(new CUIWEConfiguration(controller));
+            this.setServerInterface(new CUIServerInterface(controller));
+            this.setWorld(new CUIWorld(controller));
 
+            Constructor[] consts = clazz.getDeclaredConstructors();
+
+            this.setPlugin((WorldEdit) consts[0].newInstance(this.getServerInterface(), this.getConfiguration()));
+            this.setSession(this.getPlugin().getSession(new CUIPlayer(this.getServerInterface(), controller)));
+
+            //Set localPlugin if SPC already loaded it.
+            controller.getLocalPlugin().setEnabled(true);
+            return null;
         } catch (Exception ex) {
-            throwError("Problem when initializing WorldEdit jar! WorldEditCUI may not work as expected!");
             ex.printStackTrace(System.err);
+            return throwError("Internal WorldEditCUI exception! See console for errors.");
         }
-
-    }
-
-    protected void loadJar(File file) throws Exception {
-        if (!file.exists()) {
-            throw new InitializationException("WorldEdit JAR file could not be found!");
-        }
-        
-        URLClassLoader sysloader = (URLClassLoader) ClassLoader.getSystemClassLoader();
-        Class<URLClassLoader> sysclass = URLClassLoader.class;
-        
-        Method method = sysclass.getDeclaredMethod("addURL", new Class<?>[]{ URL.class });
-        method.setAccessible(true);
-        method.invoke(sysloader, new Object[]{ file.toURI().toURL() });
-
     }
 
     public boolean isEnabled() {
@@ -127,5 +142,4 @@ public class LocalPlugin implements InitializationFactory {
     public void setInitialized(boolean initialized) {
         this.initialized = initialized;
     }
-    
 }
