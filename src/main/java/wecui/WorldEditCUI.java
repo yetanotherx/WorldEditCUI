@@ -24,10 +24,9 @@ import wecui.render.CuboidRegion;
 /**
  * Main controller class
  * 
- * TODO: Multiworld breaks it
+ * TODO: Add MultiWorld support
  * TODO: Preview mode
  * TODO: Command transactions
- * TODO: SPC
  * 
  * @author lahwran
  * @author yetanotherx

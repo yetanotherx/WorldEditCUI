@@ -62,7 +62,6 @@ public class mod_WorldEditCUI extends BaseMod {
     public void KeyboardEvent(KeyBinding event) {
         
         //Shows a new WorldEdit GUI screen when the GUI key is pressed.
-        //TODO: Merge this with regular chat?
         if (event.equals(guiKey) && controller.getObfuscation().getCurrentScreen() == null ) {
             //TODO: Stray G key?
             //TODO: ....... now it's sticking to H? what is this?
