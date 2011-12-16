@@ -17,7 +17,6 @@ public class LocalPlugin {
     protected WorldEditCUI controller;
     protected boolean enabled = false;
     protected boolean initialized = false;
-    protected Class<?> clazz;
     protected WorldEdit plugin;
     protected CUIWEConfiguration conf;
     protected CUIServerInterface serv;
@@ -62,7 +61,7 @@ public class LocalPlugin {
             this.setServerInterface(new CUIServerInterface(controller));
             this.setWorld(new CUIWorld(controller));
 
-            Constructor[] consts = clazz.getDeclaredConstructors();
+            Constructor[] consts = WorldEdit.class.getDeclaredConstructors();
 
             this.setPlugin((WorldEdit) consts[0].newInstance(this.getServerInterface(), this.getConfiguration()));
             this.setSession(this.getPlugin().getSession(new CUIPlayer(this.getServerInterface(), controller)));
@@ -90,10 +89,6 @@ public class LocalPlugin {
 
     public void setPlugin(WorldEdit plugin) {
         this.plugin = plugin;
-    }
-
-    public Class<?> getClazz() {
-        return clazz;
     }
 
     public String throwError(String message) {

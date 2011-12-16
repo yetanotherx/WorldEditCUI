@@ -28,6 +28,8 @@ import wecui.render.CuboidRegion;
  * TODO: Add MultiWorld support
  * TODO: Preview mode
  * TODO: Command transactions
+ * TODO: MCPatcher
+ * TODO: SPC
  * 
  * @author lahwran
  * @author yetanotherx
