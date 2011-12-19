@@ -46,11 +46,3 @@ contents to the .minecraft/mods directory.
    b) spc_WorldEditCUI.class
    c) the entire wecui/ folder
 5) Start Minecraft!
-
-
-Installing using MCPatcher
---------------------------
-
-MCPatcher does *NOT YET WORK* with WorldEditCUI! I am currently working
-on getting MCPatcher support, but until it is officially supported, I would
-not recommend installing WorldEditCUI with it yet.

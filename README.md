@@ -7,10 +7,7 @@ to assist in using WorldEdit, as well as preventing accidental errors.
 Please note that this is not WorldEdit, which allows you to make changes
 to your world, but WorldEditCUI, a frontend for WorldEdit. You must have
 WorldEdit installed on your server or in SinglePlayerCommands to use this mod.
-
-This is a fork of WorldEdit CUI, by lahwran. It is currently in a 
-developmental state, and should not be used except by developers.
-
+ 
 
 Compiling
 ---------
@@ -82,9 +79,9 @@ Credits
 -------
 
  * [lahwran](https://github.com/lahwran) - Creator of the original WorldEdit CUI
+ * [sk89q](http://sk89q.com) for writing the WorldEdit plugin!
  * [Bukkit](http://bukkit.org) for the useful ChatColor.java class!
  * [Apache Commons](http://commons.apache.org/) for various useful methods!
- * [SinglePlayerCommands](http://bit.ly/rOqezr) for help with loading WorldEdit!
  * All the people behind [Maven](http://maven.apache.org) and
    [Java](http://java.oracle.com).
  * [Notch](http://mojang.com/notch) and all the other people at
