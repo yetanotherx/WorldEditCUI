@@ -26,10 +26,6 @@ import wecui.render.CuboidRegion;
  * TODO: Preview mode
  * TODO: Command transactions
  * 
- * TODO: MCPatcher
- * TODO: SPC
- * TODO: Fix light bugs
- * 
  * @author lahwran
  * @author yetanotherx
  */

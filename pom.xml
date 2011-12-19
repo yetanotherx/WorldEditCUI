@@ -23,7 +23,7 @@
         </dependency>
     </dependencies>
     <properties>
-        <WEVersion>4.8-SNAPSHOT</WEVersion>
+        <WEVersion>5.1-SNAPSHOT</WEVersion>
     </properties>
     <repositories>
         <repository>
