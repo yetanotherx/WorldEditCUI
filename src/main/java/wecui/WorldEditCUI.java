@@ -1,5 +1,6 @@
 package wecui;
 
+import wecui.config.CUIConfiguration;
 import wecui.plugin.LocalPlugin;
 import net.minecraft.client.Minecraft;
 import wecui.event.CUIEvent;
@@ -38,7 +39,7 @@ public class WorldEditCUI {
     protected Obfuscation obfuscation;
     protected CUIRegion selection;
     protected CUIDebug debugger;
-    protected CUISettings settings;
+    protected CUIConfiguration configuration;
     protected LocalPlugin localPlugin;
 
     /*static {
@@ -57,7 +58,7 @@ public class WorldEditCUI {
         this.eventManager = new EventManager(this);
         this.obfuscation = new Obfuscation(this);
         this.selection = new CuboidRegion(this);
-        this.settings = new CUISettings(this);
+        this.configuration = new CUIConfiguration(this);
         this.debugger = new CUIDebug(this);
         this.localPlugin = new LocalPlugin(this);
 
@@ -65,7 +66,7 @@ public class WorldEditCUI {
             this.eventManager.initialize();
             this.obfuscation.initialize();
             this.selection.initialize();
-            this.settings.initialize();
+            this.configuration.initialize();
             this.debugger.initialize();
             this.localPlugin.initialize();
         } catch (InitializationException e) {
@@ -127,8 +128,8 @@ public class WorldEditCUI {
         this.selection = selection;
     }
 
-    public CUISettings getSettings() {
-        return settings;
+    public CUIConfiguration getConf() {
+        return configuration;
     }
 
     public EventManager getEventManager() {

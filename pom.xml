@@ -21,6 +21,11 @@
             <artifactId>worldedit</artifactId>
             <version>${WEVersion}</version>
         </dependency>
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>1.9</version>
+        </dependency>
     </dependencies>
     <properties>
         <WEVersion>5.1-SNAPSHOT</WEVersion>
@@ -52,13 +57,18 @@
                             <goal>unpack</goal>
                         </goals>
                         <configuration>
-                            <includes>com/**</includes>
+                            <includes>com/**,org/**</includes>
                             <outputDirectory>${project.build.directory}/classes</outputDirectory>
                             <artifactItems>
                                 <artifactItem>
                                     <groupId>com.sk89q</groupId>
                                     <artifactId>worldedit</artifactId>
                                     <version>${WEVersion}</version>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.yaml</groupId>
+                                    <artifactId>snakeyaml</artifactId>
+                                    <version>1.9</version>
                                 </artifactItem>
                             </artifactItems>
                         </configuration>
@@ -131,7 +141,7 @@
                 <filtering>true</filtering>
                 <directory>${basedir}/src/main/resources/</directory>
                 <includes>
-                    <include>*.txt</include>
+                    <include>Configuration.yml</include>
                 </includes>
             </resource>
             <resource>

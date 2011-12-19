@@ -35,8 +35,8 @@ public class mod_WorldEditCUI extends BaseMod {
         this.controller = new WorldEditCUI(ModLoader.getMinecraftInstance());
         this.controller.initialize();
 
-        this.guiKey = new KeyBinding("CUIKey", Keyboard.getKeyIndex(this.controller.getSettings().getProperty("guiKey")));
-
+        this.guiKey = new KeyBinding("CUIKey", Keyboard.getKeyIndex(this.controller.getConf().getGuiKey()));
+        System.out.println(Keyboard.getKeyName(this.guiKey.d));
         ModLoader.SetInGameHook(this, true, true); // the last true is because we don't want to iterate the entity list too often
         ModLoader.RegisterKey(this, guiKey, false);
     }
