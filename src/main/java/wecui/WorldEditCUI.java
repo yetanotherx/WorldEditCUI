@@ -21,19 +21,18 @@ import wecui.render.CUIRegion;
 import wecui.render.CuboidRegion;
 
 /**
- * Main controller class
+ * Main controller class. Uses a pseudo-JavaBeans paradigm. The only real
+ * logic here is listener registration.
  * 
  * TODO: Add MultiWorld support
  * TODO: Preview mode
  * TODO: Command transactions
  * 
- * @author lahwran
  * @author yetanotherx
  */
 public class WorldEditCUI {
 
-    public static final String VERSION = "1.0beta for Minecraft version 1.0";
-    //public static final List<String> WEVERSIONS; //List of compatible WorldEdit versions
+    public static final String VERSION = "1.0 for Minecraft version 1.0";
     protected Minecraft minecraft;
     protected EventManager eventManager;
     protected Obfuscation obfuscation;
@@ -41,13 +40,6 @@ public class WorldEditCUI {
     protected CUIDebug debugger;
     protected CUIConfiguration configuration;
     protected LocalPlugin localPlugin;
-
-    /*static {
-        List<String> list = new ArrayList<String>();
-        list.add("4.8");
-        list.add("4.8-SNAPSHOT");
-        WEVERSIONS = list;
-    }*/
 
     public WorldEditCUI(Minecraft minecraft) {
         this.minecraft = minecraft;
@@ -70,7 +62,7 @@ public class WorldEditCUI {
             this.debugger.initialize();
             this.localPlugin.initialize();
         } catch (InitializationException e) {
-            e.printStackTrace(System.err);
+            e.printStackTrace();
             return;
         }
 
@@ -84,7 +76,6 @@ public class WorldEditCUI {
         ChatEvent.handlers.register(new ChatListener(this), Order.Default);
         WorldRenderEvent.handlers.register(new WorldRenderListener(this), Order.Default);
 
-        //Register the individual /commands
         WorldEditCommandListener commListener = new WorldEditCommandListener(this);
         ChatCommandEvent.getHandlers("worldedit").register(commListener, Order.Default);
         ChatCommandEvent.getHandlers("we").register(commListener, Order.Default);
@@ -100,8 +91,28 @@ public class WorldEditCUI {
         //ChatCommandEvent.getHandlers("/commit").register(new CommitCommandListener(this), Order.Default);
     }
 
+    public CUIConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(CUIConfiguration configuration) {
+        this.configuration = configuration;
+    }
+
     public CUIDebug getDebugger() {
         return debugger;
+    }
+
+    public void setDebugger(CUIDebug debugger) {
+        this.debugger = debugger;
+    }
+
+    public EventManager getEventManager() {
+        return eventManager;
+    }
+
+    public void setEventManager(EventManager eventManager) {
+        this.eventManager = eventManager;
     }
 
     public LocalPlugin getLocalPlugin() {
@@ -116,8 +127,16 @@ public class WorldEditCUI {
         return minecraft;
     }
 
+    public void setMinecraft(Minecraft minecraft) {
+        this.minecraft = minecraft;
+    }
+
     public Obfuscation getObfuscation() {
         return obfuscation;
+    }
+
+    public void setObfuscation(Obfuscation obfuscation) {
+        this.obfuscation = obfuscation;
     }
 
     public CUIRegion getSelection() {
@@ -128,11 +147,4 @@ public class WorldEditCUI {
         this.selection = selection;
     }
 
-    public CUIConfiguration getConf() {
-        return configuration;
-    }
-
-    public EventManager getEventManager() {
-        return eventManager;
-    }
 }

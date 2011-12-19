@@ -1,9 +1,7 @@
 package wecui;
 
 import deobf.SPCPlugin;
-import wecui.WorldEditCUI;
 import wecui.event.CUIEvent;
-import wecui.util.Utilities;
 
 /**
  * Main SinglePlayerCommands class

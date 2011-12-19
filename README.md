@@ -80,7 +80,7 @@ Credits
 
  * [lahwran](https://github.com/lahwran) - Creator of the original WorldEdit CUI
  * [sk89q](http://sk89q.com) for writing the WorldEdit plugin!
- * [Bukkit](http://bukkit.org) for the useful ChatColor.java class!
+ * [Bukkit](http://bukkit.org) for the useful ChatColor and Configuration classes!
  * [Apache Commons](http://commons.apache.org/) for various useful methods!
  * All the people behind [Maven](http://maven.apache.org) and
    [Java](http://java.oracle.com).

@@ -39,21 +39,29 @@ public class mod_WorldEditCUI extends BaseMod {
         
         ModLoader.SetInGameHook(this, true, true); // the last true is because we don't want to iterate the entity list too often
         ModLoader.RegisterKey(this, guiKey, false);
-        
     }
 
     @Override
     public void load() {
     }
 
+    /**
+     * Checks if the world or player has changed from the last time we checked.
+     * If it's changed, spawn a new render entity and update accordingly.
+     * 
+     * Additionally, initialize SPC plugin on first load. This is done now
+     * because SPC only loads spc_Classes in the minecraft.jar file, and not
+     * in the mods/ directory.
+     * 
+     * @param partialticks
+     * @param mc
+     * @return 
+     */
     @Override
     @SuppressWarnings("unchecked")
     public boolean OnTickInGame(float partialticks, Minecraft mc) {
 
-        //Checks if the world or player has changed from the last time we checked.
-        //If it's changed, spawn a new render entity and update accordingly.
         if (Obfuscation.getWorld(mc) != lastWorld || Obfuscation.getPlayer(mc) != lastPlayer) {
-
             controller.getObfuscation().spawnEntity(renderEntity);
 
             lastWorld = Obfuscation.getWorld(mc);
@@ -61,13 +69,16 @@ public class mod_WorldEditCUI extends BaseMod {
 
             if (!spcInitialized) {
                 spcInitialized = true;
+                
                 try {
                     //Loads the SPC class, unless SPC isn't installed. 
                     //Doing Class.forName will throw an exception if it's not found, 
-                    //so only set the controller if it doesn't throw an exception.
+                    //so only set the plugin if it doesn't throw an exception.
                     Class.forName("SPCPlugin");
+                    
                     Field field = SPCPluginManager.getPluginManager().getClass().getField("plugins");
                     ((Vector) field.get(SPCPluginManager.getPluginManager())).add(new SPCWorldEditCUI(controller));
+                    
                     controller.getLocalPlugin().onVersionEvent("");
                 } catch (Exception e) {
                     controller.getDebugger().debug("SinglePlayerCommands not found, not worrying about the spc_WorldEditCUI class.");
@@ -79,10 +90,12 @@ public class mod_WorldEditCUI extends BaseMod {
         return true;
     }
 
+    /**
+     * Shows a new WorldEdit GUI screen when the GUI key is pressed.
+     * 
+     */
     @Override
     public void KeyboardEvent(KeyBinding event) {
-
-        //Shows a new WorldEdit GUI screen when the GUI key is pressed.
         if (event.equals(guiKey) && controller.getObfuscation().getCurrentScreen() == null) {
             controller.getObfuscation().showGuiScreen(new WorldEditScreen(controller));
         }
@@ -91,7 +104,6 @@ public class mod_WorldEditCUI extends BaseMod {
     @Override
     @SuppressWarnings("unchecked")
     public void AddRenderer(Map map) {
-        controller.getDebugger().debug("Attaching renderer to ModLoader");
         map.put(RenderEntity.class, new RenderHooks(controller));
     }
 
@@ -99,4 +111,5 @@ public class mod_WorldEditCUI extends BaseMod {
     public String getVersion() {
         return WorldEditCUI.VERSION;
     }
+    
 }
