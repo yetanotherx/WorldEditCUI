@@ -35,10 +35,11 @@ public class mod_WorldEditCUI extends BaseMod {
         this.controller = new WorldEditCUI(ModLoader.getMinecraftInstance());
         this.controller.initialize();
 
-        this.guiKey = new KeyBinding("CUIKey", Keyboard.getKeyIndex(this.controller.getConf().getGuiKey()));
-        System.out.println(Keyboard.getKeyName(this.guiKey.d));
+        this.guiKey = new KeyBinding("CUIKey", Keyboard.KEY_G);
+        
         ModLoader.SetInGameHook(this, true, true); // the last true is because we don't want to iterate the entity list too often
         ModLoader.RegisterKey(this, guiKey, false);
+        
     }
 
     @Override
@@ -83,8 +84,6 @@ public class mod_WorldEditCUI extends BaseMod {
 
         //Shows a new WorldEdit GUI screen when the GUI key is pressed.
         if (event.equals(guiKey) && controller.getObfuscation().getCurrentScreen() == null) {
-            //TODO: Stray G key?
-            //TODO: ....... now it's sticking to H? what is this?
             controller.getObfuscation().showGuiScreen(new WorldEditScreen(controller));
         }
     }
