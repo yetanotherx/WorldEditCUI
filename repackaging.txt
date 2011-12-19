@@ -1,3 +1,5 @@
 renames: 
   - notch: 
     wecui: deobf
+  - notch: wecui.com.sk89q.\1
+    wecui: com.sk89q.(.*)

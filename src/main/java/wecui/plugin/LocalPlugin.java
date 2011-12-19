@@ -2,17 +2,15 @@ package wecui.plugin;
 
 import com.sk89q.worldedit.LocalSession;
 import com.sk89q.worldedit.WorldEdit;
-import java.lang.reflect.Constructor;
+import wecui.InitializationFactory;
 import wecui.WorldEditCUI;
 
 /**
  * WorldEdit local plugin controller.
  * 
- * WARNING: Do not use this class unless you are sure that WorldEdit.jar is loaded!
- * 
  * @author yetanotherx
  */
-public class LocalPlugin {
+public class LocalPlugin implements InitializationFactory {
 
     protected WorldEditCUI controller;
     protected boolean enabled = false;
@@ -26,53 +24,41 @@ public class LocalPlugin {
     public LocalPlugin(WorldEditCUI controller) {
         this.controller = controller;
     }
+    
+    @Override
+    public void initialize() {
+        controller.setLocalPlugin(new LocalPlugin(controller));
+    }
 
     public String onVersionEvent(String plugin) {
         //If for some reason, the local plugin is already disabled, let's not continue.
         if (controller.getLocalPlugin().isInitialized()) {
             return null;
         }
-
         controller.getLocalPlugin().setInitialized(true);
 
-        //Check if the WorldEdit class exists.
-        try {
-            Class.forName("com.sk89q.worldedit.WorldEdit");
-        } catch (Exception e) {
-            return throwError("WorldEdit not found! Certain features will not work as expected!");
-        }
+        /*String local = WorldEdit.getVersion();
 
-        String local = WorldEdit.getVersion();
-
-        controller.getDebugger().debug("Server version - " + plugin + " | Local version - " + local);
+        String versions = "Server version - " + plugin + " | Local version - " + local;
+        controller.getDebugger().debug(versions);
 
         if (!local.equals(plugin)) {
+            controller.getDebugger().info(versions);
             return throwError("Server and local versions of WorldEdit do not match!");
         }
 
         if (!WorldEditCUI.WEVERSIONS.contains(local)) {
             return throwError("WorldEdit version is not compatible with WorldEditCUI! Certain features will not work!");
-        }
+        }*/
 
-        try {
+        this.setConfiguration(new CUIWEConfiguration(controller));
+        this.setServerInterface(new CUIServerInterface(controller));
+        this.setWorld(new CUIWorld(controller));
+        this.setPlugin(new WorldEdit(this.getServerInterface(), this.getConfiguration()));
+        this.setSession(this.getPlugin().getSession(new CUIPlayer(this.getServerInterface(), controller)));
 
-            //Initializes plugin class
-            this.setConfiguration(new CUIWEConfiguration(controller));
-            this.setServerInterface(new CUIServerInterface(controller));
-            this.setWorld(new CUIWorld(controller));
-
-            Constructor[] consts = WorldEdit.class.getDeclaredConstructors();
-
-            this.setPlugin((WorldEdit) consts[0].newInstance(this.getServerInterface(), this.getConfiguration()));
-            this.setSession(this.getPlugin().getSession(new CUIPlayer(this.getServerInterface(), controller)));
-
-            //Set localPlugin if SPC already loaded it.
-            controller.getLocalPlugin().setEnabled(true);
-            return null;
-        } catch (Exception ex) {
-            ex.printStackTrace(System.err);
-            return throwError("Internal WorldEditCUI exception! See console for errors.");
-        }
+        controller.getLocalPlugin().setEnabled(true);
+        return null;
     }
 
     public boolean isEnabled() {

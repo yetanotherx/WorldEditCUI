@@ -18,7 +18,6 @@ import wecui.fevents.EventManager;
 import wecui.fevents.Order;
 import wecui.obfuscation.Obfuscation;
 import wecui.obfuscation.Packet3CUIChat;
-import wecui.plugin.LocalPluginInitializer;
 import wecui.render.CUIRegion;
 import wecui.render.CuboidRegion;
 
@@ -28,8 +27,10 @@ import wecui.render.CuboidRegion;
  * TODO: Add MultiWorld support
  * TODO: Preview mode
  * TODO: Command transactions
+ * 
  * TODO: MCPatcher
  * TODO: SPC
+ * TODO: Fix light bugs
  * 
  * @author lahwran
  * @author yetanotherx
@@ -45,7 +46,6 @@ public class WorldEditCUI {
     protected CUIDebug debugger;
     protected CUISettings settings;
     protected LocalPlugin localPlugin;
-    protected LocalPluginInitializer localPluginInit;
 
     static {
         List<String> list = new ArrayList<String>();
@@ -64,7 +64,7 @@ public class WorldEditCUI {
         this.selection = new CuboidRegion(this);
         this.settings = new CUISettings(this);
         this.debugger = new CUIDebug(this);
-        this.localPluginInit = new LocalPluginInitializer(this);
+        this.localPlugin = new LocalPlugin(this);
 
         try {
             this.eventManager.initialize();
@@ -72,7 +72,7 @@ public class WorldEditCUI {
             this.selection.initialize();
             this.settings.initialize();
             this.debugger.initialize();
-            this.localPluginInit.initialize();
+            this.localPlugin.initialize();
         } catch (InitializationException e) {
             e.printStackTrace(System.err);
             return;
@@ -88,6 +88,7 @@ public class WorldEditCUI {
             Class.forName("SPCPlugin");
             spc_WorldEditCUI.setController(this);
         } catch (Exception e) {
+            debugger.debug("SinglePlayerCommands not found, not worrying about the spc_WorldEditCUI class.");
         }
 
     }

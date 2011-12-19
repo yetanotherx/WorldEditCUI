@@ -15,6 +15,7 @@
             </includes>
             <excludes>
                 <exclude>deobf</exclude>
+                <exclude>com/**</exclude>
                 <exclude>SPCPlugin.class</exclude>
                 <exclude>StartMC.class</exclude>
                 <exclude>INSTALL.md</exclude>
@@ -22,11 +23,6 @@
         </fileSet>
     </fileSets>
     <files>
-        <file>
-            <source>${project.build.directory}/dependency/worldedit-${WEVersion}.jar</source>
-            <outputDirectory>/WorldEditCUI</outputDirectory>
-            <destName>WorldEdit.jar</destName>
-        </file>
         <file>
             <source>${project.build.directory}/classes/INSTALL.md</source>
             <outputDirectory>/</outputDirectory>
