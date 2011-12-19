@@ -29,7 +29,7 @@ public class WorldEditScreen extends GuiChat {
             if (controller.getLocalPlugin().isEnabled()) {
                 Map<String, String> commands = controller.getLocalPlugin().getPlugin().getCommands();
                 String command = getCommand(this.getMessage());
-
+                
                 if (commands.containsKey(command.substring(1))) {
                     drawRect(2, this.getScreenHeight() - 28, this.getScreenWidth() - 14, this.getScreenHeight() - 14, 0x80000000);
                     drawString("  " + command + " " + commands.get(command.substring(1)), 4, this.n - 24, 0xe0e0e0);

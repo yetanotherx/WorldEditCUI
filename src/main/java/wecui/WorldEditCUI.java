@@ -1,9 +1,6 @@
 package wecui;
 
 import wecui.plugin.LocalPlugin;
-import deobf.spc_WorldEditCUI;
-import java.util.ArrayList;
-import java.util.List;
 import net.minecraft.client.Minecraft;
 import wecui.event.CUIEvent;
 import wecui.event.ChatCommandEvent;
@@ -39,7 +36,7 @@ import wecui.render.CuboidRegion;
 public class WorldEditCUI {
 
     public static final String VERSION = "1.0beta for Minecraft version 1.0";
-    public static final List<String> WEVERSIONS; //List of compatible WorldEdit versions
+    //public static final List<String> WEVERSIONS; //List of compatible WorldEdit versions
     protected Minecraft minecraft;
     protected EventManager eventManager;
     protected Obfuscation obfuscation;
@@ -48,17 +45,18 @@ public class WorldEditCUI {
     protected CUISettings settings;
     protected LocalPlugin localPlugin;
 
-    static {
+    /*static {
         List<String> list = new ArrayList<String>();
         list.add("4.8");
         list.add("4.8-SNAPSHOT");
         WEVERSIONS = list;
-    }
+    }*/
 
     public WorldEditCUI(Minecraft minecraft) {
         this.minecraft = minecraft;
     }
 
+    @SuppressWarnings("unchecked")
     public void initialize() {
         this.eventManager = new EventManager(this);
         this.obfuscation = new Obfuscation(this);
@@ -81,16 +79,6 @@ public class WorldEditCUI {
 
         this.registerListeners();
         Packet3CUIChat.register(this);
-
-        try {
-            //Loads the SPC class, unless SPC isn't installed. 
-            //Doing Class.forName will throw an exception if it's not found, 
-            //so only set the controller if it doesn't throw an exception.
-            Class.forName("SPCPlugin");
-            spc_WorldEditCUI.setController(this);
-        } catch (Exception e) {
-            debugger.debug("SinglePlayerCommands not found, not worrying about the spc_WorldEditCUI class.");
-        }
 
     }
 

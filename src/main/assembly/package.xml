@@ -17,6 +17,7 @@
                 <exclude>deobf</exclude>
                 <exclude>com/**</exclude>
                 <exclude>SPCPlugin.class</exclude>
+                <exclude>SPCPluginManager.class</exclude>
                 <exclude>StartMC.class</exclude>
                 <exclude>INSTALL.md</exclude>
             </excludes>
