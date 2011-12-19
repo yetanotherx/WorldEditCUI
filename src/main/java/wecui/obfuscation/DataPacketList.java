@@ -50,7 +50,7 @@ public class DataPacketList<T> extends ArrayList<T> {
             if (!chatevent.isCancelled() && s.startsWith("/") && s.length() > 1) {
                 ChatCommandEvent commandevent = new ChatCommandEvent(controller, s);
                 controller.getEventManager().callEvent(commandevent);
-                if (commandevent.isHandled()) {
+                if (commandevent.isHandled() || commandevent.isCancelled()) {
                     cancelled = true;
                 }
             }

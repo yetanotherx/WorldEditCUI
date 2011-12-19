@@ -91,4 +91,9 @@ public class CuboidRegion extends CUIRegion {
             calcBounds();
         }
     }
+
+    @Override
+    public Type getType() {
+        return Type.CUBOID;
+    }
 }

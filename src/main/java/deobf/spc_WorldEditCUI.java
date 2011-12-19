@@ -2,6 +2,7 @@ package deobf;
 
 import wecui.WorldEditCUI;
 import wecui.event.CUIEvent;
+import wecui.util.Utilities;
 
 /**
  * Main SinglePlayerCommands class
@@ -30,6 +31,7 @@ public class spc_WorldEditCUI extends SPCPlugin {
 
     @Override
     public void handleCUIEvent(String type, String params[]) {
+        System.out.println(type + " - " + Utilities.join(params));
         if( controller != null ) {
             controller.getEventManager().callEvent(new CUIEvent(controller, type, params));
         }

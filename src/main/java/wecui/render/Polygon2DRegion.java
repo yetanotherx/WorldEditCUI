@@ -72,4 +72,8 @@ public class Polygon2DRegion extends CUIRegion {
         this.min = min;
         this.max = max;
     }
+    
+    public Type getType() {
+        return Type.POLY;
+    }
 }

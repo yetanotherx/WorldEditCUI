@@ -67,4 +67,17 @@ public abstract class CUIRegion implements InitializationFactory {
      */
     public void setMinMax(int min, int max) {
     }
+    
+    public abstract Type getType();
+    
+    public static enum Type {
+        POLY,
+        CUBOID;
+
+        @Override
+        public String toString() {
+            return this.name().toLowerCase();
+        }
+        
+    }
 }
