@@ -28,6 +28,8 @@ import wecui.render.CuboidRegion;
  * TODO: Preview mode
  * TODO: Command transactions
  * 
+ * TODO: Look at pre-rewrite to make boxes prettier
+ * 
  * @author yetanotherx
  */
 public class WorldEditCUI {

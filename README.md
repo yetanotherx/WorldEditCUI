@@ -65,6 +65,15 @@ WorldEditCUI on GitHub, add your changes, and then submit a pull request. We'll
 look at it, make comments, and merge it if we think your changes are good enough.
 
 
+Support
+-------
+
+If you need help installing, find a bug, or just want to talk about WorldEditCUI,
+feel free to pop in to #lahwran on irc.esper.net. If you want to talk to me in 
+private, you can also send me a message on GitHub. All messages on GitHub are sent
+to my email, so I'll get back to you quickly.
+
+
 Continuous Integration
 ----------------------
 
