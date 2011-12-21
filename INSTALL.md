@@ -43,6 +43,5 @@ a handy guide at http://bit.ly/v9Ymqz on how to install mods)
 contents to the .minecraft/mods directory. 
 4) In the .minecraft/mods directory, delete the following files:
    a) mod_WorldEditCUI.class
-   b) spc_WorldEditCUI.class
-   c) the entire wecui/ folder
+   b) the entire wecui/ folder
 5) Start Minecraft!
