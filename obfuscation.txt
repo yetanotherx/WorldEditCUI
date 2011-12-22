@@ -5,8 +5,20 @@ renames:
   - notch: if
     wecui: ifclass
     packageOnly: false
+  - notch: ia
+    wecui: Entity
+    packageOnly: false
+  - notch: cx
+    wecui: EntityClientPlayerMP
+    packageOnly: false
+  - notch: di
+    wecui: EntityPlayerSP
+    packageOnly: false
   - notch: ct
     wecui: GuiButton
+    packageOnly: false
+  - notch: gx
+    wecui: GuiChat
     packageOnly: false
   - notch: xe
     wecui: GuiScreen
@@ -14,26 +26,8 @@ renames:
   - notch: abs
     wecui: GuiSmallButton
     packageOnly: false
-  - notch: cv
-    wecui: Tessellator
-    packageOnly: false
-  - notch: ry
-    wecui: World
-    packageOnly: false
-  - notch: di
-    wecui: EntityPlayerSP
-    packageOnly: false
-  - notch: ia
-    wecui: Entity
-    packageOnly: false
-  - notch: abb
-    wecui: Packet3Chat
-    packageOnly: false
-  - notch: fe
-    wecui: NetHandler
-    packageOnly: false
-  - notch: gt
-    wecui: Packet
+  - notch: aby
+    wecui: KeyBinding
     packageOnly: false
   - notch: ob
     wecui: MCHash
@@ -41,24 +35,30 @@ renames:
   - notch: ik
     wecui: NBTTagCompound
     packageOnly: false
+  - notch: abp
+    wecui: NetClientHandler
+    packageOnly: false
+  - notch: fe
+    wecui: NetHandler
+    packageOnly: false
+  - notch: hc
+    wecui: NetworkManager
+    packageOnly: false
+  - notch: gt
+    wecui: Packet
+    packageOnly: false
+  - notch: abb
+    wecui: Packet3Chat
+    packageOnly: false
   - notch: rg
     wecui: Render
     packageOnly: false
   - notch: rt
     wecui: RenderHelper
     packageOnly: false
-  - notch: cx
-    wecui: EntityClientPlayerMP
+  - notch: cv
+    wecui: Tessellator
     packageOnly: false
-  - notch: abp
-    wecui: NetClientHandler
-    packageOnly: false
-  - notch: hc
-    wecui: NetworkManager
-    packageOnly: false
-  - notch: gx
-    wecui: GuiChat
-    packageOnly: false
-  - notch: aby
-    wecui: KeyBinding
+  - notch: ry
+    wecui: World
     packageOnly: false

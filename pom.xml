@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>wecui</groupId>
     <artifactId>WorldEditCUI</artifactId>
-    <version>1.0</version>
+    <version>1.1beta</version>
     <name>WorldEditCUI</name>
     <dependencies>
         <dependency>
