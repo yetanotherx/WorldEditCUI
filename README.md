@@ -101,4 +101,4 @@ Credits
 Legal stuff
 -----------
 
-This code is licensed under the BSD license. 
+This code is licensed under the Eclipse Public License. 
