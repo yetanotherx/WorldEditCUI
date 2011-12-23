@@ -28,6 +28,6 @@ public class DeselectCommandListener implements Listener<ChatCommandEvent> {
     @Override
     public void onEvent(ChatCommandEvent event) {
         event.setCancelled(true);
-        controller.getObfuscation().sendChat("//sel " + controller.getSelection().getType().toString());
+        controller.getObfuscation().sendChat("//sel");
     }
 }
