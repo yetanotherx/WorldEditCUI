@@ -86,6 +86,7 @@ public class WorldEditCUI {
         ChatCommandEvent.getHandlers("/clearsel").register(desel, Order.Default);
         ChatCommandEvent.getHandlers("/unselect").register(desel, Order.Default);
         ChatCommandEvent.getHandlers("/unsel").register(desel, Order.Default);
+        ChatCommandEvent.getHandlers("/sel").register(desel, Order.Default);
         
         //ChatCommandEvent.getHandlers("/preview").register(new PreviewCommandListener(this), Order.Default);
         //ChatCommandEvent.getHandlers("/commit").register(new CommitCommandListener(this), Order.Default);

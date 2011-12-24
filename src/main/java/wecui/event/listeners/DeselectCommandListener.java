@@ -1,12 +1,10 @@
 package wecui.event.listeners;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import wecui.fevents.Listener;
 import wecui.WorldEditCUI;
 import wecui.event.ChatCommandEvent;
-import wecui.event.command.CommandEventBase;
-import wecui.event.command.CommandEventType;
+import wecui.render.CuboidRegion;
+import wecui.render.Polygon2DRegion;
 
 /**
  * Parses incoming/outgoing chat messages, and calls a CUIEvent if it matches the WorldEdit CUI header
@@ -27,7 +25,19 @@ public class DeselectCommandListener implements Listener<ChatCommandEvent> {
 
     @Override
     public void onEvent(ChatCommandEvent event) {
+        if (event.getArgs().length > 0) {
+            return;
+        }
+
         event.setCancelled(true);
+        switch (controller.getSelection().getType()) {
+            case POLY:
+                controller.setSelection(new Polygon2DRegion(controller));
+                break;
+            case CUBOID:
+                controller.setSelection(new CuboidRegion(controller));
+                break;
+        }
         controller.getObfuscation().sendChat("//sel");
     }
 }
