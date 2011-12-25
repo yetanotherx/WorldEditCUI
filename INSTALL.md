@@ -41,8 +41,6 @@ The minecraft directory structure should look something like this:
       stats/
       texturepacks/
 
-3. Start Minecraft!
-
 
 Installing the old-fashioned way
 --------------------------------
@@ -72,5 +70,3 @@ The minecraft directory structure should look something like this:
       saves/
       stats/
       texturepacks/
-
-5. Start Minecraft!
