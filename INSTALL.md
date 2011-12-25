@@ -4,10 +4,10 @@ Installing WorldEditCUI
 Installing WorldEditCUI is relatively simple, and can be done in seconds!
 Before installing, ensure that you have done all of the requirements:
 
-1) You have installed ModLoader (http://bit.ly/snQajN) to minecraft.jar, 
+1. You have installed ModLoader (http://bit.ly/snQajN) to minecraft.jar, 
 and have ensured that it works.
-2) You have deleted META-INF/ from minecraft.jar
-3) You are competent enough to provide useful error messages if it breaks.
+2. You have deleted META-INF/ from minecraft.jar
+3. You are competent enough to provide useful error messages if it breaks.
 
 Congratulations! You're ready to install WorldEditCUI! There are two methods
 to install this mod, and both are supported. Any other method is not supported,
