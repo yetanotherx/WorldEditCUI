@@ -28,18 +28,18 @@ contents to the .minecraft/mods directory.
 
 The minecraft directory structure should look something like this:
 
-  .minecraft/
-    bin/
-    mods/
-      WorldEditCUI/
-        Configuration.yml
-        mod_WorldEditCUI.class
-        wecui/
-          (lots of classes)
-    resources/
-    saves/
-    stats/
-    texturepacks/
+    .minecraft/
+      bin/
+      mods/
+        WorldEditCUI/
+          Configuration.yml
+          mod_WorldEditCUI.class
+          wecui/
+            (lots of classes)
+      resources/
+      saves/
+      stats/
+      texturepacks/
 
 3) Start Minecraft!
 
@@ -63,14 +63,14 @@ contents to the .minecraft/mods directory.
 
 The minecraft directory structure should look something like this:
 
-  .minecraft/
-    bin/
-    mods/
-      WorldEditCUI/
-        Configuration.yml
-    resources/
-    saves/
-    stats/
-    texturepacks/
+    .minecraft/
+      bin/
+      mods/
+        WorldEditCUI/
+          Configuration.yml
+      resources/
+      saves/
+      stats/
+      texturepacks/
 
 5) Start Minecraft!
