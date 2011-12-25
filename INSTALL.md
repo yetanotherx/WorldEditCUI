@@ -25,6 +25,22 @@ this way. To install the mod using this method, do the following:
 1) Download WorldEditCUI and unzip it. Chances are you've already done that.
 2) In the WorldEditCUI-build folder, copy the WorldEditCUI folder and all its
 contents to the .minecraft/mods directory. 
+
+The minecraft directory structure should look something like this:
+
+  .minecraft/
+    bin/
+    mods/
+      WorldEditCUI/
+        Configuration.yml
+        mod_WorldEditCUI.class
+        wecui/
+          (lots of classes)
+    resources/
+    saves/
+    stats/
+    texturepacks/
+
 3) Start Minecraft!
 
 
@@ -44,4 +60,17 @@ contents to the .minecraft/mods directory.
 4) In the .minecraft/mods directory, delete the following files:
    a) mod_WorldEditCUI.class
    b) the entire wecui/ folder
+
+The minecraft directory structure should look something like this:
+
+  .minecraft/
+    bin/
+    mods/
+      WorldEditCUI/
+        Configuration.yml
+    resources/
+    saves/
+    stats/
+    texturepacks/
+
 5) Start Minecraft!
