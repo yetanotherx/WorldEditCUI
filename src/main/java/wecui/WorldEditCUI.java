@@ -9,7 +9,6 @@ import wecui.event.listeners.CUIListener;
 import wecui.event.ChatEvent;
 import wecui.event.listeners.ChatListener;
 import wecui.event.WorldRenderEvent;
-import wecui.event.listeners.DeselectCommandListener;
 import wecui.event.listeners.WorldEditCommandListener;
 import wecui.event.listeners.WorldRenderListener;
 import wecui.exception.InitializationException;
@@ -79,14 +78,6 @@ public class WorldEditCUI {
         WorldEditCommandListener commListener = new WorldEditCommandListener(this);
         ChatCommandEvent.getHandlers("worldedit").register(commListener, Order.Default);
         ChatCommandEvent.getHandlers("we").register(commListener, Order.Default);
-
-        DeselectCommandListener desel = new DeselectCommandListener(this);
-        ChatCommandEvent.getHandlers("/deselect").register(desel, Order.Default);
-        ChatCommandEvent.getHandlers("/desel").register(desel, Order.Default);
-        ChatCommandEvent.getHandlers("/clearsel").register(desel, Order.Default);
-        ChatCommandEvent.getHandlers("/unselect").register(desel, Order.Default);
-        ChatCommandEvent.getHandlers("/unsel").register(desel, Order.Default);
-        ChatCommandEvent.getHandlers("/sel").register(desel, Order.Default);
         
         //ChatCommandEvent.getHandlers("/preview").register(new PreviewCommandListener(this), Order.Default);
         //ChatCommandEvent.getHandlers("/commit").register(new CommitCommandListener(this), Order.Default);
