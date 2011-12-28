@@ -15,11 +15,9 @@ import wecui.render.RenderShapes;
 public abstract class BaseRegion implements InitializationFactory {
 
     protected WorldEditCUI controller;
-    protected RenderShapes renderer;
 
     public BaseRegion(WorldEditCUI controller) {
         this.controller = controller;
-        this.renderer = new RenderShapes(controller);
     }
 
     @Override

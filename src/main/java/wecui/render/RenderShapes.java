@@ -2,7 +2,6 @@ package wecui.render;
 
 import java.util.List;
 import org.lwjgl.opengl.GL11;
-import wecui.WorldEditCUI;
 import wecui.obfuscation.RenderObfuscation;
 import wecui.render.points.PointContainer;
 import wecui.render.points.PointCube;
@@ -10,13 +9,7 @@ import wecui.render.points.PointRectangle;
 
 public class RenderShapes {
 
-    protected WorldEditCUI controller;
-
-    public RenderShapes(WorldEditCUI controller) {
-        this.controller = controller;
-    }
-
-    public void drawGridBetweenCorners(LineColor color, PointContainer first, PointContainer second) {
+    public static void drawGridBetweenCorners(LineColor color, PointContainer first, PointContainer second) {
         double x1 = first.getX();
         double y1 = first.getY();
         double z1 = first.getZ();
@@ -144,11 +137,11 @@ public class RenderShapes {
         }
     }
 
-    public void drawBoxBetweenCorners(LineColor color, PointContainer first, PointContainer second) {
+    public static void drawBoxBetweenCorners(LineColor color, PointContainer first, PointContainer second) {
         drawBox(color.getHidden(), first.getX(), first.getY(), first.getZ(), second.getX(), second.getY(), second.getZ());
     }
 
-    public void drawGridBetweenPoints(LineColor color, List<PointRectangle> points, int min, int max) {
+    public static void drawGridBetweenPoints(LineColor color, List<PointRectangle> points, int min, int max) {
         double off = 0.03;
         for (double height = min; height <= max + 1; height++) {
 
@@ -162,7 +155,7 @@ public class RenderShapes {
         }
     }
 
-    public void drawBoxBetweenPoints(LineColor color, List<PointRectangle> points, int min, int max) {
+    public static void drawBoxBetweenPoints(LineColor color, List<PointRectangle> points, int min, int max) {
         double off = 0.03;
         for (LineInfo tempColor : color.getColors()) {
             tempColor.prepareRender();
@@ -181,7 +174,7 @@ public class RenderShapes {
         }
     }
 
-    public void drawEllipsoidAroundPoint(LineColor color, PointCube center, PointContainer radii) {
+    public static void drawEllipsoidAroundPoint(LineColor color, PointCube center, PointContainer radii) {
         double twoPi = Math.PI * 2;
         double[] sinThetas = new double[]{0.84806, 0.5236, 0.25272, -0.84806, -0.5236, -0.25272}; //The values of theta such that sin(theta) is 1/4, 2/4, 3/4, etc.
         double[] cosThetas = new double[]{0.7227, 1.047197, 1.3181, 1.8234, 2.09439, 2.418858}; //The values of theta such that cos(theta) is 1/4, 2/4, 3/4, etc.
@@ -196,17 +189,16 @@ public class RenderShapes {
             tempColor.prepareRender();
 
             //XZ plane
-            for (double theta : sinThetas) {
+            for (double yBlock = -radii.getY(); yBlock < radii.getY(); yBlock++) {
                 o.startDrawing(GL11.GL_LINE_LOOP);
                 tempColor.prepareColor();
 
                 for (int i = 0; i <= 40; i++) {
                     double tempTheta = i * twoPi / 40;
-                    double tempX = radii.getX() * Math.cos(tempTheta) * Math.cos(theta);
-                    double tempY = radii.getY() * Math.sin(theta);
-                    double tempZ = radii.getZ() * Math.sin(tempTheta) * Math.cos(theta);
+                    double tempX = radii.getX() * Math.cos(tempTheta) * Math.cos(Math.asin(yBlock / radii.getY()));
+                    double tempZ = radii.getZ() * Math.sin(tempTheta) * Math.cos(Math.asin(yBlock / radii.getY()));
 
-                    o.addVertex(x + tempX, y + tempY, z + tempZ);
+                    o.addVertex(x + tempX, y + yBlock, z + tempZ);
                 }
                 o.finishDrawing();
             }
@@ -224,17 +216,16 @@ public class RenderShapes {
             o.finishDrawing();
 
             //YZ plane
-            for (double theta : cosThetas) {
+            for (double xBlock = -radii.getX(); xBlock < radii.getX(); xBlock++) {
                 o.startDrawing(GL11.GL_LINE_LOOP);
                 tempColor.prepareColor();
 
                 for (int i = 0; i <= 40; i++) {
                     double tempTheta = i * twoPi / 40;
-                    double tempX = radii.getX() * Math.cos(theta);
-                    double tempY = radii.getY() * Math.cos(tempTheta) * Math.sin(theta);
-                    double tempZ = radii.getZ() * Math.sin(tempTheta) * Math.sin(theta);
+                    double tempY = radii.getY() * Math.cos(tempTheta) * Math.sin(Math.acos(xBlock / radii.getX()));
+                    double tempZ = radii.getZ() * Math.sin(tempTheta) * Math.sin(Math.acos(xBlock / radii.getX()));
 
-                    o.addVertex(x + tempX, y + tempY, z + tempZ);
+                    o.addVertex(x + xBlock, y + tempY, z + tempZ);
                 }
                 o.finishDrawing();
             }
@@ -252,17 +243,16 @@ public class RenderShapes {
             o.finishDrawing();
 
             //XY plane
-            for (double theta : cosThetas) {
+            for (double zBlock = -radii.getZ(); zBlock < radii.getZ(); zBlock++) {
                 o.startDrawing(GL11.GL_LINE_LOOP);
                 tempColor.prepareColor();
 
                 for (int i = 0; i <= 40; i++) {
                     double tempTheta = i * twoPi / 40;
-                    double tempY = radii.getY() * Math.cos(tempTheta) * Math.sin(theta);
-                    double tempX = radii.getX() * Math.sin(tempTheta) * Math.sin(theta);
-                    double tempZ = radii.getZ() * Math.cos(theta);
+                    double tempX = radii.getX() * Math.sin(tempTheta) * Math.sin(Math.acos(zBlock / radii.getZ()));
+                    double tempY = radii.getY() * Math.cos(tempTheta) * Math.sin(Math.acos(zBlock / radii.getZ()));
 
-                    o.addVertex(x + tempX, y + tempY, z + tempZ);
+                    o.addVertex(x + tempX, y + tempY, z + zBlock);
                 }
                 o.finishDrawing();
             }
