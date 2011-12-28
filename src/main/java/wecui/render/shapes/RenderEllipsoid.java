@@ -33,10 +33,6 @@ public class RenderEllipsoid {
     }
 
     public void render() {
-        if( radii.getX() * radii.getY() * radii.getZ() == 0 ) {
-            return; //Any one of the radii is zero
-        }
-        
         for (LineInfo tempColor : color.getColors()) {
             tempColor.prepareRender();
             drawXZPlane(tempColor);
@@ -46,7 +42,7 @@ public class RenderEllipsoid {
     }
 
     protected void drawXZPlane(LineInfo color) {
-        for (double yBlock = -radii.getY(); yBlock < radii.getY(); yBlock++) {
+        for (double yBlock = -Math.floor(radii.getY()); yBlock < Math.floor(radii.getY()); yBlock++) {
             obf.startDrawing(GL11.GL_LINE_LOOP);
             color.prepareColor();
 
@@ -74,7 +70,7 @@ public class RenderEllipsoid {
     }
 
     protected void drawYZPlane(LineInfo color) {
-        for (double xBlock = -radii.getX(); xBlock < radii.getX(); xBlock++) {
+        for (double xBlock = -Math.floor(radii.getX()); xBlock < Math.floor(radii.getX()); xBlock++) {
             obf.startDrawing(GL11.GL_LINE_LOOP);
             color.prepareColor();
 
@@ -102,7 +98,7 @@ public class RenderEllipsoid {
     }
 
     protected void drawXYPlane(LineInfo color) {
-        for (double zBlock = -radii.getZ(); zBlock < radii.getZ(); zBlock++) {
+        for (double zBlock = -Math.floor(radii.getZ()); zBlock < Math.floor(radii.getZ()); zBlock++) {
             obf.startDrawing(GL11.GL_LINE_LOOP);
             color.prepareColor();
 
