@@ -1,7 +1,7 @@
 package wecui.event.cui;
 
 import wecui.WorldEditCUI;
-import wecui.render.CuboidRegion;
+import wecui.render.region.CuboidRegion;
 
 /**
  * Called when handshake event is received
@@ -29,7 +29,6 @@ public class CUIHandshakeEvent extends CUIBaseEvent {
         }
         
         CuboidRegion cuboidRegion = new CuboidRegion(controller);
-        cuboidRegion.initialize();
         
         //Initiates a new blank cuboid region.
         this.controller.setSelection(cuboidRegion);

@@ -23,7 +23,7 @@ public class CUIMinMaxEvent extends CUIBaseEvent {
     public String run() {
         int min = this.getInt(0);
         int max = this.getInt(1);
-        controller.getSelection().setMinMax(min, max);
+        controller.getSelection().setPolygonMinMax(min, max);
         
         controller.getDebugger().debug("Expanding/contracting selection.");
         

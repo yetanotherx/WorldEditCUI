@@ -16,8 +16,8 @@ import wecui.fevents.EventManager;
 import wecui.fevents.Order;
 import wecui.obfuscation.Obfuscation;
 import wecui.obfuscation.Packet3CUIChat;
-import wecui.render.CUIRegion;
-import wecui.render.CuboidRegion;
+import wecui.render.region.BaseRegion;
+import wecui.render.region.CuboidRegion;
 
 /**
  * Main controller class. Uses a pseudo-JavaBeans paradigm. The only real
@@ -35,7 +35,7 @@ public class WorldEditCUI {
     protected Minecraft minecraft;
     protected EventManager eventManager;
     protected Obfuscation obfuscation;
-    protected CUIRegion selection;
+    protected BaseRegion selection;
     protected CUIDebug debugger;
     protected CUIConfiguration configuration;
     protected LocalPlugin localPlugin;
@@ -131,11 +131,11 @@ public class WorldEditCUI {
         this.obfuscation = obfuscation;
     }
 
-    public CUIRegion getSelection() {
+    public BaseRegion getSelection() {
         return selection;
     }
 
-    public void setSelection(CUIRegion selection) {
+    public void setSelection(BaseRegion selection) {
         this.selection = selection;
     }
 

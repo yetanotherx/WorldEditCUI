@@ -30,9 +30,21 @@ public class CUIPointEvent extends CUIBaseEvent {
         int x = this.getInt(1);
         int y = this.getInt(2);
         int z = this.getInt(3);
-        int regionSize = this.getInt(4);
-        controller.getSelection().setPoint(id, x, y, z, regionSize);
-        this.setLocalPoint(id, x, y, z);
+
+        switch (controller.getSelection().getType()) {
+            case CUBOID:
+                controller.getSelection().setCuboidPoint(id, x, y, z);
+                this.setLocalPoint(id, x, y, z);
+                break;
+            case ELLIPSOID:
+            case SPHERE:
+                if (id == 0) {
+                    controller.getSelection().setSphereCenter(x, y, z);
+                } else {
+                    controller.getSelection().setSphereRadius(x, y, z);
+                }
+                break;
+        }
 
         controller.getDebugger().debug("Setting point #" + id);
 
@@ -41,14 +53,14 @@ public class CUIPointEvent extends CUIBaseEvent {
 
     protected void setLocalPoint(int id, int x, int y, int z) {
         if (controller.getLocalPlugin().isEnabled()) {
-            
+
             WorldEdit plugin = controller.getLocalPlugin().getPlugin();
             CUIWorld world = controller.getLocalPlugin().getWorld();
-            
+
             WorldVector clicked = new WorldVector(world, x, y, z);
             LocalSession session = plugin.getSession("player");
             RegionSelector selector = session.getRegionSelector(world);
-            
+
             if (id == 0) {
                 selector.selectPrimary(clicked);
             } else {

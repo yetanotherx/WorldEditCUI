@@ -26,7 +26,7 @@ public class CUIPoint2DEvent extends CUIPointEvent {
         int x = this.getInt(1);
         int z = this.getInt(2);
         int regionSize = this.getInt(3);
-        controller.getSelection().setPoint(id, x, z, regionSize);
+        controller.getSelection().setPolygonPoint(id, x, z);
         
         controller.getDebugger().debug("Setting point2d #" + id);
         

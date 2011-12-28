@@ -8,7 +8,6 @@ import deobf.MCHash;
 import deobf.NetClientHandler;
 import deobf.Packet3Chat;
 import deobf.RenderHelper;
-import deobf.Tessellator;
 import deobf.World;
 import java.io.File;
 import net.minecraft.client.Minecraft;
@@ -30,8 +29,7 @@ public class Obfuscation implements InitializationFactory {
 
     protected WorldEditCUI controller;
     protected Minecraft minecraft;
-    protected Tessellator tessellator = Tessellator.a;
-
+    
     public Obfuscation(WorldEditCUI controller) {
         this.controller = controller;
     }
@@ -80,18 +78,6 @@ public class Obfuscation implements InitializationFactory {
     public double getPlayerZGuess(float renderTick) {
         EntityPlayerSP plyr = getPlayer();
         return plyr.r + ((plyr.u - plyr.r) * renderTick);
-    }
-
-    public void startDrawing(int type) {
-        tessellator.a(type);
-    }
-
-    public void addVertex(double x, double y, double z) {
-        tessellator.a(x, y, z);
-    }
-
-    public void finishDrawing() {
-        tessellator.a();
     }
 
     public EntityPlayerSP getPlayer() {
