@@ -79,6 +79,10 @@ public abstract class CUIBaseEvent {
     public int getInt(int index) {
         return (int) Float.parseFloat(args[index]);
     }
+    
+    public double getDouble(int index) {
+        return Double.parseDouble(args[index]);
+    }
 
     public String getString(int index) {
         return args[index];

@@ -41,7 +41,7 @@ public class EllipsoidRegion extends BaseRegion {
     }
 
     @Override
-    public void setEllipsoidRadii(int x, int y, int z) {
+    public void setEllipsoidRadii(double x, double y, double z) {
         radii = new PointContainer(x, y, z);
     }
 

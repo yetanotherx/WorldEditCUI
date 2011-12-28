@@ -8,7 +8,7 @@ import wecui.WorldEditCUI;
  * @author lahwran
  * @author yetanotherx
  */
-public class CUIEllipsoidEvent extends CUIPointEvent {
+public class CUIEllipsoidEvent extends CUIBaseEvent {
 
     public CUIEllipsoidEvent(WorldEditCUI controller, String[] args) {
         super(controller, args);
@@ -23,13 +23,16 @@ public class CUIEllipsoidEvent extends CUIPointEvent {
     public String run() {
 
         int id = this.getInt(0);
-        int x = this.getInt(1);
-        int y = this.getInt(2);
-        int z = this.getInt(3);
 
         if (id == 0) {
+            int x = this.getInt(1);
+            int y = this.getInt(2);
+            int z = this.getInt(3);
             controller.getSelection().setEllipsoidCenter(x, y, z);
         } else if (id == 1) {
+            double x = this.getDouble(1);
+            double y = this.getDouble(2);
+            double z = this.getDouble(3);
             controller.getSelection().setEllipsoidRadii(x, y, z);
         }
 
