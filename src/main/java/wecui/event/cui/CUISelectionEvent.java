@@ -5,7 +5,6 @@ import wecui.render.region.BaseRegion;
 import wecui.render.region.CuboidRegion;
 import wecui.render.region.EllipsoidRegion;
 import wecui.render.region.PolygonRegion;
-import wecui.render.region.SphereRegion;
 
 /**
  * Called when selection event is received
@@ -35,10 +34,8 @@ public class CUISelectionEvent extends CUIBaseEvent {
             newRegion = new PolygonRegion(controller);
         } else if (this.getString(0).equals("ellipsoid")) {
             newRegion = new EllipsoidRegion(controller);
-        } else if (this.getString(0).equals("sphere")) {
-            newRegion = new SphereRegion(controller);
         } else {
-            return "Invalid selection type. Must be cuboid|polygon2d|sphere|ellipsoid.";
+            return "Invalid selection type. Must be cuboid|polygon2d|ellipsoid.";
         }
 
         controller.setSelection(newRegion);

@@ -28,9 +28,9 @@ public class CUIEllipsoidEvent extends CUIPointEvent {
         int z = this.getInt(3);
 
         if (id == 0) {
-            controller.getSelection().setSphereCenter(x, y, z);
+            controller.getSelection().setEllipsoidCenter(x, y, z);
         } else {
-            controller.getSelection().setSphereRadius(x, y, z);
+            controller.getSelection().setEllipsoidRadii(x, y, z);
         }
 
         controller.getDebugger().debug("Setting center/radius");

@@ -35,13 +35,13 @@ public class EllipsoidRegion extends BaseRegion {
     }
 
     @Override
-    public void setSphereCenter(int x, int y, int z) {
+    public void setEllipsoidCenter(int x, int y, int z) {
         center = new PointCube(x, y, z);
         center.setColor(LineColor.ELLIPSOIDCENTER);
     }
 
     @Override
-    public void setSphereRadius(int x, int y, int z) {
+    public void setEllipsoidRadii(int x, int y, int z) {
         radii = new PointContainer(x, y, z);
     }
 

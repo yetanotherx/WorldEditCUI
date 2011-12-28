@@ -22,10 +22,8 @@ public enum LineColor {
     POLYGRID(0.8F, 0.2F, 0.2F),
     POLYBOX(0.8F, 0.3F, 0.3F),
     POLYPOINT(0.2F, 0.8F, 0.8F),
-    SPHEREGRID(0.8F, 0.3F, 0.3F),
-    SPHERECENTER(0.8F, 0.8F, 0.2F),
     ELLIPSOIDGRID(0.8F, 0.3F, 0.3F),
-    ELLIPSOIDCENTER(0.8F, 0.2F, 0.8F);
+    ELLIPSOIDCENTER(0.8F, 0.8F, 0.2F);
     protected LineInfo normal;
     protected LineInfo hidden;
 

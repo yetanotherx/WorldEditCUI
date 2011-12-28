@@ -31,10 +31,10 @@ public abstract class BaseRegion implements InitializationFactory {
     public void setPolygonPoint(int id, int x, int z) {
     }
 
-    public void setSphereCenter(int x, int y, int z) {
+    public void setEllipsoidCenter(int x, int y, int z) {
     }
 
-    public void setSphereRadius(int x, int y, int z) {
+    public void setEllipsoidRadii(int x, int y, int z) {
     }
 
     public void setPolygonMinMax(int min, int max) {
