@@ -29,7 +29,7 @@ public class CUIEllipsoidEvent extends CUIPointEvent {
 
         if (id == 0) {
             controller.getSelection().setEllipsoidCenter(x, y, z);
-        } else {
+        } else if (id == 1) {
             controller.getSelection().setEllipsoidRadii(x, y, z);
         }
 

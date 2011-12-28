@@ -44,7 +44,7 @@ public class CuboidRegion extends BaseRegion {
         if (id == 0) {
             firstPoint = new PointCube(x, y, z);
             firstPoint.setColor(LineColor.CUBOIDPOINT1);
-        } else {
+        } else if (id == 1) {
             secondPoint = new PointCube(x, y, z);
             secondPoint.setColor(LineColor.CUBOIDPOINT2);
         }
@@ -83,7 +83,7 @@ public class CuboidRegion extends BaseRegion {
                 out[0].setZ(point.getPoint().getZ() - off);
             }
         }
-        
+
         return out;
     }
 

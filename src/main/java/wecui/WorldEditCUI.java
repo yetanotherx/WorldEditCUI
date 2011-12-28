@@ -26,6 +26,7 @@ import wecui.render.region.CuboidRegion;
  * TODO: Add MultiWorld support
  * TODO: Preview mode
  * TODO: Command transactions
+ * TODO: Version checking
  * 
  * @author yetanotherx
  */
