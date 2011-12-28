@@ -2,7 +2,6 @@ package wecui.render.region;
 
 import wecui.InitializationFactory;
 import wecui.WorldEditCUI;
-import wecui.render.RenderShapes;
 
 /**
  * Base region storage class. Provides

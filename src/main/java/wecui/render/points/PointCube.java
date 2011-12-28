@@ -1,7 +1,7 @@
 package wecui.render.points;
 
 import wecui.render.LineColor;
-import wecui.render.RenderShapes;
+import wecui.render.shapes.Render3DBox;
 
 /**
  * Stores data about a cube surrounding a
@@ -31,9 +31,7 @@ public class PointCube {
         double y = point.getY();
         double z = point.getZ();
 
-        RenderShapes.drawBox(color.getHidden(), x - off, y - off, z - off, x + 1 + off, y + 1 + off, z + 1 + off);
-        RenderShapes.drawBox(color.getNormal(), x - off, y - off, z - off, x + 1 + off, y + 1 + off, z + 1 + off);
-        
+        new Render3DBox(color, new PointContainer(x - off, y - off, z - off), new PointContainer(x + 1 + off, y + 1 + off, z + 1 + off)).render();
     }
 
     public PointContainer getPoint() {

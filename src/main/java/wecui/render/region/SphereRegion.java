@@ -2,7 +2,7 @@ package wecui.render.region;
 
 import wecui.WorldEditCUI;
 import wecui.render.LineColor;
-import wecui.render.RenderShapes;
+import wecui.render.shapes.RenderEllipsoid;
 import wecui.render.points.PointContainer;
 import wecui.render.points.PointCube;
 
@@ -26,7 +26,7 @@ public class SphereRegion extends BaseRegion {
         if (center != null && radii != null) {
             center.render();
 
-            RenderShapes.drawEllipsoidAroundPoint(LineColor.SPHEREGRID, center, radii);
+            new RenderEllipsoid(LineColor.SPHEREGRID, center, radii).render();
 
         } else if (center != null) {
             center.render();

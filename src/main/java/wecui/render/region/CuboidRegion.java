@@ -2,9 +2,10 @@ package wecui.render.region;
 
 import wecui.WorldEditCUI;
 import wecui.render.LineColor;
-import wecui.render.RenderShapes;
+import wecui.render.shapes.Render3DBox;
 import wecui.render.points.PointContainer;
 import wecui.render.points.PointCube;
+import wecui.render.shapes.Render3DGrid;
 
 /**
  * Main controller for a cuboid-type region
@@ -28,8 +29,8 @@ public class CuboidRegion extends BaseRegion {
             secondPoint.render();
 
             PointContainer[] bounds = this.calcBounds();
-            RenderShapes.drawBoxBetweenCorners(LineColor.CUBOIDBOX, bounds[0], bounds[1]);
-            RenderShapes.drawGridBetweenCorners(LineColor.CUBOIDGRID, bounds[0], bounds[1]);
+            new Render3DBox(LineColor.CUBOIDBOX, bounds[0], bounds[1]).render();
+            new Render3DGrid(LineColor.CUBOIDGRID, bounds[0], bounds[1]).render();
 
         } else if (firstPoint != null) {
             firstPoint.render();

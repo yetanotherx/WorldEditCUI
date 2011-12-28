@@ -1,7 +1,7 @@
 package wecui.render.points;
 
 import wecui.render.LineColor;
-import wecui.render.RenderShapes;
+import wecui.render.shapes.Render3DBox;
 
 /**
  * Stores data about a prism surrounding two
@@ -30,8 +30,7 @@ public class PointRectangle {
         double x = point.getX();
         double z = point.getZ();
 
-        RenderShapes.drawBox(color.getHidden(), x - off, min - off, z - off, x + 1 + off, max + 1 + off, z + 1 + off);
-        RenderShapes.drawBox(color.getNormal(), x - off, min - off, z - off, x + 1 + off, max + 1 + off, z + 1 + off);
+        new Render3DBox(color, new PointContainer(x - off, min - off, z - off), new PointContainer(x + 1 + off, max + 1 + off, z + 1 + off)).render();
     }
 
     public PointContainer getPoint() {

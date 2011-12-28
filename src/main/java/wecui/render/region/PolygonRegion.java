@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import wecui.WorldEditCUI;
 import wecui.render.LineColor;
-import wecui.render.RenderShapes;
 import wecui.render.points.PointRectangle;
+import wecui.render.shapes.Render2DBox;
+import wecui.render.shapes.Render2DGrid;
 
 /**
  * Main controller for a polygon-type region
@@ -33,8 +34,8 @@ public class PolygonRegion extends BaseRegion {
             point.render(min, max);
         }
 
-        RenderShapes.drawBoxBetweenPoints(LineColor.POLYBOX, points, min, max);
-        RenderShapes.drawGridBetweenPoints(LineColor.POLYGRID, points, min, max);
+        new Render2DBox(LineColor.POLYBOX, points, min, max).render();
+        new Render2DGrid(LineColor.POLYGRID, points, min, max).render();
 
     }
 
