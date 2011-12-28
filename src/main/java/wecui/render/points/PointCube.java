@@ -34,7 +34,6 @@ public class PointCube {
         RenderShapes.drawBox(color.getHidden(), x - off, y - off, z - off, x + 1 + off, y + 1 + off, z + 1 + off);
         RenderShapes.drawBox(color.getNormal(), x - off, y - off, z - off, x + 1 + off, y + 1 + off, z + 1 + off);
         
-        RenderShapes.drawEllipsoidAroundPoint(color, this, new PointContainer(10,20,30));
     }
 
     public PointContainer getPoint() {
