@@ -185,7 +185,7 @@ public class RenderShapes {
 
         RenderObfuscation o = RenderObfuscation.getInstance();
 
-        for (LineInfo tempColor : LineColor.POLYPOINT.getColors()) {
+        for (LineInfo tempColor : color.getColors()) {
             tempColor.prepareRender();
 
             //XZ plane
