@@ -31,21 +31,8 @@ public class CUIPointEvent extends CUIBaseEvent {
         int y = this.getInt(2);
         int z = this.getInt(3);
 
-        switch (controller.getSelection().getType()) {
-            case CUBOID:
-                controller.getSelection().setCuboidPoint(id, x, y, z);
-                this.setLocalPoint(id, x, y, z);
-                break;
-            case ELLIPSOID:
-            case SPHERE:
-                if (id == 0) {
-                    controller.getSelection().setSphereCenter(x, y, z);
-                } else {
-                    controller.getSelection().setSphereRadius(x, y, z);
-                }
-                break;
-        }
-
+        controller.getSelection().setCuboidPoint(id, x, y, z);
+        this.setLocalPoint(id, x, y, z);
         controller.getDebugger().debug("Setting point #" + id);
 
         return null;

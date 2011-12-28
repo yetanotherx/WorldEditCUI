@@ -12,6 +12,7 @@ public enum CUIEventType {
     SELECTION(CUISelectionEvent.class, "s", 1),
     POINT(CUIPointEvent.class, "p", 5, 6),
     POINT2D(CUIPoint2DEvent.class, "p2", 4, 5),
+    ELLIPSOID(CUIEllipsoidEvent.class, "pe", 4),
     MINMAX(CUIMinMaxEvent.class, "mm", 2),
     VERSION(CUIVersionEvent.class, "v", 1),
     UPDATE(CUIUpdateEvent.class, "u", 1);

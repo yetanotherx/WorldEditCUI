@@ -28,7 +28,7 @@ public class CUIListener implements Listener<CUIEvent> {
             
             //Get a CUIEventType enum value from the first section of the CUI message
             CUIEventType eventType = CUIEventType.getTypeFromKey(event.getType());
-            if (eventType == null) {
+            if (eventType == null || eventType.getEventClass() == null) {
                 event.markInvalid("Unknown CUIEvent identifier.");
             }
 
