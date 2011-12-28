@@ -42,7 +42,8 @@ public class RenderEllipsoid {
     }
 
     protected void drawXZPlane(LineInfo color) {
-        for (int yBlock = (int) -Math.floor(radii.getY()); yBlock < Math.floor(radii.getY()); yBlock++) {
+        int yRad = (int) Math.floor(radii.getY());
+        for (int yBlock = -yRad; yBlock < yRad; yBlock++) {
             obf.startDrawing(GL11.GL_LINE_LOOP);
             color.prepareColor();
 
@@ -70,7 +71,8 @@ public class RenderEllipsoid {
     }
 
     protected void drawYZPlane(LineInfo color) {
-        for (double xBlock = (int) -Math.floor(radii.getX()); xBlock < Math.floor(radii.getX()); xBlock++) {
+        int xRad = (int) Math.floor(radii.getX());
+        for (int xBlock = -xRad; xBlock < xRad; xBlock++) {
             obf.startDrawing(GL11.GL_LINE_LOOP);
             color.prepareColor();
 
@@ -98,7 +100,8 @@ public class RenderEllipsoid {
     }
 
     protected void drawXYPlane(LineInfo color) {
-        for (double zBlock = (int) -Math.floor(radii.getZ()); zBlock < Math.floor(radii.getZ()); zBlock++) {
+        int zRad = (int) Math.floor(radii.getZ());
+        for (int zBlock = -zRad; zBlock < zRad; zBlock++) {
             obf.startDrawing(GL11.GL_LINE_LOOP);
             color.prepareColor();
 
