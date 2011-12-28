@@ -33,6 +33,10 @@ public class RenderEllipsoid {
     }
 
     public void render() {
+        if( radii.getX() * radii.getY() * radii.getZ() == 0 ) {
+            return; //Any one of the radii is zero
+        }
+        
         for (LineInfo tempColor : color.getColors()) {
             tempColor.prepareRender();
             drawXZPlane(tempColor);
