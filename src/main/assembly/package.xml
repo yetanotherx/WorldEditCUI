@@ -28,7 +28,7 @@
         <file>
             <source>${project.build.directory}/classes/INSTALL.md</source>
             <outputDirectory>/</outputDirectory>
-            <destName>INSTALL</destName>
+            <destName>INSTALL.txt</destName>
         </file>
     </files>
 </assembly>
