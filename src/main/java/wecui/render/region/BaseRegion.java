@@ -37,7 +37,13 @@ public abstract class BaseRegion implements InitializationFactory {
     public void setEllipsoidRadii(double x, double y, double z) {
     }
 
-    public void setPolygonMinMax(int min, int max) {
+    public void setMinMax(int min, int max) {
+    }
+
+    public void setCylinderCenter(int x, int y, int z) {
+    }
+
+    public void setCylinderRadius(double radius) {
     }
 
     public abstract RegionType getType();

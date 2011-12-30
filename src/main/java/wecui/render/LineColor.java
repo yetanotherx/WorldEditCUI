@@ -17,13 +17,15 @@ public enum LineColor {
 
     CUBOIDGRID(0.8F, 0.2F, 0.2F),
     CUBOIDBOX(0.8F, 0.3F, 0.3F),
-    CUBOIDPOINT1(0.2F, 0.8F, 0.2F),
-    CUBOIDPOINT2(0.2F, 0.2F, 0.8F),
+    CUBOIDPOINT1(0.2F, 0.8F, 0.2F), //33CC33
+    CUBOIDPOINT2(0.2F, 0.2F, 0.8F), //3333CC
     POLYGRID(0.8F, 0.2F, 0.2F),
     POLYBOX(0.8F, 0.3F, 0.3F),
-    POLYPOINT(0.2F, 0.8F, 0.8F),
+    POLYPOINT(0.2F, 0.8F, 0.8F), //33CCCC
     ELLIPSOIDGRID(0.8F, 0.3F, 0.3F),
-    ELLIPSOIDCENTER(0.8F, 0.8F, 0.2F);
+    ELLIPSOIDCENTER(0.8F, 0.8F, 0.2F), //CCCC33
+    CYLINDERGRID(0.8F, 0.3F, 0.3F),
+    CYLINDERCENTER(0.8F, 0.2F, 0.8F); //CC33CC
     protected LineInfo normal;
     protected LineInfo hidden;
 

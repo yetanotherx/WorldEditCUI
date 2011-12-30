@@ -9,6 +9,7 @@ public enum RegionType {
     
     CUBOID,
     POLYGON,
-    ELLIPSOID
+    ELLIPSOID,
+    CYLINDER
     
 }

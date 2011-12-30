@@ -40,7 +40,7 @@ public class PolygonRegion extends BaseRegion {
     }
 
     @Override
-    public void setPolygonMinMax(int min, int max) {
+    public void setMinMax(int min, int max) {
         this.min = min;
         this.max = max;
     }
