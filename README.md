@@ -87,15 +87,11 @@ Development builds are run automatically, and should not be relied upon.
 Credits
 -------
 
- * [lahwran](https://github.com/lahwran) - Creator of the original WorldEdit CUI
+ * [lahwran](https://github.com/lahwran) - Creator of the original WorldEdit CUI!
  * [sk89q](http://sk89q.com) for writing the WorldEdit plugin!
- * [Bukkit](http://bukkit.org) for the useful ChatColor and Configuration classes!
- * [Apache Commons](http://commons.apache.org/) for various useful methods!
- * All the people behind [Maven](http://maven.apache.org) and
-   [Java](http://java.oracle.com).
- * [Notch](http://mojang.com/notch) and all the other people at
-   [Mojang](http://mojang.com) - for making such an awesome game in the first
-   place!
+ * TomyLobo and zml2008 for maintaining WorldEdit!
+ * [Apache Commons](http://commons.apache.org/) for the join() methods!
+ * [Mojang](http://mojang.com) - for making such an awesome game!
 
 
 Legal stuff

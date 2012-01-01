@@ -46,11 +46,11 @@ Installing the old-fashioned way
 --------------------------------
 
 WorldEditCUI can be installed the old fashioned way, by patching minecraft.jar.
-However, due to the WorldEdit dependency, it requires a bit more work. To install
+However, due to the configuration file, it requires a bit more work. To install
 using this method, do the following steps:
 
 1. Download WorldEditCUI and unzip it. Chances are you've already done that.
-2. In the WorldEditCUI-build/WorldEditCUI folder, copy the wecui/ folder and all
+2. In the WorldEditCUI-build/WorldEditCUI/ folder, copy the wecui/ folder and all
 of its contents into minecraft.jar. (If you don't know how to do this, there is
 a handy guide at http://bit.ly/v9Ymqz on how to install mods)
 3. In the WorldEditCUI-build folder, copy the WorldEditCUI folder and all its

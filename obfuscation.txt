@@ -14,17 +14,11 @@ renames:
   - notch: di
     wecui: EntityPlayerSP
     packageOnly: false
-  - notch: ct
-    wecui: GuiButton
-    packageOnly: false
   - notch: gx
     wecui: GuiChat
     packageOnly: false
   - notch: xe
     wecui: GuiScreen
-    packageOnly: false
-  - notch: abs
-    wecui: GuiSmallButton
     packageOnly: false
   - notch: aby
     wecui: KeyBinding
