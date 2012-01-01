@@ -28,6 +28,9 @@ import wecui.render.region.CuboidRegion;
  * TODO: Command transactions
  * TODO: Version checking
  * 
+ * BUG: Lighting
+ * BUG: Polys with SPC
+ * 
  * @author yetanotherx
  */
 public class WorldEditCUI {
@@ -79,9 +82,6 @@ public class WorldEditCUI {
         WorldEditCommandListener commListener = new WorldEditCommandListener(this);
         ChatCommandEvent.getHandlers("worldedit").register(commListener, Order.Default);
         ChatCommandEvent.getHandlers("we").register(commListener, Order.Default);
-        
-        //ChatCommandEvent.getHandlers("/preview").register(new PreviewCommandListener(this), Order.Default);
-        //ChatCommandEvent.getHandlers("/commit").register(new CommitCommandListener(this), Order.Default);
     }
 
     public CUIConfiguration getConfiguration() {

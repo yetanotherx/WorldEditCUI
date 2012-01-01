@@ -1,5 +1,6 @@
 package wecui.obfuscation;
 
+import deobf.RenderHelper;
 import deobf.Tessellator;
 
 /**
@@ -29,6 +30,14 @@ public class RenderObfuscation {
 
     public void finishDrawing() {
         tess.a();
+    }
+    
+    public static void disableLighting() {
+        RenderHelper.a();
+    }
+
+    public static void enableLighting() {
+        RenderHelper.b();
     }
 
     public static RenderObfuscation getInstance() {

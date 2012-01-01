@@ -36,7 +36,7 @@ public class RenderEntity extends Entity {
     @Override
     protected void b(NBTTagCompound arg0) {
     }
-
+    
     @Override
     public void a() {
         Obfuscation.setEntityPositionToPlayer(controller.getMinecraft(), this);

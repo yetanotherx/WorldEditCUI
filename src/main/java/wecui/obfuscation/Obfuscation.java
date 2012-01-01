@@ -7,7 +7,6 @@ import deobf.GuiScreen;
 import deobf.MCHash;
 import deobf.NetClientHandler;
 import deobf.Packet3Chat;
-import deobf.RenderHelper;
 import deobf.World;
 import java.io.File;
 import net.minecraft.client.Minecraft;
@@ -129,14 +128,6 @@ public class Obfuscation implements InitializationFactory {
 
     public static void setEntityPositionToPlayer(Minecraft mc, Entity entity) {
         entity.d(getPlayerX(mc.h), getPlayerY(mc.h), getPlayerZ(mc.h));
-    }
-
-    public static void disableLighting() {
-        RenderHelper.a();
-    }
-
-    public static void enableLighting() {
-        RenderHelper.b();
     }
 
     public NetClientHandler getNetClientHandler(EntityClientPlayerMP player) {
