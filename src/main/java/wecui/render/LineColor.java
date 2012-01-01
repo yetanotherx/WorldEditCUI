@@ -24,7 +24,8 @@ public enum LineColor {
     POLYPOINT(0.2F, 0.8F, 0.8F), //33CCCC
     ELLIPSOIDGRID(0.8F, 0.3F, 0.3F),
     ELLIPSOIDCENTER(0.8F, 0.8F, 0.2F), //CCCC33
-    CYLINDERGRID(0.8F, 0.3F, 0.3F),
+    CYLINDERGRID(0.8F, 0.2F, 0.2F),
+    CYLINDERBOX(0.8F, 0.3F, 0.3F),
     CYLINDERCENTER(0.8F, 0.2F, 0.8F); //CC33CC
     protected LineInfo normal;
     protected LineInfo hidden;
@@ -32,6 +33,10 @@ public enum LineColor {
     private LineColor(float r, float g, float b) {
         normal = new LineInfo(3.0f, r, g, b, 0.8f, GL11.GL_LESS);
         hidden = new LineInfo(3.0f, r, g, b, 0.2f, GL11.GL_GEQUAL);
+    }
+    
+    private LineColor(String hex) {
+        setColor(hex);
     }
 
     public LineInfo getHidden() {
@@ -44,5 +49,18 @@ public enum LineColor {
 
     public LineInfo[] getColors() {
         return new LineInfo[]{hidden, normal};
+    }
+
+    public void setColor(String hex) {
+        Integer r = Integer.parseInt(hex.substring(1, 3), 16);
+        Integer g = Integer.parseInt(hex.substring(3, 5), 16);
+        Integer b = Integer.parseInt(hex.substring(5, 7), 16);
+        
+        float rF = r.floatValue() / 256.0F;
+        float gF = g.floatValue() / 256.0F;
+        float bF = b.floatValue() / 256.0F;
+        
+        normal = new LineInfo(3.0f, rF, gF, bF, 0.8f, GL11.GL_LESS);
+        hidden = new LineInfo(3.0f, rF, gF, bF, 0.2f, GL11.GL_GEQUAL);
     }
 }

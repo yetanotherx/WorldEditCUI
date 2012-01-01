@@ -3,7 +3,9 @@ package wecui.render.region;
 import wecui.WorldEditCUI;
 import wecui.render.LineColor;
 import wecui.render.points.PointCube;
-import wecui.render.shapes.RenderCylinder;
+import wecui.render.shapes.RenderCylinderBox;
+import wecui.render.shapes.RenderCylinderCircles;
+import wecui.render.shapes.RenderCylinderGrid;
 
 /**
  * Main controller for a cylinder-type region
@@ -16,25 +18,29 @@ public class CylinderRegion extends BaseRegion {
     protected double radius = 0;
     protected int minY = 0;
     protected int maxY = 0;
-    
+
     public CylinderRegion(WorldEditCUI controller) {
         super(controller);
     }
 
     @Override
     public void render() {
-        if( center != null && radius != 0 ) {
+        if (center != null && radius != 0) {
             center.render();
-            
-            if( minY == 0 || maxY == 0 ) {
-                new RenderCylinder(LineColor.CYLINDERGRID, center, radius, center.getPoint().getY().intValue(), center.getPoint().getY().intValue()).render();
+
+            int tMin = minY;
+            int tMax = maxY;
+
+            if (minY == 0 || maxY == 0) {
+                tMin = center.getPoint().getY().intValue();
+                tMax = center.getPoint().getY().intValue();
             }
-            else {
-                new RenderCylinder(LineColor.CYLINDERGRID, center, radius, minY, maxY).render();
-            }
-            
-        }
-        else if( center != null ) {
+
+            new RenderCylinderCircles(LineColor.CYLINDERGRID, center, radius, tMin, tMax).render();
+            new RenderCylinderGrid(LineColor.CYLINDERGRID, center, radius, tMin, tMax).render();
+            new RenderCylinderBox(LineColor.CYLINDERBOX, center, radius, tMin, tMax).render();
+
+        } else if (center != null) {
             center.render();
         }
     }
@@ -60,5 +66,4 @@ public class CylinderRegion extends BaseRegion {
     public RegionType getType() {
         return RegionType.CYLINDER;
     }
-    
 }

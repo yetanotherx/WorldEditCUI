@@ -1,4 +1,4 @@
-package wecui.config;
+package wecui.exception;
 
 public class ConfigurationException extends Exception {
 
