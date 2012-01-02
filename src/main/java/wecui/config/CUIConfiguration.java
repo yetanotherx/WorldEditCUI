@@ -30,6 +30,7 @@ public class CUIConfiguration implements InitializationFactory {
     protected String cylinderGridColor = "#CC3333";
     protected String cylinderEdgeColor = "#CC4C4C";
     protected String cylinderPointColor = "#CC33CC";
+    protected String updateFile = "https://raw.github.com/yetanotherx/WorldEditCUI/master/updates.yml";
     protected Configuration config = null;
 
     public CUIConfiguration(WorldEditCUI controller) {
@@ -95,6 +96,7 @@ public class CUIConfiguration implements InitializationFactory {
         LineColor.CYLINDERBOX.setColor(this.cylinderEdgeColor);
         LineColor.CYLINDERCENTER.setColor(this.cylinderPointColor);
 
+        this.updateFile = config.getString("updateFile", this.updateFile);
     }
 
     protected String parseColor(String color, String def) {
@@ -123,5 +125,9 @@ public class CUIConfiguration implements InitializationFactory {
 
     public boolean isDebugMode() {
         return debugMode;
+    }
+
+    public String getUpdateFile() {
+        return updateFile;
     }
 }

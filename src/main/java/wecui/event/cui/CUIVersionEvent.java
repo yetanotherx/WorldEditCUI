@@ -16,7 +16,7 @@ public class CUIVersionEvent extends CUIBaseEvent {
     
     @Override
     public CUIEventType getEventType() {
-        return CUIEventType.VERSION;
+        return null;//CUIEventType.VERSION;
     }
     
     @Override

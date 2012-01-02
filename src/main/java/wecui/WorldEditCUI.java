@@ -26,7 +26,7 @@ import wecui.render.region.CuboidRegion;
  * TODO: Add MultiWorld support
  * TODO: Preview mode
  * TODO: Command transactions
- * TODO: Version checking
+ * TODO: Really nice ConfigNode
  * 
  * BUG: Lighting
  * BUG: Polys with SPC
@@ -35,7 +35,8 @@ import wecui.render.region.CuboidRegion;
  */
 public class WorldEditCUI {
 
-    public static final String VERSION = "1.1beta for Minecraft version 1.0";
+    public static final String VERSION = "1.1beta";
+    public static final String MCVERSION = "1.0";
     public static final int protocolVersion = 1;
     protected Minecraft minecraft;
     protected EventManager eventManager;
@@ -139,6 +140,10 @@ public class WorldEditCUI {
 
     public void setSelection(BaseRegion selection) {
         this.selection = selection;
+    }
+    
+    public static String getVersion() {
+        return VERSION + " for Minecraft version " + MCVERSION;
     }
 
 }

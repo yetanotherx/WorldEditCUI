@@ -22,7 +22,7 @@ public class VersionCommandEvent extends CommandEventBase {
 
     @Override
     public void run() {
-        this.controller.getObfuscation().showChatMessage(ChatColor.LIGHT_PURPLE + "WorldEditCUI version " + WorldEditCUI.VERSION);
+        this.controller.getObfuscation().showChatMessage(ChatColor.LIGHT_PURPLE + "WorldEditCUI version " + WorldEditCUI.getVersion());
     }
     
 }

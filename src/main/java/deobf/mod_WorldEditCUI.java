@@ -109,7 +109,7 @@ public class mod_WorldEditCUI extends BaseMod {
 
     @Override
     public String getVersion() {
-        return WorldEditCUI.VERSION;
+        return WorldEditCUI.getVersion();
     }
     
 }

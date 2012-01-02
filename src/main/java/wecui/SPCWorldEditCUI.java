@@ -20,7 +20,7 @@ public class SPCWorldEditCUI extends SPCPlugin {
     
     @Override
     public String getVersion() {
-        return WorldEditCUI.VERSION;
+        return WorldEditCUI.getVersion();
     }
 
     @Override

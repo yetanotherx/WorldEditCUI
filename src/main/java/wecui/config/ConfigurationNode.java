@@ -14,7 +14,7 @@ public class ConfigurationNode {
 
     protected Map<String, Object> root;
 
-    protected ConfigurationNode(Map<String, Object> root) {
+    public ConfigurationNode(Map<String, Object> root) {
         this.root = root;
     }
 
@@ -534,5 +534,13 @@ public class ConfigurationNode {
 
             node = (Map<String, Object>) o;
         }
+    }
+
+    public Map<String, Object> getRoot() {
+        return root;
+    }
+
+    public void setRoot(Map<String, Object> root) {
+        this.root = root;
     }
 }

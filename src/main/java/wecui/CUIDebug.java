@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import wecui.exception.InitializationException;
 import wecui.obfuscation.Obfuscation;
@@ -65,5 +66,9 @@ public class CUIDebug implements InitializationFactory {
 
     public void info(String message) {
         logger.info(message);
+    }
+    
+    public void info(String message, Throwable e) {
+        logger.log(Level.INFO, message, e);
     }
 }
