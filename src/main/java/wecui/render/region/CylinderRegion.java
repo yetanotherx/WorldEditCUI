@@ -15,7 +15,8 @@ import wecui.render.shapes.RenderCylinderGrid;
 public class CylinderRegion extends BaseRegion {
 
     protected PointCube center;
-    protected double radius = 0;
+    protected double radX = 0;
+    protected double radZ = 0;
     protected int minY = 0;
     protected int maxY = 0;
 
@@ -25,7 +26,7 @@ public class CylinderRegion extends BaseRegion {
 
     @Override
     public void render() {
-        if (center != null && radius != 0) {
+        if (center != null) {
             center.render();
 
             int tMin = minY;
@@ -36,12 +37,10 @@ public class CylinderRegion extends BaseRegion {
                 tMax = center.getPoint().getY().intValue();
             }
 
-            new RenderCylinderCircles(LineColor.CYLINDERGRID, center, radius, tMin, tMax).render();
-            new RenderCylinderGrid(LineColor.CYLINDERGRID, center, radius, tMin, tMax).render();
-            new RenderCylinderBox(LineColor.CYLINDERBOX, center, radius, tMin, tMax).render();
+            new RenderCylinderCircles(LineColor.CYLINDERGRID, center, radX, radZ, tMin, tMax).render();
+            new RenderCylinderGrid(LineColor.CYLINDERGRID, center, radX, radZ, tMin, tMax).render();
+            new RenderCylinderBox(LineColor.CYLINDERBOX, center, radX, radZ, tMin, tMax).render();
 
-        } else if (center != null) {
-            center.render();
         }
     }
 
@@ -52,8 +51,9 @@ public class CylinderRegion extends BaseRegion {
     }
 
     @Override
-    public void setCylinderRadius(double radius) {
-        this.radius = radius;
+    public void setCylinderRadius(double x, double z) {
+        this.radX = x;
+        this.radZ = z;
     }
 
     @Override

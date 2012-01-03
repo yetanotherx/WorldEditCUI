@@ -26,6 +26,16 @@
             <artifactId>snakeyaml</artifactId>
             <version>1.9</version>
         </dependency>
+        <dependency>
+            <groupId>com.yetanotherx</groupId>
+            <artifactId>SPCInterfaces</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.yetanotherx</groupId>
+            <artifactId>MapNode</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
     <properties>
         <WEVersion>5.1-SNAPSHOT</WEVersion>
@@ -38,6 +48,10 @@
         <repository>
             <id>bukkit-repo</id>
             <url>http://repo.bukkit.org/artifactory/repo</url>
+        </repository>
+        <repository>
+            <id>mcbouncer-repo</id>
+            <url>http://maven.mcbouncer.com/archiva/repository/internal/</url>
         </repository>
     </repositories>
     <build>
@@ -69,6 +83,11 @@
                                     <groupId>org.yaml</groupId>
                                     <artifactId>snakeyaml</artifactId>
                                     <version>1.9</version>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.yetanotherx</groupId>
+                                    <artifactId>MapNode</artifactId>
+                                    <version>1.0</version>
                                 </artifactItem>
                             </artifactItems>
                         </configuration>

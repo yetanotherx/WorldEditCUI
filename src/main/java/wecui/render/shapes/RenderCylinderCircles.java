@@ -14,16 +14,18 @@ import wecui.render.points.PointCube;
 public class RenderCylinderCircles {
 
     protected LineColor color;
-    protected double radius;
+    protected double radX = 0;
+    protected double radZ = 0;
     protected int minY;
     protected int maxY;
     protected RenderObfuscation obf = RenderObfuscation.getInstance();
     protected double centerX;
     protected double centerZ;
 
-    public RenderCylinderCircles(LineColor color, PointCube center, double radius, int minY, int maxY) {
+    public RenderCylinderCircles(LineColor color, PointCube center, double radX, double radZ, int minY, int maxY) {
         this.color = color;
-        this.radius = radius;
+        this.radX = radX;
+        this.radZ = radZ;
         this.minY = minY;
         this.maxY = maxY;
         this.centerX = center.getPoint().getX() + 0.5;
@@ -41,8 +43,8 @@ public class RenderCylinderCircles {
 
                 for (int i = 0; i <= 75; i++) {
                     double tempTheta = i * twoPi / 75;
-                    double tempX = radius * Math.cos(tempTheta);
-                    double tempZ = radius * Math.sin(tempTheta);
+                    double tempX = radX * Math.cos(tempTheta);
+                    double tempZ = radZ * Math.sin(tempTheta);
 
                     obf.addVertex(centerX + tempX, yBlock, centerZ + tempZ);
                 }

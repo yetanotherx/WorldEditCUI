@@ -3,7 +3,7 @@ package wecui.event.cui;
 import wecui.WorldEditCUI;
 
 /**
- * Called when ellipsoid event is received
+ * Called when cylinder event is received
  * 
  * @author lahwran
  * @author yetanotherx
@@ -25,10 +25,11 @@ public class CUICylinderEvent extends CUIBaseEvent {
         int x = this.getInt(0);
         int y = this.getInt(1);
         int z = this.getInt(2);
-        double radius = this.getDouble(3);
+        double radX = this.getDouble(3);
+        double radZ = this.getDouble(4);
         
         controller.getSelection().setCylinderCenter(x, y, z);
-        controller.getSelection().setCylinderRadius(radius);
+        controller.getSelection().setCylinderRadius(radX, radZ);
 
         controller.getDebugger().debug("Setting center/radius");
 

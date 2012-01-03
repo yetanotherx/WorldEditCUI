@@ -43,7 +43,7 @@ public abstract class BaseRegion implements InitializationFactory {
     public void setCylinderCenter(int x, int y, int z) {
     }
 
-    public void setCylinderRadius(double radius) {
+    public void setCylinderRadius(double x, double z) {
     }
 
     public abstract RegionType getType();

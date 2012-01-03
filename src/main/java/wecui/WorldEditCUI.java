@@ -1,8 +1,8 @@
 package wecui;
 
+import net.minecraft.client.Minecraft;
 import wecui.config.CUIConfiguration;
 import wecui.plugin.LocalPlugin;
-import net.minecraft.client.Minecraft;
 import wecui.event.CUIEvent;
 import wecui.event.ChatCommandEvent;
 import wecui.event.listeners.CUIListener;
@@ -26,7 +26,6 @@ import wecui.render.region.CuboidRegion;
  * TODO: Add MultiWorld support
  * TODO: Preview mode
  * TODO: Command transactions
- * TODO: Really nice ConfigNode
  * 
  * BUG: Lighting
  * BUG: Polys with SPC
@@ -50,7 +49,6 @@ public class WorldEditCUI {
         this.minecraft = minecraft;
     }
 
-    @SuppressWarnings("unchecked")
     public void initialize() {
         this.eventManager = new EventManager(this);
         this.obfuscation = new Obfuscation(this);
@@ -141,9 +139,8 @@ public class WorldEditCUI {
     public void setSelection(BaseRegion selection) {
         this.selection = selection;
     }
-    
+
     public static String getVersion() {
         return VERSION + " for Minecraft version " + MCVERSION;
     }
-
 }

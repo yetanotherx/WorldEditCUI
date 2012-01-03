@@ -4,7 +4,6 @@ import org.lwjgl.opengl.GL11;
 import wecui.obfuscation.RenderObfuscation;
 import wecui.render.LineColor;
 import wecui.render.LineInfo;
-import wecui.render.points.PointContainer;
 import wecui.render.points.PointCube;
 
 /**
@@ -15,16 +14,18 @@ import wecui.render.points.PointCube;
 public class RenderCylinderGrid {
 
     protected LineColor color;
-    protected double radius;
+    protected double radX = 0;
+    protected double radZ = 0;
     protected int minY;
     protected int maxY;
     protected RenderObfuscation obf = RenderObfuscation.getInstance();
     protected double centerX;
     protected double centerZ;
 
-    public RenderCylinderGrid(LineColor color, PointCube center, double radius, int minY, int maxY) {
+    public RenderCylinderGrid(LineColor color, PointCube center, double radX, double radZ, int minY, int maxY) {
         this.color = color;
-        this.radius = radius;
+        this.radX = radX;
+        this.radZ = radZ;
         this.minY = minY;
         this.maxY = maxY;
         this.centerX = center.getPoint().getX() + 0.5;
@@ -37,11 +38,13 @@ public class RenderCylinderGrid {
 
             int tmaxY = maxY + 1;
             int tminY = minY;
-            int posRadius = (int) Math.ceil(radius);
-            int negRadius = (int) -Math.ceil(radius);
+            int posRadiusX = (int) Math.ceil(radX);
+            int negRadiusX = (int) -Math.ceil(radX);
+            int posRadiusZ = (int) Math.ceil(radZ);
+            int negRadiusZ = (int) -Math.ceil(radZ);
 
-            for (double tempX = negRadius; tempX <= posRadius; ++tempX) {
-                double tempZ = radius * Math.cos(Math.asin(tempX / radius));
+            for (double tempX = negRadiusX; tempX <= posRadiusX; ++tempX) {
+                double tempZ = radZ * Math.cos(Math.asin(tempX / radX));
                 obf.startDrawing(GL11.GL_LINE_LOOP);
                 tempColor.prepareColor();
 
@@ -53,8 +56,8 @@ public class RenderCylinderGrid {
                 obf.finishDrawing();
             }
 
-            for (double tempZ = negRadius; tempZ <= posRadius; ++tempZ) {
-                double tempX = radius * Math.sin(Math.acos(tempZ / radius));
+            for (double tempZ = negRadiusZ; tempZ <= posRadiusZ; ++tempZ) {
+                double tempX = radX * Math.sin(Math.acos(tempZ / radZ));
                 obf.startDrawing(GL11.GL_LINE_LOOP);
                 tempColor.prepareColor();
 

@@ -29,30 +29,23 @@ Afterwards, run the following code:
 
 This will install minecraft.jar into the maven repository.
 
-2) Clone lahwran's renamer-maven-plugin repository (http://bit.ly/u9Most) to
-any location on your drive, and run the following code:
-
-    mvn clean install
-
-This will install the WorldEditCUI obfuscation/deobfuscation program.
-
-3) Go back to the WorldEditCUI root folder, and run the following code:
+2) Go back to the WorldEditCUI root folder, and run the following code:
 
     mvn -f deobf.xml clean install
 
 This will create a new minecraft jar in your repository with some renamed
 classes, to aid in development. 
 
-4) Finally, run the following code to build WorldEditCUI:
+3) Finally, run the following code to build WorldEditCUI:
 
     mvn clean install
     
 This will build the classes, and reobfuscate them to Minecraft's default
 class naming scheme. 
 
-After you have done steps 1 and 2, you do not need to do these again unless
+After you have done steps 1, you do not need to do this again unless
 Minecraft updates, which means that a new version needs to be added to the
-local repository. Step 3 only needs to be run if obfuscation.txt is changed.
+local repository. Step 2 only needs to be run if obfuscation.txt is changed.
 
 
 Contributing
