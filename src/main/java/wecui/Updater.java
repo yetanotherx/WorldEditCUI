@@ -7,12 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
-import org.yaml.snakeyaml.constructor.SafeConstructor;
 import org.yaml.snakeyaml.reader.UnicodeReader;
 import wecui.config.ConfigurationNode;
-import wecui.config.EmptyNullRepresenter;
 import wecui.exception.ConfigurationException;
 import wecui.util.ChatColor;
 
@@ -36,7 +33,7 @@ public class Updater extends Thread {
             url.openConnection();
             is = url.openStream();
 
-            Yaml yaml = new Yaml(new SafeConstructor(), new EmptyNullRepresenter(), new DumperOptions());
+            Yaml yaml = new Yaml();
             Object out = yaml.load(new UnicodeReader(is));
 
             try {

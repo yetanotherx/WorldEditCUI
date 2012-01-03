@@ -15,7 +15,6 @@ public enum CUIEventType {
     ELLIPSOID(CUIEllipsoidEvent.class, "e", 4),
     CYLINDER(CUICylinderEvent.class, "cyl", 5),
     MINMAX(CUIMinMaxEvent.class, "mm", 2),
-    //VERSION(CUIVersionEvent.class, "v", 1),
     UPDATE(CUIUpdateEvent.class, "u", 1);
     
     private final Class<? extends CUIBaseEvent> eventClass;

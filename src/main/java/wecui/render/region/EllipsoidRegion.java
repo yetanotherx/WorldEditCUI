@@ -24,9 +24,7 @@ public class EllipsoidRegion extends BaseRegion {
     @Override
     public void render() {
         if( center != null && radii != null ) {
-            if( radii.getX() != 0 && radii.getY() != 0 || radii.getZ() != 0 ) {
-                center.render();
-            }
+            center.render();
             
             new RenderEllipsoid(LineColor.ELLIPSOIDGRID, center, radii).render();
             
