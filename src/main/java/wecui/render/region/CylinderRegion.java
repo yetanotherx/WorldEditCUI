@@ -33,8 +33,8 @@ public class CylinderRegion extends BaseRegion {
             int tMax = maxY;
 
             if (minY == 0 || maxY == 0) {
-                tMin = center.getPoint().getY().intValue();
-                tMax = center.getPoint().getY().intValue();
+                tMin = (int) center.getPoint().getY();
+                tMax = (int) center.getPoint().getY();
             }
 
             new RenderCylinderCircles(LineColor.CYLINDERGRID, center, radX, radZ, tMin, tMax).render();

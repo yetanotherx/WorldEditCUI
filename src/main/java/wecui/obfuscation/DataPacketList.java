@@ -22,7 +22,7 @@ import wecui.event.ChatEvent;
  */
 public class DataPacketList<T> extends ArrayList<T> {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 275687258276L;
     protected WorldEditCUI controller;
     protected Class<T> typeClass;
 

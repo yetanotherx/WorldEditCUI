@@ -1,7 +1,7 @@
 renames: 
   - notch: 
     wecui: deobf
-  - notch: wecui.com.sk89q.\1
-    wecui: com.sk89q.(.*)
-  - notch: wecui.org.yaml.\1
-    wecui: org.yaml.(.*)
+  - notch: wecui.com.\1
+    wecui: com.(.*)
+  - notch: wecui.org.\1
+    wecui: org.(.*)

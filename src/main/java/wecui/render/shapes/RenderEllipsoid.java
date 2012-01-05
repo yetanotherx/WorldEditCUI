@@ -4,8 +4,8 @@ import org.lwjgl.opengl.GL11;
 import wecui.obfuscation.RenderObfuscation;
 import wecui.render.LineColor;
 import wecui.render.LineInfo;
-import wecui.render.points.PointContainer;
 import wecui.render.points.PointCube;
+import wecui.util.Vector3;
 
 /**
  * Draws an ellipsoid shape around a center point.
@@ -16,14 +16,14 @@ public class RenderEllipsoid {
 
     protected LineColor color;
     protected PointCube center;
-    protected PointContainer radii;
+    protected Vector3 radii;
     protected RenderObfuscation obf = RenderObfuscation.getInstance();
     protected final static double twoPi = Math.PI * 2;
     protected double centerX;
     protected double centerY;
     protected double centerZ;
 
-    public RenderEllipsoid(LineColor color, PointCube center, PointContainer radii) {
+    public RenderEllipsoid(LineColor color, PointCube center, Vector3 radii) {
         this.color = color;
         this.center = center;
         this.radii = radii;

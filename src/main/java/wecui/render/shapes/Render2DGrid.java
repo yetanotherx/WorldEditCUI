@@ -43,7 +43,7 @@ public class Render2DGrid {
             tempColor.prepareColor();
             for (PointRectangle point : points) {
                 if (point != null) {
-                    obf.addVertex(point.getPoint().getX() + 0.5, height, point.getPoint().getZ() + 0.5);
+                    obf.addVertex(point.getPoint().getX() + 0.5, height, point.getPoint().getY() + 0.5);
                 }
             }
             obf.finishDrawing();

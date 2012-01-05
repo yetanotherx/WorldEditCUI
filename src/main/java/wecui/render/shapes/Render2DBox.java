@@ -39,8 +39,8 @@ public class Render2DBox {
 
             for (PointRectangle point : points) {
                 if (point != null) {
-                    obf.addVertex(point.getPoint().getX() + 0.5, min + off, point.getPoint().getZ() + 0.5);
-                    obf.addVertex(point.getPoint().getX() + 0.5, max + 1 + off, point.getPoint().getZ() + 0.5);
+                    obf.addVertex(point.getPoint().getX() + 0.5, min + off, point.getPoint().getY() + 0.5);
+                    obf.addVertex(point.getPoint().getX() + 0.5, max + 1 + off, point.getPoint().getY() + 0.5);
                 }
             }
             obf.finishDrawing();

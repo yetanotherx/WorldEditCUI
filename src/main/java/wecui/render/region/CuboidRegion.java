@@ -3,9 +3,10 @@ package wecui.render.region;
 import wecui.WorldEditCUI;
 import wecui.render.LineColor;
 import wecui.render.shapes.Render3DBox;
-import wecui.render.points.PointContainer;
 import wecui.render.points.PointCube;
 import wecui.render.shapes.Render3DGrid;
+import wecui.util.Vector3;
+import wecui.util.Vector3m;
 
 /**
  * Main controller for a cuboid-type region
@@ -28,7 +29,7 @@ public class CuboidRegion extends BaseRegion {
             firstPoint.render();
             secondPoint.render();
 
-            PointContainer[] bounds = this.calcBounds();
+            Vector3[] bounds = this.calcBounds();
             new Render3DBox(LineColor.CUBOIDBOX, bounds[0], bounds[1]).render();
             new Render3DGrid(LineColor.CUBOIDGRID, bounds[0], bounds[1]).render();
 
@@ -50,13 +51,13 @@ public class CuboidRegion extends BaseRegion {
         }
     }
 
-    protected PointContainer[] calcBounds() {
-        double off = 0.02;
-        double off1 = 1 + off;
+    protected Vector3m[] calcBounds() {
+        float off = 0.02f;
+        float off1 = 1 + off;
 
-        PointContainer[] out = new PointContainer[2];
-        out[0] = new PointContainer(Double.MAX_VALUE, Double.MAX_VALUE, Double.MAX_VALUE);
-        out[1] = new PointContainer(-Double.MAX_VALUE, -Double.MAX_VALUE, -Double.MAX_VALUE);
+        Vector3m[] out = new Vector3m[2];
+        out[0] = new Vector3m(Double.MAX_VALUE, Double.MAX_VALUE, Double.MAX_VALUE);
+        out[1] = new Vector3m(-Double.MAX_VALUE, -Double.MAX_VALUE, -Double.MAX_VALUE);
 
         for (PointCube point : new PointCube[]{firstPoint, secondPoint}) {
             if (point.getPoint().getX() + off1 > out[1].getX()) {

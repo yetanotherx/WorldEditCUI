@@ -76,7 +76,7 @@ public class mod_WorldEditCUI extends BaseMod {
                     //so only set the plugin if it doesn't throw an exception.
                     Class.forName("SPCPlugin");
                     
-                    Field field = SPCPluginManager.getPluginManager().getClass().getField("plugins");
+                    Field field = Class.forName("SPCPluginManager").getField("plugins");
                     ((Vector) field.get(SPCPluginManager.getPluginManager())).add(new SPCWorldEditCUI(controller));
                     
                     controller.getLocalPlugin().onVersionEvent("");

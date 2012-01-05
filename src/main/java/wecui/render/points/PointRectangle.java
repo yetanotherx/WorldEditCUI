@@ -2,6 +2,7 @@ package wecui.render.points;
 
 import wecui.render.LineColor;
 import wecui.render.shapes.Render3DBox;
+import wecui.util.Vector2;
 
 /**
  * Stores data about a prism surrounding two
@@ -14,30 +15,30 @@ import wecui.render.shapes.Render3DBox;
  */
 public class PointRectangle {
 
-    protected PointContainer point;
+    protected Vector2 point;
     protected LineColor color = LineColor.POLYPOINT;
 
-    public PointRectangle(PointContainer point) {
+    public PointRectangle(Vector2 point) {
         this.point = point;
     }
 
     public PointRectangle(int x, int z) {
-        this.point = new PointContainer(x, 0, z);
+        this.point = new Vector2(x, z);
     }
 
     public void render(int min, int max) {
-        double off = 0.03f;
-        double x = point.getX();
-        double z = point.getZ();
+        float off = 0.03f;
+        Vector2 minVec = new Vector2(off, off);
+        Vector2 maxVec = new Vector2(off + 1, off + 1);
 
-        new Render3DBox(color, new PointContainer(x - off, min - off, z - off), new PointContainer(x + 1 + off, max + 1 + off, z + 1 + off)).render();
+        new Render3DBox(color, point.subtract(minVec).toVector3(min - off), point.add(maxVec).toVector3(max + 1 + off)).render();
     }
 
-    public PointContainer getPoint() {
+    public Vector2 getPoint() {
         return point;
     }
 
-    public void setPoint(PointContainer point) {
+    public void setPoint(Vector2 point) {
         this.point = point;
     }
 

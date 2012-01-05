@@ -4,7 +4,7 @@ import org.lwjgl.opengl.GL11;
 import wecui.obfuscation.RenderObfuscation;
 import wecui.render.LineColor;
 import wecui.render.LineInfo;
-import wecui.render.points.PointContainer;
+import wecui.util.Vector3;
 
 /**
  * Draws the grid for a region between
@@ -16,10 +16,10 @@ public class Render3DGrid {
 
     protected RenderObfuscation obf = RenderObfuscation.getInstance();
     protected LineColor color;
-    protected PointContainer first;
-    protected PointContainer second;
+    protected Vector3 first;
+    protected Vector3 second;
 
-    public Render3DGrid(LineColor color, PointContainer first, PointContainer second) {
+    public Render3DGrid(LineColor color, Vector3 first, Vector3 second) {
         this.color = color;
         this.first = first;
         this.second = second;

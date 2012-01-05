@@ -2,6 +2,7 @@ package wecui.render.points;
 
 import wecui.render.LineColor;
 import wecui.render.shapes.Render3DBox;
+import wecui.util.Vector3;
 
 /**
  * Stores data about a cube surrounding a
@@ -14,31 +15,34 @@ import wecui.render.shapes.Render3DBox;
  */
 public class PointCube {
 
-    protected PointContainer point;
+    protected Vector3 point;
     protected LineColor color = LineColor.CUBOIDPOINT1;
 
-    public PointCube(PointContainer point) {
+    public PointCube(Vector3 point) {
         this.point = point;
     }
 
     public PointCube(int x, int y, int z) {
-        this.point = new PointContainer(x, y, z);
+        this.point = new Vector3(x, y, z);
+    }
+    
+    public PointCube(double x, double y, double z) {
+        this.point = new Vector3(x, y, z);
     }
 
     public void render() {
         double off = 0.03f;
-        double x = point.getX();
-        double y = point.getY();
-        double z = point.getZ();
+        Vector3 minVec = new Vector3(off, off, off);
+        Vector3 maxVec = new Vector3(off + 1, off + 1, off + 1);
 
-        new Render3DBox(color, new PointContainer(x - off, y - off, z - off), new PointContainer(x + 1 + off, y + 1 + off, z + 1 + off)).render();
+        new Render3DBox(color, point.subtract(minVec), point.add(maxVec)).render();
     }
 
-    public PointContainer getPoint() {
+    public Vector3 getPoint() {
         return point;
     }
 
-    public void setPoint(PointContainer point) {
+    public void setPoint(Vector3 point) {
         this.point = point;
     }
 
