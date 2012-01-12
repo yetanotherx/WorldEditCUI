@@ -21,7 +21,7 @@ public class RenderEntity extends Entity {
     public RenderEntity(WorldEditCUI controller, World world) {
         super(world);
         this.controller = controller;
-        ao = true; // ignoreFrustumCheck \o/
+        ak = true; // ignoreFrustumCheck \o/
         controller.getDebugger().debug("Entity spawned");
     }
 
@@ -38,11 +38,11 @@ public class RenderEntity extends Entity {
     }
     
     @Override
-    public void a() {
+    public void B_() {
         Obfuscation.setEntityPositionToPlayer(controller.getMinecraft(), this);
     }
 
     @Override
-    public void v() {
+    public void B() {
     }
 }

@@ -66,17 +66,17 @@ public class Obfuscation implements InitializationFactory {
 
     public double getPlayerXGuess(float renderTick) {
         EntityPlayerSP plyr = getPlayer();
-        return plyr.p + ((plyr.s - plyr.p) * renderTick);
+        return plyr.l + ((plyr.o - plyr.l) * renderTick);
     }
 
     public double getPlayerYGuess(float renderTick) {
         EntityPlayerSP plyr = getPlayer();
-        return plyr.q + ((plyr.t - plyr.q) * renderTick);
+        return plyr.m + ((plyr.p - plyr.m) * renderTick);
     }
 
     public double getPlayerZGuess(float renderTick) {
         EntityPlayerSP plyr = getPlayer();
-        return plyr.r + ((plyr.u - plyr.r) * renderTick);
+        return plyr.n + ((plyr.q - plyr.n) * renderTick);
     }
 
     public EntityPlayerSP getPlayer() {
@@ -103,15 +103,15 @@ public class Obfuscation implements InitializationFactory {
     }
 
     public static double getPlayerX(EntityPlayerSP player) {
-        return player.s;
+        return player.o;
     }
 
     public static double getPlayerY(EntityPlayerSP player) {
-        return player.t;
+        return player.p;
     }
 
     public static double getPlayerZ(EntityPlayerSP player) {
-        return player.u;
+        return player.q;
     }
 
     public static EntityPlayerSP getPlayer(Minecraft mc) {
@@ -131,7 +131,7 @@ public class Obfuscation implements InitializationFactory {
     }
 
     public NetClientHandler getNetClientHandler(EntityClientPlayerMP player) {
-        return player.a;
+        return player.cl;
     }
 
     public static String getChatFromPacket(Packet3Chat packet) {

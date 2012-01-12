@@ -9,7 +9,7 @@ package wecui.obfuscation;
  * 
  * @obfuscated
  */
-public enum MethodObfuscation {
+public enum FieldObfuscation {
 
     /**
      * Location of the .minecraft directory in Minecraft.class
@@ -26,14 +26,14 @@ public enum MethodObfuscation {
     /**
      * ID->Class hashmap for packets in Packet.class
      */
-    IDSTOCLASSES("j"),
+    IDSTOCLASSES("k"),
     /**
      * Class->ID hashmap for packets in Packet.class
      */
     CLASSESTOIDS("a");
     protected String variable;
 
-    private MethodObfuscation(String variable) {
+    private FieldObfuscation(String variable) {
         this.variable = variable;
     }
 
@@ -41,7 +41,7 @@ public enum MethodObfuscation {
         return variable;
     }
 
-    public static String getVariable(MethodObfuscation type) {
+    public static String getVariable(FieldObfuscation type) {
         return type.getVariable();
     }
 }

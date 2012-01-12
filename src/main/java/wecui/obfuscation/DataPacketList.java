@@ -83,11 +83,11 @@ public class DataPacketList<T> extends ArrayList<T> {
         try {
             NetClientHandler nch = obf.getNetClientHandler(player);
 
-            Field nmField = NetClientHandler.class.getDeclaredField(MethodObfuscation.NETWORKMANAGER.getVariable());
+            Field nmField = NetClientHandler.class.getDeclaredField(FieldObfuscation.NETWORKMANAGER.getVariable());
             nmField.setAccessible(true);
             NetworkManager nm = (NetworkManager) nmField.get(nch);
 
-            Field listField = NetworkManager.class.getDeclaredField(MethodObfuscation.PACKETLIST.getVariable());
+            Field listField = NetworkManager.class.getDeclaredField(FieldObfuscation.PACKETLIST.getVariable());
             listField.setAccessible(true);
             List oldPacketList = (List) listField.get(nm);
             for (Object item : oldPacketList) {

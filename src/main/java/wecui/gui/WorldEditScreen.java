@@ -32,7 +32,7 @@ public class WorldEditScreen extends GuiChat {
                 
                 if (commands.containsKey(command.substring(1))) {
                     drawRect(2, this.getScreenHeight() - 28, this.getScreenWidth() - 14, this.getScreenHeight() - 14, 0x80000000);
-                    drawString("  " + command + " " + commands.get(command.substring(1)), 4, this.n - 24, 0xe0e0e0);
+                    drawString("  " + command + " " + commands.get(command.substring(1)), 4, this.getScreenHeight() - 24, 0xe0e0e0);
                 }
 
             }
@@ -49,15 +49,15 @@ public class WorldEditScreen extends GuiChat {
     }
 
     protected int getScreenHeight() {
-        return this.n;
+        return this.r;
     }
 
     protected int getScreenWidth() {
-        return this.m;
+        return this.q;
     }
 
     protected void drawString(String string, int x, int y, int color) {
-        this.b(this.q, string, x, y, color);
+        this.b(this.u, string, x, y, color);
     }
 
     protected void drawRect(int x1, int y1, int x2, int y2, int color) {

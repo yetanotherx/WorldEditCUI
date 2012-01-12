@@ -34,8 +34,8 @@ import wecui.render.region.CuboidRegion;
  */
 public class WorldEditCUI {
 
-    public static final String VERSION = "1.1beta";
-    public static final String MCVERSION = "1.0";
+    public static final String VERSION = "1.1";
+    public static final String MCVERSION = "1.1";
     public static final int protocolVersion = 1;
     protected Minecraft minecraft;
     protected EventManager eventManager;
