@@ -1,6 +1,5 @@
 package deobf;
 
-import java.lang.reflect.Field;
 import wecui.WorldEditCUI;
 import wecui.render.RenderEntity;
 import wecui.render.RenderHooks;
@@ -13,6 +12,7 @@ import wecui.SPCWorldEditCUI;
 import wecui.gui.WorldEditScreen;
 import wecui.obfuscation.DataPacketList;
 import wecui.obfuscation.Obfuscation;
+import wecui.vendor.org.joor.Reflect;
 
 /**
  * Main ModLoader class. Initializes the mod, enabling CUI communication 
@@ -76,8 +76,8 @@ public class mod_WorldEditCUI extends BaseMod {
                     //so only set the plugin if it doesn't throw an exception.
                     Class.forName("SPCPlugin");
                     
-                    Field field = Class.forName("SPCPluginManager").getField("plugins");
-                    ((Vector) field.get(SPCPluginManager.getPluginManager())).add(new SPCWorldEditCUI(controller));
+                    Vector pluginList = (Vector) Reflect.on("SPCPluginManager").get("plugins");
+                    pluginList.add(new SPCWorldEditCUI(controller));
                     
                     controller.getLocalPlugin().onVersionEvent("");
                 } catch (Exception e) {

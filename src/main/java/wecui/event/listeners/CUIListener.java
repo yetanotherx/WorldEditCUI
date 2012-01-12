@@ -1,12 +1,12 @@
 package wecui.event.listeners;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
+import wecui.vendor.org.joor.Reflect;
 import wecui.fevents.Listener;
 import wecui.WorldEditCUI;
 import wecui.event.CUIEvent;
 import wecui.event.cui.CUIBaseEvent;
 import wecui.event.cui.CUIEventType;
+import wecui.vendor.org.joor.ReflectException;
 
 /**
  * Listener class for CUIEvent
@@ -24,19 +24,15 @@ public class CUIListener implements Listener<CUIEvent> {
     }
 
     public void onEvent(CUIEvent event) {
-        try {
-            
-            //Get a CUIEventType enum value from the first section of the CUI message
-            CUIEventType eventType = CUIEventType.getTypeFromKey(event.getType());
-            if (eventType == null || eventType.getEventClass() == null) {
-                event.markInvalid("Unknown CUIEvent identifier.");
-            }
 
-            Constructor[] constructors = eventType.getEventClass().getDeclaredConstructors();
-            if (constructors == null || constructors.length == 0) {
-                return;
-            }
-            CUIBaseEvent newEvent = (CUIBaseEvent) constructors[0].newInstance(this.controller, event.getParams());
+        //Get a CUIEventType enum value from the first section of the CUI message
+        CUIEventType eventType = CUIEventType.getTypeFromKey(event.getType());
+        if (eventType == null || eventType.getEventClass() == null) {
+            event.markInvalid("Unknown CUIEvent identifier.");
+        }
+
+        try {
+            CUIBaseEvent newEvent = Reflect.on(eventType.getEventClass()).create(this.controller, event.getParams()).get();
 
             //Run the event. If doRun returns null, the event was successful. 
             //If it returns a string, it uses that as the error message.
@@ -46,11 +42,8 @@ public class CUIListener implements Listener<CUIEvent> {
             } else {
                 event.setHandled(true);
             }
-
-        } catch (InstantiationException ex) {
-        } catch (IllegalAccessException ex) {
-        } catch (IllegalArgumentException ex) {
-        } catch (InvocationTargetException ex) {
+        } catch (ReflectException e) {
+            return;
         }
     }
 }
