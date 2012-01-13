@@ -54,6 +54,12 @@
             <url>http://maven.mcbouncer.com/archiva/repository/internal/</url>
         </repository>
     </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>mcbouncer-repo</id>
+            <url>http://maven.mcbouncer.com/archiva/repository/internal/</url>
+        </pluginRepository>
+    </pluginRepositories>
     <build>
         <finalName>WorldEditCUI</finalName>
         <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
