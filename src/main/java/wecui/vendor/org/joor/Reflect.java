@@ -173,6 +173,9 @@ public class Reflect {
     public Reflect set(String name, Object value) throws ReflectException {
         try {
             Field field = type().getField(name);
+            if( !field.isAccessible() ) {
+                field.setAccessible(true);
+            }
             field.set(object, unwrap(value));
             return this;
         }
@@ -216,6 +219,9 @@ public class Reflect {
     public Reflect field(String name) throws ReflectException {
         try {
             Field field = type().getField(name);
+            if( !field.isAccessible() ) {
+                field.setAccessible(true);
+            }
             return on(field.get(object));
         }
         catch (Exception e) {
