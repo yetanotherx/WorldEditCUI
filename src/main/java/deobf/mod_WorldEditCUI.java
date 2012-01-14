@@ -76,11 +76,11 @@ public class mod_WorldEditCUI extends BaseMod {
                     //so only set the plugin if it doesn't throw an exception.
                     Class.forName("SPCPlugin");
                     
-                    Vector pluginList = (Vector) Reflect.on("SPCPluginManager").get("plugins");
+                    Vector pluginList = (Vector) Reflect.on(SPCPluginManager.getPluginManager()).get("plugins");
                     pluginList.add(new SPCWorldEditCUI(controller));
                     
                     controller.getLocalPlugin().onVersionEvent("");
-                } catch (Exception e) {
+                } catch (ClassNotFoundException e) {
                     controller.getDebugger().debug("SinglePlayerCommands not found, not worrying about the spc_WorldEditCUI class.");
                 }
             }

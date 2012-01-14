@@ -26,7 +26,6 @@ import wecui.render.region.CuboidRegion;
  * TODO: Add MultiWorld support
  * TODO: Preview mode
  * TODO: Command transactions
- * TODO: Accessible methods
  * 
  * BUG: Lighting
  * BUG: Polys with SPC
@@ -35,7 +34,7 @@ import wecui.render.region.CuboidRegion;
  */
 public class WorldEditCUI {
 
-    public static final String VERSION = "1.1";
+    public static final String VERSION = "1.1a";
     public static final String MCVERSION = "1.1";
     public static final int protocolVersion = 1;
     protected Minecraft minecraft;

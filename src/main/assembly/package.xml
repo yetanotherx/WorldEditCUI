@@ -19,6 +19,7 @@
                 <exclude>org/**</exclude>
                 <exclude>StartMC.class</exclude>
                 <exclude>INSTALL.md</exclude>
+                <exclude>UPGRADE.md</exclude>
             </excludes>
         </fileSet>
     </fileSets>
@@ -27,6 +28,11 @@
             <source>${project.build.directory}/classes/INSTALL.md</source>
             <outputDirectory>/</outputDirectory>
             <destName>INSTALL.txt</destName>
+        </file>
+        <file>
+            <source>${project.build.directory}/classes/UPGRADE.md</source>
+            <outputDirectory>/</outputDirectory>
+            <destName>UPGRADE.txt</destName>
         </file>
     </files>
 </assembly>
