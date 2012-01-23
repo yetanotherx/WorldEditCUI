@@ -26,6 +26,7 @@ import wecui.render.region.CuboidRegion;
  * TODO: Add MultiWorld support
  * TODO: Preview mode
  * TODO: Command transactions
+ * TODO: Add ability to flash selection
  * 
  * BUG: Lighting
  * BUG: Polys with SPC
