@@ -9,7 +9,7 @@ import wecui.WorldEditCUI;
  * 
  * @author yetanotherx
  * 
- * @obfuscated
+ * @obfuscated 1.2
  */
 public class WorldEditScreen extends GuiChat {
 

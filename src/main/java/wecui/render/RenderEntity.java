@@ -12,7 +12,7 @@ import wecui.obfuscation.Obfuscation;
  * @author lahwran
  * @author yetanotherx
  * 
- * @obfuscated
+ * @obfuscated 1.2
  */
 public class RenderEntity extends Entity {
 
@@ -38,11 +38,11 @@ public class RenderEntity extends Entity {
     }
     
     @Override
-    public void B_() {
+    public void I_() {
         Obfuscation.setEntityPositionToPlayer(controller.getMinecraft(), this);
     }
 
     @Override
-    public void B() {
+    public void z() {
     }
 }

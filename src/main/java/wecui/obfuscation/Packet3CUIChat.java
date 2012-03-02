@@ -20,7 +20,7 @@ import wecui.WorldEditCUI;
  * @author lahwran
  * @author yetanotherx
  *
- * @obfuscated
+ * @obfuscated 1.2
  */
 public class Packet3CUIChat extends Packet3Chat {
 

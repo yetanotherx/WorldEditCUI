@@ -5,54 +5,54 @@ renames:
   - notch: if
     wecui: ifclass
     packageOnly: false
-  - notch: ms
+  - notch: nk
     wecui: Entity
     packageOnly: false
-  - notch: afr
+  - notch: ahp
     wecui: EntityClientPlayerMP
     packageOnly: false
-  - notch: uh
+  - notch: vm
     wecui: EntityPlayerSP
     packageOnly: false
-  - notch: wm
+  - notch: yb
     wecui: GuiChat
     packageOnly: false
-  - notch: ug
+  - notch: vl
     wecui: GuiScreen
     packageOnly: false
-  - notch: ads
+  - notch: afp
     wecui: KeyBinding
     packageOnly: false
-  - notch: zk
+  - notch: abc
     wecui: MCHash
     packageOnly: false
-  - notch: abx
+  - notch: adt
     wecui: NBTTagCompound
     packageOnly: false
-  - notch: abm
+  - notch: adg
     wecui: NetClientHandler
     packageOnly: false
-  - notch: nh
+  - notch: oa
     wecui: NetHandler
     packageOnly: false
-  - notch: kp
+  - notch: ld
     wecui: NetworkManager
     packageOnly: false
-  - notch: zu
+  - notch: abn
     wecui: Packet
     packageOnly: false
-  - notch: adc
+  - notch: aey
     wecui: Packet3Chat
     packageOnly: false
-  - notch: ti
+  - notch: ui
     wecui: Render
     packageOnly: false
-  - notch: se
+  - notch: tb
     wecui: RenderHelper
     packageOnly: false
-  - notch: aby
+  - notch: adu
     wecui: Tessellator
     packageOnly: false
-  - notch: vq
+  - notch: wz
     wecui: World
     packageOnly: false

@@ -9,7 +9,7 @@
         <dependency>
             <groupId>net.minecraft</groupId>
             <artifactId>minecraft-deobf</artifactId>
-            <version>1.1-wecui</version>
+            <version>1.2-wecui</version>
         </dependency>
         <dependency>
             <groupId>org.lwjgl.lwjgl</groupId>
