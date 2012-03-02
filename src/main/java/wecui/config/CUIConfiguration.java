@@ -1,8 +1,10 @@
 package wecui.config;
 
+import deobf.mod_WorldEditCUI;
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import wecui.InitializationFactory;
 import wecui.WorldEditCUI;
 import wecui.obfuscation.Obfuscation;
@@ -43,30 +45,41 @@ public class CUIConfiguration implements InitializationFactory {
         File file = new File(Obfuscation.getWorldEditCUIDir(), "Configuration.yml");
         file.getParentFile().mkdirs();
 
+        if (!file.exists()) {
+            InputStream input = mod_WorldEditCUI.class.getResourceAsStream("/Configuration.yml");
+            if (input != null) {
+                FileOutputStream output = null;
+
+                try {
+                    output = new FileOutputStream(file);
+                    byte[] buf = new byte[8192];
+                    int length = 0;
+                    while ((length = input.read(buf)) > 0) {
+                        output.write(buf, 0, length);
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        if (input != null) {
+                            input.close();
+                        }
+                    } catch (IOException e) {
+                    }
+
+                    try {
+                        if (output != null) {
+                            output.close();
+                        }
+                    } catch (IOException e) {
+                    }
+                }
+            }
+        }
+        
         config = new Configuration(file);
         config.load();
-
-        if (!file.exists()) {
-            config.setProperty("debug", this.debugMode);
-            
-            Map<String, String> tempMap = new HashMap<String, String>();
-            tempMap.put("cuboidGrid", this.cuboidGridColor);
-            tempMap.put("cuboidEdge", this.cuboidEdgeColor);
-            tempMap.put("cuboidFirstPoint", this.cuboidFirstPointColor);
-            tempMap.put("cuboidSecondPoint", this.cuboidSecondPointColor);
-            tempMap.put("polyGrid", this.polyGridColor);
-            tempMap.put("polyEdge", this.polyEdgeColor);
-            tempMap.put("polyPoint", this.polyPointColor);
-            tempMap.put("ellipsoidGrid", this.ellipsoidGridColor);
-            tempMap.put("ellipsoidPoint", this.ellipsoidPointColor);
-            tempMap.put("cylinderGrid", this.cylinderGridColor);
-            tempMap.put("cylinderEdge", this.cylinderEdgeColor);
-            tempMap.put("cylinderPoint", this.cylinderPointColor);
-            
-            config.setProperty("colors", tempMap);
-            
-            config.save();
-        }
 
         this.debugMode = config.getBoolean("debug", debugMode);
 

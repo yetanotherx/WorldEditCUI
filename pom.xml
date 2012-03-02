@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>wecui</groupId>
     <artifactId>WorldEditCUI</artifactId>
-    <version>1.1a</version>
+    <version>1.2</version>
     <name>WorldEditCUI</name>
     <dependencies>
         <dependency>
@@ -38,7 +38,7 @@
         </dependency>
     </dependencies>
     <properties>
-        <WEVersion>5.1-SNAPSHOT</WEVersion>
+        <WEVersion>5.1</WEVersion>
     </properties>
     <repositories>
         <repository>
