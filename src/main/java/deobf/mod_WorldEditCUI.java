@@ -37,8 +37,8 @@ public class mod_WorldEditCUI extends BaseMod {
 
         this.guiKey = new KeyBinding("CUIKey", Keyboard.KEY_G);
         
-        ModLoader.SetInGameHook(this, true, true); // the last true is because we don't want to iterate the entity list too often
-        ModLoader.RegisterKey(this, guiKey, false);
+        ModLoader.setInGameHook(this, true, true); // the last true is because we don't want to iterate the entity list too often
+        ModLoader.registerKey(this, guiKey, false);
     }
 
     @Override
@@ -59,7 +59,7 @@ public class mod_WorldEditCUI extends BaseMod {
      */
     @Override
     @SuppressWarnings("unchecked")
-    public boolean OnTickInGame(float partialticks, Minecraft mc) {
+    public boolean onTickInGame(float partialticks, Minecraft mc) {
 
         if (Obfuscation.getWorld(mc) != lastWorld || Obfuscation.getPlayer(mc) != lastPlayer) {
             controller.getObfuscation().spawnEntity(renderEntity);
@@ -95,7 +95,7 @@ public class mod_WorldEditCUI extends BaseMod {
      * 
      */
     @Override
-    public void KeyboardEvent(KeyBinding event) {
+    public void keyboardEvent(KeyBinding event) {
         if (event.equals(guiKey) && controller.getObfuscation().getCurrentScreen() == null) {
             controller.getObfuscation().showGuiScreen(new WorldEditScreen(controller));
         }
@@ -103,7 +103,7 @@ public class mod_WorldEditCUI extends BaseMod {
 
     @Override
     @SuppressWarnings("unchecked")
-    public void AddRenderer(Map map) {
+    public void addRenderer(Map map) {
         map.put(RenderEntity.class, new RenderHooks(controller));
     }
 
