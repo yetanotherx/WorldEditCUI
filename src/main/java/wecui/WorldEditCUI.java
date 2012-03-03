@@ -27,6 +27,7 @@ import wecui.render.region.CuboidRegion;
  * TODO: Preview mode
  * TODO: Command transactions
  * TODO: Use plugin channel
+ * TODO: Add ability to flash selection
  * 
  * BUG: Lighting
  * BUG: Polys with SPC
