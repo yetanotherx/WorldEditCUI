@@ -9,7 +9,7 @@ import wecui.WorldEditCUI;
  * 
  * @author yetanotherx
  * 
- * @obfuscated 1.2
+ * @obfuscated 1.2.5
  */
 public class WorldEditScreen extends GuiChat {
 
@@ -40,12 +40,8 @@ public class WorldEditScreen extends GuiChat {
         super.a(i, i1, f);
     }
 
-    protected void setMessage(String message) {
-        this.a = message;
-    }
-
     protected String getMessage() {
-        return this.a;
+        return this.a.b();
     }
 
     protected int getScreenHeight() {

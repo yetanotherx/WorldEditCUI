@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import wecui.WorldEditCUI;
 import wecui.event.ChatCommandEvent;
-import wecui.event.ChatEvent;
+import wecui.event.OutgoingChatEvent;
 
 /**
  * Overrides the dataPacket list in NetworkManager
@@ -22,7 +22,7 @@ import wecui.event.ChatEvent;
  */
 public class DataPacketList<T> extends ArrayList<T> {
 
-    private static final long serialVersionUID = 275687258276L;
+    private static final long serialVersionUID = 275687258277L;
     protected WorldEditCUI controller;
     protected Class<T> typeClass;
 
@@ -45,7 +45,7 @@ public class DataPacketList<T> extends ArrayList<T> {
             boolean cancelled = false;
             String s = Obfuscation.getChatFromPacket((Packet3Chat) packet);
 
-            ChatEvent chatevent = new ChatEvent(controller, s, ChatEvent.Direction.OUTGOING);
+            OutgoingChatEvent chatevent = new OutgoingChatEvent(controller, s);
             controller.getEventManager().callEvent(chatevent);
             if (!chatevent.isCancelled() && s.startsWith("/") && s.length() > 1) {
                 ChatCommandEvent commandevent = new ChatCommandEvent(controller, s);

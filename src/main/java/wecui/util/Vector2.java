@@ -20,7 +20,7 @@ public class Vector2 implements Comparable<Vector2> {
 	/**
 	 * Represents a unit vector in the Y direction (0,1)
 	 */
-	public final static Vector2 UNTI_Y = new Vector2(0, 1);
+	public final static Vector2 UNIT_Y = new Vector2(0, 1);
 
 	/**
 	 * Represents a unit vector (1,1)

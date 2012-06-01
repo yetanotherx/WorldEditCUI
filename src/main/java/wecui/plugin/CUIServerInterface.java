@@ -1,5 +1,6 @@
 package wecui.plugin;
 
+import com.sk89q.worldedit.BiomeTypes;
 import com.sk89q.worldedit.ServerInterface;
 import wecui.WorldEditCUI;
 
@@ -29,5 +30,10 @@ public class CUIServerInterface extends ServerInterface {
 
     @Override
     public void reload() {
+    }
+
+    @Override
+    public BiomeTypes getBiomes() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

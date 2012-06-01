@@ -1,10 +1,12 @@
 package wecui.plugin;
 
+import com.sk89q.worldedit.BiomeType;
 import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.EntityType;
 import com.sk89q.worldedit.LocalWorld;
 import com.sk89q.worldedit.MaxChangedBlocksException;
 import com.sk89q.worldedit.Vector;
+import com.sk89q.worldedit.Vector2D;
 import com.sk89q.worldedit.blocks.BaseBlock;
 import com.sk89q.worldedit.blocks.BaseItemStack;
 import com.sk89q.worldedit.regions.Region;
@@ -129,6 +131,16 @@ public class CUIWorld extends LocalWorld {
 
     @Override
     public int hashCode() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public BiomeType getBiome(Vector2D pt) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void setBiome(Vector2D pt, BiomeType biome) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     

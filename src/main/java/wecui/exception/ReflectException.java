@@ -33,7 +33,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package wecui.vendor.org.joor;
+package wecui.exception;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -59,7 +59,7 @@ public class ReflectException extends RuntimeException {
     /**
      * Generated UID
      */
-    private static final long serialVersionUID = -6213149635297151442L;
+    private static final long serialVersionUID = -6213149635297151443L;
 
     public ReflectException(String message) {
         super(message);

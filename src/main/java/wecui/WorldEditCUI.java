@@ -4,18 +4,17 @@ import net.minecraft.client.Minecraft;
 import wecui.config.CUIConfiguration;
 import wecui.plugin.LocalPlugin;
 import wecui.event.CUIEvent;
+import wecui.event.ChannelEvent;
 import wecui.event.ChatCommandEvent;
 import wecui.event.listeners.CUIListener;
-import wecui.event.ChatEvent;
-import wecui.event.listeners.ChatListener;
 import wecui.event.WorldRenderEvent;
+import wecui.event.listeners.ChannelListener;
 import wecui.event.listeners.WorldEditCommandListener;
 import wecui.event.listeners.WorldRenderListener;
 import wecui.exception.InitializationException;
 import wecui.fevents.EventManager;
 import wecui.fevents.Order;
 import wecui.obfuscation.Obfuscation;
-import wecui.obfuscation.Packet3CUIChat;
 import wecui.render.region.BaseRegion;
 import wecui.render.region.CuboidRegion;
 
@@ -23,10 +22,8 @@ import wecui.render.region.CuboidRegion;
  * Main controller class. Uses a pseudo-JavaBeans paradigm. The only real
  * logic here is listener registration.
  * 
- * TODO: Add MultiWorld support
  * TODO: Preview mode
  * TODO: Command transactions
- * TODO: Use plugin channel
  * TODO: Add ability to flash selection
  * 
  * BUG: Lighting
@@ -36,9 +33,9 @@ import wecui.render.region.CuboidRegion;
  */
 public class WorldEditCUI {
 
-    public static final String VERSION = "1.2";
-    public static final String MCVERSION = "1.2";
-    public static final int protocolVersion = 1;
+    public static final String VERSION = "1.2.5";
+    public static final String MCVERSION = "1.2.5";
+    public static final int protocolVersion = 2;
     protected Minecraft minecraft;
     protected EventManager eventManager;
     protected Obfuscation obfuscation;
@@ -72,13 +69,11 @@ public class WorldEditCUI {
         }
 
         this.registerListeners();
-        Packet3CUIChat.register(this);
-
     }
 
     protected void registerListeners() {
         CUIEvent.handlers.register(new CUIListener(this), Order.Default);
-        ChatEvent.handlers.register(new ChatListener(this), Order.Default);
+        ChannelEvent.handlers.register(new ChannelListener(this), Order.Default);
         WorldRenderEvent.handlers.register(new WorldRenderListener(this), Order.Default);
 
         WorldEditCommandListener commListener = new WorldEditCommandListener(this);

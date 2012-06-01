@@ -8,7 +8,6 @@ package wecui.event.cui;
  */
 public enum CUIEventType {
 
-    HANDSHAKE(CUIHandshakeEvent.class, "", 0),
     SELECTION(CUISelectionEvent.class, "s", 1),
     POINT(CUIPointEvent.class, "p", 5, 6),
     POINT2D(CUIPoint2DEvent.class, "p2", 4, 5),

@@ -12,31 +12,25 @@ import wecui.fevents.HandlerList;
  * @author yetanotherx
  *
  */
-public class ChatEvent extends Event<ChatEvent> implements Cancellable {
+public class OutgoingChatEvent extends Event<OutgoingChatEvent> implements Cancellable {
 
     protected WorldEditCUI controller;
     protected String message;
-    protected final Direction direction;
-    public static final HandlerList<ChatEvent> handlers = new HandlerList<ChatEvent>();
+    public static final HandlerList<OutgoingChatEvent> handlers = new HandlerList<OutgoingChatEvent>();
 
-    public ChatEvent(WorldEditCUI controller, String message, Direction direction) {
+    public OutgoingChatEvent(WorldEditCUI controller, String message) {
         this.controller = controller;
         this.message = message;
-        this.direction = direction;
     }
 
     @Override
     protected String getEventName() {
-        return "IncomingChatEvent";
+        return "OutgoingChatEvent";
     }
 
     @Override
-    protected HandlerList<ChatEvent> getHandlers() {
+    protected HandlerList<OutgoingChatEvent> getHandlers() {
         return handlers;
-    }
-
-    public Direction getDirection() {
-        return direction;
     }
 
     public String getMessage() {
@@ -45,15 +39,5 @@ public class ChatEvent extends Event<ChatEvent> implements Cancellable {
 
     public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
-    }
-
-    public static enum Direction {
-
-        INCOMING,
-        OUTGOING;
-
-        public String toString() {
-            return name().toLowerCase();
-        }
     }
 }

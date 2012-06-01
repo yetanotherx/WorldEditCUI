@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.minecraft</groupId>
     <artifactId>minecraft-deobf</artifactId>
-    <version>1.2-wecui</version>
+    <version>1.2.5-wecui</version>
     <name>WorldEditCUI deobfuscator</name>
     <build>
         <sourceDirectory>deobf</sourceDirectory>
@@ -54,7 +54,7 @@
         <dependency>
             <groupId>net.minecraft</groupId>
             <artifactId>minecraft</artifactId>
-            <version>1.2</version>
+            <version>1.2.5</version>
         </dependency>
     </dependencies>
 </project>

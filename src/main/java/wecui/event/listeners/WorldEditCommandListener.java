@@ -6,7 +6,7 @@ import wecui.event.ChatCommandEvent;
 import wecui.event.command.CommandEventBase;
 import wecui.event.command.CommandEventType;
 import wecui.vendor.org.joor.Reflect;
-import wecui.vendor.org.joor.ReflectException;
+import wecui.exception.ReflectException;
 
 /**
  * Parses incoming/outgoing chat messages, and calls a CUIEvent if it matches the WorldEdit CUI header

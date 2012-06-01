@@ -3,13 +3,13 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>wecui</groupId>
     <artifactId>WorldEditCUI</artifactId>
-    <version>1.2</version>
+    <version>1.2.5</version>
     <name>WorldEditCUI</name>
     <dependencies>
         <dependency>
             <groupId>net.minecraft</groupId>
             <artifactId>minecraft-deobf</artifactId>
-            <version>1.2-wecui</version>
+            <version>1.2.5-wecui</version>
         </dependency>
         <dependency>
             <groupId>org.lwjgl.lwjgl</groupId>
@@ -31,33 +31,28 @@
             <artifactId>SPCInterfaces</artifactId>
             <version>1.0</version>
         </dependency>
-        <dependency>
-            <groupId>com.yetanotherx</groupId>
-            <artifactId>MapNode</artifactId>
-            <version>1.0</version>
-        </dependency>
     </dependencies>
     <properties>
-        <WEVersion>5.1</WEVersion>
+        <WEVersion>5.3</WEVersion>
     </properties>
     <repositories>
         <repository>
             <id>sk89q-mvn2</id>
-            <url>http://mvn2.sk89q.com/repo</url>
+            <url>http://maven.sk89q.com/repo/</url>
         </repository>
         <repository>
             <id>bukkit-repo</id>
-            <url>http://repo.bukkit.org/artifactory/repo</url>
+            <url>http://repo.bukkit.org/content/repositories/releases/</url>
         </repository>
         <repository>
             <id>mcbouncer-repo</id>
-            <url>http://maven.mcbouncer.com/archiva/repository/internal/</url>
+            <url>http://maven.mcbouncer.com/repo</url>
         </repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>
             <id>mcbouncer-repo</id>
-            <url>http://maven.mcbouncer.com/archiva/repository/internal/</url>
+            <url>http://maven.mcbouncer.com/repo</url>
         </pluginRepository>
     </pluginRepositories>
     <build>
@@ -89,11 +84,6 @@
                                     <groupId>org.yaml</groupId>
                                     <artifactId>snakeyaml</artifactId>
                                     <version>1.9</version>
-                                </artifactItem>
-                                <artifactItem>
-                                    <groupId>com.yetanotherx</groupId>
-                                    <artifactId>MapNode</artifactId>
-                                    <version>1.0</version>
                                 </artifactItem>
                             </artifactItems>
                         </configuration>

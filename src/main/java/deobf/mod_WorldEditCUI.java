@@ -1,5 +1,6 @@
 package deobf;
 
+import java.nio.charset.Charset;
 import wecui.WorldEditCUI;
 import wecui.render.RenderEntity;
 import wecui.render.RenderHooks;
@@ -7,11 +8,12 @@ import java.util.Map;
 import java.util.Vector;
 
 import net.minecraft.client.Minecraft;
-import org.lwjgl.input.Keyboard;
 import wecui.SPCWorldEditCUI;
-import wecui.gui.WorldEditScreen;
+import wecui.Updater;
+import wecui.event.ChannelEvent;
 import wecui.obfuscation.DataPacketList;
 import wecui.obfuscation.Obfuscation;
+import wecui.render.region.CuboidRegion;
 import wecui.vendor.org.joor.Reflect;
 
 /**
@@ -21,6 +23,7 @@ import wecui.vendor.org.joor.Reflect;
  * @author lahwran
  * @author yetanotherx
  * 
+ * @obfuscated 1.2.5
  */
 public class mod_WorldEditCUI extends BaseMod {
 
@@ -28,17 +31,15 @@ public class mod_WorldEditCUI extends BaseMod {
     protected World lastWorld;
     protected EntityPlayerSP lastPlayer;
     protected RenderEntity renderEntity;
-    protected KeyBinding guiKey;
     protected boolean spcInitialized = false;
+    public final static Charset UTF_8_CHARSET = Charset.forName("UTF-8");
 
     public mod_WorldEditCUI() {
         this.controller = new WorldEditCUI(ModLoader.getMinecraftInstance());
         this.controller.initialize();
 
-        this.guiKey = new KeyBinding("CUIKey", Keyboard.KEY_G);
-        
         ModLoader.setInGameHook(this, true, true); // the last true is because we don't want to iterate the entity list too often
-        ModLoader.registerKey(this, guiKey, false);
+        ModLoader.registerPacketChannel(this, "WECUI");
     }
 
     @Override
@@ -79,7 +80,8 @@ public class mod_WorldEditCUI extends BaseMod {
                     Vector pluginList = (Vector) Reflect.on(SPCPluginManager.getPluginManager()).get("plugins");
                     pluginList.add(new SPCWorldEditCUI(controller));
                     
-                    controller.getLocalPlugin().onVersionEvent("");
+                    new Updater(controller).start();
+                    this.controller.setSelection(new CuboidRegion(controller));
                 } catch (ClassNotFoundException e) {
                     controller.getDebugger().debug("SinglePlayerCommands not found, not worrying about the spc_WorldEditCUI class.");
                 }
@@ -90,15 +92,23 @@ public class mod_WorldEditCUI extends BaseMod {
         return true;
     }
 
-    /**
-     * Shows a new WorldEdit GUI screen when the GUI key is pressed.
-     * 
-     */
     @Override
-    public void keyboardEvent(KeyBinding event) {
-        if (event.equals(guiKey) && controller.getObfuscation().getCurrentScreen() == null) {
-            controller.getObfuscation().showGuiScreen(new WorldEditScreen(controller));
-        }
+    public void receiveCustomPacket(Packet250CustomPayload packet) {
+        ChannelEvent channelevent = new ChannelEvent(controller, new String(packet.c, UTF_8_CHARSET));
+        controller.getEventManager().callEvent(channelevent);
+    }
+
+    @Override
+    public void serverConnect(NetClientHandler handler) {
+        byte[] buffer = ("v|" + WorldEditCUI.protocolVersion).getBytes(UTF_8_CHARSET);
+        Packet250CustomPayload packet = new Packet250CustomPayload();
+        packet.a = "WECUI";
+        packet.b = buffer.length;
+        packet.c = buffer;
+        ModLoader.sendPacket(packet);
+        
+        new Updater(controller).start();
+        this.controller.setSelection(new CuboidRegion(controller));
     }
 
     @Override

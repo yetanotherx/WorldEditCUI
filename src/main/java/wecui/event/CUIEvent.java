@@ -25,7 +25,7 @@ public class CUIEvent extends Event<CUIEvent> {
         this.controller = controller;
         this.type = type;
 
-        //split("[|]" returns String[] {""} for some reason,  instead of String[] {}.
+        //"".split("[|]") returns String[] {""} for some reason,  instead of String[] {}.
         if (params.length == 1 && params[0].length() == 0) {
             params = new String[]{};
         }

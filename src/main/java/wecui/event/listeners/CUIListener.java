@@ -6,7 +6,7 @@ import wecui.WorldEditCUI;
 import wecui.event.CUIEvent;
 import wecui.event.cui.CUIBaseEvent;
 import wecui.event.cui.CUIEventType;
-import wecui.vendor.org.joor.ReflectException;
+import wecui.exception.ReflectException;
 
 /**
  * Listener class for CUIEvent
