@@ -5,16 +5,13 @@ import wecui.WorldEditCUI;
 import wecui.render.RenderEntity;
 import wecui.render.RenderHooks;
 import java.util.Map;
-import java.util.Vector;
 
 import net.minecraft.client.Minecraft;
-import wecui.SPCWorldEditCUI;
 import wecui.Updater;
 import wecui.event.ChannelEvent;
 import wecui.obfuscation.DataPacketList;
 import wecui.obfuscation.Obfuscation;
 import wecui.render.region.CuboidRegion;
-import wecui.vendor.org.joor.Reflect;
 
 /**
  * Main ModLoader class. Initializes the mod, enabling CUI communication 
@@ -31,7 +28,7 @@ public class mod_WorldEditCUI extends BaseMod {
     protected World lastWorld;
     protected EntityPlayerSP lastPlayer;
     protected RenderEntity renderEntity;
-    protected boolean spcInitialized = false;
+    protected boolean gameStarted = false;
     public final static Charset UTF_8_CHARSET = Charset.forName("UTF-8");
 
     public mod_WorldEditCUI() {
@@ -68,26 +65,14 @@ public class mod_WorldEditCUI extends BaseMod {
             lastWorld = Obfuscation.getWorld(mc);
             lastPlayer = Obfuscation.getPlayer(mc);
 
-            if (!spcInitialized) {
-                spcInitialized = true;
+            if (!gameStarted) {
+                gameStarted = true;
                 
-                try {
-                    //Loads the SPC class, unless SPC isn't installed. 
-                    //Doing Class.forName will throw an exception if it's not found, 
-                    //so only set the plugin if it doesn't throw an exception.
-                    Class.forName("SPCPlugin");
-                    
-                    Vector pluginList = (Vector) Reflect.on(SPCPluginManager.getPluginManager()).get("plugins");
-                    pluginList.add(new SPCWorldEditCUI(controller));
-                    
-                    new Updater(controller).start();
-                    this.controller.setSelection(new CuboidRegion(controller));
-                } catch (ClassNotFoundException e) {
-                    controller.getDebugger().debug("SinglePlayerCommands not found, not worrying about the spc_WorldEditCUI class.");
-                }
+                new Updater(controller).start();
+                this.controller.setSelection(new CuboidRegion(controller));
+                
+                DataPacketList.register(controller);
             }
-
-            DataPacketList.register(controller);
         }
         return true;
     }
@@ -106,9 +91,6 @@ public class mod_WorldEditCUI extends BaseMod {
         packet.b = buffer.length;
         packet.c = buffer;
         ModLoader.sendPacket(packet);
-        
-        new Updater(controller).start();
-        this.controller.setSelection(new CuboidRegion(controller));
     }
 
     @Override

@@ -25,6 +25,7 @@ public class DataPacketList<T> extends ArrayList<T> {
     private static final long serialVersionUID = 275687258277L;
     protected WorldEditCUI controller;
     protected Class<T> typeClass;
+    public static boolean registered = false;
 
     public DataPacketList(WorldEditCUI controller, Class<T> typeClass) {
         this.controller = controller;
@@ -69,7 +70,12 @@ public class DataPacketList<T> extends ArrayList<T> {
      * @param controller 
      */
     public static void register(WorldEditCUI controller) {
-
+        
+        if( registered ) {
+            return;
+        }
+        registered = true;
+        
         DataPacketList<Packet> list = new DataPacketList<Packet>(controller, Packet.class);
         Obfuscation obf = controller.getObfuscation();
 

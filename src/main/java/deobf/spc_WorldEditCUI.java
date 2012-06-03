@@ -1,6 +1,6 @@
-package wecui;
+package deobf;
 
-import deobf.SPCPlugin;
+import wecui.WorldEditCUI;
 import wecui.event.CUIEvent;
 
 /**
@@ -10,11 +10,11 @@ import wecui.event.CUIEvent;
  * @author yetanotherx
  * 
  */
-public class SPCWorldEditCUI extends SPCPlugin {
+public class spc_WorldEditCUI extends SPCPlugin {
 
     protected WorldEditCUI controller;
 
-    public SPCWorldEditCUI(WorldEditCUI controller) {
+    public spc_WorldEditCUI(WorldEditCUI controller) {
         this.controller = controller;
     }
     

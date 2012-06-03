@@ -42,10 +42,6 @@ public class Obfuscation implements InitializationFactory {
         return minecraft.l();
     }
 
-    public void sendChat(String chat) {
-        getPlayer().a(chat);
-    }
-
     /**
      * Displays a chat message on the screen, if the player is currently playing
      * @param chat 

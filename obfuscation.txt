@@ -44,6 +44,9 @@ renames:
   - notch: afd
     wecui: Packet3Chat
     packageOnly: false
+  - notch: ee
+    wecui: Packet250CustomPayload
+    packageOnly: false
   - notch: um
     wecui: Render
     packageOnly: false
@@ -55,7 +58,4 @@ renames:
     packageOnly: false
   - notch: xd
     wecui: World
-    packageOnly: false
-  - notch: ee
-    wecui: Packet250CustomPayload
     packageOnly: false
