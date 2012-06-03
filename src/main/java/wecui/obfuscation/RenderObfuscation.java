@@ -1,7 +1,10 @@
 package wecui.obfuscation;
 
+import deobf.Block;
+import deobf.RenderBlocks;
 import deobf.RenderHelper;
 import deobf.Tessellator;
+import wecui.util.Constants;
 
 /**
  * Singleton obfuscation class for dealing
@@ -28,8 +31,8 @@ public class RenderObfuscation {
         tess.a(x, y, z);
     }
 
-    public void finishDrawing() {
-        tess.a();
+    public int finishDrawing() {
+        return tess.a();
     }
     
     public static void disableLighting() {
@@ -42,6 +45,24 @@ public class RenderObfuscation {
 
     public static RenderObfuscation getInstance() {
         return RenderObfuscationHolder.INSTANCE;
+    }
+
+    public void setOpaque(int i) {
+        if( Constants.transparencyEnabled ) {
+            tess.opaqueAlpha = 128;
+        }
+    }
+
+    public void setTranslation(double d, double d0, double d1) {
+        tess.b(d, d0, d1);
+    }
+    
+    public boolean renderBlockByRenderType(RenderBlocks rb, Block par1Block, float par2, float par3, float par4) {
+        return rb.b(par1Block, (int) par2, (int) par3, (int) par4);
+    }
+
+    public int getRenderBlockPass(Block block) {
+        return block.c();
     }
 
     protected static class RenderObfuscationHolder {

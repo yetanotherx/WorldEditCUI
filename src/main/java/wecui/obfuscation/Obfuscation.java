@@ -1,5 +1,6 @@
 package wecui.obfuscation;
 
+import deobf.Block;
 import deobf.Entity;
 import deobf.EntityClientPlayerMP;
 import deobf.EntityPlayerSP;
@@ -10,6 +11,7 @@ import deobf.Packet3Chat;
 import deobf.World;
 import java.io.File;
 import net.minecraft.client.Minecraft;
+import org.lwjgl.opengl.GL11;
 import wecui.InitializationFactory;
 import wecui.WorldEditCUI;
 import wecui.render.RenderEntity;
@@ -28,7 +30,7 @@ public class Obfuscation implements InitializationFactory {
 
     protected WorldEditCUI controller;
     protected Minecraft minecraft;
-    
+
     public Obfuscation(WorldEditCUI controller) {
         this.controller = controller;
     }
@@ -98,6 +100,18 @@ public class Obfuscation implements InitializationFactory {
 
     }
 
+    public NetClientHandler getNetClientHandler(EntityClientPlayerMP player) {
+        return player.cl;
+    }
+
+    public int getTexture(String file) {
+        return minecraft.p.b(file);
+    }
+
+    public Block getBlockFromID(int id) {
+        return Block.m[id];
+    }
+
     public static double getPlayerX(EntityPlayerSP player) {
         return player.o;
     }
@@ -117,17 +131,13 @@ public class Obfuscation implements InitializationFactory {
     public static World getWorld(Minecraft mc) {
         return mc.f;
     }
-    
+
     public static GuiScreen getCurrentScreen(Minecraft mc) {
         return mc.s;
     }
 
     public static void setEntityPositionToPlayer(Minecraft mc, Entity entity) {
         entity.d(getPlayerX(mc.h), getPlayerY(mc.h), getPlayerZ(mc.h));
-    }
-
-    public NetClientHandler getNetClientHandler(EntityClientPlayerMP player) {
-        return player.cl;
     }
 
     public static String getChatFromPacket(Packet3Chat packet) {
@@ -144,5 +154,9 @@ public class Obfuscation implements InitializationFactory {
 
     public static File getWorldEditCUIDir() {
         return new File(getMinecraftDir(), "mods" + File.separator + "WorldEditCUI");
+    }
+
+    public void translateToCamera(float partialTick) {
+        GL11.glTranslated(getPlayerXGuess(partialTick), getPlayerYGuess(partialTick), getPlayerZGuess(partialTick));
     }
 }

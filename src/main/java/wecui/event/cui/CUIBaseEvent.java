@@ -87,4 +87,8 @@ public abstract class CUIBaseEvent {
     public String getString(int index) {
         return args[index];
     }
+    
+    public int length() {
+        return args.length;
+    }
 }

@@ -5,6 +5,9 @@ renames:
   - notch: if
     wecui: ifclass
     packageOnly: false
+  - notch: pb
+    wecui: Block
+    packageOnly: false
   - notch: nn
     wecui: Entity
     packageOnly: false
@@ -13,6 +16,9 @@ renames:
     packageOnly: false
   - notch: vq
     wecui: EntityPlayerSP
+    packageOnly: false
+  - notch: ew
+    wecui: GLAllocation
     packageOnly: false
   - notch: yf
     wecui: GuiChat
@@ -50,11 +56,17 @@ renames:
   - notch: um
     wecui: Render
     packageOnly: false
+  - notch: vl
+    wecui: RenderBlocks
+    packageOnly: false
   - notch: tf
     wecui: RenderHelper
     packageOnly: false
   - notch: adz
     wecui: Tessellator
+    packageOnly: false
+  - notch: kw
+    wecui: TileEntity
     packageOnly: false
   - notch: xd
     wecui: World

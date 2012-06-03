@@ -85,11 +85,19 @@ public class mod_WorldEditCUI extends BaseMod {
 
     @Override
     public void serverConnect(NetClientHandler handler) {
+        byte[] regbuffer = "WECUI".getBytes(UTF_8_CHARSET);
+        Packet250CustomPayload regpacket = new Packet250CustomPayload();
+        regpacket.a = "REGISTER";
+        regpacket.b = regbuffer.length;
+        regpacket.c = regbuffer;
+        
         byte[] buffer = ("v|" + WorldEditCUI.protocolVersion).getBytes(UTF_8_CHARSET);
         Packet250CustomPayload packet = new Packet250CustomPayload();
         packet.a = "WECUI";
         packet.b = buffer.length;
         packet.c = buffer;
+        
+        ModLoader.sendPacket(regpacket);
         ModLoader.sendPacket(packet);
     }
 

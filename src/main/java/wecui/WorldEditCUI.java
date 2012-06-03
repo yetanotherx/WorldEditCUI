@@ -15,6 +15,7 @@ import wecui.exception.InitializationException;
 import wecui.fevents.EventManager;
 import wecui.fevents.Order;
 import wecui.obfuscation.Obfuscation;
+import wecui.preview.PointPreview;
 import wecui.render.region.BaseRegion;
 import wecui.render.region.CuboidRegion;
 
@@ -22,9 +23,8 @@ import wecui.render.region.CuboidRegion;
  * Main controller class. Uses a pseudo-JavaBeans paradigm. The only real
  * logic here is listener registration.
  * 
- * TODO: Preview mode
- * TODO: Command transactions
  * TODO: Add ability to flash selection
+ * TODO: Disable update message
  * 
  * BUG: Lighting
  * BUG: Polys with SPC
@@ -40,6 +40,7 @@ public class WorldEditCUI {
     protected EventManager eventManager;
     protected Obfuscation obfuscation;
     protected BaseRegion selection;
+    protected PointPreview preview;
     protected CUIDebug debugger;
     protected CUIConfiguration configuration;
     protected LocalPlugin localPlugin;
@@ -52,6 +53,7 @@ public class WorldEditCUI {
         this.eventManager = new EventManager(this);
         this.obfuscation = new Obfuscation(this);
         this.selection = new CuboidRegion(this);
+        this.preview = new PointPreview(this);
         this.configuration = new CUIConfiguration(this);
         this.debugger = new CUIDebug(this);
         this.localPlugin = new LocalPlugin(this);
@@ -60,6 +62,7 @@ public class WorldEditCUI {
             this.eventManager.initialize();
             this.obfuscation.initialize();
             this.selection.initialize();
+            this.preview.initialize();
             this.configuration.initialize();
             this.debugger.initialize();
             this.localPlugin.initialize();
@@ -135,6 +138,14 @@ public class WorldEditCUI {
 
     public void setSelection(BaseRegion selection) {
         this.selection = selection;
+    }
+
+    public PointPreview getPreview() {
+        return preview;
+    }
+
+    public void setPreview(PointPreview preview) {
+        this.preview = preview;
     }
 
     public static String getVersion() {

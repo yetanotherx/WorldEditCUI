@@ -6,7 +6,6 @@ import wecui.event.WorldRenderEvent;
 import wecui.WorldEditCUI;
 import wecui.obfuscation.RenderObfuscation;
 
-
 /**
  * Custom entity renderer, attached in the ModLoader class
  * 
@@ -23,7 +22,7 @@ public class RenderHooks extends Render {
     public RenderHooks(WorldEditCUI controller) {
         this.controller = controller;
         this.event = new WorldRenderEvent(controller);
-    }    
+    }
 
     private void render(float renderTick) {
         RenderObfuscation.disableLighting();
