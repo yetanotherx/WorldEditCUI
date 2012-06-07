@@ -157,6 +157,6 @@ public class Obfuscation implements InitializationFactory {
     }
 
     public void translateToCamera(float partialTick) {
-        GL11.glTranslated(getPlayerXGuess(partialTick), getPlayerYGuess(partialTick), getPlayerZGuess(partialTick));
+        GL11.glTranslated(-getPlayerXGuess(partialTick), -getPlayerYGuess(partialTick), -getPlayerZGuess(partialTick));
     }
 }
