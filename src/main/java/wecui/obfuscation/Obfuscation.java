@@ -52,14 +52,6 @@ public class Obfuscation implements InitializationFactory {
         }
     }
 
-    public void showGuiScreen(GuiScreen screen) {
-        GuiScreen currentScreen = getCurrentScreen();
-        if (currentScreen != null) {
-            minecraft.a((GuiScreen) null);
-        }
-        minecraft.a(screen);
-    }
-
     public double getPlayerXGuess(float renderTick) {
         EntityPlayerSP plyr = getPlayer();
         return plyr.l + ((plyr.o - plyr.l) * renderTick);
@@ -81,10 +73,6 @@ public class Obfuscation implements InitializationFactory {
 
     public World getWorld() {
         return getWorld(minecraft);
-    }
-
-    public GuiScreen getCurrentScreen() {
-        return getCurrentScreen(minecraft);
     }
 
     public void spawnEntity(Entity entity) {
@@ -116,10 +104,6 @@ public class Obfuscation implements InitializationFactory {
 
     public static World getWorld(Minecraft mc) {
         return mc.f;
-    }
-    
-    public static GuiScreen getCurrentScreen(Minecraft mc) {
-        return mc.s;
     }
 
     public static void setEntityPositionToPlayer(Minecraft mc, Entity entity) {

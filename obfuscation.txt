@@ -5,57 +5,51 @@ renames:
   - notch: if
     wecui: ifclass
     packageOnly: false
-  - notch: nn
+  - notch: iw
     wecui: Entity
     packageOnly: false
-  - notch: ahv
+  - notch: arf
     wecui: EntityClientPlayerMP
     packageOnly: false
-  - notch: vq
+  - notch: asp
     wecui: EntityPlayerSP
     packageOnly: false
-  - notch: yf
-    wecui: GuiChat
-    packageOnly: false
-  - notch: vp
-    wecui: GuiScreen
-    packageOnly: false
-  - notch: afu
+  - notch: net.minecraft.client.i
     wecui: KeyBinding
     packageOnly: false
-  - notch: abh
+  - notch: 
     wecui: MCHash
     packageOnly: false
-  - notch: ady
+  - notch: an
     wecui: NBTTagCompound
     packageOnly: false
-  - notch: adl
+  - notch: aqu
     wecui: NetClientHandler
     packageOnly: false
-  - notch: oe
+  - notch: dc
     wecui: NetHandler
     packageOnly: false
-  - notch: lg
+  - notch: bb
     wecui: NetworkManager
     packageOnly: false
-  - notch: abs
+  - notch: db
     wecui: Packet
     packageOnly: false
-  - notch: afd
+  - notch: bq
     wecui: Packet3Chat
     packageOnly: false
-  - notch: ee
+  - notch: ce
     wecui: Packet250CustomPayload
     packageOnly: false
-  - notch: um
+  - notch: aty
     wecui: Render
     packageOnly: false
-  - notch: tf
+  - notch: net.minecraft.client.j
     wecui: RenderHelper
     packageOnly: false
-  - notch: adz
+  - notch: atd
     wecui: Tessellator
     packageOnly: false
-  - notch: xd
+  - notch: ga
     wecui: World
     packageOnly: false
