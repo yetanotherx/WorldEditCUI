@@ -5,25 +5,25 @@ renames:
   - notch: if
     wecui: ifclass
     packageOnly: false
-  - notch: iw
+  - notch: jm
     wecui: Entity
     packageOnly: false
-  - notch: arf
+  - notch: atf
     wecui: EntityClientPlayerMP
     packageOnly: false
-  - notch: asp
+  - notch: aup
     wecui: EntityPlayerSP
     packageOnly: false
-  - notch: net.minecraft.client.i
+  - notch: ane
     wecui: KeyBinding
     packageOnly: false
-  - notch: 
+  - notch: ib
     wecui: MCHash
     packageOnly: false
   - notch: an
     wecui: NBTTagCompound
     packageOnly: false
-  - notch: aqu
+  - notch: asu
     wecui: NetClientHandler
     packageOnly: false
   - notch: dc
@@ -41,15 +41,15 @@ renames:
   - notch: ce
     wecui: Packet250CustomPayload
     packageOnly: false
-  - notch: aty
+  - notch: avy
     wecui: Render
     packageOnly: false
-  - notch: net.minecraft.client.j
+  - notch: anf
     wecui: RenderHelper
     packageOnly: false
-  - notch: atd
+  - notch: avd
     wecui: Tessellator
     packageOnly: false
-  - notch: ga
+  - notch: gq
     wecui: World
     packageOnly: false
