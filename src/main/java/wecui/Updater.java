@@ -25,6 +25,10 @@ public class Updater extends Thread {
     @Override
     @SuppressWarnings("unchecked")
     public void run() {
+        if (controller.configuration.ignoreUpdates()) {
+            return;
+        }
+
         InputStream is = null;
         ConfigurationNode node = new ConfigurationNode(new HashMap<String, Object>());
 

@@ -20,6 +20,7 @@ public class CUIConfiguration implements InitializationFactory {
 
     protected WorldEditCUI controller;
     protected boolean debugMode = false;
+    protected boolean ignoreUpdates = false;
     protected String cuboidGridColor = "#CC3333";
     protected String cuboidEdgeColor = "#CC4C4C";
     protected String cuboidFirstPointColor = "#33CC33";
@@ -82,7 +83,8 @@ public class CUIConfiguration implements InitializationFactory {
         config.load();
 
         this.debugMode = config.getBoolean("debug", debugMode);
-
+        this.ignoreUpdates = config.getBoolean("ignoreUpdates", ignoreUpdates);
+        
         this.cuboidGridColor = parseColor(config.getString("colors.cuboidGrid"), this.cuboidGridColor);
         this.cuboidEdgeColor = parseColor(config.getString("colors.cuboidEdge"), this.cuboidEdgeColor);
         this.cuboidFirstPointColor = parseColor(config.getString("colors.cuboidFirstPoint"), this.cuboidFirstPointColor);
@@ -138,6 +140,10 @@ public class CUIConfiguration implements InitializationFactory {
 
     public boolean isDebugMode() {
         return debugMode;
+    }
+
+    public boolean ignoreUpdates() {
+        return ignoreUpdates;
     }
 
     public String getUpdateFile() {

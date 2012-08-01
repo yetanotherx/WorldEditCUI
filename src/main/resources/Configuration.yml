@@ -16,3 +16,5 @@ colors:
     ellipsoidPoint: '#CCCC33'
 
 debug: false
+
+ignoreUpdates: false
