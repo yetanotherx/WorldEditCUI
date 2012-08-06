@@ -56,6 +56,16 @@ public class RenderEntity extends Entity {
     public boolean a(Vec3 vector) {
         return true;
     } // Entity.isInRangeToRenderVec3D
+
+    @Override
+    public int b(float f) {
+        return 0xf000f0;
+    } // Entity.getBrightnessForRender
+
+    @Override
+    public float c(float f) {
+        return 1f;
+    } // Entity.getBrightness
     
     
 }

@@ -17,6 +17,8 @@ import wecui.render.region.CuboidRegion;
  * Main ModLoader class. Initializes the mod, enabling CUI communication 
  * between server and client, in addition to enabling rendering.
  * 
+ * TODO: Move Configuration.yml to WEConfig.yml
+ * 
  * @author lahwran
  * @author yetanotherx
  */

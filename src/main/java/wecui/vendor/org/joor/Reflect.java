@@ -142,7 +142,7 @@ public class Reflect {
     // Fluent Configuration API
     // ---------------------------------------------------------------------
 
-    // TODO: Allow for accessing non-public members, methods, etc
+    // TO_DO: Allow for accessing non-public members, methods, etc
 
     // ---------------------------------------------------------------------
     // Fluent Reflection API
