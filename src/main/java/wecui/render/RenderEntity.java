@@ -40,7 +40,7 @@ public class RenderEntity extends Entity {
     
     @Override
     public void h_() {
-        Obfuscation.setEntityPositionToPlayer(controller.getMinecraft(), this);
+        //Obfuscation.setEntityPositionToPlayer(controller.getMinecraft(), this);
     } // Entity.onUpdate
 
     @Override

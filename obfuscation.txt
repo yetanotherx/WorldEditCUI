@@ -56,3 +56,6 @@ renames:
   - notch: ajr
     wecui: Vec3
     packageOnly: false
+  - notch: ij
+    wecui: Profiler
+    packageOnly: false
