@@ -2,7 +2,8 @@ package wecui.render;
 
 import deobf.Entity;
 import deobf.NBTTagCompound;
-import deobf.World;
+import deobf.WorldClient;
+import deobf.Vec3;
 import wecui.WorldEditCUI;
 import wecui.obfuscation.Obfuscation;
 
@@ -12,13 +13,13 @@ import wecui.obfuscation.Obfuscation;
  * @author lahwran
  * @author yetanotherx
  * 
- * @obfuscated 1.2.5
+ * @obfuscated 1.3.1
  */
 public class RenderEntity extends Entity {
 
     protected WorldEditCUI controller;
 
-    public RenderEntity(WorldEditCUI controller, World world) {
+    public RenderEntity(WorldEditCUI controller, WorldClient world) {
         super(world);
         this.controller = controller;
         ak = true; // ignoreFrustumCheck \o/
@@ -30,19 +31,31 @@ public class RenderEntity extends Entity {
     } // Entity.readEntityFromNBT
 
     @Override
-    protected void b() {
+    protected void a() {
     } // Entity.entityInit
 
     @Override
     protected void b(NBTTagCompound arg0) {
-    }
+    } // Entity.writeEntityToNBT
     
     @Override
-    public void J_() {
+    public void h_() {
         Obfuscation.setEntityPositionToPlayer(controller.getMinecraft(), this);
+    } // Entity.onUpdate
+
+    @Override
+    public void y() {
+    } // Entity.setDead
+
+    @Override
+    public String ak() {
+        return "CUI";
     }
 
     @Override
-    public void A() {
-    }
+    public boolean a(Vec3 vector) {
+        return true;
+    } // Entity.isInRangeToRenderVec3D
+    
+    
 }

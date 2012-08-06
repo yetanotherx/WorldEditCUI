@@ -50,6 +50,9 @@ renames:
   - notch: avd
     wecui: Tessellator
     packageOnly: false
-  - notch: gq
-    wecui: World
+  - notch: atc
+    wecui: WorldClient
+    packageOnly: false
+  - notch: ajr
+    wecui: Vec3
     packageOnly: false

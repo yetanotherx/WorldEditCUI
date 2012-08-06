@@ -7,14 +7,10 @@ package wecui.obfuscation;
  * 
  * @author yetanotherx
  * 
- * @obfuscated 1.2.5
+ * @obfuscated 1.3.1
  */
 public enum FieldObfuscation {
-
-    /**
-     * Location of the .minecraft directory in Minecraft.class
-     */
-    MINECRAFTDIR("aj"),
+    
     /**
      * NetworkManager instance in NetClientHandler.class
      */
@@ -22,11 +18,11 @@ public enum FieldObfuscation {
     /**
      * Packet stream list in NetworkManager.class
      */
-    PACKETLIST("n"),
+    PACKETLIST("p"),
     /**
      * ID->Class hashmap for packets in Packet.class
      */
-    IDSTOCLASSES("k"),
+    IDSTOCLASSES("l"),
     /**
      * Class->ID hashmap for packets in Packet.class
      */

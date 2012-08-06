@@ -40,6 +40,10 @@ public class WorldRenderListener implements Listener<WorldRenderEvent> {
             GL11.glTranslated(-obf.getPlayerXGuess(event.getPartialTick()),
                     -obf.getPlayerYGuess(event.getPartialTick()),
                     -obf.getPlayerZGuess(event.getPartialTick()));
+//            float x = event.getPosition().getX();
+//            float y = event.getPosition().getY();
+//            float z = event.getPosition().getZ();
+//            GL11.glTranslatef(x, y, z);
             GL11.glColor3f(1.0f, 1.0f, 1.0f);
             if (controller.getSelection() != null) {
                 controller.getSelection().render();

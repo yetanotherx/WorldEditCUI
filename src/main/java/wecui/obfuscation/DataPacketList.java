@@ -91,7 +91,13 @@ public class DataPacketList<T> extends ArrayList<T> {
 
             Field nmField = NetClientHandler.class.getDeclaredField(FieldObfuscation.NETWORKMANAGER.getVariable());
             nmField.setAccessible(true);
-            NetworkManager nm = (NetworkManager) nmField.get(nch);
+            Object nmMebbe = nmField.get(nch);
+            NetworkManager nm = null;
+            if( nmMebbe instanceof NetworkManager ) {
+                nm = (NetworkManager) nmField.get(nch);
+            } else {
+                return;
+            }
 
             Field listField = NetworkManager.class.getDeclaredField(FieldObfuscation.PACKETLIST.getVariable());
             listField.setAccessible(true);

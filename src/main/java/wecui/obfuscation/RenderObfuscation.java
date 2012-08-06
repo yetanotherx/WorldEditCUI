@@ -10,7 +10,7 @@ import deobf.Tessellator;
  * @author yetanotherx
  * @author lahwran
  * 
- * @obfuscated 1.2.5
+ * @obfuscated 1.3.1
  */
 public class RenderObfuscation {
 
@@ -21,7 +21,7 @@ public class RenderObfuscation {
     }
     
     public void startDrawing(int type) {
-        tess.a(type);
+        tess.b(type);
     }
 
     public void addVertex(double x, double y, double z) {

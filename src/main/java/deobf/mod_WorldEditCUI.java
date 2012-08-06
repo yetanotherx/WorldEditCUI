@@ -19,21 +19,20 @@ import wecui.render.region.CuboidRegion;
  * 
  * @author lahwran
  * @author yetanotherx
- * 
- * @obfuscated 1.2.5
  */
 public class mod_WorldEditCUI extends BaseMod {
 
     protected WorldEditCUI controller;
-    protected World lastWorld;
+    protected WorldClient lastWorld;
     protected EntityPlayerSP lastPlayer;
-    protected RenderEntity renderEntity;
     protected boolean gameStarted = false;
     public final static Charset UTF_8_CHARSET = Charset.forName("UTF-8");
 
     public mod_WorldEditCUI() {
         this.controller = new WorldEditCUI(ModLoader.getMinecraftInstance());
         this.controller.initialize();
+        
+        ModLoader.registerEntityID(RenderEntity.class, "CUI", ModLoader.getUniqueEntityId());
 
         ModLoader.setInGameHook(this, true, true); // the last true is because we don't want to iterate the entity list too often
         ModLoader.registerPacketChannel(this, "WECUI");
@@ -60,7 +59,7 @@ public class mod_WorldEditCUI extends BaseMod {
     public boolean onTickInGame(float partialticks, Minecraft mc) {
 
         if (Obfuscation.getWorld(mc) != lastWorld || Obfuscation.getPlayer(mc) != lastPlayer) {
-            controller.getObfuscation().spawnEntity(renderEntity);
+            controller.getObfuscation().spawnEntity();
 
             lastWorld = Obfuscation.getWorld(mc);
             lastPlayer = Obfuscation.getPlayer(mc);
@@ -76,21 +75,17 @@ public class mod_WorldEditCUI extends BaseMod {
         }
         return true;
     }
-
+    
     @Override
-    public void receiveCustomPacket(Packet250CustomPayload packet) {
-        ChannelEvent channelevent = new ChannelEvent(controller, new String(packet.c, UTF_8_CHARSET));
+    public void clientCustomPayload(NetClientHandler handler, Packet250CustomPayload packet) {
+        ChannelEvent channelevent = new ChannelEvent(controller, new String(Obfuscation.getBytesFromPacket(packet), UTF_8_CHARSET));
         controller.getEventManager().callEvent(channelevent);
     }
 
     @Override
-    public void serverConnect(NetClientHandler handler) {
+    public void clientConnect(NetClientHandler handler) {
         byte[] buffer = ("v|" + WorldEditCUI.protocolVersion).getBytes(UTF_8_CHARSET);
-        Packet250CustomPayload packet = new Packet250CustomPayload();
-        packet.a = "WECUI";
-        packet.b = buffer.length;
-        packet.c = buffer;
-        ModLoader.sendPacket(packet);
+        ModLoader.clientSendPacket(Obfuscation.newPayloadPacket("WECUI", buffer.length, buffer));
     }
 
     @Override

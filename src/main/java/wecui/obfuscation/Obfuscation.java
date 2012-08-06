@@ -3,11 +3,11 @@ package wecui.obfuscation;
 import deobf.Entity;
 import deobf.EntityClientPlayerMP;
 import deobf.EntityPlayerSP;
-import deobf.GuiScreen;
 import deobf.MCHash;
 import deobf.NetClientHandler;
+import deobf.Packet250CustomPayload;
 import deobf.Packet3Chat;
-import deobf.World;
+import deobf.WorldClient;
 import java.io.File;
 import net.minecraft.client.Minecraft;
 import wecui.InitializationFactory;
@@ -22,7 +22,7 @@ import wecui.render.RenderEntity;
  * @author lahwran
  * @author yetanotherx
  * 
- * @obfuscated 1.2.5
+ * @obfuscated 1.3.1
  */
 public class Obfuscation implements InitializationFactory {
 
@@ -39,7 +39,8 @@ public class Obfuscation implements InitializationFactory {
     }
 
     public boolean isMultiplayerWorld() {
-        return minecraft.l();
+        return true; // TODO - Temprarily until I can figure out the new server thing
+        //return minecraft.l();
     }
 
     /**
@@ -48,74 +49,85 @@ public class Obfuscation implements InitializationFactory {
      */
     public void showChatMessage(String chat) {
         if (getPlayer() != null) {
-            getPlayer().b(chat);
+            getPlayer().c(chat);
         }
-    }
-
-    public double getPlayerXGuess(float renderTick) {
-        EntityPlayerSP plyr = getPlayer();
-        return plyr.l + ((plyr.o - plyr.l) * renderTick);
-    }
-
-    public double getPlayerYGuess(float renderTick) {
-        EntityPlayerSP plyr = getPlayer();
-        return plyr.m + ((plyr.p - plyr.m) * renderTick);
-    }
-
-    public double getPlayerZGuess(float renderTick) {
-        EntityPlayerSP plyr = getPlayer();
-        return plyr.n + ((plyr.q - plyr.n) * renderTick);
     }
 
     public EntityPlayerSP getPlayer() {
         return getPlayer(minecraft);
     }
 
-    public World getWorld() {
+    public WorldClient getWorld() {
         return getWorld(minecraft);
     }
 
-    public void spawnEntity(Entity entity) {
+    public void spawnEntity() {
         Minecraft mc = this.controller.getMinecraft();
 
-        entity = new RenderEntity(this.controller, getWorld(mc));
+        Entity entity = new RenderEntity(this.controller, getWorld(mc));
         setEntityPositionToPlayer(mc, entity);
-        getWorld(mc).a(entity);
+        getWorld(mc).d(entity);
         setEntityPositionToPlayer(mc, entity);
         controller.getDebugger().debug("RenderEntity spawned");
-
     }
 
     public static double getPlayerX(EntityPlayerSP player) {
-        return player.o;
+        return player.t;
     }
 
     public static double getPlayerY(EntityPlayerSP player) {
-        return player.p;
+        return player.u;
     }
 
     public static double getPlayerZ(EntityPlayerSP player) {
-        return player.q;
+        return player.v;
+    }
+    
+    public double getPlayerXGuess(float renderTick) {
+        EntityPlayerSP plyr = getPlayer();
+        return plyr.q + ((plyr.t - plyr.q) * renderTick);
+    }
+
+    public double getPlayerYGuess(float renderTick) {
+        EntityPlayerSP plyr = getPlayer();
+        return plyr.r + ((plyr.u - plyr.r) * renderTick);
+    }
+
+    public double getPlayerZGuess(float renderTick) {
+        EntityPlayerSP plyr = getPlayer();
+        return plyr.s + ((plyr.v - plyr.s) * renderTick);
     }
 
     public static EntityPlayerSP getPlayer(Minecraft mc) {
-        return mc.h;
+        return mc.g;
     }
 
-    public static World getWorld(Minecraft mc) {
-        return mc.f;
+    public static WorldClient getWorld(Minecraft mc) {
+        return mc.e;
     }
 
     public static void setEntityPositionToPlayer(Minecraft mc, Entity entity) {
-        entity.d(getPlayerX(mc.h), getPlayerY(mc.h), getPlayerZ(mc.h));
+        entity.d(getPlayerX(mc.g), getPlayerY(mc.g), getPlayerZ(mc.g));
     }
 
     public NetClientHandler getNetClientHandler(EntityClientPlayerMP player) {
-        return player.cl;
+        return player.a;
     }
 
     public static String getChatFromPacket(Packet3Chat packet) {
-        return packet.a;
+        return packet.b;
+    }
+    
+    public static byte[] getBytesFromPacket(Packet250CustomPayload packet) {
+        return packet.c;
+    }
+    
+    public static Packet250CustomPayload newPayloadPacket(String name, int len, byte[] data) {
+        Packet250CustomPayload packet = new Packet250CustomPayload();
+        packet.a = name;
+        packet.b = len;
+        packet.c = data;
+        return packet;
     }
 
     public static void putToMCHash(MCHash hash, int first, Object second) {
