@@ -1,6 +1,5 @@
 package wecui.render;
 
-
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -41,6 +40,9 @@ public class LineInfo {
         this.depthfunc = orig.depthfunc;
     }
 
+    /**
+     * Sets the lineWidth and depthFunction based on this color
+     */
     public void prepareRender() {
         GL11.glLineWidth(lineWidth);
         GL11.glDepthFunc(depthfunc);

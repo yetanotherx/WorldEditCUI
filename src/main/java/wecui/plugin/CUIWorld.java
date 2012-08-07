@@ -13,7 +13,7 @@ import com.sk89q.worldedit.regions.Region;
 import wecui.WorldEditCUI;
 
 public class CUIWorld extends LocalWorld {
-    
+
     protected WorldEditCUI controller;
 
     public CUIWorld(WorldEditCUI controller) {
@@ -38,7 +38,6 @@ public class CUIWorld extends LocalWorld {
 
     @Override
     public void setBlockData(Vector pt, int data) {
-        
     }
 
     @Override
@@ -125,7 +124,7 @@ public class CUIWorld extends LocalWorld {
         if (!(other instanceof CUIWorld)) {
             return false;
         }
-        
+
         return true;
     }
 
@@ -143,5 +142,4 @@ public class CUIWorld extends LocalWorld {
     public void setBiome(Vector2D pt, BiomeType biome) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
 }

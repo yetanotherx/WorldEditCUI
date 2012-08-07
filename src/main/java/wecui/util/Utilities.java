@@ -122,14 +122,19 @@ public class Utilities {
         }
         return buf.toString();
     }
-    
+
+    /**
+     * Creates a pretty representation of a Map
+     * @param map
+     * @return 
+     */
     public static String debugMap(Map<?, ?> map) {
         StringBuilder build = new StringBuilder();
-        
-        for( Object key : map.keySet() ) { 
-            build.append(key).append(" - ").append(map.get(key)).append("\n");
+
+        for (Object key : map.keySet()) {
+            build.append(key.toString()).append(" - ").append(map.get(key).toString()).append("\n");
         }
-        
+
         return build.toString();
     }
 }

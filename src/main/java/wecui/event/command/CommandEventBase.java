@@ -34,5 +34,4 @@ public abstract class CommandEventBase implements Cancellable {
     public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
-    
 }

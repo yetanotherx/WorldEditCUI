@@ -22,6 +22,11 @@ public class Updater extends Thread {
         this.controller = controller;
     }
 
+    /**
+     * Checks the most recent version of updates.yml on GitHub, and parses the
+     * YAML to find supported versions. If the current version isn't supported,
+     * show an error to the user.
+     */
     @Override
     @SuppressWarnings("unchecked")
     public void run() {

@@ -1,5 +1,10 @@
 package wecui.util;
 
+/**
+ * A version of Vector3 that can be modified.
+ * 
+ * @author yetanotherx
+ */
 public class Vector3m extends Vector3 {
 
 	public Vector3m(float x, float y, float z) {

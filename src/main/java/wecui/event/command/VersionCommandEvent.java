@@ -24,5 +24,4 @@ public class VersionCommandEvent extends CommandEventBase {
     public void run() {
         this.controller.getObfuscation().showChatMessage(ChatColor.LIGHT_PURPLE + "WorldEditCUI version " + WorldEditCUI.getVersion());
     }
-    
 }

@@ -25,7 +25,7 @@ public class PointCube {
     public PointCube(int x, int y, int z) {
         this.point = new Vector3(x, y, z);
     }
-    
+
     public PointCube(double x, double y, double z) {
         this.point = new Vector3(x, y, z);
     }

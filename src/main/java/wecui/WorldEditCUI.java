@@ -25,10 +25,7 @@ import wecui.render.region.CuboidRegion;
  * TODO: Preview mode
  * TODO: Command transactions
  * TODO: Add ability to flash selection
- * 
- * BUG: Lighting
- * BUG: Polys with SPC
- * 
+ *  
  * @author yetanotherx
  */
 public class WorldEditCUI {

@@ -40,6 +40,10 @@ public class CUIConfiguration implements InitializationFactory {
         this.controller = controller;
     }
 
+    /**
+     * Copies the default config file to the proper directory if it does not
+     * exist. It then reads the file and sets each variable to the proper value.
+     */
     @Override
     public void initialize() {
 
@@ -78,13 +82,13 @@ public class CUIConfiguration implements InitializationFactory {
                 }
             }
         }
-        
+
         config = new Configuration(file);
         config.load();
 
         this.debugMode = config.getBoolean("debug", debugMode);
         this.ignoreUpdates = config.getBoolean("ignoreUpdates", ignoreUpdates);
-        
+
         this.cuboidGridColor = parseColor(config.getString("colors.cuboidGrid"), this.cuboidGridColor);
         this.cuboidEdgeColor = parseColor(config.getString("colors.cuboidEdge"), this.cuboidEdgeColor);
         this.cuboidFirstPointColor = parseColor(config.getString("colors.cuboidFirstPoint"), this.cuboidFirstPointColor);
@@ -114,6 +118,13 @@ public class CUIConfiguration implements InitializationFactory {
         this.updateFile = config.getString("updateFile", this.updateFile);
     }
 
+    /**
+     * Validates a user-entered color code. Ensures that color is not null, it
+     * starts with #, that it has all 6 digits, and that each hex code is valid.
+     * @param color
+     * @param def
+     * @return 
+     */
     protected String parseColor(String color, String def) {
         if (color == null) {
             return def;

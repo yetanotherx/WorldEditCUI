@@ -9,9 +9,7 @@ import wecui.vendor.org.joor.Reflect;
 import wecui.exception.ReflectException;
 
 /**
- * Parses incoming/outgoing chat messages, and calls a CUIEvent if it matches the WorldEdit CUI header
- * WorldEdit itself sends a message that is prepended by 4 special characters
- * Relevant: http://bit.ly/v3Me4m
+ * Parses outgoing commands, and checks if they match an existing command.
  * 
  * @author lahwran
  * @author yetanotherx

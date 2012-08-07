@@ -24,7 +24,7 @@ public class LocalPlugin implements InitializationFactory {
     public LocalPlugin(WorldEditCUI controller) {
         this.controller = controller;
     }
-    
+
     @Override
     public void initialize() {
         controller.setLocalPlugin(new LocalPlugin(controller));
@@ -38,17 +38,17 @@ public class LocalPlugin implements InitializationFactory {
         controller.getLocalPlugin().setInitialized(true);
 
         /*String local = WorldEdit.getVersion();
-
+        
         String versions = "Server version - " + plugin + " | Local version - " + local;
         controller.getDebugger().debug(versions);
-
+        
         if (!local.equals(plugin)) {
-            controller.getDebugger().info(versions);
-            return throwError("Server and local versions of WorldEdit do not match!");
+        controller.getDebugger().info(versions);
+        return throwError("Server and local versions of WorldEdit do not match!");
         }
-
+        
         if (!WorldEditCUI.WEVERSIONS.contains(local)) {
-            return throwError("WorldEdit version is not compatible with WorldEditCUI! Certain features will not work!");
+        return throwError("WorldEdit version is not compatible with WorldEditCUI! Certain features will not work!");
         }*/
 
         this.setConfiguration(new CUIWEConfiguration(controller));

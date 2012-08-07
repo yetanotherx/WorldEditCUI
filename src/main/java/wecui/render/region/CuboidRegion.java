@@ -51,6 +51,11 @@ public class CuboidRegion extends BaseRegion {
         }
     }
 
+    /**
+     * Calculates the boundary points of the actual box. 
+     * I have no idea what I'm doing.
+     * @return 
+     */
     protected Vector3m[] calcBounds() {
         float off = 0.02f;
         float off1 = 1 + off;

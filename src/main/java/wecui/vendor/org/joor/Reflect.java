@@ -66,7 +66,6 @@ public class Reflect {
     // ---------------------------------------------------------------------
     // Static API used as entrance points to the fluent API
     // ---------------------------------------------------------------------
-
     /**
      * Wrap a class name.
      * <p>
@@ -107,16 +106,13 @@ public class Reflect {
     public static Reflect on(Object object) {
         return new Reflect(object);
     }
-
     // ---------------------------------------------------------------------
     // Members
     // ---------------------------------------------------------------------
-
     /**
      * The wrapped object
      */
-    private final Object  object;
-
+    private final Object object;
     /**
      * A flag indicating whether the wrapped object is a {@link Class} (for
      * accessing static fields and methods), or any other type of {@link Object}
@@ -127,7 +123,6 @@ public class Reflect {
     // ---------------------------------------------------------------------
     // Constructors
     // ---------------------------------------------------------------------
-
     private Reflect(Class<?> type) {
         this.object = type;
         this.isClass = true;
@@ -141,13 +136,10 @@ public class Reflect {
     // ---------------------------------------------------------------------
     // Fluent Configuration API
     // ---------------------------------------------------------------------
-
     // TO_DO: Allow for accessing non-public members, methods, etc
-
     // ---------------------------------------------------------------------
     // Fluent Reflection API
     // ---------------------------------------------------------------------
-
     /**
      * Get the wrapped object
      *
@@ -174,13 +166,12 @@ public class Reflect {
     public Reflect set(String name, Object value) throws ReflectException {
         try {
             Field field = type().getField(name);
-            if( !field.isAccessible() ) {
+            if (!field.isAccessible()) {
                 field.setAccessible(true);
             }
             field.set(object, unwrap(value));
             return this;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw new ReflectException(e);
         }
     }
@@ -220,12 +211,11 @@ public class Reflect {
     public Reflect field(String name) throws ReflectException {
         try {
             Field field = type().getField(name);
-            if( !field.isAccessible() ) {
+            if (!field.isAccessible()) {
                 field.setAccessible(true);
             }
             return on(field.get(object));
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw new ReflectException(e);
         }
     }
@@ -312,9 +302,7 @@ public class Reflect {
         try {
             Method method = type().getMethod(name, types);
             return on(method, object, args);
-        }
-
-        // If there is no exact match, try to find one that has a "similar"
+        } // If there is no exact match, try to find one that has a "similar"
         // signature if primitive argument types are converted to their wrappers
         catch (NoSuchMethodException e) {
             for (Method method : type().getMethods()) {
@@ -375,9 +363,7 @@ public class Reflect {
         try {
             Constructor<?> constructor = type().getConstructor(types);
             return on(constructor, args);
-        }
-
-        // If there is no exact match, try to find one that has a "similar"
+        } // If there is no exact match, try to find one that has a "similar"
         // signature if primitive argument types are converted to their wrappers
         catch (NoSuchMethodException e) {
             for (Constructor<?> constructor : type().getConstructors()) {
@@ -393,7 +379,6 @@ public class Reflect {
     // ---------------------------------------------------------------------
     // Object API
     // ---------------------------------------------------------------------
-
     /**
      * Check whether two arrays of types match, converting primitive types to
      * their corresponding wrappers.
@@ -407,8 +392,7 @@ public class Reflect {
             }
 
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -444,15 +428,13 @@ public class Reflect {
     // ---------------------------------------------------------------------
     // Utility methods
     // ---------------------------------------------------------------------
-
     /**
      * Wrap an object created from a constructor
      */
     private static Reflect on(Constructor<?> constructor, Object... args) throws ReflectException {
         try {
             return on(constructor.newInstance(args));
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw new ReflectException(e);
         }
     }
@@ -465,12 +447,10 @@ public class Reflect {
             if (method.getReturnType() == void.class) {
                 method.invoke(object, args);
                 return on(object);
-            }
-            else {
+            } else {
                 return on(method.invoke(object, args));
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw new ReflectException(e);
         }
     }
@@ -513,8 +493,7 @@ public class Reflect {
     private static Class<?> forName(String name) throws ReflectException {
         try {
             return Class.forName(name);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw new ReflectException(e);
         }
     }
@@ -527,8 +506,7 @@ public class Reflect {
     private Class<?> type() {
         if (isClass) {
             return (Class<?>) object;
-        }
-        else {
+        } else {
             return object.getClass();
         }
     }
@@ -540,29 +518,21 @@ public class Reflect {
     private static Class<?> wrapper(Class<?> type) {
         if (boolean.class == type) {
             return Boolean.class;
-        }
-        else if (int.class == type) {
+        } else if (int.class == type) {
             return Integer.class;
-        }
-        else if (long.class == type) {
+        } else if (long.class == type) {
             return Long.class;
-        }
-        else if (short.class == type) {
+        } else if (short.class == type) {
             return Short.class;
-        }
-        else if (byte.class == type) {
+        } else if (byte.class == type) {
             return Byte.class;
-        }
-        else if (double.class == type) {
+        } else if (double.class == type) {
             return Double.class;
-        }
-        else if (float.class == type) {
+        } else if (float.class == type) {
             return Float.class;
-        }
-        else if (char.class == type) {
+        } else if (char.class == type) {
             return Character.class;
-        }
-        else {
+        } else {
             return type;
         }
     }

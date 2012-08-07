@@ -42,7 +42,7 @@ public class ChatCommandEvent extends Event<ChatCommandEvent> implements Cancell
                 this.args = new String[0];
             }
         }
-        
+
     }
 
     @Override
@@ -87,7 +87,7 @@ public class ChatCommandEvent extends Event<ChatCommandEvent> implements Cancell
     public String getRawMessage() {
         return rawMessage;
     }
-    
+
     @Override
     public boolean isCancelled() {
         return cancelled;
@@ -96,5 +96,4 @@ public class ChatCommandEvent extends Event<ChatCommandEvent> implements Cancell
     public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
-    
 }

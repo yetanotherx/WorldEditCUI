@@ -11,9 +11,8 @@ import java.util.List;
  * 
  */
 public enum CommandEventType {
-    
+
     VERSION(VersionCommandEvent.class, "ver");
-    
     protected final Class<? extends CommandEventBase> eventClass;
     protected List<String> aliases;
 
@@ -22,7 +21,7 @@ public enum CommandEventType {
         this.aliases = new ArrayList<String>();
     }
 
-    private CommandEventType(Class<? extends CommandEventBase> eventClass, String ... aliases) {
+    private CommandEventType(Class<? extends CommandEventBase> eventClass, String... aliases) {
         this.eventClass = eventClass;
         this.aliases = Arrays.asList(aliases);
     }
@@ -37,11 +36,10 @@ public enum CommandEventType {
 
     public static CommandEventType getTypeFromCommand(String key) {
         for (CommandEventType value : CommandEventType.values()) {
-            if (value.name().toLowerCase().equals(key) || value.getAliases().contains(key) ) {
+            if (value.name().toLowerCase().equals(key) || value.getAliases().contains(key)) {
                 return value;
             }
         }
         return null;
     }
-    
 }

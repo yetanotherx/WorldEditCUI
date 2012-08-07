@@ -16,7 +16,6 @@ public class StartMC {
     public static void main(String[] args) {
         try {
             // This overrides it to a local copy, to preserve my production copy
-            // It also ensures that I start with a fresh bin directory
             Field f = Minecraft.class.getDeclaredField("am");
             f.setAccessible(true);
             f.set(null, new File("."));

@@ -33,10 +33,10 @@ public class mod_WorldEditCUI extends BaseMod {
     public mod_WorldEditCUI() {
         this.controller = new WorldEditCUI(ModLoader.getMinecraftInstance());
         this.controller.initialize();
-        
+
         ModLoader.registerEntityID(RenderEntity.class, "CUI", ModLoader.getUniqueEntityId());
 
-        ModLoader.setInGameHook(this, true, true); // the last true is because we don't want to iterate the entity list too often
+        ModLoader.setInGameHook(this, true, true);
         ModLoader.registerPacketChannel(this, "WECUI");
     }
 
@@ -48,16 +48,15 @@ public class mod_WorldEditCUI extends BaseMod {
      * Checks if the world or player has changed from the last time we checked.
      * If it's changed, spawn a new render entity and update accordingly.
      * 
-     * Additionally, initialize SPC plugin on first load. This is done now
-     * because SPC only loads spc_Classes in the minecraft.jar file, and not
-     * in the mods/ directory.
+     * It also checks if initialization tasks have been done, such as checking
+     * for updates, resetting the region, and registering reflection for the
+     * outgoing command handler.
      * 
      * @param partialticks
      * @param mc
      * @return 
      */
     @Override
-    @SuppressWarnings("unchecked")
     public boolean onTickInGame(float partialticks, Minecraft mc) {
 
         if (Obfuscation.getWorld(mc) != lastWorld || Obfuscation.getPlayer(mc) != lastPlayer) {
@@ -68,28 +67,43 @@ public class mod_WorldEditCUI extends BaseMod {
 
             if (!gameStarted) {
                 gameStarted = true;
-                
+
                 new Updater(controller).start();
                 this.controller.setSelection(new CuboidRegion(controller));
-                
+
                 DataPacketList.register(controller);
             }
         }
         return true;
     }
-    
+
+    /**
+     * Called when the client receives a CUI packet from the server. 
+     * @param handler
+     * @param packet 
+     */
     @Override
     public void clientCustomPayload(NetClientHandler handler, Packet250CustomPayload packet) {
         ChannelEvent channelevent = new ChannelEvent(controller, new String(Obfuscation.getBytesFromPacket(packet), UTF_8_CHARSET));
         controller.getEventManager().callEvent(channelevent);
     }
 
+    /**
+     * Called when the client connects to a server. Sends the protocol version 
+     * in a channel message to the server.
+     * @param handler 
+     */
     @Override
     public void clientConnect(NetClientHandler handler) {
         byte[] buffer = ("v|" + WorldEditCUI.protocolVersion).getBytes(UTF_8_CHARSET);
         ModLoader.clientSendPacket(Obfuscation.newPayloadPacket("WECUI", buffer.length, buffer));
     }
 
+    /**
+     * Tells the renderer that all RenderEntity's should be rendered with the
+     * RenderHooks class.
+     * @param map 
+     */
     @Override
     @SuppressWarnings("unchecked")
     public void addRenderer(Map map) {
@@ -100,5 +114,4 @@ public class mod_WorldEditCUI extends BaseMod {
     public String getVersion() {
         return WorldEditCUI.getVersion();
     }
-    
 }

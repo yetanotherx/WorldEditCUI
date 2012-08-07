@@ -17,7 +17,7 @@ public class spc_WorldEditCUI extends SPCPlugin {
     public spc_WorldEditCUI(WorldEditCUI controller) {
         this.controller = controller;
     }
-    
+
     @Override
     public String getVersion() {
         return WorldEditCUI.getVersion();
@@ -30,7 +30,7 @@ public class spc_WorldEditCUI extends SPCPlugin {
 
     @Override
     public void handleCUIEvent(String type, String params[]) {
-        if( controller != null ) {
+        if (controller != null) {
             controller.getEventManager().callEvent(new CUIEvent(controller, type, params));
         }
     }

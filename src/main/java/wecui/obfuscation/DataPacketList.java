@@ -42,7 +42,7 @@ public class DataPacketList<T> extends ArrayList<T> {
      */
     public boolean add(T packet) {
         if (packet instanceof Packet3Chat) {
-            
+
             boolean cancelled = false;
             String s = Obfuscation.getChatFromPacket((Packet3Chat) packet);
 
@@ -70,12 +70,12 @@ public class DataPacketList<T> extends ArrayList<T> {
      * @param controller 
      */
     public static void register(WorldEditCUI controller) {
-        
-        if( registered ) {
+
+        if (registered) {
             return;
         }
         registered = true;
-        
+
         DataPacketList<Packet> list = new DataPacketList<Packet>(controller, Packet.class);
         Obfuscation obf = controller.getObfuscation();
 
@@ -93,7 +93,7 @@ public class DataPacketList<T> extends ArrayList<T> {
             nmField.setAccessible(true);
             Object nmMebbe = nmField.get(nch);
             NetworkManager nm = null;
-            if( nmMebbe instanceof NetworkManager ) {
+            if (nmMebbe instanceof NetworkManager) {
                 nm = (NetworkManager) nmField.get(nch);
             } else {
                 return;
@@ -108,7 +108,7 @@ public class DataPacketList<T> extends ArrayList<T> {
 
             listField.set(nm, list);
             nmField.set(nch, nm);
-            
+
         } catch (Exception e) {
             throw new RuntimeException("Error inserting outgoing chat handler - Certain parts of WorldEditCUI will not work!", e);
         }

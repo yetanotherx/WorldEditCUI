@@ -28,7 +28,7 @@ public class Obfuscation implements InitializationFactory {
 
     protected WorldEditCUI controller;
     protected Minecraft minecraft;
-    
+
     public Obfuscation(WorldEditCUI controller) {
         this.controller = controller;
     }
@@ -82,7 +82,7 @@ public class Obfuscation implements InitializationFactory {
     public static double getPlayerZ(EntityPlayerSP player) {
         return player.v;
     }
-    
+
     public double getPlayerXGuess(float renderTick) {
         EntityPlayerSP plyr = getPlayer();
         return plyr.q + ((plyr.t - plyr.q) * renderTick);
@@ -117,11 +117,11 @@ public class Obfuscation implements InitializationFactory {
     public static String getChatFromPacket(Packet3Chat packet) {
         return packet.b;
     }
-    
+
     public static byte[] getBytesFromPacket(Packet250CustomPayload packet) {
         return packet.c;
     }
-    
+
     public static Packet250CustomPayload newPayloadPacket(String name, int len, byte[] data) {
         Packet250CustomPayload packet = new Packet250CustomPayload();
         packet.a = name;

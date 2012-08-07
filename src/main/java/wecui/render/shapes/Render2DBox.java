@@ -8,8 +8,7 @@ import wecui.render.LineInfo;
 import wecui.render.points.PointRectangle;
 
 /**
- * Draws the top and bottom rings of
- * a polygon region
+ * Draws the top and bottom rings of a polygon region
  * 
  * @author yetanotherx
  * @author lahwran

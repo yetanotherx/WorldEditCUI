@@ -15,11 +15,11 @@ import deobf.Tessellator;
 public class RenderObfuscation {
 
     protected Tessellator tess;
-    
+
     protected RenderObfuscation() {
         tess = Tessellator.a;
     }
-    
+
     public void startDrawing(int type) {
         tess.b(type);
     }
@@ -31,7 +31,10 @@ public class RenderObfuscation {
     public void finishDrawing() {
         tess.a();
     }
-    
+
+    /**
+     * TODO: Find if this is even necessary
+     */
     public static void disableLighting() {
         RenderHelper.a();
     }
@@ -45,6 +48,7 @@ public class RenderObfuscation {
     }
 
     protected static class RenderObfuscationHolder {
+
         protected static final RenderObfuscation INSTANCE = new RenderObfuscation();
     }
 }

@@ -14,7 +14,7 @@ import wecui.render.points.PointRectangle;
  * @author lahwran
  */
 public class Render2DGrid {
-    
+
     protected RenderObfuscation obf = RenderObfuscation.getInstance();
     protected LineColor color;
     protected List<PointRectangle> points;
@@ -27,7 +27,7 @@ public class Render2DGrid {
         this.min = min;
         this.max = max;
     }
-    
+
     public void render() {
         double off = 0.03;
         for (double height = min; height <= max + 1; height++) {
@@ -35,7 +35,7 @@ public class Render2DGrid {
         }
     }
 
-    protected  void drawPoly(double height) {
+    protected void drawPoly(double height) {
         for (LineInfo tempColor : color.getColors()) {
             tempColor.prepareRender();
 

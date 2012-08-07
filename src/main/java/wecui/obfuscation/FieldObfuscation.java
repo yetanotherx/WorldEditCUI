@@ -10,7 +10,7 @@ package wecui.obfuscation;
  * @obfuscated 1.3.1
  */
 public enum FieldObfuscation {
-    
+
     /**
      * NetworkManager instance in NetClientHandler.class
      */

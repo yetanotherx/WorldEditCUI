@@ -26,7 +26,7 @@ public class WorldRenderEvent extends Event<WorldRenderEvent> {
     public void setPartialTick(float partialTick) {
         this.partialTick = partialTick;
     }
-    
+
     public void setPosition(Vector3 pos) {
         this.pos = pos;
     }
@@ -48,5 +48,4 @@ public class WorldRenderEvent extends Event<WorldRenderEvent> {
     protected HandlerList<WorldRenderEvent> getHandlers() {
         return handlers;
     }
-
 }

@@ -11,6 +11,7 @@ import java.util.logging.LogRecord;
  * Console log formatter, from Minecraft Server.
  * Brought into Minecraft Client.
  * 
+ * TODO: Necessary anymore?
  * @author Mojang
  */
 public class ConsoleLogFormatter extends Formatter {

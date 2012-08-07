@@ -74,7 +74,6 @@ public enum ChatColor {
      * Represents white
      */
     WHITE(0xF);
-
     private final int code;
     private final static Map<Integer, ChatColor> colors = new HashMap<Integer, ChatColor>();
 

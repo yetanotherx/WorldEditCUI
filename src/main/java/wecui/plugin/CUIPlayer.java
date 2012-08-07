@@ -16,7 +16,7 @@ public class CUIPlayer extends LocalPlayer {
         super(server);
         this.controller = controller;
     }
-    
+
     @Override
     public int getItemInHand() {
         throw new UnsupportedOperationException("Not supported yet.");
@@ -85,5 +85,4 @@ public class CUIPlayer extends LocalPlayer {
     public boolean hasPermission(String perm) {
         return true;
     }
-    
 }

@@ -5,8 +5,6 @@ import deobf.Render;
 import wecui.event.WorldRenderEvent;
 import wecui.WorldEditCUI;
 import wecui.obfuscation.RenderObfuscation;
-import wecui.util.Vector3;
-
 
 /**
  * Custom entity renderer, attached in the ModLoader class
@@ -25,17 +23,34 @@ public class RenderHooks extends Render {
         this.controller = controller;
         this.event = new WorldRenderEvent(controller);
     }
-    
+
+    /**
+     * Actually renders the entity.
+     * @param entity
+     * @param x
+     * @param y
+     * @param z
+     * @param yaw
+     * @param renderTick 
+     */
     public void renderCUI(Entity entity, double x, double y, double z, float yaw, float renderTick) {
         RenderObfuscation.disableLighting();
         event.setPartialTick(renderTick);
-        event.setPosition(new Vector3(x, y, z));
         controller.getEventManager().callEvent(event);
         RenderObfuscation.enableLighting();
     }
 
+    /**
+     * Render.doRender
+     * @param entity
+     * @param x
+     * @param y
+     * @param z
+     * @param yaw
+     * @param renderTick 
+     */
     @Override
-    public void a(Entity entity, double d, double d1, double d2, float f, float f1) {
-        renderCUI(entity, d, d1, d2, f, f1);
+    public void a(Entity entity, double x, double y, double z, float yaw, float renderTick) {
+        renderCUI(entity, x, y, z, yaw, renderTick);
     }
 }

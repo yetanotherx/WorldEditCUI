@@ -35,7 +35,7 @@ public class RenderCylinderCircles {
     public void render() {
         for (LineInfo tempColor : color.getColors()) {
             tempColor.prepareRender();
-            
+
             double twoPi = Math.PI * 2;
             for (int yBlock = minY + 1; yBlock <= maxY; yBlock++) {
                 obf.startDrawing(GL11.GL_LINE_LOOP);

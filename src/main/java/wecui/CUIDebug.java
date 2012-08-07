@@ -33,14 +33,14 @@ public class CUIDebug implements InitializationFactory {
         ConsoleLogFormatter formatter = new ConsoleLogFormatter();
         ConsoleHandler handler = new ConsoleHandler();
         handler.setFormatter(formatter);
-        
+
         logger.setUseParentHandlers(false);
         logger.addHandler(handler);
-        
+
         try {
             this.debugFile = new File(Obfuscation.getWorldEditCUIDir(), "WorldEditCUI-debug.txt");
             this.debugMode = controller.getConfiguration().isDebugMode();
-            
+
             if (this.debugMode) {
                 FileHandler newHandler = new FileHandler(this.debugFile.getAbsolutePath());
                 newHandler.setFormatter(formatter);
@@ -67,7 +67,7 @@ public class CUIDebug implements InitializationFactory {
     public void info(String message) {
         logger.info(message);
     }
-    
+
     public void info(String message, Throwable e) {
         logger.log(Level.INFO, message, e);
     }
