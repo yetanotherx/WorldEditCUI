@@ -29,6 +29,7 @@ public class mod_WorldEditCUI extends BaseMod {
     protected EntityPlayerSP lastPlayer;
     protected boolean gameStarted = false;
     public final static Charset UTF_8_CHARSET = Charset.forName("UTF-8");
+    protected int entityUpdateTickCount = 0;
 
     public mod_WorldEditCUI() {
         this.controller = new WorldEditCUI(ModLoader.getMinecraftInstance());
@@ -72,6 +73,13 @@ public class mod_WorldEditCUI extends BaseMod {
                 this.controller.setSelection(new CuboidRegion(controller));
 
                 DataPacketList.register(controller);
+            }
+        } else {
+            if( entityUpdateTickCount > 500 ) {
+                entityUpdateTickCount = 0;
+                Obfuscation.setEntityPositionToPlayer(mc, lastPlayer);
+            } else {
+                ++entityUpdateTickCount;
             }
         }
         return true;
