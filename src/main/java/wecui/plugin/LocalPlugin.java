@@ -1,16 +1,11 @@
 package wecui.plugin;
 
-import com.sk89q.worldedit.LocalSession;
-import com.sk89q.worldedit.WorldEdit;
-import wecui.InitializationFactory;
-import wecui.WorldEditCUI;
-
 /**
  * WorldEdit local plugin controller.
  * 
  * @author yetanotherx
  */
-public class LocalPlugin implements InitializationFactory {
+public class LocalPlugin {} /* implements InitializationFactory {
 
     protected WorldEditCUI controller;
     protected boolean enabled = false;
@@ -49,7 +44,7 @@ public class LocalPlugin implements InitializationFactory {
         
         if (!WorldEditCUI.WEVERSIONS.contains(local)) {
         return throwError("WorldEdit version is not compatible with WorldEditCUI! Certain features will not work!");
-        }*/
+        }* /
 
         this.setConfiguration(new CUIWEConfiguration(controller));
         this.setServerInterface(new CUIServerInterface(controller));
@@ -123,4 +118,4 @@ public class LocalPlugin implements InitializationFactory {
     public void setInitialized(boolean initialized) {
         this.initialized = initialized;
     }
-}
+} */

@@ -2,7 +2,7 @@ package wecui;
 
 import net.minecraft.client.Minecraft;
 import wecui.config.CUIConfiguration;
-import wecui.plugin.LocalPlugin;
+//import wecui.plugin.LocalPlugin;
 import wecui.event.CUIEvent;
 import wecui.event.ChannelEvent;
 import wecui.event.ChatCommandEvent;
@@ -39,7 +39,7 @@ public class WorldEditCUI {
     protected BaseRegion selection;
     protected CUIDebug debugger;
     protected CUIConfiguration configuration;
-    protected LocalPlugin localPlugin;
+    //protected LocalPlugin localPlugin;
 
     public WorldEditCUI(Minecraft minecraft) {
         this.minecraft = minecraft;
@@ -51,7 +51,7 @@ public class WorldEditCUI {
         this.selection = new CuboidRegion(this);
         this.configuration = new CUIConfiguration(this);
         this.debugger = new CUIDebug(this);
-        this.localPlugin = new LocalPlugin(this);
+        //this.localPlugin = new LocalPlugin(this);
 
         try {
             this.eventManager.initialize();
@@ -59,7 +59,7 @@ public class WorldEditCUI {
             this.selection.initialize();
             this.configuration.initialize();
             this.debugger.initialize();
-            this.localPlugin.initialize();
+            //this.localPlugin.initialize();
         } catch (InitializationException e) {
             e.printStackTrace();
             return;
@@ -102,13 +102,13 @@ public class WorldEditCUI {
         this.eventManager = eventManager;
     }
 
-    public LocalPlugin getLocalPlugin() {
+    /*public LocalPlugin getLocalPlugin() {
         return localPlugin;
     }
 
     public void setLocalPlugin(LocalPlugin localPlugin) {
         this.localPlugin = localPlugin;
-    }
+    }*/
 
     public Minecraft getMinecraft() {
         return minecraft;

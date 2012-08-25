@@ -39,7 +39,7 @@ public class CUIPointEvent extends CUIBaseEvent {
     }
 
     protected void setLocalPoint(int id, int x, int y, int z) {
-        if (controller.getLocalPlugin().isEnabled()) {
+        /*if (controller.getLocalPlugin().isEnabled()) {
 
             WorldEdit plugin = controller.getLocalPlugin().getPlugin();
             CUIWorld world = controller.getLocalPlugin().getWorld();
@@ -53,6 +53,6 @@ public class CUIPointEvent extends CUIBaseEvent {
             } else {
                 selector.selectSecondary(clicked);
             }
-        }
+        }*/
     }
 }

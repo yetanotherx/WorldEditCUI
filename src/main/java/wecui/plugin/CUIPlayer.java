@@ -1,14 +1,6 @@
 package wecui.plugin;
 
-import com.sk89q.worldedit.LocalPlayer;
-import com.sk89q.worldedit.LocalWorld;
-import com.sk89q.worldedit.ServerInterface;
-import com.sk89q.worldedit.Vector;
-import com.sk89q.worldedit.WorldVector;
-import com.sk89q.worldedit.bags.BlockBag;
-import wecui.WorldEditCUI;
-
-public class CUIPlayer extends LocalPlayer {
+public class CUIPlayer {} /*extends LocalPlayer {
 
     protected WorldEditCUI controller;
 
@@ -85,4 +77,4 @@ public class CUIPlayer extends LocalPlayer {
     public boolean hasPermission(String perm) {
         return true;
     }
-}
+}*/
