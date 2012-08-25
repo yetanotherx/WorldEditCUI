@@ -12,7 +12,7 @@ import wecui.obfuscation.RenderObfuscation;
  * @author lahwran
  * @author yetanotherx
  * 
- * @obfuscated 1.3.1
+ * @obfuscated 1.3.2
  */
 public class RenderHooks extends Render {
 

@@ -4,7 +4,6 @@ import com.sk89q.worldedit.BiomeType;
 import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.EntityType;
 import com.sk89q.worldedit.LocalWorld;
-import com.sk89q.worldedit.MaxChangedBlocksException;
 import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.Vector2D;
 import com.sk89q.worldedit.blocks.BaseBlock;
@@ -55,6 +54,55 @@ public class CUIWorld extends LocalWorld {
     }
 
     @Override
+    public boolean equals(Object other) {
+        if (!(other instanceof CUIWorld)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean setBlockType(Vector pt, int type, EditSession session) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public int getBlockType(Vector pt, EditSession session) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void setBlockData(Vector pt, int data, EditSession session) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void setBlockDataFast(Vector pt, int data, EditSession session) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public BiomeType getBiome(Vector2D pt) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void setBiome(Vector2D pt, BiomeType biome) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public int getBlockData(Vector pt, EditSession session) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
     public boolean regenerate(Region region, EditSession editSession) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
@@ -75,71 +123,12 @@ public class CUIWorld extends LocalWorld {
     }
 
     @Override
-    public boolean generateTree(EditSession editSession, Vector pt) throws MaxChangedBlocksException {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public boolean generateBigTree(EditSession editSession, Vector pt) throws MaxChangedBlocksException {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public boolean generateBirchTree(EditSession editSession, Vector pt) throws MaxChangedBlocksException {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public boolean generateRedwoodTree(EditSession editSession, Vector pt) throws MaxChangedBlocksException {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public boolean generateTallRedwoodTree(EditSession editSession, Vector pt) throws MaxChangedBlocksException {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
     public void dropItem(Vector pt, BaseItemStack item) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public int killMobs(Vector origin, int radius) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public int killMobs(Vector origin, int radius, boolean killPets) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
     public int removeEntities(EntityType type, Vector origin, int radius) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        if (!(other instanceof CUIWorld)) {
-            return false;
-        }
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public BiomeType getBiome(Vector2D pt) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public void setBiome(Vector2D pt, BiomeType biome) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }

@@ -12,7 +12,7 @@ import wecui.WorldEditCUI;
  * @author lahwran
  * @author yetanotherx
  * 
- * @obfuscated 1.3.1
+ * @obfuscated 1.3.2
  */
 public class RenderEntity extends Entity {
 
@@ -22,7 +22,7 @@ public class RenderEntity extends Entity {
         super(world);
 
         this.controller = controller;
-        this.ak = true; // Entity.ignoreFrustumCheck \o/
+        this.ak = true; // Entity.ignoreFrustumCheck
         controller.getDebugger().debug("Entity spawned");
     }
 

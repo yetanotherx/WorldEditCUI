@@ -3,13 +3,13 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>wecui</groupId>
     <artifactId>WorldEditCUI</artifactId>
-    <version>1.3.1</version> 
+    <version>1.3.2</version> 
     <name>WorldEditCUI</name>
     <dependencies>
         <dependency>
             <groupId>net.minecraft</groupId>
             <artifactId>minecraft-deobf</artifactId>
-            <version>1.3.1-wecui</version>
+            <version>1.3.2-wecui</version>
         </dependency>
         <dependency>
             <groupId>org.lwjgl.lwjgl</groupId>
@@ -33,7 +33,7 @@
         </dependency>
     </dependencies>
     <properties>
-        <WEVersion>5.3</WEVersion>
+        <WEVersion>5.4-SNAPSHOT</WEVersion>
     </properties>
     <repositories>
         <repository>

@@ -5,25 +5,25 @@ renames:
   - notch: if
     wecui: ifclass
     packageOnly: false
-  - notch: jm
+  - notch: jn
     wecui: Entity
     packageOnly: false
-  - notch: atf
+  - notch: atg
     wecui: EntityClientPlayerMP
     packageOnly: false
-  - notch: aup
+  - notch: auq
     wecui: EntityPlayerSP
     packageOnly: false
-  - notch: ane
+  - notch: anf
     wecui: KeyBinding
     packageOnly: false
-  - notch: ib
+  - notch: ic
     wecui: MCHash
     packageOnly: false
   - notch: an
     wecui: NBTTagCompound
     packageOnly: false
-  - notch: asu
+  - notch: asv
     wecui: NetClientHandler
     packageOnly: false
   - notch: dc
@@ -41,21 +41,21 @@ renames:
   - notch: ce
     wecui: Packet250CustomPayload
     packageOnly: false
-  - notch: avy
+  - notch: avz
     wecui: Render
     packageOnly: false
-  - notch: anf
+  - notch: ang
     wecui: RenderHelper
     packageOnly: false
-  - notch: avd
+  - notch: ave
     wecui: Tessellator
     packageOnly: false
-  - notch: atc
+  - notch: atd
     wecui: WorldClient
     packageOnly: false
-  - notch: ajr
+  - notch: ajs
     wecui: Vec3
     packageOnly: false
-  - notch: ij
+  - notch: ik
     wecui: Profiler
     packageOnly: false
