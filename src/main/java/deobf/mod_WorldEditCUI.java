@@ -27,6 +27,7 @@ public class mod_WorldEditCUI extends BaseMod {
     protected WorldEditCUI controller;
     protected WorldClient lastWorld;
     protected EntityPlayerSP lastPlayer;
+    protected Entity lastEntity;
     protected boolean gameStarted = false;
     public final static Charset UTF_8_CHARSET = Charset.forName("UTF-8");
     protected int entityUpdateTickCount = 0;
@@ -61,8 +62,7 @@ public class mod_WorldEditCUI extends BaseMod {
     public boolean onTickInGame(float partialticks, Minecraft mc) {
 
         if (Obfuscation.getWorld(mc) != lastWorld || Obfuscation.getPlayer(mc) != lastPlayer) {
-            controller.getObfuscation().spawnEntity();
-
+            lastEntity = controller.getObfuscation().spawnEntity();
             lastWorld = Obfuscation.getWorld(mc);
             lastPlayer = Obfuscation.getPlayer(mc);
 
@@ -75,9 +75,11 @@ public class mod_WorldEditCUI extends BaseMod {
                 DataPacketList.register(controller);
             }
         } else {
-            if( entityUpdateTickCount > 500 ) {
+            if( entityUpdateTickCount > 500  ) {
                 entityUpdateTickCount = 0;
-                Obfuscation.setEntityPositionToPlayer(mc, lastPlayer);
+                if( lastEntity != null ) {
+                    Obfuscation.setEntityPositionToPlayer(mc, lastEntity);
+                }
             } else {
                 ++entityUpdateTickCount;
             }

@@ -61,7 +61,7 @@ public class Obfuscation implements InitializationFactory {
         return getWorld(minecraft);
     }
 
-    public void spawnEntity() {
+    public Entity spawnEntity() {
         Minecraft mc = this.controller.getMinecraft();
 
         Entity entity = new RenderEntity(this.controller, getWorld(mc));
@@ -69,6 +69,7 @@ public class Obfuscation implements InitializationFactory {
         getWorld(mc).d(entity);
         setEntityPositionToPlayer(mc, entity);
         controller.getDebugger().debug("RenderEntity spawned");
+        return entity;
     }
 
     public static double getPlayerX(EntityPlayerSP player) {
