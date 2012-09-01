@@ -108,7 +108,7 @@ public class Obfuscation implements InitializationFactory {
     }
 
     public static void setEntityPositionToPlayer(Minecraft mc, Entity entity) {
-        entity.d(getPlayerX(mc.g), getPlayerY(mc.g), getPlayerZ(mc.g));
+        entity.b(getPlayerX(mc.g), getPlayerY(mc.g), getPlayerZ(mc.g));
     }
 
     public NetClientHandler getNetClientHandler(EntityClientPlayerMP player) {
