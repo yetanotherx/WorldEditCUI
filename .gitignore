@@ -2,6 +2,7 @@
 /run*
 /build.sh
 /minecraft.jar
+/repackaging/
 
 # Compiled source #
 ###################

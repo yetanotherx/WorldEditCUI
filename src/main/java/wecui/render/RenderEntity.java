@@ -12,7 +12,7 @@ import wecui.WorldEditCUI;
  * @author lahwran
  * @author yetanotherx
  * 
- * @obfuscated 1.3.2
+ * @obfuscated 1.4.2
  */
 public class RenderEntity extends Entity {
 
@@ -22,7 +22,9 @@ public class RenderEntity extends Entity {
         super(world);
 
         this.controller = controller;
-        this.ak = true; // Entity.ignoreFrustumCheck
+        this.al = true; // Entity.ignoreFrustumCheck
+        this.Y = true; // Entity.noClip
+        this.b(0, 0); // Entity.setSize()
         controller.getDebugger().debug("Entity spawned");
     }
 
@@ -53,7 +55,7 @@ public class RenderEntity extends Entity {
      * Entity.onUpdate
      */
     @Override
-    public void h_() {
+    public void j_() {
         //Obfuscation.setEntityPositionToPlayer(controller.getMinecraft(), this);
     }
 
@@ -61,7 +63,7 @@ public class RenderEntity extends Entity {
      * Entity.setDead
      */
     @Override
-    public void y() {
+    public void x() {
     }
 
     /**
@@ -70,7 +72,7 @@ public class RenderEntity extends Entity {
      * @return 
      */
     @Override
-    public String ak() {
+    public String an() {
         return "CUI";
     }
 

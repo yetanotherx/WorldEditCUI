@@ -3,7 +3,6 @@ package wecui.obfuscation;
 import deobf.Entity;
 import deobf.EntityClientPlayerMP;
 import deobf.EntityPlayerSP;
-import deobf.MCHash;
 import deobf.NetClientHandler;
 import deobf.Packet250CustomPayload;
 import deobf.Packet3Chat;
@@ -22,7 +21,7 @@ import wecui.render.RenderEntity;
  * @author lahwran
  * @author yetanotherx
  * 
- * @obfuscated 1.3.2
+ * @obfuscated 1.4.2
  */
 public class Obfuscation implements InitializationFactory {
 
@@ -49,7 +48,7 @@ public class Obfuscation implements InitializationFactory {
      */
     public void showChatMessage(String chat) {
         if (getPlayer() != null) {
-            getPlayer().c(chat);
+            getPlayer().b(chat);
         }
     }
 
@@ -108,7 +107,7 @@ public class Obfuscation implements InitializationFactory {
     }
 
     public static void setEntityPositionToPlayer(Minecraft mc, Entity entity) {
-        entity.d(getPlayerX(mc.g), getPlayerY(mc.g), getPlayerZ(mc.g));
+        entity.b(getPlayerX(mc.g), getPlayerY(mc.g), getPlayerZ(mc.g));
     }
 
     public NetClientHandler getNetClientHandler(EntityClientPlayerMP player) {
@@ -129,10 +128,6 @@ public class Obfuscation implements InitializationFactory {
         packet.b = len;
         packet.c = data;
         return packet;
-    }
-
-    public static void putToMCHash(MCHash hash, int first, Object second) {
-        hash.a(first, second);
     }
 
     public static File getMinecraftDir() {

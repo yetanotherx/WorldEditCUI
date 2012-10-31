@@ -9,14 +9,14 @@ import net.minecraft.client.Minecraft;
  * 
  * @author yetanotherx
  * 
- * @obfuscated 1.3.1
+ * @obfuscated 1.4.2
  */
 public class StartMC {
 
     public static void main(String[] args) {
         try {
             // This overrides it to a local copy, to preserve my production copy
-            Field f = Minecraft.class.getDeclaredField("am");
+            Field f = Minecraft.class.getDeclaredField("an");
             f.setAccessible(true);
             f.set(null, new File("."));
 

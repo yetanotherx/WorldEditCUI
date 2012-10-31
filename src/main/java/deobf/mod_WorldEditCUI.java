@@ -71,17 +71,18 @@ public class mod_WorldEditCUI extends BaseMod {
 
                 new Updater(controller).start();
                 this.controller.setSelection(new CuboidRegion(controller));
+                //new EntityUpdateThread(this).start();
 
                 DataPacketList.register(controller);
             }
         } else {
-            if( entityUpdateTickCount > 500  ) {
-                entityUpdateTickCount = 0;
+            if( this.entityUpdateTickCount > 1000 ) {
+                this.entityUpdateTickCount = 0;
                 if( lastEntity != null ) {
                     Obfuscation.setEntityPositionToPlayer(mc, lastEntity);
                 }
             } else {
-                ++entityUpdateTickCount;
+                ++this.entityUpdateTickCount;
             }
         }
         return true;
