@@ -9,7 +9,7 @@ import net.minecraft.client.Minecraft;
  * 
  * @author yetanotherx
  * 
- * @obfuscated 1.4.2
+ * @obfuscated 1.4.5
  */
 public class StartMC {
 

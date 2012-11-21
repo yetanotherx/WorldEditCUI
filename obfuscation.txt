@@ -5,45 +5,45 @@ renames:
   - notch: if
     wecui: ifclass
     packageOnly: false
-  - notch: lb
+  - notch: lq
     wecui: Entity
     packageOnly: false
-  - notch: axc
+  - notch: ayk
     wecui: EntityClientPlayerMP
     packageOnly: false
-  - notch: aym
+  - notch: azv
     wecui: EntityPlayerSP
     packageOnly: false
-  - notch: bh
+  - notch: bq
     wecui: NBTTagCompound
     packageOnly: false
-  - notch: awr
+  - notch: axz
     wecui: NetClientHandler
     packageOnly: false
-  - notch: bx
+  - notch: cg
     wecui: NetworkManager
     packageOnly: false
-  - notch: dx
+  - notch: eg
     wecui: Packet
     packageOnly: false
-  - notch: cm
+  - notch: cv
     wecui: Packet3Chat
     packageOnly: false
-  - notch: da
+  - notch: dj
     wecui: Packet250CustomPayload
     packageOnly: false
-  - notch: azx
+  - notch: bbk
     wecui: Render
     packageOnly: false
-  - notch: aqj
+  - notch: aro
     wecui: RenderHelper
     packageOnly: false
-  - notch: azb
+  - notch: bao
     wecui: Tessellator
     packageOnly: false
-  - notch: awz
+  - notch: ayh
     wecui: WorldClient
     packageOnly: false
-  - notch: amw
+  - notch: aob
     wecui: Vec3
     packageOnly: false

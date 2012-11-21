@@ -12,7 +12,7 @@ import wecui.WorldEditCUI;
  * @author lahwran
  * @author yetanotherx
  * 
- * @obfuscated 1.4.2
+ * @obfuscated 1.4.5
  */
 public class RenderEntity extends Entity {
 
