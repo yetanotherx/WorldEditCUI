@@ -74,7 +74,8 @@ public class Vector2m extends Vector2 {
      * 
      * @return 
      */
-    public Vector2 ceil() {
+    @Override
+	public Vector2 ceil() {
         x = (float) Math.ceil(x);
         z = (float) Math.ceil(z);
         return this;
@@ -86,7 +87,8 @@ public class Vector2m extends Vector2 {
      * 
      * @return 
      */
-    public Vector2 floor() {
+    @Override
+	public Vector2 floor() {
         x = (float) Math.floor(x);
         z = (float) Math.floor(z);
         return this;
@@ -98,7 +100,8 @@ public class Vector2m extends Vector2 {
      * 
      * @return 
      */
-    public Vector2 round() {
+    @Override
+	public Vector2 round() {
         x = Math.round(x);
         z = Math.round(z);
         return this;
@@ -110,7 +113,8 @@ public class Vector2m extends Vector2 {
      * 
      * @return 
      */
-    public Vector2 abs() {
+    @Override
+	public Vector2 abs() {
         x = Math.abs(x);
         z = Math.abs(z);
         return this;

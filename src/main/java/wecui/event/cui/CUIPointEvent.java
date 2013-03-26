@@ -1,11 +1,6 @@
 package wecui.event.cui;
 
-import com.sk89q.worldedit.LocalSession;
-import com.sk89q.worldedit.WorldEdit;
-import com.sk89q.worldedit.WorldVector;
-import com.sk89q.worldedit.regions.RegionSelector;
 import wecui.WorldEditCUI;
-import wecui.plugin.CUIWorld;
 
 /**
  * Called when point event is received

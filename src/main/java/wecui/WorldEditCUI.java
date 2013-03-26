@@ -1,8 +1,9 @@
 package wecui;
 
+import java.io.File;
+
 import net.minecraft.client.Minecraft;
 import wecui.config.CUIConfiguration;
-//import wecui.plugin.LocalPlugin;
 import wecui.event.CUIEvent;
 import wecui.event.ChannelEvent;
 import wecui.event.ChatCommandEvent;
@@ -14,7 +15,6 @@ import wecui.event.listeners.WorldRenderListener;
 import wecui.exception.InitializationException;
 import wecui.fevents.EventManager;
 import wecui.fevents.Order;
-import wecui.obfuscation.Obfuscation;
 import wecui.render.region.BaseRegion;
 import wecui.render.region.CuboidRegion;
 
@@ -30,12 +30,11 @@ import wecui.render.region.CuboidRegion;
  */
 public class WorldEditCUI {
 
-    public static final String VERSION = "1.4.5";
-    public static final String MCVERSION = "1.4.5";
+    public static final String VERSION = "1.5.1";
+    public static final String MCVERSION = "1.5.1";
     public static final int protocolVersion = 2;
     protected Minecraft minecraft;
     protected EventManager eventManager;
-    protected Obfuscation obfuscation;
     protected BaseRegion selection;
     protected CUIDebug debugger;
     protected CUIConfiguration configuration;
@@ -47,7 +46,6 @@ public class WorldEditCUI {
 
     public void initialize() {
         this.eventManager = new EventManager(this);
-        this.obfuscation = new Obfuscation(this);
         this.selection = new CuboidRegion(this);
         this.configuration = new CUIConfiguration(this);
         this.debugger = new CUIDebug(this);
@@ -55,7 +53,6 @@ public class WorldEditCUI {
 
         try {
             this.eventManager.initialize();
-            this.obfuscation.initialize();
             this.selection.initialize();
             this.configuration.initialize();
             this.debugger.initialize();
@@ -118,14 +115,6 @@ public class WorldEditCUI {
         this.minecraft = minecraft;
     }
 
-    public Obfuscation getObfuscation() {
-        return obfuscation;
-    }
-
-    public void setObfuscation(Obfuscation obfuscation) {
-        this.obfuscation = obfuscation;
-    }
-
     public BaseRegion getSelection() {
         return selection;
     }
@@ -137,4 +126,10 @@ public class WorldEditCUI {
     public static String getVersion() {
         return VERSION + " for Minecraft version " + MCVERSION;
     }
+
+	public static File getWorldEditCUIDir()
+	{
+		File modsFolder = new File(Minecraft.getMinecraftDir(), "mods");
+		return new File(modsFolder, "WorldEditCUI");
+	}
 }

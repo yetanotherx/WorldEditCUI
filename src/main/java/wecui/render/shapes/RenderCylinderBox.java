@@ -1,7 +1,9 @@
 package wecui.render.shapes;
 
+import net.minecraft.src.Tessellator;
+
 import org.lwjgl.opengl.GL11;
-import wecui.obfuscation.RenderObfuscation;
+
 import wecui.render.LineColor;
 import wecui.render.LineInfo;
 import wecui.render.points.PointCube;
@@ -18,7 +20,6 @@ public class RenderCylinderBox {
     protected double radZ = 0;
     protected int minY;
     protected int maxY;
-    protected RenderObfuscation obf = RenderObfuscation.getInstance();
     protected double centerX;
     protected double centerZ;
 
@@ -33,12 +34,13 @@ public class RenderCylinderBox {
     }
 
     public void render() {
+    	Tessellator tess = Tessellator.instance;
         for (LineInfo tempColor : color.getColors()) {
             tempColor.prepareRender();
 
             double twoPi = Math.PI * 2;
             for (int yBlock : new int[]{minY, maxY + 1}) {
-                obf.startDrawing(GL11.GL_LINE_LOOP);
+                tess.startDrawing(GL11.GL_LINE_LOOP);
                 tempColor.prepareColor();
 
                 for (int i = 0; i <= 75; i++) {
@@ -46,9 +48,9 @@ public class RenderCylinderBox {
                     double tempX = radX * Math.cos(tempTheta);
                     double tempZ = radZ * Math.sin(tempTheta);
 
-                    obf.addVertex(centerX + tempX, yBlock, centerZ + tempZ);
+                    tess.addVertex(centerX + tempX, yBlock, centerZ + tempZ);
                 }
-                obf.finishDrawing();
+                tess.draw();
             }
         }
     }

@@ -392,9 +392,8 @@ public class Reflect {
             }
 
             return true;
-        } else {
-            return false;
         }
+		return false;
     }
 
     /**
@@ -447,9 +446,8 @@ public class Reflect {
             if (method.getReturnType() == void.class) {
                 method.invoke(object, args);
                 return on(object);
-            } else {
-                return on(method.invoke(object, args));
             }
+			return on(method.invoke(object, args));
         } catch (Exception e) {
             throw new ReflectException(e);
         }
@@ -506,9 +504,8 @@ public class Reflect {
     private Class<?> type() {
         if (isClass) {
             return (Class<?>) object;
-        } else {
-            return object.getClass();
         }
+		return object.getClass();
     }
 
     /**

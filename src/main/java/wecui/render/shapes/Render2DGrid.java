@@ -1,8 +1,11 @@
 package wecui.render.shapes;
 
 import java.util.List;
+
+import net.minecraft.src.Tessellator;
+
 import org.lwjgl.opengl.GL11;
-import wecui.obfuscation.RenderObfuscation;
+
 import wecui.render.LineColor;
 import wecui.render.LineInfo;
 import wecui.render.points.PointRectangle;
@@ -15,7 +18,6 @@ import wecui.render.points.PointRectangle;
  */
 public class Render2DGrid {
 
-    protected RenderObfuscation obf = RenderObfuscation.getInstance();
     protected LineColor color;
     protected List<PointRectangle> points;
     protected int min;
@@ -36,17 +38,18 @@ public class Render2DGrid {
     }
 
     protected void drawPoly(double height) {
+    	Tessellator tess = Tessellator.instance;
         for (LineInfo tempColor : color.getColors()) {
             tempColor.prepareRender();
 
-            obf.startDrawing(GL11.GL_LINE_LOOP);
+            tess.startDrawing(GL11.GL_LINE_LOOP);
             tempColor.prepareColor();
             for (PointRectangle point : points) {
                 if (point != null) {
-                    obf.addVertex(point.getPoint().getX() + 0.5, height, point.getPoint().getY() + 0.5);
+                    tess.addVertex(point.getPoint().getX() + 0.5, height, point.getPoint().getY() + 0.5);
                 }
             }
-            obf.finishDrawing();
+            tess.draw();
         }
     }
 }

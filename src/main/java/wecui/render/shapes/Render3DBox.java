@@ -1,7 +1,9 @@
 package wecui.render.shapes;
 
+import net.minecraft.src.Tessellator;
+
 import org.lwjgl.opengl.GL11;
-import wecui.obfuscation.RenderObfuscation;
+
 import wecui.render.LineColor;
 import wecui.render.LineInfo;
 import wecui.util.Vector3;
@@ -14,7 +16,6 @@ import wecui.util.Vector3;
  */
 public class Render3DBox {
 
-    protected RenderObfuscation obf = RenderObfuscation.getInstance();
     protected LineColor color;
     protected Vector3 first;
     protected Vector3 second;
@@ -26,6 +27,7 @@ public class Render3DBox {
     }
 
     public void render() {
+    	Tessellator tess = Tessellator.instance;
         double x1 = first.getX();
         double y1 = first.getY();
         double z1 = first.getZ();
@@ -37,40 +39,40 @@ public class Render3DBox {
             tempColor.prepareRender();
 
             // Draw bottom face
-            obf.startDrawing(GL11.GL_LINE_LOOP);
+            tess.startDrawing(GL11.GL_LINE_LOOP);
             tempColor.prepareColor();
-            obf.addVertex(x1, y1, z1);
-            obf.addVertex(x2, y1, z1);
-            obf.addVertex(x2, y1, z2);
-            obf.addVertex(x1, y1, z2);
-            obf.finishDrawing();
+            tess.addVertex(x1, y1, z1);
+            tess.addVertex(x2, y1, z1);
+            tess.addVertex(x2, y1, z2);
+            tess.addVertex(x1, y1, z2);
+            tess.draw();
 
             // Draw top face
-            obf.startDrawing(GL11.GL_LINE_LOOP);
+            tess.startDrawing(GL11.GL_LINE_LOOP);
             tempColor.prepareColor();
-            obf.addVertex(x1, y2, z1);
-            obf.addVertex(x2, y2, z1);
-            obf.addVertex(x2, y2, z2);
-            obf.addVertex(x1, y2, z2);
-            obf.finishDrawing();
+            tess.addVertex(x1, y2, z1);
+            tess.addVertex(x2, y2, z1);
+            tess.addVertex(x2, y2, z2);
+            tess.addVertex(x1, y2, z2);
+            tess.draw();
 
             // Draw join top and bottom faces
-            obf.startDrawing(GL11.GL_LINES);
+            tess.startDrawing(GL11.GL_LINES);
             tempColor.prepareColor();
 
-            obf.addVertex(x1, y1, z1);
-            obf.addVertex(x1, y2, z1);
+            tess.addVertex(x1, y1, z1);
+            tess.addVertex(x1, y2, z1);
 
-            obf.addVertex(x2, y1, z1);
-            obf.addVertex(x2, y2, z1);
+            tess.addVertex(x2, y1, z1);
+            tess.addVertex(x2, y2, z1);
 
-            obf.addVertex(x2, y1, z2);
-            obf.addVertex(x2, y2, z2);
+            tess.addVertex(x2, y1, z2);
+            tess.addVertex(x2, y2, z2);
 
-            obf.addVertex(x1, y1, z2);
-            obf.addVertex(x1, y2, z2);
+            tess.addVertex(x1, y1, z2);
+            tess.addVertex(x1, y2, z2);
 
-            obf.finishDrawing();
+            tess.draw();
         }
     }
 }

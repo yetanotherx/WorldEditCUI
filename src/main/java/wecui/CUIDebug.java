@@ -7,7 +7,6 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import wecui.exception.InitializationException;
-import wecui.obfuscation.Obfuscation;
 import wecui.util.ConsoleLogFormatter;
 
 /**
@@ -38,7 +37,7 @@ public class CUIDebug implements InitializationFactory {
         logger.addHandler(handler);
 
         try {
-            this.debugFile = new File(Obfuscation.getWorldEditCUIDir(), "WorldEditCUI-debug.txt");
+            this.debugFile = new File(WorldEditCUI.getWorldEditCUIDir(), "WorldEditCUI-debug.txt");
             this.debugMode = controller.getConfiguration().isDebugMode();
 
             if (this.debugMode) {

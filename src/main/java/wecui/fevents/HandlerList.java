@@ -42,7 +42,7 @@ public class HandlerList<TEvent extends Event<TEvent>> {
     /**
      * List of all handlerlists which have been created, for use in bakeall()
      */
-    private static ArrayList<HandlerList> alllists = new ArrayList<HandlerList>();
+    private static ArrayList<HandlerList<? extends Event<?>>> alllists = new ArrayList<HandlerList<? extends Event<?>>>();
 
     /**
      * Bake all handler lists. Best used just after all normal event
@@ -50,7 +50,7 @@ public class HandlerList<TEvent extends Event<TEvent>> {
      * you're using fevents in a plugin system.
      */
     public static void bakeall() {
-        for (HandlerList h : alllists) {
+        for (HandlerList<? extends Event<?>> h : alllists) {
             h.bake();
         }
     }
@@ -109,7 +109,7 @@ public class HandlerList<TEvent extends Event<TEvent>> {
         if (baked) {
             return; // don't re-bake when still valid
         }
-        ArrayList<Listener[]> handlerslist = new ArrayList<Listener[]>();
+        ArrayList<Listener<? extends Event<?>>[]> handlerslist = new ArrayList<Listener<? extends Event<?>>[]>();
         ArrayList<Integer> handleridslist = new ArrayList<Integer>();
         for (Entry<Order, ArrayList<Listener<TEvent>>> entry : handlerslots.entrySet()) {
             Order orderslot = entry.getKey();

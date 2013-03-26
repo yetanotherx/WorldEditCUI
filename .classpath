@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="java"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Client"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/LiteLoader"/>
+	<classpathentry kind="lib" path="lib/snakeyaml-1.9.jar"/>
+	<classpathentry kind="lib" path="/Client/jars/bin/jinput.jar"/>
+	<classpathentry kind="lib" path="/Client/jars/bin/lwjgl_util.jar" sourcepath="/Client/lwjgl"/>
+	<classpathentry kind="lib" path="/Client/jars/bin/lwjgl.jar" sourcepath="/Client/lwjgl"/>
+	<classpathentry kind="lib" path="/Client/jars/bin/minecraft.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

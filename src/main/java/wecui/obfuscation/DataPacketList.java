@@ -1,13 +1,15 @@
 package wecui.obfuscation;
 
-import deobf.EntityClientPlayerMP;
-import deobf.NetClientHandler;
-import deobf.NetworkManager;
-import deobf.Packet;
-import deobf.Packet3Chat;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+
+import net.minecraft.src.EntityClientPlayerMP;
+import net.minecraft.src.INetworkManager;
+import net.minecraft.src.NetClientHandler;
+import net.minecraft.src.TcpConnection;
+import net.minecraft.src.Packet;
+import net.minecraft.src.Packet3Chat;
 import wecui.WorldEditCUI;
 import wecui.event.ChatCommandEvent;
 import wecui.event.OutgoingChatEvent;
@@ -40,11 +42,12 @@ public class DataPacketList<T> extends ArrayList<T> {
      * @param packet
      * @return 
      */
-    public boolean add(T packet) {
+    @Override
+	public boolean add(T packet) {
         if (packet instanceof Packet3Chat) {
 
             boolean cancelled = false;
-            String s = Obfuscation.getChatFromPacket((Packet3Chat) packet);
+            String s = ((Packet3Chat)packet).message; // Obfuscation.getChatFromPacket((Packet3Chat) packet);
 
             OutgoingChatEvent chatevent = new OutgoingChatEvent(controller, s);
             controller.getEventManager().callEvent(chatevent);
@@ -77,37 +80,25 @@ public class DataPacketList<T> extends ArrayList<T> {
         registered = true;
 
         DataPacketList<Packet> list = new DataPacketList<Packet>(controller, Packet.class);
-        Obfuscation obf = controller.getObfuscation();
 
-        //Checks if it's a multiplayer world
-        if (!obf.isMultiplayerWorld()) {
-            return;
-        }
-
-        EntityClientPlayerMP player = (EntityClientPlayerMP) obf.getPlayer();
+        EntityClientPlayerMP player = controller.getMinecraft().thePlayer;
 
         try {
-            NetClientHandler nch = obf.getNetClientHandler(player);
-
-            Field nmField = NetClientHandler.class.getDeclaredField(FieldObfuscation.NETWORKMANAGER.getVariable());
-            nmField.setAccessible(true);
-            Object nmMebbe = nmField.get(nch);
-            NetworkManager nm = null;
-            if (nmMebbe instanceof NetworkManager) {
-                nm = (NetworkManager) nmField.get(nch);
-            } else {
-                return;
+            NetClientHandler nch = player.sendQueue;
+            INetworkManager nm = nch.getNetManager();
+            
+            if (nm instanceof TcpConnection)
+            {
+	            Field listField = TcpConnection.class.getDeclaredField(FieldObfuscation.dataPackets.getVariable());
+	            listField.setAccessible(true);
+	            @SuppressWarnings("unchecked")
+				List<Packet> oldPacketList = (List<Packet>)listField.get(nm);
+	            for (Object item : oldPacketList) {
+	                list.add((Packet) item);
+	            }
+	
+	            listField.set(nm, list);
             }
-
-            Field listField = NetworkManager.class.getDeclaredField(FieldObfuscation.PACKETLIST.getVariable());
-            listField.setAccessible(true);
-            List oldPacketList = (List) listField.get(nm);
-            for (Object item : oldPacketList) {
-                list.add((Packet) item);
-            }
-
-            listField.set(nm, list);
-            nmField.set(nch, nm);
 
         } catch (Exception e) {
             throw new RuntimeException("Error inserting outgoing chat handler - Certain parts of WorldEditCUI will not work!", e);

@@ -41,6 +41,7 @@ public class Vector3m extends Vector3 {
 	 * @return
 	 */
 
+	@Override
 	public Vector3 add(Vector3 that) {
 		x += that.x;
 		y += that.y;
@@ -55,6 +56,7 @@ public class Vector3m extends Vector3 {
 	 * @return
 	 */
 
+	@Override
 	public Vector3 subtract(Vector3 that) {
 		x -= that.x;
 		y -= that.y;
@@ -69,6 +71,7 @@ public class Vector3m extends Vector3 {
 	 * @return
 	 */
 
+	@Override
 	public Vector3 scale(float scale) {
 		x *= scale;
 		y *= scale;
@@ -83,6 +86,7 @@ public class Vector3m extends Vector3 {
 	 * @return
 	 */
 
+	@Override
 	public Vector3 cross(Vector3 that) {
 		x = getY() * that.getZ() - getZ() * that.getY();
 		y = getZ() * that.getX() - getX() * that.getZ();
@@ -97,6 +101,7 @@ public class Vector3m extends Vector3 {
 	 * 
 	 * @return 
 	 */
+	@Override
 	public Vector3 ceil() {
 		x = (float) Math.ceil(x);
 		y = (float) Math.ceil(y);
@@ -110,6 +115,7 @@ public class Vector3m extends Vector3 {
 	 * 
 	 * @return 
 	 */
+	@Override
 	public Vector3 floor() {
 		x = (float) Math.floor(x);
 		y = (float) Math.floor(y);
@@ -123,6 +129,7 @@ public class Vector3m extends Vector3 {
 	 * 
 	 * @return 
 	 */
+	@Override
 	public Vector3 round() {
 		x = Math.round(x);
 		y = Math.round(y);
@@ -136,6 +143,7 @@ public class Vector3m extends Vector3 {
 	 * 
 	 * @return 
 	 */
+	@Override
 	public Vector3 abs() {
 		x = Math.abs(x);
 		y = Math.abs(y);
@@ -149,6 +157,7 @@ public class Vector3m extends Vector3 {
 	 * @return
 	 */
 
+	@Override
 	public Vector3 normalize() {
 		float length = this.length();
 		x *= 1 / length;

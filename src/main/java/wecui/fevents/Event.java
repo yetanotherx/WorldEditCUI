@@ -44,7 +44,8 @@ public abstract class Event<TEvent extends Event<TEvent>> {
      */
     protected abstract String getEventName();
 
-    public String toString() {
+    @Override
+	public String toString() {
         return getEventName() + " (" + this.getClass().getName() + ")";
     }
 

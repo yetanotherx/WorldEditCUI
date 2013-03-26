@@ -1,8 +1,9 @@
 package wecui.event.listeners;
 
 import wecui.fevents.Listener;
-import wecui.obfuscation.Obfuscation;
 import wecui.WorldEditCUI;
+import net.minecraft.src.EntityClientPlayerMP;
+
 import org.lwjgl.opengl.GL11;
 import wecui.event.WorldRenderEvent;
 
@@ -35,11 +36,9 @@ public class WorldRenderListener implements Listener<WorldRenderEvent> {
         GL11.glPushMatrix();
 
         try {
-            Obfuscation obf = controller.getObfuscation();
-
-            GL11.glTranslated(-obf.getPlayerXGuess(event.getPartialTick()),
-                    -obf.getPlayerYGuess(event.getPartialTick()),
-                    -obf.getPlayerZGuess(event.getPartialTick()));
+            GL11.glTranslated(-this.getPlayerXGuess(event.getPartialTick()),
+                    -this.getPlayerYGuess(event.getPartialTick()),
+                    -this.getPlayerZGuess(event.getPartialTick()));
             GL11.glColor3f(1.0f, 1.0f, 1.0f);
             if (controller.getSelection() != null) {
                 controller.getSelection().render();
@@ -55,4 +54,22 @@ public class WorldRenderListener implements Listener<WorldRenderEvent> {
         GL11.glDisable(GL11.GL_BLEND);
         //GL11.glEnable(GL11.GL_ALPHA_TEST);
     }
+
+	private double getPlayerXGuess(float renderTick)
+	{
+		EntityClientPlayerMP thePlayer = controller.getMinecraft().thePlayer;
+		return thePlayer.prevPosX + ((thePlayer.posX - thePlayer.prevPosX) * renderTick);
+	}
+	
+	private double getPlayerYGuess(float renderTick)
+	{
+		EntityClientPlayerMP thePlayer = controller.getMinecraft().thePlayer;
+		return thePlayer.prevPosY + ((thePlayer.posY - thePlayer.prevPosY) * renderTick);
+	}
+	
+	private double getPlayerZGuess(float renderTick)
+	{
+		EntityClientPlayerMP thePlayer = controller.getMinecraft().thePlayer;
+		return thePlayer.prevPosZ + ((thePlayer.posZ - thePlayer.prevPosZ) * renderTick);
+	}
 }

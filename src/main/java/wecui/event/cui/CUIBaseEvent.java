@@ -70,9 +70,9 @@ public abstract class CUIBaseEvent {
             }
 
             throw new RuntimeException(message);
-        } else {
-            return this.run();
         }
+        
+		return this.run();
 
     }
 

@@ -37,7 +37,8 @@ public class OutgoingChatEvent extends Event<OutgoingChatEvent> implements Cance
         return message;
     }
 
-    public void setCancelled(boolean cancelled) {
+    @Override
+	public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
 }

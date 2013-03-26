@@ -152,9 +152,8 @@ public class ConfigurationNode {
         if (o == null) {
             //setProperty(path, def);
             return def;
-        } else {
-            return o;
-        }
+        }        
+		return o;
     }
 
     /**
@@ -173,9 +172,8 @@ public class ConfigurationNode {
         if (o == null) {
             //setProperty(path, def);
             return def;
-        } else {
-            return o;
         }
+		return o;
     }
 
     /**
@@ -193,9 +191,8 @@ public class ConfigurationNode {
         if (o == null) {
             //setProperty(path, def);
             return def;
-        } else {
-            return o;
         }
+		return o;
     }
 
     /**

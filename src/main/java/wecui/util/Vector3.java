@@ -293,21 +293,24 @@ public class Vector3 implements Comparable<Vector3> {
     /**
      * Compares two Vector3s
      */
-    public int compareTo(Vector3 o) {
+    @Override
+	public int compareTo(Vector3 o) {
         return Vector3.compareTo(this, o);
     }
 
     /**
      * Checks if two Vector3s are equal
      */
-    public boolean equals(Object o) {
+    @Override
+	public boolean equals(Object o) {
         return Vector3.equals(this, o);
     }
 
     /**
      * toString Override
      */
-    public String toString() {
+    @Override
+	public String toString() {
         return String.format("{ %f, %f, %f }", x, y, z);
     }
 
@@ -569,5 +572,11 @@ public class Vector3 implements Comparable<Vector3> {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public int hashCode()
+    {
+    	return (int)(this.x * this.y % this.z);
     }
 }

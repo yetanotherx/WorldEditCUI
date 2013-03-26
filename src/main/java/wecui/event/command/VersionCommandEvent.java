@@ -1,5 +1,6 @@
 package wecui.event.command;
 
+import net.minecraft.src.EntityClientPlayerMP;
 import wecui.WorldEditCUI;
 import wecui.util.ChatColor;
 
@@ -22,6 +23,10 @@ public class VersionCommandEvent extends CommandEventBase {
 
     @Override
     public void run() {
-        this.controller.getObfuscation().showChatMessage(ChatColor.LIGHT_PURPLE + "WorldEditCUI version " + WorldEditCUI.getVersion());
+        EntityClientPlayerMP thePlayer = this.controller.getMinecraft().thePlayer;
+		if (thePlayer != null)
+		{
+			thePlayer.addChatMessage(ChatColor.LIGHT_PURPLE + "WorldEditCUI version " + WorldEditCUI.getVersion());
+		}
     }
 }

@@ -1,13 +1,12 @@
 package wecui.config;
 
-import deobf.mod_WorldEditCUI;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+
 import wecui.InitializationFactory;
 import wecui.WorldEditCUI;
-import wecui.obfuscation.Obfuscation;
 import wecui.render.LineColor;
 
 /**
@@ -47,11 +46,11 @@ public class CUIConfiguration implements InitializationFactory {
     @Override
     public void initialize() {
 
-        File file = new File(Obfuscation.getWorldEditCUIDir(), "Configuration.yml");
+        File file = new File(WorldEditCUI.getWorldEditCUIDir(), "Configuration.yml");
         file.getParentFile().mkdirs();
 
         if (!file.exists()) {
-            InputStream input = mod_WorldEditCUI.class.getResourceAsStream("/Configuration.yml");
+            InputStream input = CUIConfiguration.class.getResourceAsStream("/Configuration.yml");
             if (input != null) {
                 FileOutputStream output = null;
 
@@ -67,9 +66,7 @@ public class CUIConfiguration implements InitializationFactory {
                     e.printStackTrace();
                 } finally {
                     try {
-                        if (input != null) {
-                            input.close();
-                        }
+                        input.close();
                     } catch (IOException e) {
                     }
 
@@ -134,19 +131,8 @@ public class CUIConfiguration implements InitializationFactory {
             return def;
         }
 
-        String r = color.substring(1, 3);
-        String g = color.substring(3, 5);
-        String b = color.substring(5, 7);
-
-        try {
-            int rI = Integer.parseInt(r, 16);
-            int gI = Integer.parseInt(g, 16);
-            int bI = Integer.parseInt(b, 16);
-
-            return color;
-        } catch (NumberFormatException e) {
-            return def;
-        }
+        // Replaced some bloody stupid code with regex
+        return (color.matches("(?i)^[0-9a-f]{6}$")) ? color : def;
     }
 
     public boolean isDebugMode() {

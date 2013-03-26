@@ -32,7 +32,6 @@ public class CUIEvent extends Event<CUIEvent> {
 
         this.params = params;
         this.controller.getDebugger().debug("CUI Event (" + type + ") - Params: " + Utilities.join(params, ", "));
-
     }
 
     @Override
@@ -72,7 +71,8 @@ public class CUIEvent extends Event<CUIEvent> {
         return handled;
     }
 
-    public boolean isCancelled() {
+    @Override
+	public boolean isCancelled() {
         return isHandled();
     }
 

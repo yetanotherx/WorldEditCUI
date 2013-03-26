@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import net.minecraft.src.EntityClientPlayerMP;
+
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.reader.UnicodeReader;
 import wecui.config.ConfigurationNode;
@@ -58,8 +61,8 @@ public class Updater extends Thread {
 
             if (currentVersion != null && !currentVersion.equals(WorldEditCUI.VERSION) && !(currentVersion + "beta").equals(WorldEditCUI.VERSION)) {
                 if (supportedVersions != null && !supportedVersions.contains(WorldEditCUI.VERSION)) {
-                    controller.getObfuscation().showChatMessage(ChatColor.RED + "Your WorldEditCUI version is out of date! ");
-                    controller.getObfuscation().showChatMessage(ChatColor.RED + "The latest version is " + currentVersion + ". http://bit.ly/wecui");
+                    this.showChatMessage(ChatColor.RED + "Your WorldEditCUI version is out of date! ");
+                    this.showChatMessage(ChatColor.RED + "The latest version is " + currentVersion + ". http://bit.ly/wecui");
 
                 }
             }
@@ -75,4 +78,18 @@ public class Updater extends Thread {
             }
         }
     }
+	
+	/**
+	 * Displays a chat message on the screen, if the player is currently playing
+	 * 
+	 * @param chat
+	 */
+	public void showChatMessage(String chat)
+	{
+		EntityClientPlayerMP thePlayer = this.controller.getMinecraft().thePlayer;
+		if (thePlayer != null)
+		{
+			thePlayer.addChatMessage(chat);
+		}
+	}
 }

@@ -1,7 +1,9 @@
 package wecui.render.shapes;
 
+import net.minecraft.src.Tessellator;
+
 import org.lwjgl.opengl.GL11;
-import wecui.obfuscation.RenderObfuscation;
+
 import wecui.render.LineColor;
 import wecui.render.LineInfo;
 import wecui.render.points.PointCube;
@@ -18,7 +20,6 @@ public class RenderCylinderGrid {
     protected double radZ = 0;
     protected int minY;
     protected int maxY;
-    protected RenderObfuscation obf = RenderObfuscation.getInstance();
     protected double centerX;
     protected double centerZ;
 
@@ -33,6 +34,7 @@ public class RenderCylinderGrid {
     }
 
     public void render() {
+        Tessellator tess = Tessellator.instance;
         for (LineInfo tempColor : color.getColors()) {
             tempColor.prepareRender();
 
@@ -45,28 +47,28 @@ public class RenderCylinderGrid {
 
             for (double tempX = negRadiusX; tempX <= posRadiusX; ++tempX) {
                 double tempZ = radZ * Math.cos(Math.asin(tempX / radX));
-                obf.startDrawing(GL11.GL_LINE_LOOP);
+                tess.startDrawing(GL11.GL_LINE_LOOP);
                 tempColor.prepareColor();
 
-                obf.addVertex(centerX + tempX, tmaxY, centerZ + tempZ);
-                obf.addVertex(centerX + tempX, tmaxY, centerZ - tempZ);
-                obf.addVertex(centerX + tempX, tminY, centerZ - tempZ);
-                obf.addVertex(centerX + tempX, tminY, centerZ + tempZ);
+                tess.addVertex(centerX + tempX, tmaxY, centerZ + tempZ);
+                tess.addVertex(centerX + tempX, tmaxY, centerZ - tempZ);
+                tess.addVertex(centerX + tempX, tminY, centerZ - tempZ);
+                tess.addVertex(centerX + tempX, tminY, centerZ + tempZ);
 
-                obf.finishDrawing();
+                tess.draw();
             }
 
             for (double tempZ = negRadiusZ; tempZ <= posRadiusZ; ++tempZ) {
                 double tempX = radX * Math.sin(Math.acos(tempZ / radZ));
-                obf.startDrawing(GL11.GL_LINE_LOOP);
+                tess.startDrawing(GL11.GL_LINE_LOOP);
                 tempColor.prepareColor();
 
-                obf.addVertex(centerX + tempX, tmaxY, centerZ + tempZ);
-                obf.addVertex(centerX - tempX, tmaxY, centerZ + tempZ);
-                obf.addVertex(centerX - tempX, tminY, centerZ + tempZ);
-                obf.addVertex(centerX + tempX, tminY, centerZ + tempZ);
+                tess.addVertex(centerX + tempX, tmaxY, centerZ + tempZ);
+                tess.addVertex(centerX - tempX, tmaxY, centerZ + tempZ);
+                tess.addVertex(centerX - tempX, tminY, centerZ + tempZ);
+                tess.addVertex(centerX + tempX, tminY, centerZ + tempZ);
 
-                obf.finishDrawing();
+                tess.draw();
             }
         }
     }

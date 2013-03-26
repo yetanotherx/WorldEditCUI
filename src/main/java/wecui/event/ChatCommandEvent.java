@@ -93,7 +93,8 @@ public class ChatCommandEvent extends Event<ChatCommandEvent> implements Cancell
         return cancelled;
     }
 
-    public void setCancelled(boolean cancelled) {
+    @Override
+	public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
 }

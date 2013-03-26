@@ -23,13 +23,16 @@ public class CUIListener implements Listener<CUIEvent> {
         this.controller = controller;
     }
 
-    public void onEvent(CUIEvent event) {
+    @Override
+	public void onEvent(CUIEvent event) {
 
         //Get a CUIEventType enum value from the first section of the CUI message
         CUIEventType eventType = CUIEventType.getTypeFromKey(event.getType());
         if (eventType == null || eventType.getEventClass() == null) {
             event.markInvalid("Unknown CUIEvent identifier.");
         }
+        
+        if (eventType == null) return;
 
         try {
             CUIBaseEvent newEvent = Reflect.on(eventType.getEventClass()).create(this.controller, event.getParams()).get();

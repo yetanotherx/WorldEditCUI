@@ -1,43 +1,42 @@
 package wecui.obfuscation;
 
+import com.mumfrey.liteloader.util.ModUtilities;
+
 /**
  * Method name obfuscation, used whenever we use reflection. 
  * This lets us keep reflected obfuscated methods in a central
  * class to ease updating.
  * 
  * @author yetanotherx
+ * @author Mumfrey
  * 
- * @obfuscated 1.4.5
+ * @obfuscated 1.5.1
  */
 public enum FieldObfuscation {
 
     /**
-     * NetworkManager instance in NetClientHandler.class
-     */
-    NETWORKMANAGER("g"),
-    /**
      * Packet stream list in NetworkManager.class
      */
-    PACKETLIST("p"),
+    dataPackets("q", "field_74487_p"),
     /**
      * ID->Class hashmap for packets in Packet.class
      */
-    IDSTOCLASSES("l"),
-    /**
-     * Class->ID hashmap for packets in Packet.class
-     */
-    CLASSESTOIDS("a");
-    protected String variable;
+    packetIdToClassMap("l", "field_73294_l");
 
-    private FieldObfuscation(String variable) {
+    protected String variable;
+    
+    protected String seargeVariable;
+
+    private FieldObfuscation(String variable, String seargeVariable) {
         this.variable = variable;
+        this.seargeVariable = seargeVariable;
     }
 
     public String getVariable() {
-        return variable;
+        return ModUtilities.getObfuscatedFieldName(this.toString(), variable, seargeVariable);
     }
 
     public static String getVariable(FieldObfuscation type) {
-        return type.getVariable();
+        return ModUtilities.getObfuscatedFieldName(type.toString(), type.variable, type.seargeVariable);
     }
 }

@@ -18,7 +18,8 @@ public class ConsoleLogFormatter extends Formatter {
 
     private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    public String format(LogRecord logrecord) {
+    @Override
+	public String format(LogRecord logrecord) {
         StringBuilder stringbuilder = new StringBuilder();
 
         stringbuilder.append(this.format.format(Long.valueOf(logrecord.getMillis())));
