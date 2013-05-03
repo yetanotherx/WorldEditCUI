@@ -11,8 +11,6 @@ import net.minecraft.src.OpenGlHelper;
 import net.minecraft.src.Packet1Login;
 import net.minecraft.src.RenderHelper;
 import net.minecraft.src.WorldClient;
-import wecui.Updater;
-import wecui.WorldEditCUI;
 import wecui.event.ChannelEvent;
 import wecui.event.WorldRenderEvent;
 import wecui.obfuscation.DataPacketList;
@@ -46,7 +44,7 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 	{
         this.controller = new WorldEditCUI(Minecraft.getMinecraft());
         this.controller.initialize();
-		this.event = new WorldRenderEvent(controller);
+		this.event = new WorldRenderEvent(this.controller);
 	}
 
 	@Override
@@ -65,26 +63,26 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 	@Override
 	public void onCustomPayload(String channel, int length, byte[] data)
 	{
-        ChannelEvent channelevent = new ChannelEvent(controller, new String(data, UTF_8_CHARSET));
-        controller.getEventManager().callEvent(channelevent);
+        ChannelEvent channelevent = new ChannelEvent(this.controller, new String(data, UTF_8_CHARSET));
+        this.controller.getEventManager().callEvent(channelevent);
 	}
 
 	@Override
 	public void onTick(Minecraft mc, float partialTicks, boolean inGame, boolean clock)
 	{
-		if (inGame && clock && controller != null)
+		if (inGame && clock && this.controller != null)
 		{
-	        if (mc.theWorld != lastWorld || mc.thePlayer != lastPlayer) {
-	            lastWorld = mc.theWorld;
-	            lastPlayer = mc.thePlayer;
+	        if (mc.theWorld != this.lastWorld || mc.thePlayer != this.lastPlayer) {
+	            this.lastWorld = mc.theWorld;
+	            this.lastPlayer = mc.thePlayer;
 
-	            if (!gameStarted) {
-	                gameStarted = true;
+	            if (!this.gameStarted) {
+	                this.gameStarted = true;
 
-	                new Updater(controller).start();
-	                this.controller.setSelection(new CuboidRegion(controller));
+	                new Updater(this.controller).start();
+	                this.controller.setSelection(new CuboidRegion(this.controller));
 
-	                DataPacketList.register(controller);
+	                DataPacketList.register(this.controller);
 	            }
 	        }
 		}
@@ -99,7 +97,7 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 	@Override
 	public String getVersion()
 	{
-		return "1.5.1_02_lite";
+		return "1.5.2_02_lite";
 	}
 
 	@Override
@@ -107,8 +105,8 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 	{
         RenderHelper.disableStandardItemLighting();
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240, 240);
-        event.setPartialTick(partialTicks);
-        controller.getEventManager().callEvent(event);
+        this.event.setPartialTick(partialTicks);
+        this.controller.getEventManager().callEvent(this.event);
         RenderHelper.enableStandardItemLighting();
 	}
 

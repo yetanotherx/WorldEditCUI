@@ -33,6 +33,6 @@ public class ChannelEvent extends Event<ChannelEvent> {
     }
 
     public String getMessage() {
-        return message;
+        return this.message;
     }
 }

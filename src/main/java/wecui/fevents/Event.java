@@ -46,7 +46,7 @@ public abstract class Event<TEvent extends Event<TEvent>> {
 
     @Override
 	public String toString() {
-        return getEventName() + " (" + this.getClass().getName() + ")";
+        return this.getEventName() + " (" + this.getClass().getName() + ")";
     }
 
     /**
@@ -71,6 +71,6 @@ public abstract class Event<TEvent extends Event<TEvent>> {
      *                Cancellable should never return true here
      */
     public boolean isCancelled() {
-        return cancelled;
+        return this.cancelled;
     }
 }

@@ -1,6 +1,5 @@
 package wecui.config;
 
-import wecui.exception.ConfigurationException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -8,10 +7,13 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.HashMap;
 import java.util.Map;
+
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.SafeConstructor;
 import org.yaml.snakeyaml.reader.UnicodeReader;
+
+import wecui.exception.ConfigurationException;
 
 /**
  * YAML configuration loader. To use this class, construct it with path to
@@ -59,7 +61,7 @@ public class Configuration extends ConfigurationNode {
         options.setIndent(4);
         options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
 
-        yaml = new Yaml(new SafeConstructor(), new EmptyNullRepresenter(), options);
+        this.yaml = new Yaml(new SafeConstructor(), new EmptyNullRepresenter(), options);
 
         this.file = file;
     }
@@ -71,12 +73,12 @@ public class Configuration extends ConfigurationNode {
         FileInputStream stream = null;
 
         try {
-            stream = new FileInputStream(file);
-            read(yaml.load(new UnicodeReader(stream)));
+            stream = new FileInputStream(this.file);
+            this.read(this.yaml.load(new UnicodeReader(stream)));
         } catch (IOException e) {
-            root = new HashMap<String, Object>();
+            this.root = new HashMap<String, Object>();
         } catch (ConfigurationException e) {
-            root = new HashMap<String, Object>();
+            this.root = new HashMap<String, Object>();
         } finally {
             try {
                 if (stream != null) {
@@ -103,7 +105,7 @@ public class Configuration extends ConfigurationNode {
             headerTemp.append(line);
         }
 
-        setHeader(headerTemp.toString());
+        this.setHeader(headerTemp.toString());
     }
 
     /**
@@ -124,7 +126,7 @@ public class Configuration extends ConfigurationNode {
      * @return
      */
     public String getHeader() {
-        return header;
+        return this.header;
     }
 
     /**
@@ -136,20 +138,20 @@ public class Configuration extends ConfigurationNode {
     public boolean save() {
         FileOutputStream stream = null;
 
-        File parent = file.getParentFile();
+        File parent = this.file.getParentFile();
 
         if (parent != null) {
             parent.mkdirs();
         }
 
         try {
-            stream = new FileOutputStream(file);
+            stream = new FileOutputStream(this.file);
             OutputStreamWriter writer = new OutputStreamWriter(stream, "UTF-8");
-            if (header != null) {
-                writer.append(header);
+            if (this.header != null) {
+                writer.append(this.header);
                 writer.append("\r\n");
             }
-            yaml.dump(root, writer);
+            this.yaml.dump(this.root, writer);
             return true;
         } catch (IOException e) {
         } finally {
@@ -168,9 +170,9 @@ public class Configuration extends ConfigurationNode {
     private void read(Object input) throws ConfigurationException {
         try {
             if (null == input) {
-                root = new HashMap<String, Object>();
+                this.root = new HashMap<String, Object>();
             } else {
-                root = (Map<String, Object>) input;
+                this.root = (Map<String, Object>) input;
             }
         } catch (ClassCastException e) {
             throw new ConfigurationException("Root document must be an key-value structure");

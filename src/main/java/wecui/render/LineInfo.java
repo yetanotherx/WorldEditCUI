@@ -44,11 +44,11 @@ public class LineInfo {
      * Sets the lineWidth and depthFunction based on this color
      */
     public void prepareRender() {
-        GL11.glLineWidth(lineWidth);
-        GL11.glDepthFunc(depthfunc);
+        GL11.glLineWidth(this.lineWidth);
+        GL11.glDepthFunc(this.depthfunc);
     }
 
     public void prepareColor() {
-        GL11.glColor4f(red, green, blue, alpha);
+        GL11.glColor4f(this.red, this.green, this.blue, this.alpha);
     }
 }

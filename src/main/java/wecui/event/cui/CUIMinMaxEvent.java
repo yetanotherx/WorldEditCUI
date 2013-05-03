@@ -23,9 +23,9 @@ public class CUIMinMaxEvent extends CUIBaseEvent {
     public String run() {
         int min = this.getInt(0);
         int max = this.getInt(1);
-        controller.getSelection().setMinMax(min, max);
+        this.controller.getSelection().setMinMax(min, max);
         
-        controller.getDebugger().debug("Expanding/contracting selection.");
+        this.controller.getDebugger().debug("Expanding/contracting selection.");
         
         return null;
     }

@@ -72,6 +72,6 @@ public enum Order {
      * @return the index
      */
     public int getIndex() {
-        return index;
+        return this.index;
     }
 }

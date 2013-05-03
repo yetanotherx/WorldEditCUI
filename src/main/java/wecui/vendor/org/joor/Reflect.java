@@ -35,13 +35,14 @@
  */
 package wecui.vendor.org.joor;
 
-import wecui.exception.ReflectException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import wecui.exception.ReflectException;
 
 /**
  * A wrapper for an {@link Object} or {@link Class} upon which reflective calls
@@ -147,7 +148,7 @@ public class Reflect {
      */
     @SuppressWarnings("unchecked")
     public <T> T get() {
-        return (T) object;
+        return (T) this.object;
     }
 
     /**
@@ -165,11 +166,11 @@ public class Reflect {
      */
     public Reflect set(String name, Object value) throws ReflectException {
         try {
-            Field field = type().getField(name);
+            Field field = this.type().getField(name);
             if (!field.isAccessible()) {
                 field.setAccessible(true);
             }
-            field.set(object, unwrap(value));
+            field.set(this.object, unwrap(value));
             return this;
         } catch (Exception e) {
             throw new ReflectException(e);
@@ -193,7 +194,7 @@ public class Reflect {
      * @see #field(String)
      */
     public Object get(String name) throws ReflectException {
-        return field(name).get();
+        return this.field(name).get();
     }
 
     /**
@@ -210,11 +211,11 @@ public class Reflect {
      */
     public Reflect field(String name) throws ReflectException {
         try {
-            Field field = type().getField(name);
+            Field field = this.type().getField(name);
             if (!field.isAccessible()) {
                 field.setAccessible(true);
             }
-            return on(field.get(object));
+            return on(field.get(this.object));
         } catch (Exception e) {
             throw new ReflectException(e);
         }
@@ -238,10 +239,10 @@ public class Reflect {
     public Map<String, Reflect> fields() {
         Map<String, Reflect> result = new LinkedHashMap<String, Reflect>();
 
-        for (Field field : type().getFields()) {
-            if (!isClass ^ Modifier.isStatic(field.getModifiers())) {
+        for (Field field : this.type().getFields()) {
+            if (!this.isClass ^ Modifier.isStatic(field.getModifiers())) {
                 String name = field.getName();
-                result.put(name, field(name));
+                result.put(name, this.field(name));
             }
         }
 
@@ -262,7 +263,7 @@ public class Reflect {
      * @see #call(String, Object...)
      */
     public Reflect call(String name) throws ReflectException {
-        return call(name, new Object[0]);
+        return this.call(name, new Object[0]);
     }
 
     /**
@@ -300,14 +301,14 @@ public class Reflect {
         // Try invoking the "canonical" method, i.e. the one with exact
         // matching argument types
         try {
-            Method method = type().getMethod(name, types);
-            return on(method, object, args);
+            Method method = this.type().getMethod(name, types);
+            return on(method, this.object, args);
         } // If there is no exact match, try to find one that has a "similar"
         // signature if primitive argument types are converted to their wrappers
         catch (NoSuchMethodException e) {
-            for (Method method : type().getMethods()) {
-                if (method.getName().equals(name) && match(method.getParameterTypes(), types)) {
-                    return on(method, object, args);
+            for (Method method : this.type().getMethods()) {
+                if (method.getName().equals(name) && this.match(method.getParameterTypes(), types)) {
+                    return on(method, this.object, args);
                 }
             }
 
@@ -326,7 +327,7 @@ public class Reflect {
      * @see #create(Object...)
      */
     public Reflect create() throws ReflectException {
-        return create(new Object[0]);
+        return this.create(new Object[0]);
     }
 
     /**
@@ -361,13 +362,13 @@ public class Reflect {
         // Try invoking the "canonical" constructor, i.e. the one with exact
         // matching argument types
         try {
-            Constructor<?> constructor = type().getConstructor(types);
+            Constructor<?> constructor = this.type().getConstructor(types);
             return on(constructor, args);
         } // If there is no exact match, try to find one that has a "similar"
         // signature if primitive argument types are converted to their wrappers
         catch (NoSuchMethodException e) {
-            for (Constructor<?> constructor : type().getConstructors()) {
-                if (match(constructor.getParameterTypes(), types)) {
+            for (Constructor<?> constructor : this.type().getConstructors()) {
+                if (this.match(constructor.getParameterTypes(), types)) {
                     return on(constructor, args);
                 }
             }
@@ -401,7 +402,7 @@ public class Reflect {
      */
     @Override
     public int hashCode() {
-        return object.hashCode();
+        return this.object.hashCode();
     }
 
     /**
@@ -410,7 +411,7 @@ public class Reflect {
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Reflect) {
-            return object.equals(((Reflect) obj).get());
+            return this.object.equals(((Reflect) obj).get());
         }
 
         return false;
@@ -421,7 +422,7 @@ public class Reflect {
      */
     @Override
     public String toString() {
-        return object.toString();
+        return this.object.toString();
     }
 
     // ---------------------------------------------------------------------
@@ -502,10 +503,10 @@ public class Reflect {
      * @see Object#getClass()
      */
     private Class<?> type() {
-        if (isClass) {
-            return (Class<?>) object;
+        if (this.isClass) {
+            return (Class<?>) this.object;
         }
-		return object.getClass();
+		return this.object.getClass();
     }
 
     /**

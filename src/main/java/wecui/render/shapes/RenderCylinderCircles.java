@@ -35,20 +35,20 @@ public class RenderCylinderCircles {
 
     public void render() {
     	Tessellator tess = Tessellator.instance;
-        for (LineInfo tempColor : color.getColors()) {
+        for (LineInfo tempColor : this.color.getColors()) {
             tempColor.prepareRender();
 
             double twoPi = Math.PI * 2;
-            for (int yBlock = minY + 1; yBlock <= maxY; yBlock++) {
+            for (int yBlock = this.minY + 1; yBlock <= this.maxY; yBlock++) {
                 tess.startDrawing(GL11.GL_LINE_LOOP);
                 tempColor.prepareColor();
 
                 for (int i = 0; i <= 75; i++) {
                     double tempTheta = i * twoPi / 75;
-                    double tempX = radX * Math.cos(tempTheta);
-                    double tempZ = radZ * Math.sin(tempTheta);
+                    double tempX = this.radX * Math.cos(tempTheta);
+                    double tempZ = this.radZ * Math.sin(tempTheta);
 
-                    tess.addVertex(centerX + tempX, yBlock, centerZ + tempZ);
+                    tess.addVertex(this.centerX + tempX, yBlock, this.centerZ + tempZ);
                 }
                 tess.draw();
             }

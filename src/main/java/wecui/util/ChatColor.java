@@ -87,12 +87,12 @@ public enum ChatColor {
      * @return An integer value of this color code
      */
     public int getCode() {
-        return code;
+        return this.code;
     }
 
     @Override
     public String toString() {
-        return String.format("\u00A7%x", code);
+        return String.format("\u00A7%x", this.code);
     }
 
     /**

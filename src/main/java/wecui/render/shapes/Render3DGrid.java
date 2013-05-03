@@ -28,14 +28,14 @@ public class Render3DGrid {
 
     public void render() {
     	Tessellator tess = Tessellator.instance;
-        double x1 = first.getX();
-        double y1 = first.getY();
-        double z1 = first.getZ();
-        double x2 = second.getX();
-        double y2 = second.getY();
-        double z2 = second.getZ();
+        double x1 = this.first.getX();
+        double y1 = this.first.getY();
+        double z1 = this.first.getZ();
+        double x2 = this.second.getX();
+        double y2 = this.second.getY();
+        double z2 = this.second.getZ();
 
-        for (LineInfo tempColor : color.getColors()) {
+        for (LineInfo tempColor : this.color.getColors()) {
             tempColor.prepareRender();
 
             tess.startDrawing(GL11.GL_LINES);

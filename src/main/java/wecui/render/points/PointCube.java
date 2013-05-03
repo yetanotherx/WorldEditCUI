@@ -35,11 +35,11 @@ public class PointCube {
         Vector3 minVec = new Vector3(off, off, off);
         Vector3 maxVec = new Vector3(off + 1, off + 1, off + 1);
 
-        new Render3DBox(color, point.subtract(minVec), point.add(maxVec)).render();
+        new Render3DBox(this.color, this.point.subtract(minVec), this.point.add(maxVec)).render();
     }
 
     public Vector3 getPoint() {
-        return point;
+        return this.point;
     }
 
     public void setPoint(Vector3 point) {
@@ -47,7 +47,7 @@ public class PointCube {
     }
 
     public LineColor getColor() {
-        return color;
+        return this.color;
     }
 
     public void setColor(LineColor color) {

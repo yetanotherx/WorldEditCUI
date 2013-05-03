@@ -32,19 +32,19 @@ public class Render2DGrid {
 
     public void render() {
         double off = 0.03;
-        for (double height = min; height <= max + 1; height++) {
-            drawPoly(height + off);
+        for (double height = this.min; height <= this.max + 1; height++) {
+            this.drawPoly(height + off);
         }
     }
 
     protected void drawPoly(double height) {
     	Tessellator tess = Tessellator.instance;
-        for (LineInfo tempColor : color.getColors()) {
+        for (LineInfo tempColor : this.color.getColors()) {
             tempColor.prepareRender();
 
             tess.startDrawing(GL11.GL_LINE_LOOP);
             tempColor.prepareColor();
-            for (PointRectangle point : points) {
+            for (PointRectangle point : this.points) {
                 if (point != null) {
                     tess.addVertex(point.getPoint().getX() + 0.5, height, point.getPoint().getY() + 0.5);
                 }

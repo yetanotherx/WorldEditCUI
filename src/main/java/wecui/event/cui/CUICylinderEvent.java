@@ -28,10 +28,10 @@ public class CUICylinderEvent extends CUIBaseEvent {
         double radX = this.getDouble(3);
         double radZ = this.getDouble(4);
         
-        controller.getSelection().setCylinderCenter(x, y, z);
-        controller.getSelection().setCylinderRadius(radX, radZ);
+        this.controller.getSelection().setCylinderCenter(x, y, z);
+        this.controller.getSelection().setCylinderRadius(radX, radZ);
 
-        controller.getDebugger().debug("Setting center/radius");
+        this.controller.getDebugger().debug("Setting center/radius");
 
         return null;
     }

@@ -36,19 +36,19 @@ public enum CUIEventType {
     }
 
     public Class<? extends CUIBaseEvent> getEventClass() {
-        return eventClass;
+        return this.eventClass;
     }
 
     public String getKey() {
-        return key;
+        return this.key;
     }
 
     public int getMaxParameters() {
-        return max;
+        return this.max;
     }
 
     public int getMinParameters() {
-        return min;
+        return this.min;
     }
 
     public static CUIEventType getTypeFromKey(String key) {

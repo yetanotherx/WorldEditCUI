@@ -6,6 +6,7 @@ import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import wecui.exception.InitializationException;
 import wecui.util.ConsoleLogFormatter;
 
@@ -38,7 +39,7 @@ public class CUIDebug implements InitializationFactory {
 
         try {
             this.debugFile = new File(WorldEditCUI.getWorldEditCUIDir(), "WorldEditCUI-debug.txt");
-            this.debugMode = controller.getConfiguration().isDebugMode();
+            this.debugMode = this.controller.getConfiguration().isDebugMode();
 
             if (this.debugMode) {
                 FileHandler newHandler = new FileHandler(this.debugFile.getAbsolutePath());
@@ -58,7 +59,7 @@ public class CUIDebug implements InitializationFactory {
      * @param message 
      */
     public void debug(String message) {
-        if (debugMode) {
+        if (this.debugMode) {
             logger.info("WorldEditCUI Debug - " + message);
         }
     }

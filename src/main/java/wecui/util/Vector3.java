@@ -99,15 +99,15 @@ public class Vector3 implements Comparable<Vector3> {
     }
 
     public float getX() {
-        return x;
+        return this.x;
     }
 
     public float getY() {
-        return y;
+        return this.y;
     }
 
     public float getZ() {
-        return z;
+        return this.z;
     }
 
     /**
@@ -191,7 +191,7 @@ public class Vector3 implements Comparable<Vector3> {
      * @return 
      */
     public Vector3 ceil() {
-        return new Vector3(Math.ceil(x), Math.ceil(y), Math.ceil(z));
+        return new Vector3(Math.ceil(this.x), Math.ceil(this.y), Math.ceil(this.z));
     }
 
     /**
@@ -201,7 +201,7 @@ public class Vector3 implements Comparable<Vector3> {
      * @return 
      */
     public Vector3 floor() {
-        return new Vector3(Math.floor(x), Math.floor(y), Math.floor(z));
+        return new Vector3(Math.floor(this.x), Math.floor(this.y), Math.floor(this.z));
     }
 
     /**
@@ -211,7 +211,7 @@ public class Vector3 implements Comparable<Vector3> {
      * @return 
      */
     public Vector3 round() {
-        return new Vector3(Math.round(x), Math.round(y), Math.round(z));
+        return new Vector3(Math.round(this.x), Math.round(this.y), Math.round(this.z));
     }
 
     /**
@@ -221,7 +221,7 @@ public class Vector3 implements Comparable<Vector3> {
      * @return 
      */
     public Vector3 abs() {
-        return new Vector3(Math.abs(x), Math.abs(y), Math.abs(z));
+        return new Vector3(Math.abs(this.x), Math.abs(this.y), Math.abs(this.z));
     }
 
     /**
@@ -311,7 +311,7 @@ public class Vector3 implements Comparable<Vector3> {
      */
     @Override
 	public String toString() {
-        return String.format("{ %f, %f, %f }", x, y, z);
+        return String.format("{ %f, %f, %f }", this.x, this.y, this.z);
     }
 
     /**

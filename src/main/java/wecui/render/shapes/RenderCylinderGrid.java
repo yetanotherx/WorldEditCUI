@@ -35,38 +35,38 @@ public class RenderCylinderGrid {
 
     public void render() {
         Tessellator tess = Tessellator.instance;
-        for (LineInfo tempColor : color.getColors()) {
+        for (LineInfo tempColor : this.color.getColors()) {
             tempColor.prepareRender();
 
-            int tmaxY = maxY + 1;
-            int tminY = minY;
-            int posRadiusX = (int) Math.ceil(radX);
-            int negRadiusX = (int) -Math.ceil(radX);
-            int posRadiusZ = (int) Math.ceil(radZ);
-            int negRadiusZ = (int) -Math.ceil(radZ);
+            int tmaxY = this.maxY + 1;
+            int tminY = this.minY;
+            int posRadiusX = (int) Math.ceil(this.radX);
+            int negRadiusX = (int) -Math.ceil(this.radX);
+            int posRadiusZ = (int) Math.ceil(this.radZ);
+            int negRadiusZ = (int) -Math.ceil(this.radZ);
 
             for (double tempX = negRadiusX; tempX <= posRadiusX; ++tempX) {
-                double tempZ = radZ * Math.cos(Math.asin(tempX / radX));
+                double tempZ = this.radZ * Math.cos(Math.asin(tempX / this.radX));
                 tess.startDrawing(GL11.GL_LINE_LOOP);
                 tempColor.prepareColor();
 
-                tess.addVertex(centerX + tempX, tmaxY, centerZ + tempZ);
-                tess.addVertex(centerX + tempX, tmaxY, centerZ - tempZ);
-                tess.addVertex(centerX + tempX, tminY, centerZ - tempZ);
-                tess.addVertex(centerX + tempX, tminY, centerZ + tempZ);
+                tess.addVertex(this.centerX + tempX, tmaxY, this.centerZ + tempZ);
+                tess.addVertex(this.centerX + tempX, tmaxY, this.centerZ - tempZ);
+                tess.addVertex(this.centerX + tempX, tminY, this.centerZ - tempZ);
+                tess.addVertex(this.centerX + tempX, tminY, this.centerZ + tempZ);
 
                 tess.draw();
             }
 
             for (double tempZ = negRadiusZ; tempZ <= posRadiusZ; ++tempZ) {
-                double tempX = radX * Math.sin(Math.acos(tempZ / radZ));
+                double tempX = this.radX * Math.sin(Math.acos(tempZ / this.radZ));
                 tess.startDrawing(GL11.GL_LINE_LOOP);
                 tempColor.prepareColor();
 
-                tess.addVertex(centerX + tempX, tmaxY, centerZ + tempZ);
-                tess.addVertex(centerX - tempX, tmaxY, centerZ + tempZ);
-                tess.addVertex(centerX - tempX, tminY, centerZ + tempZ);
-                tess.addVertex(centerX + tempX, tminY, centerZ + tempZ);
+                tess.addVertex(this.centerX + tempX, tmaxY, this.centerZ + tempZ);
+                tess.addVertex(this.centerX - tempX, tmaxY, this.centerZ + tempZ);
+                tess.addVertex(this.centerX - tempX, tminY, this.centerZ + tempZ);
+                tess.addVertex(this.centerX + tempX, tminY, this.centerZ + tempZ);
 
                 tess.draw();
             }

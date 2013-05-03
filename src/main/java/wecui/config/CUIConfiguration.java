@@ -32,7 +32,7 @@ public class CUIConfiguration implements InitializationFactory {
     protected String cylinderGridColor = "#CC3333";
     protected String cylinderEdgeColor = "#CC4C4C";
     protected String cylinderPointColor = "#CC33CC";
-    protected String updateFile = "https://raw.github.com/yetanotherx/WorldEditCUI/master/updates.yml";
+    protected String updateFile = "http://update.liteloader.com/wecui.version";
     protected Configuration config = null;
 
     public CUIConfiguration(WorldEditCUI controller) {
@@ -80,24 +80,24 @@ public class CUIConfiguration implements InitializationFactory {
             }
         }
 
-        config = new Configuration(file);
-        config.load();
+        this.config = new Configuration(file);
+        this.config.load();
 
-        this.debugMode = config.getBoolean("debug", debugMode);
-        this.ignoreUpdates = config.getBoolean("ignoreUpdates", ignoreUpdates);
+        this.debugMode = this.config.getBoolean("debug", this.debugMode);
+        this.ignoreUpdates = this.config.getBoolean("ignoreUpdates", this.ignoreUpdates);
 
-        this.cuboidGridColor = parseColor(config.getString("colors.cuboidGrid"), this.cuboidGridColor);
-        this.cuboidEdgeColor = parseColor(config.getString("colors.cuboidEdge"), this.cuboidEdgeColor);
-        this.cuboidFirstPointColor = parseColor(config.getString("colors.cuboidFirstPoint"), this.cuboidFirstPointColor);
-        this.cuboidSecondPointColor = parseColor(config.getString("colors.cuboidSecondPoint"), this.cuboidSecondPointColor);
-        this.polyGridColor = parseColor(config.getString("colors.polyGrid"), this.polyGridColor);
-        this.polyEdgeColor = parseColor(config.getString("colors.polyEdge"), this.polyEdgeColor);
-        this.polyPointColor = parseColor(config.getString("colors.polyPoint"), this.polyPointColor);
-        this.ellipsoidGridColor = parseColor(config.getString("colors.ellipsoidGrid"), this.ellipsoidGridColor);
-        this.ellipsoidPointColor = parseColor(config.getString("colors.ellipsoidPoint"), this.ellipsoidPointColor);
-        this.cylinderGridColor = parseColor(config.getString("colors.cylinderGrid"), this.cylinderGridColor);
-        this.cylinderEdgeColor = parseColor(config.getString("colors.cylinderEdge"), this.cylinderEdgeColor);
-        this.cylinderPointColor = parseColor(config.getString("colors.cylinderPoint"), this.cylinderPointColor);
+        this.cuboidGridColor = this.parseColor(this.config.getString("colors.cuboidGrid"), this.cuboidGridColor);
+        this.cuboidEdgeColor = this.parseColor(this.config.getString("colors.cuboidEdge"), this.cuboidEdgeColor);
+        this.cuboidFirstPointColor = this.parseColor(this.config.getString("colors.cuboidFirstPoint"), this.cuboidFirstPointColor);
+        this.cuboidSecondPointColor = this.parseColor(this.config.getString("colors.cuboidSecondPoint"), this.cuboidSecondPointColor);
+        this.polyGridColor = this.parseColor(this.config.getString("colors.polyGrid"), this.polyGridColor);
+        this.polyEdgeColor = this.parseColor(this.config.getString("colors.polyEdge"), this.polyEdgeColor);
+        this.polyPointColor = this.parseColor(this.config.getString("colors.polyPoint"), this.polyPointColor);
+        this.ellipsoidGridColor = this.parseColor(this.config.getString("colors.ellipsoidGrid"), this.ellipsoidGridColor);
+        this.ellipsoidPointColor = this.parseColor(this.config.getString("colors.ellipsoidPoint"), this.ellipsoidPointColor);
+        this.cylinderGridColor = this.parseColor(this.config.getString("colors.cylinderGrid"), this.cylinderGridColor);
+        this.cylinderEdgeColor = this.parseColor(this.config.getString("colors.cylinderEdge"), this.cylinderEdgeColor);
+        this.cylinderPointColor = this.parseColor(this.config.getString("colors.cylinderPoint"), this.cylinderPointColor);
 
         LineColor.CUBOIDBOX.setColor(this.cuboidEdgeColor);
         LineColor.CUBOIDGRID.setColor(this.cuboidGridColor);
@@ -112,7 +112,7 @@ public class CUIConfiguration implements InitializationFactory {
         LineColor.CYLINDERBOX.setColor(this.cylinderEdgeColor);
         LineColor.CYLINDERCENTER.setColor(this.cylinderPointColor);
 
-        this.updateFile = config.getString("updateFile", this.updateFile);
+        this.updateFile = this.config.getString("updateFile", this.updateFile);
     }
 
     /**
@@ -136,14 +136,14 @@ public class CUIConfiguration implements InitializationFactory {
     }
 
     public boolean isDebugMode() {
-        return debugMode;
+        return this.debugMode;
     }
 
     public boolean ignoreUpdates() {
-        return ignoreUpdates;
+        return this.ignoreUpdates;
     }
 
     public String getUpdateFile() {
-        return updateFile;
+        return this.updateFile;
     }
 }

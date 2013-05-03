@@ -31,11 +31,11 @@ public class PointRectangle {
         Vector2 minVec = new Vector2(off, off);
         Vector2 maxVec = new Vector2(off + 1, off + 1);
 
-        new Render3DBox(color, point.subtract(minVec).toVector3(min - off), point.add(maxVec).toVector3(max + 1 + off)).render();
+        new Render3DBox(this.color, this.point.subtract(minVec).toVector3(min - off), this.point.add(maxVec).toVector3(max + 1 + off)).render();
     }
 
     public Vector2 getPoint() {
-        return point;
+        return this.point;
     }
 
     public void setPoint(Vector2 point) {
@@ -43,7 +43,7 @@ public class PointRectangle {
     }
 
     public LineColor getColor() {
-        return color;
+        return this.color;
     }
 
     public void setColor(LineColor color) {

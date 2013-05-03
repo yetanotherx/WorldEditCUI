@@ -33,16 +33,16 @@ public class Render2DBox {
     public void render() {
     	Tessellator tess = Tessellator.instance;
         double off = 0.03;
-        for (LineInfo tempColor : color.getColors()) {
+        for (LineInfo tempColor : this.color.getColors()) {
             tempColor.prepareRender();
 
             tess.startDrawing(GL11.GL_LINES);
             tempColor.prepareColor();
 
-            for (PointRectangle point : points) {
+            for (PointRectangle point : this.points) {
                 if (point != null) {
-                    tess.addVertex(point.getPoint().getX() + 0.5, min + off, point.getPoint().getY() + 0.5);
-                    tess.addVertex(point.getPoint().getX() + 0.5, max + 1 + off, point.getPoint().getY() + 0.5);
+                    tess.addVertex(point.getPoint().getX() + 0.5, this.min + off, point.getPoint().getY() + 0.5);
+                    tess.addVertex(point.getPoint().getX() + 0.5, this.max + 1 + off, point.getPoint().getY() + 0.5);
                 }
             }
             tess.draw();

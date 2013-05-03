@@ -27,11 +27,11 @@ public enum CommandEventType {
     }
 
     public Class<? extends CommandEventBase> getEventClass() {
-        return eventClass;
+        return this.eventClass;
     }
 
     public List<String> getAliases() {
-        return aliases;
+        return this.aliases;
     }
 
     public static CommandEventType getTypeFromCommand(String key) {

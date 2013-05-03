@@ -10,7 +10,7 @@ import com.mumfrey.liteloader.util.ModUtilities;
  * @author yetanotherx
  * @author Mumfrey
  * 
- * @obfuscated 1.5.1
+ * @obfuscated 1.5.2
  */
 public enum FieldObfuscation {
 
@@ -33,7 +33,7 @@ public enum FieldObfuscation {
     }
 
     public String getVariable() {
-        return ModUtilities.getObfuscatedFieldName(this.toString(), variable, seargeVariable);
+        return ModUtilities.getObfuscatedFieldName(this.toString(), this.variable, this.seargeVariable);
     }
 
     public static String getVariable(FieldObfuscation type) {

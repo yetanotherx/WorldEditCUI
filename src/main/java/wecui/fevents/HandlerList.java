@@ -60,9 +60,9 @@ public class HandlerList<TEvent extends Event<TEvent>> {
      * handlerlist is then added to meta-list for use in bakeall()
      */
     public HandlerList() {
-        handlerslots = new EnumMap<Order, ArrayList<Listener<TEvent>>>(Order.class);
+        this.handlerslots = new EnumMap<Order, ArrayList<Listener<TEvent>>>(Order.class);
         for (Order o : Order.values()) {
-            handlerslots.put(o, new ArrayList<Listener<TEvent>>());
+            this.handlerslots.put(o, new ArrayList<Listener<TEvent>>());
         }
         alllists.add(this);
     }
@@ -73,11 +73,11 @@ public class HandlerList<TEvent extends Event<TEvent>> {
      * @param order order location at which to call provided listener
      */
     public void register(Listener<TEvent> listener, Order order) {
-        if (handlerslots.get(order).contains(listener)) {
+        if (this.handlerslots.get(order).contains(listener)) {
             throw new IllegalStateException("This listener is already registered to order " + order.toString());
         }
-        baked = false;
-        handlerslots.get(order).add(listener);
+        this.baked = false;
+        this.handlerslots.get(order).add(listener);
     }
 
     /**
@@ -86,7 +86,7 @@ public class HandlerList<TEvent extends Event<TEvent>> {
      */
     public void unregister(Listener<TEvent> listener) {
         for (Order o : Order.values()) {
-            unregister(listener, o);
+            this.unregister(listener, o);
         }
     }
 
@@ -96,9 +96,9 @@ public class HandlerList<TEvent extends Event<TEvent>> {
      * @param order order from which to remove listener
      */
     public void unregister(Listener<TEvent> listener, Order order) {
-        if (handlerslots.get(order).contains(listener)) {
-            baked = false;
-            handlerslots.get(order).remove(listener);
+        if (this.handlerslots.get(order).contains(listener)) {
+            this.baked = false;
+            this.handlerslots.get(order).remove(listener);
         }
     }
 
@@ -106,12 +106,12 @@ public class HandlerList<TEvent extends Event<TEvent>> {
      * Bake HashMap and ArrayLists to 2d array - does nothing if not necessary
      */
     void bake() {
-        if (baked) {
+        if (this.baked) {
             return; // don't re-bake when still valid
         }
         ArrayList<Listener<? extends Event<?>>[]> handlerslist = new ArrayList<Listener<? extends Event<?>>[]>();
         ArrayList<Integer> handleridslist = new ArrayList<Integer>();
-        for (Entry<Order, ArrayList<Listener<TEvent>>> entry : handlerslots.entrySet()) {
+        for (Entry<Order, ArrayList<Listener<TEvent>>> entry : this.handlerslots.entrySet()) {
             Order orderslot = entry.getKey();
 
             ArrayList<Listener<TEvent>> list = entry.getValue();
@@ -120,11 +120,11 @@ public class HandlerList<TEvent extends Event<TEvent>> {
             handlerslist.add(list.toArray(new Listener[list.size()]));
             handleridslist.add(ord);
         }
-        handlers = handlerslist.toArray(new Listener[handlerslist.size()][]);
-        handlerids = new int[handleridslist.size()];
+        this.handlers = handlerslist.toArray(new Listener[handlerslist.size()][]);
+        this.handlerids = new int[handleridslist.size()];
         for (int i = 0; i < handleridslist.size(); i++) {
-            handlerids[i] = handleridslist.get(i);
+            this.handlerids[i] = handleridslist.get(i);
         }
-        baked = true;
+        this.baked = true;
     }
 }

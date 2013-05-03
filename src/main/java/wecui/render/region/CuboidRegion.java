@@ -2,8 +2,8 @@ package wecui.render.region;
 
 import wecui.WorldEditCUI;
 import wecui.render.LineColor;
-import wecui.render.shapes.Render3DBox;
 import wecui.render.points.PointCube;
+import wecui.render.shapes.Render3DBox;
 import wecui.render.shapes.Render3DGrid;
 import wecui.util.Vector3;
 import wecui.util.Vector3m;
@@ -25,29 +25,29 @@ public class CuboidRegion extends BaseRegion {
 
     @Override
     public void render() {
-        if (firstPoint != null && secondPoint != null) {
-            firstPoint.render();
-            secondPoint.render();
+        if (this.firstPoint != null && this.secondPoint != null) {
+            this.firstPoint.render();
+            this.secondPoint.render();
 
             Vector3[] bounds = this.calcBounds();
             new Render3DBox(LineColor.CUBOIDBOX, bounds[0], bounds[1]).render();
             new Render3DGrid(LineColor.CUBOIDGRID, bounds[0], bounds[1]).render();
 
-        } else if (firstPoint != null) {
-            firstPoint.render();
-        } else if (secondPoint != null) {
-            secondPoint.render();
+        } else if (this.firstPoint != null) {
+            this.firstPoint.render();
+        } else if (this.secondPoint != null) {
+            this.secondPoint.render();
         }
     }
 
     @Override
     public void setCuboidPoint(int id, int x, int y, int z) {
         if (id == 0) {
-            firstPoint = new PointCube(x, y, z);
-            firstPoint.setColor(LineColor.CUBOIDPOINT1);
+            this.firstPoint = new PointCube(x, y, z);
+            this.firstPoint.setColor(LineColor.CUBOIDPOINT1);
         } else if (id == 1) {
-            secondPoint = new PointCube(x, y, z);
-            secondPoint.setColor(LineColor.CUBOIDPOINT2);
+            this.secondPoint = new PointCube(x, y, z);
+            this.secondPoint.setColor(LineColor.CUBOIDPOINT2);
         }
     }
 
@@ -64,7 +64,7 @@ public class CuboidRegion extends BaseRegion {
         out[0] = new Vector3m(Double.MAX_VALUE, Double.MAX_VALUE, Double.MAX_VALUE);
         out[1] = new Vector3m(-Double.MAX_VALUE, -Double.MAX_VALUE, -Double.MAX_VALUE);
 
-        for (PointCube point : new PointCube[]{firstPoint, secondPoint}) {
+        for (PointCube point : new PointCube[]{this.firstPoint, this.secondPoint}) {
             if (point.getPoint().getX() + off1 > out[1].getX()) {
                 out[1].setX(point.getPoint().getX() + off1);
             }

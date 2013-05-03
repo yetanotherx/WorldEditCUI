@@ -1,12 +1,12 @@
 package wecui.event.listeners;
 
-import wecui.vendor.org.joor.Reflect;
-import wecui.fevents.Listener;
 import wecui.WorldEditCUI;
 import wecui.event.CUIEvent;
 import wecui.event.cui.CUIBaseEvent;
 import wecui.event.cui.CUIEventType;
 import wecui.exception.ReflectException;
+import wecui.fevents.Listener;
+import wecui.vendor.org.joor.Reflect;
 
 /**
  * Listener class for CUIEvent

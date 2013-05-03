@@ -42,29 +42,29 @@ public class Vector2m extends Vector2 {
 
     @Override
     public Vector2 add(Vector2 that) {
-        x += that.x;
-        z += that.z;
+        this.x += that.x;
+        this.z += that.z;
         return this;
     }
 
     @Override
     public Vector2 subtract(Vector2 that) {
-        x -= that.x;
-        z -= that.z;
+        this.x -= that.x;
+        this.z -= that.z;
         return this;
     }
 
     @Override
     public Vector2 scale(float scale) {
-        x *= scale;
-        z *= scale;
+        this.x *= scale;
+        this.z *= scale;
         return this;
     }
 
     public Vector2 cross(Vector2 that) {
-        float tmp = z;
-        z = -x;
-        x = tmp;
+        float tmp = this.z;
+        this.z = -this.x;
+        this.x = tmp;
         return this;
     }
 
@@ -76,8 +76,8 @@ public class Vector2m extends Vector2 {
      */
     @Override
 	public Vector2 ceil() {
-        x = (float) Math.ceil(x);
-        z = (float) Math.ceil(z);
+        this.x = (float) Math.ceil(this.x);
+        this.z = (float) Math.ceil(this.z);
         return this;
     }
 
@@ -89,8 +89,8 @@ public class Vector2m extends Vector2 {
      */
     @Override
 	public Vector2 floor() {
-        x = (float) Math.floor(x);
-        z = (float) Math.floor(z);
+        this.x = (float) Math.floor(this.x);
+        this.z = (float) Math.floor(this.z);
         return this;
     }
 
@@ -102,8 +102,8 @@ public class Vector2m extends Vector2 {
      */
     @Override
 	public Vector2 round() {
-        x = Math.round(x);
-        z = Math.round(z);
+        this.x = Math.round(this.x);
+        this.z = Math.round(this.z);
         return this;
     }
 
@@ -115,16 +115,16 @@ public class Vector2m extends Vector2 {
      */
     @Override
 	public Vector2 abs() {
-        x = Math.abs(x);
-        z = Math.abs(z);
+        this.x = Math.abs(this.x);
+        this.z = Math.abs(this.z);
         return this;
     }
 
     @Override
     public Vector2 normalize() {
         float length = this.length();
-        x *= 1 / length;
-        z *= 1 / length;
+        this.x *= 1 / length;
+        this.z *= 1 / length;
         return this;
     }
 }

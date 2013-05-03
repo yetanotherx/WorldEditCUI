@@ -4,9 +4,9 @@
 	<taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
 	
     <!-- Versions !!IMPORTANT -->
-	<property name="version" value="1.5.1_02_lite" />
-    <property name="mcversion" value="1.5.1" />
-    <property name="litemodversion" value="1.5.1" />
+	<property name="version" value="1.5.2_01_lite" />
+    <property name="mcversion" value="1.5.2" />
+    <property name="litemodversion" value="1.5.2" />
     <property name="author" value="yetanotherx, Mumfrey" />
 
     <!-- Project definitions and dependencies -->

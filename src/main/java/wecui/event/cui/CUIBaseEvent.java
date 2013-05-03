@@ -52,7 +52,7 @@ public abstract class CUIBaseEvent {
     }
 
     public final String doRun() {
-        if (controller == null || args == null) {
+        if (this.controller == null || this.args == null) {
             throw new RuntimeException("Controller and parameters must both be set.");
         }
 
@@ -64,8 +64,8 @@ public abstract class CUIBaseEvent {
                 message += "between " + this.getEventType().getMinParameters() + " and " + this.getEventType().getMaxParameters() + " parameters. ";
             }
 
-            message += "Received " + args.length + " parameters instead. ";
-            for (String arg : args) {
+            message += "Received " + this.args.length + " parameters instead. ";
+            for (String arg : this.args) {
                 message += arg + " ";
             }
 
@@ -77,14 +77,14 @@ public abstract class CUIBaseEvent {
     }
 
     public int getInt(int index) {
-        return (int) Float.parseFloat(args[index]);
+        return (int) Float.parseFloat(this.args[index]);
     }
     
     public double getDouble(int index) {
-        return Double.parseDouble(args[index]);
+        return Double.parseDouble(this.args[index]);
     }
 
     public String getString(int index) {
-        return args[index];
+        return this.args[index];
     }
 }

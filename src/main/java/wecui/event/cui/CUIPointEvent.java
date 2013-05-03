@@ -26,9 +26,9 @@ public class CUIPointEvent extends CUIBaseEvent {
         int y = this.getInt(2);
         int z = this.getInt(3);
 
-        controller.getSelection().setCuboidPoint(id, x, y, z);
+        this.controller.getSelection().setCuboidPoint(id, x, y, z);
         this.setLocalPoint(id, x, y, z);
-        controller.getDebugger().debug("Setting point #" + id);
+        this.controller.getDebugger().debug("Setting point #" + id);
 
         return null;
     }

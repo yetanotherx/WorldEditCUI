@@ -1,9 +1,9 @@
 package wecui.event;
 
-import wecui.util.Utilities;
+import wecui.WorldEditCUI;
 import wecui.fevents.Event;
 import wecui.fevents.HandlerList;
-import wecui.WorldEditCUI;
+import wecui.util.Utilities;
 
 /**
  * CUI communication event
@@ -55,32 +55,32 @@ public class CUIEvent extends Event<CUIEvent> {
      * @param reason Error message
      */
     public void markInvalid(String reason) {
-        this.controller.getDebugger().debug("INVALID WECUIEvent " + type + " - " + Utilities.join(params, "|") + " - Reason: " + reason);
-        setHandled(true);
+        this.controller.getDebugger().debug("INVALID WECUIEvent " + this.type + " - " + Utilities.join(this.params, "|") + " - Reason: " + reason);
+        this.setHandled(true);
     }
 
     public int getInt(int index) {
-        return (int) Float.parseFloat(params[index]);
+        return (int) Float.parseFloat(this.params[index]);
     }
 
     public String getString(int index) {
-        return params[index];
+        return this.params[index];
     }
 
     public boolean isHandled() {
-        return handled;
+        return this.handled;
     }
 
     @Override
 	public boolean isCancelled() {
-        return isHandled();
+        return this.isHandled();
     }
 
     public String[] getParams() {
-        return params;
+        return this.params;
     }
 
     public String getType() {
-        return type;
+        return this.type;
     }
 }

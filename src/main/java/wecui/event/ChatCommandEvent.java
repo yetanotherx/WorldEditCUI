@@ -1,10 +1,11 @@
 package wecui.event;
 
-import wecui.fevents.Event;
-import wecui.fevents.HandlerList;
 import java.util.HashMap;
+
 import wecui.WorldEditCUI;
 import wecui.fevents.Cancellable;
+import wecui.fevents.Event;
+import wecui.fevents.HandlerList;
 
 /**
  * Events for outgoing commands to server. 
@@ -61,7 +62,7 @@ public class ChatCommandEvent extends Event<ChatCommandEvent> implements Cancell
 
     @Override
     protected HandlerList<ChatCommandEvent> getHandlers() {
-        HandlerList<ChatCommandEvent> handlers = allhandlers.get(command);
+        HandlerList<ChatCommandEvent> handlers = allhandlers.get(this.command);
         if (handlers == null) {
             handlers = defaulthandlers;
         }
@@ -69,28 +70,28 @@ public class ChatCommandEvent extends Event<ChatCommandEvent> implements Cancell
     }
 
     public void markHandled() {
-        handled = true;
+        this.handled = true;
     }
 
     public boolean isHandled() {
-        return handled;
+        return this.handled;
     }
 
     public String[] getArgs() {
-        return args;
+        return this.args;
     }
 
     public String getCommand() {
-        return command;
+        return this.command;
     }
 
     public String getRawMessage() {
-        return rawMessage;
+        return this.rawMessage;
     }
 
     @Override
     public boolean isCancelled() {
-        return cancelled;
+        return this.cancelled;
     }
 
     @Override

@@ -34,7 +34,7 @@ public class OutgoingChatEvent extends Event<OutgoingChatEvent> implements Cance
     }
 
     public String getMessage() {
-        return message;
+        return this.message;
     }
 
     @Override

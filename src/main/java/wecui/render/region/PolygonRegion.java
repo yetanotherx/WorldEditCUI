@@ -2,6 +2,7 @@ package wecui.render.region;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import wecui.WorldEditCUI;
 import wecui.render.LineColor;
 import wecui.render.points.PointRectangle;
@@ -26,16 +27,16 @@ public class PolygonRegion extends BaseRegion {
 
     @Override
     public void render() {
-        if (points == null) {
+        if (this.points == null) {
             return;
         }
 
-        for (PointRectangle point : points) {
-            point.render(min, max);
+        for (PointRectangle point : this.points) {
+            point.render(this.min, this.max);
         }
 
-        new Render2DBox(LineColor.POLYBOX, points, min, max).render();
-        new Render2DGrid(LineColor.POLYGRID, points, min, max).render();
+        new Render2DBox(LineColor.POLYBOX, this.points, this.min, this.max).render();
+        new Render2DGrid(LineColor.POLYGRID, this.points, this.min, this.max).render();
 
     }
 
@@ -50,13 +51,13 @@ public class PolygonRegion extends BaseRegion {
         PointRectangle point = new PointRectangle(x, z);
         point.setColor(LineColor.POLYPOINT);
         
-        if (id < points.size()) {
-            points.set(id, point);
+        if (id < this.points.size()) {
+            this.points.set(id, point);
         } else {
-            for (int i = 0; i < id - points.size(); i++) {
-                points.add(null);
+            for (int i = 0; i < id - this.points.size(); i++) {
+                this.points.add(null);
             }
-            points.add(point);
+            this.points.add(point);
         }
     }
 

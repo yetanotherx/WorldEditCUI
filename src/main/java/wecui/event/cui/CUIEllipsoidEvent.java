@@ -28,15 +28,15 @@ public class CUIEllipsoidEvent extends CUIBaseEvent {
             int x = this.getInt(1);
             int y = this.getInt(2);
             int z = this.getInt(3);
-            controller.getSelection().setEllipsoidCenter(x, y, z);
+            this.controller.getSelection().setEllipsoidCenter(x, y, z);
         } else if (id == 1) {
             double x = this.getDouble(1);
             double y = this.getDouble(2);
             double z = this.getDouble(3);
-            controller.getSelection().setEllipsoidRadii(x, y, z);
+            this.controller.getSelection().setEllipsoidRadii(x, y, z);
         }
 
-        controller.getDebugger().debug("Setting center/radius");
+        this.controller.getDebugger().debug("Setting center/radius");
 
         return null;
     }

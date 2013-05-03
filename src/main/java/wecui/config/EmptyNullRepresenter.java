@@ -21,7 +21,7 @@ public class EmptyNullRepresenter extends Representer {
 
         @Override
 		public Node representData(Object data) {
-            return representScalar(Tag.NULL, ""); // Changed "null" to "" so as to avoid writing nulls
+            return EmptyNullRepresenter.this.representScalar(Tag.NULL, ""); // Changed "null" to "" so as to avoid writing nulls
         }
     }
 

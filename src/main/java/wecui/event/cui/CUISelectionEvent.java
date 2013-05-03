@@ -30,19 +30,19 @@ public class CUISelectionEvent extends CUIBaseEvent {
         BaseRegion newRegion = null;
 
         if (this.getString(0).equals("cuboid")) {
-            newRegion = new CuboidRegion(controller);
+            newRegion = new CuboidRegion(this.controller);
         } else if (this.getString(0).equals("polygon2d")) {
-            newRegion = new PolygonRegion(controller);
+            newRegion = new PolygonRegion(this.controller);
         } else if (this.getString(0).equals("ellipsoid")) {
-            newRegion = new EllipsoidRegion(controller);
+            newRegion = new EllipsoidRegion(this.controller);
         } else if (this.getString(0).equals("cylinder")) {
-            newRegion = new CylinderRegion(controller);
+            newRegion = new CylinderRegion(this.controller);
         } else {
             return "Invalid selection type. Must be cuboid|polygon2d|ellipsoid|cylinder.";
         }
 
-        controller.setSelection(newRegion);
-        controller.getDebugger().debug("Received selection event, initalizing new region instance.");
+        this.controller.setSelection(newRegion);
+        this.controller.getDebugger().debug("Received selection event, initalizing new region instance.");
 
         return null;
     }

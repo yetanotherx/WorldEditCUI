@@ -7,8 +7,8 @@ import wecui.config.CUIConfiguration;
 import wecui.event.CUIEvent;
 import wecui.event.ChannelEvent;
 import wecui.event.ChatCommandEvent;
-import wecui.event.listeners.CUIListener;
 import wecui.event.WorldRenderEvent;
+import wecui.event.listeners.CUIListener;
 import wecui.event.listeners.ChannelListener;
 import wecui.event.listeners.WorldEditCommandListener;
 import wecui.event.listeners.WorldRenderListener;
@@ -30,8 +30,8 @@ import wecui.render.region.CuboidRegion;
  */
 public class WorldEditCUI {
 
-    public static final String VERSION = "1.5.1";
-    public static final String MCVERSION = "1.5.1";
+    public static final String VERSION = "1.5.2";
+    public static final String MCVERSION = "1.5.2";
     public static final int protocolVersion = 2;
     protected Minecraft minecraft;
     protected EventManager eventManager;
@@ -76,7 +76,7 @@ public class WorldEditCUI {
     }
 
     public CUIConfiguration getConfiguration() {
-        return configuration;
+        return this.configuration;
     }
 
     public void setConfiguration(CUIConfiguration configuration) {
@@ -84,7 +84,7 @@ public class WorldEditCUI {
     }
 
     public CUIDebug getDebugger() {
-        return debugger;
+        return this.debugger;
     }
 
     public void setDebugger(CUIDebug debugger) {
@@ -92,7 +92,7 @@ public class WorldEditCUI {
     }
 
     public EventManager getEventManager() {
-        return eventManager;
+        return this.eventManager;
     }
 
     public void setEventManager(EventManager eventManager) {
@@ -108,7 +108,7 @@ public class WorldEditCUI {
     }*/
 
     public Minecraft getMinecraft() {
-        return minecraft;
+        return this.minecraft;
     }
 
     public void setMinecraft(Minecraft minecraft) {
@@ -116,7 +116,7 @@ public class WorldEditCUI {
     }
 
     public BaseRegion getSelection() {
-        return selection;
+        return this.selection;
     }
 
     public void setSelection(BaseRegion selection) {

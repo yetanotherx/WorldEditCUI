@@ -43,9 +43,9 @@ public class Vector3m extends Vector3 {
 
 	@Override
 	public Vector3 add(Vector3 that) {
-		x += that.x;
-		y += that.y;
-		z += that.z;
+		this.x += that.x;
+		this.y += that.y;
+		this.z += that.z;
 		return this;
 	}
 
@@ -58,9 +58,9 @@ public class Vector3m extends Vector3 {
 
 	@Override
 	public Vector3 subtract(Vector3 that) {
-		x -= that.x;
-		y -= that.y;
-		z -= that.z;
+		this.x -= that.x;
+		this.y -= that.y;
+		this.z -= that.z;
 		return this;
 	}
 
@@ -73,9 +73,9 @@ public class Vector3m extends Vector3 {
 
 	@Override
 	public Vector3 scale(float scale) {
-		x *= scale;
-		y *= scale;
-		z *= scale;
+		this.x *= scale;
+		this.y *= scale;
+		this.z *= scale;
 		return this;
 	}
 
@@ -88,9 +88,9 @@ public class Vector3m extends Vector3 {
 
 	@Override
 	public Vector3 cross(Vector3 that) {
-		x = getY() * that.getZ() - getZ() * that.getY();
-		y = getZ() * that.getX() - getX() * that.getZ();
-		z = getX() * that.getY() - getY() * that.getX();
+		this.x = this.getY() * that.getZ() - this.getZ() * that.getY();
+		this.y = this.getZ() * that.getX() - this.getX() * that.getZ();
+		this.z = this.getX() * that.getY() - this.getY() * that.getX();
 
 		return this;
 	}
@@ -103,9 +103,9 @@ public class Vector3m extends Vector3 {
 	 */
 	@Override
 	public Vector3 ceil() {
-		x = (float) Math.ceil(x);
-		y = (float) Math.ceil(y);
-		z = (float) Math.ceil(z);
+		this.x = (float) Math.ceil(this.x);
+		this.y = (float) Math.ceil(this.y);
+		this.z = (float) Math.ceil(this.z);
 		return this;
 	}
 	
@@ -117,9 +117,9 @@ public class Vector3m extends Vector3 {
 	 */
 	@Override
 	public Vector3 floor() {
-		x = (float) Math.floor(x);
-		y = (float) Math.floor(y);
-		z = (float) Math.floor(z);
+		this.x = (float) Math.floor(this.x);
+		this.y = (float) Math.floor(this.y);
+		this.z = (float) Math.floor(this.z);
 		return this;
 	}
 	
@@ -131,9 +131,9 @@ public class Vector3m extends Vector3 {
 	 */
 	@Override
 	public Vector3 round() {
-		x = Math.round(x);
-		y = Math.round(y);
-		z = Math.round(z);
+		this.x = Math.round(this.x);
+		this.y = Math.round(this.y);
+		this.z = Math.round(this.z);
 		return this;
 	}
 	
@@ -145,9 +145,9 @@ public class Vector3m extends Vector3 {
 	 */
 	@Override
 	public Vector3 abs() {
-		x = Math.abs(x);
-		y = Math.abs(y);
-		z = Math.abs(z);
+		this.x = Math.abs(this.x);
+		this.y = Math.abs(this.y);
+		this.z = Math.abs(this.z);
 		return this;
 	}
 
@@ -160,9 +160,9 @@ public class Vector3m extends Vector3 {
 	@Override
 	public Vector3 normalize() {
 		float length = this.length();
-		x *= 1 / length;
-		y *= 1 / length;
-		z *= 1 / length;
+		this.x *= 1 / length;
+		this.y *= 1 / length;
+		this.z *= 1 / length;
 		return this;
 	}
 }

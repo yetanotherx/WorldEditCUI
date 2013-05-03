@@ -1,12 +1,12 @@
 package wecui.event.listeners;
 
-import wecui.fevents.Listener;
 import wecui.WorldEditCUI;
 import wecui.event.ChatCommandEvent;
 import wecui.event.command.CommandEventBase;
 import wecui.event.command.CommandEventType;
-import wecui.vendor.org.joor.Reflect;
 import wecui.exception.ReflectException;
+import wecui.fevents.Listener;
+import wecui.vendor.org.joor.Reflect;
 
 /**
  * Parses outgoing commands, and checks if they match an existing command.

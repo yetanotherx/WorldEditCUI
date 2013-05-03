@@ -7,9 +7,9 @@ import java.util.List;
 import net.minecraft.src.EntityClientPlayerMP;
 import net.minecraft.src.INetworkManager;
 import net.minecraft.src.NetClientHandler;
-import net.minecraft.src.TcpConnection;
 import net.minecraft.src.Packet;
 import net.minecraft.src.Packet3Chat;
+import net.minecraft.src.TcpConnection;
 import wecui.WorldEditCUI;
 import wecui.event.ChatCommandEvent;
 import wecui.event.OutgoingChatEvent;
@@ -49,11 +49,11 @@ public class DataPacketList<T> extends ArrayList<T> {
             boolean cancelled = false;
             String s = ((Packet3Chat)packet).message; // Obfuscation.getChatFromPacket((Packet3Chat) packet);
 
-            OutgoingChatEvent chatevent = new OutgoingChatEvent(controller, s);
-            controller.getEventManager().callEvent(chatevent);
+            OutgoingChatEvent chatevent = new OutgoingChatEvent(this.controller, s);
+            this.controller.getEventManager().callEvent(chatevent);
             if (!chatevent.isCancelled() && s.startsWith("/") && s.length() > 1) {
-                ChatCommandEvent commandevent = new ChatCommandEvent(controller, s);
-                controller.getEventManager().callEvent(commandevent);
+                ChatCommandEvent commandevent = new ChatCommandEvent(this.controller, s);
+                this.controller.getEventManager().callEvent(commandevent);
                 if (commandevent.isHandled() || commandevent.isCancelled()) {
                     cancelled = true;
                 }

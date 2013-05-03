@@ -31,7 +31,7 @@ public class ConfigurationNode {
     @SuppressWarnings("unchecked")
     public Object getProperty(String path) {
         if (!path.contains(".")) {
-            Object val = root.get(path);
+            Object val = this.root.get(path);
 
             if (val == null) {
                 return null;
@@ -40,7 +40,7 @@ public class ConfigurationNode {
         }
 
         String[] parts = path.split("\\.");
-        Map<String, Object> node = root;
+        Map<String, Object> node = this.root;
 
         for (int i = 0; i < parts.length; i++) {
             Object o = node.get(parts[i]);
@@ -73,12 +73,12 @@ public class ConfigurationNode {
     @SuppressWarnings("unchecked")
     public void setProperty(String path, Object value) {
         if (!path.contains(".")) {
-            root.put(path, value);
+            this.root.put(path, value);
             return;
         }
 
         String[] parts = path.split("\\.");
-        Map<String, Object> node = root;
+        Map<String, Object> node = this.root;
 
         for (int i = 0; i < parts.length; i++) {
             Object o = node.get(parts[i]);
@@ -109,7 +109,7 @@ public class ConfigurationNode {
      * @return string or null
      */
     public String getString(String path) {
-        Object o = getProperty(path);
+        Object o = this.getProperty(path);
 
         if (o == null) {
             return null;
@@ -127,7 +127,7 @@ public class ConfigurationNode {
      * @return string or default
      */
     public String getString(String path, String def) {
-        String o = getString(path);
+        String o = this.getString(path);
 
         if (o == null) {
             //setProperty(path, def);
@@ -147,7 +147,7 @@ public class ConfigurationNode {
      * @return int or default
      */
     public int getInt(String path, int def) {
-        Integer o = castInt(getProperty(path));
+        Integer o = castInt(this.getProperty(path));
 
         if (o == null) {
             //setProperty(path, def);
@@ -167,7 +167,7 @@ public class ConfigurationNode {
      * @return double or default
      */
     public double getDouble(String path, double def) {
-        Double o = castDouble(getProperty(path));
+        Double o = castDouble(this.getProperty(path));
 
         if (o == null) {
             //setProperty(path, def);
@@ -186,7 +186,7 @@ public class ConfigurationNode {
      * @return boolean or default
      */
     public boolean getBoolean(String path, boolean def) {
-        Boolean o = castBoolean(getProperty(path));
+        Boolean o = castBoolean(this.getProperty(path));
 
         if (o == null) {
             //setProperty(path, def);
@@ -205,9 +205,9 @@ public class ConfigurationNode {
     @SuppressWarnings("unchecked")
     public List<String> getKeys(String path) {
         if (path == null) {
-            return new ArrayList<String>(root.keySet());
+            return new ArrayList<String>(this.root.keySet());
         }
-        Object o = getProperty(path);
+        Object o = this.getProperty(path);
 
         if (o == null) {
             return null;
@@ -227,7 +227,7 @@ public class ConfigurationNode {
      */
     @SuppressWarnings("unchecked")
     public List<Object> getList(String path) {
-        Object o = getProperty(path);
+        Object o = this.getProperty(path);
 
         if (o == null) {
             return null;
@@ -251,7 +251,7 @@ public class ConfigurationNode {
      * @return list of strings
      */
     public List<String> getStringList(String path, List<String> def) {
-        List<Object> raw = getList(path);
+        List<Object> raw = this.getList(path);
 
         if (raw == null) {
             return def != null ? def : new ArrayList<String>();
@@ -282,7 +282,7 @@ public class ConfigurationNode {
      * @return list of integers
      */
     public List<Integer> getIntList(String path, List<Integer> def) {
-        List<Object> raw = getList(path);
+        List<Object> raw = this.getList(path);
 
         if (raw == null) {
             return def != null ? def : new ArrayList<Integer>();
@@ -313,7 +313,7 @@ public class ConfigurationNode {
      * @return list of integers
      */
     public List<Double> getDoubleList(String path, List<Double> def) {
-        List<Object> raw = getList(path);
+        List<Object> raw = this.getList(path);
 
         if (raw == null) {
             return def != null ? def : new ArrayList<Double>();
@@ -344,7 +344,7 @@ public class ConfigurationNode {
      * @return list of integers
      */
     public List<Boolean> getBooleanList(String path, List<Boolean> def) {
-        List<Object> raw = getList(path);
+        List<Object> raw = this.getList(path);
 
         if (raw == null) {
             return def != null ? def : new ArrayList<Boolean>();
@@ -376,7 +376,7 @@ public class ConfigurationNode {
      */
     @SuppressWarnings("unchecked")
     public List<ConfigurationNode> getNodeList(String path, List<ConfigurationNode> def) {
-        List<Object> raw = getList(path);
+        List<Object> raw = this.getList(path);
 
         if (raw == null) {
             return def != null ? def : new ArrayList<ConfigurationNode>();
@@ -403,7 +403,7 @@ public class ConfigurationNode {
      */
     @SuppressWarnings("unchecked")
     public ConfigurationNode getNode(String path) {
-        Object raw = getProperty(path);
+        Object raw = this.getProperty(path);
 
         if (raw instanceof Map) {
             return new ConfigurationNode((Map<String, Object>) raw);
@@ -421,7 +421,7 @@ public class ConfigurationNode {
      */
     @SuppressWarnings("unchecked")
     public Map<String, ConfigurationNode> getNodes(String path) {
-        Object o = getProperty(path);
+        Object o = this.getProperty(path);
 
         if (o == null) {
             return null;
@@ -513,12 +513,12 @@ public class ConfigurationNode {
     @SuppressWarnings("unchecked")
     public void removeProperty(String path) {
         if (!path.contains(".")) {
-            root.remove(path);
+            this.root.remove(path);
             return;
         }
 
         String[] parts = path.split("\\.");
-        Map<String, Object> node = root;
+        Map<String, Object> node = this.root;
 
         for (int i = 0; i < parts.length; i++) {
             Object o = node.get(parts[i]);
@@ -534,7 +534,7 @@ public class ConfigurationNode {
     }
 
     public Map<String, Object> getRoot() {
-        return root;
+        return this.root;
     }
 
     public void setRoot(Map<String, Object> root) {

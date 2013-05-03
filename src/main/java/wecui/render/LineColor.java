@@ -31,24 +31,24 @@ public enum LineColor {
     protected LineInfo hidden;
 
     private LineColor(float r, float g, float b) {
-        normal = new LineInfo(3.0f, r, g, b, 0.8f, GL11.GL_LESS);
-        hidden = new LineInfo(3.0f, r, g, b, 0.2f, GL11.GL_GEQUAL);
+        this.normal = new LineInfo(3.0f, r, g, b, 0.8f, GL11.GL_LESS);
+        this.hidden = new LineInfo(3.0f, r, g, b, 0.2f, GL11.GL_GEQUAL);
     }
 
     private LineColor(String hex) {
-        setColor(hex);
+        this.setColor(hex);
     }
 
     public LineInfo getHidden() {
-        return hidden;
+        return this.hidden;
     }
 
     public LineInfo getNormal() {
-        return normal;
+        return this.normal;
     }
 
     public LineInfo[] getColors() {
-        return new LineInfo[]{hidden, normal};
+        return new LineInfo[]{this.hidden, this.normal};
     }
 
     /**
@@ -64,7 +64,7 @@ public enum LineColor {
         float gF = g.floatValue() / 256.0F;
         float bF = b.floatValue() / 256.0F;
 
-        normal = new LineInfo(3.0f, rF, gF, bF, 0.8f, GL11.GL_LESS);
-        hidden = new LineInfo(3.0f, rF, gF, bF, 0.2f, GL11.GL_GEQUAL);
+        this.normal = new LineInfo(3.0f, rF, gF, bF, 0.8f, GL11.GL_LESS);
+        this.hidden = new LineInfo(3.0f, rF, gF, bF, 0.2f, GL11.GL_GEQUAL);
     }
 }

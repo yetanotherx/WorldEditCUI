@@ -1,9 +1,9 @@
 package wecui.event.listeners;
 
-import wecui.fevents.Listener;
 import wecui.WorldEditCUI;
 import wecui.event.CUIEvent;
 import wecui.event.ChannelEvent;
+import wecui.fevents.Listener;
 
 /**
  * Listener class for incoming plugin channel messages

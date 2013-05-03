@@ -69,7 +69,7 @@ public class Vector2 implements Comparable<Vector2> {
      * @return The X coordinate
      */
     public float getX() {
-        return x;
+        return this.x;
     }
 
     /**
@@ -78,7 +78,7 @@ public class Vector2 implements Comparable<Vector2> {
      * @return The Y coordinate
      */
     public float getY() {
-        return z;
+        return this.z;
     }
 
     /**
@@ -175,7 +175,7 @@ public class Vector2 implements Comparable<Vector2> {
      * @return The orthogonal vector to this vector.
      */
     public Vector2 cross() {
-        return new Vector2(z, -x);
+        return new Vector2(this.z, -this.x);
     }
 
     /**
@@ -185,7 +185,7 @@ public class Vector2 implements Comparable<Vector2> {
      * @return 
      */
     public Vector2 ceil() {
-        return new Vector2(Math.ceil(x), Math.ceil(z));
+        return new Vector2(Math.ceil(this.x), Math.ceil(this.z));
     }
 
     /**
@@ -195,7 +195,7 @@ public class Vector2 implements Comparable<Vector2> {
      * @return 
      */
     public Vector2 floor() {
-        return new Vector2(Math.floor(x), Math.floor(z));
+        return new Vector2(Math.floor(this.x), Math.floor(this.z));
     }
 
     /**
@@ -205,7 +205,7 @@ public class Vector2 implements Comparable<Vector2> {
      * @return 
      */
     public Vector2 round() {
-        return new Vector2(Math.round(x), Math.round(z));
+        return new Vector2(Math.round(this.x), Math.round(this.z));
     }
 
     /**
@@ -215,7 +215,7 @@ public class Vector2 implements Comparable<Vector2> {
      * @return 
      */
     public Vector2 abs() {
-        return new Vector2(Math.abs(x), Math.abs(z));
+        return new Vector2(Math.abs(this.x), Math.abs(this.z));
     }
 
     /**
@@ -549,7 +549,7 @@ public class Vector2 implements Comparable<Vector2> {
 
     @Override
     public String toString() {
-        return "(" + x + ", " + z + ")";
+        return "(" + this.x + ", " + this.z + ")";
     }
     
     @Override

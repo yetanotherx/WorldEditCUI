@@ -32,11 +32,11 @@ public class WorldRenderEvent extends Event<WorldRenderEvent> {
     }
 
     public float getPartialTick() {
-        return partialTick;
+        return this.partialTick;
     }
 
     public Vector3 getPosition() {
-        return pos;
+        return this.pos;
     }
 
     @Override
