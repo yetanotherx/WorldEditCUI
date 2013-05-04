@@ -54,7 +54,6 @@ public class Updater extends Thread {
             
 			for (String version : versions)
 			{
-				System.out.println("Version: " + version);
 				if (version.matches("^" + WorldEditCUI.MCVERSION + "=\\d+$"))
 				{
 					latestVersion = Integer.parseInt(version.substring(version.indexOf("=") + 1));
