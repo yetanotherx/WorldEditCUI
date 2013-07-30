@@ -2,7 +2,9 @@ package wecui;
 
 import java.io.File;
 
-import net.minecraft.client.Minecraft;
+import com.mumfrey.liteloader.core.LiteLoader;
+
+import net.minecraft.src.Minecraft;
 import wecui.config.CUIConfiguration;
 import wecui.event.CUIEvent;
 import wecui.event.ChannelEvent;
@@ -129,7 +131,6 @@ public class WorldEditCUI {
 
 	public static File getWorldEditCUIDir()
 	{
-		File modsFolder = new File(Minecraft.getMinecraftDir(), "mods");
-		return new File(modsFolder, "WorldEditCUI");
+		return new File(LiteLoader.getInstance().getModsFolder(), "WorldEditCUI");
 	}
 }

@@ -1,10 +1,11 @@
 package wecui;
 
+import java.io.File;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.List;
 
-import net.minecraft.client.Minecraft;
+import net.minecraft.src.Minecraft;
 import net.minecraft.src.EntityPlayerSP;
 import net.minecraft.src.NetHandler;
 import net.minecraft.src.OpenGlHelper;
@@ -13,7 +14,6 @@ import net.minecraft.src.RenderHelper;
 import net.minecraft.src.WorldClient;
 import wecui.event.ChannelEvent;
 import wecui.event.WorldRenderEvent;
-import wecui.obfuscation.DataPacketList;
 import wecui.render.region.CuboidRegion;
 
 import com.mumfrey.liteloader.InitCompleteListener;
@@ -32,7 +32,12 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
     protected WorldRenderEvent event;
 
 	@Override
-	public void init()
+	public void init(File configPath)
+	{
+	}
+	
+	@Override
+	public void upgradeSettings(String version, File configPath, File oldConfigPath)
 	{
 	}
 
@@ -82,7 +87,7 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 	                new Updater(this.controller).start();
 	                this.controller.setSelection(new CuboidRegion(this.controller));
 
-	                DataPacketList.register(this.controller);
+//	                DataPacketList.register(this.controller);
 	            }
 	        }
 		}
@@ -97,7 +102,7 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 	@Override
 	public String getVersion()
 	{
-		return "1.5.2_02_lite";
+		return "1.6.2_00_lite";
 	}
 
 	@Override
