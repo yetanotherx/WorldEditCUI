@@ -4,14 +4,14 @@
 	<taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
 	
     <!-- Versions !!IMPORTANT -->
-	<property name="version" value="1.6.2_01_lite" />
-    <property name="mcversion" value="1.6.2" />
-    <property name="litemodversion" value="1.6.2" />
-    <property name="author" value="yetanotherx, Mumfrey" />
+	<property name="version" value="1.7.2" />
+    <property name="mcversion" value="1.7.2" />
+    <property name="litemodversion" value="1.7.2" />
+    <property name="author" value="yetanotherx, Mumfrey, TomyLobo" />
 
     <!-- Project definitions and dependencies -->
-	<property name="upstream" value="LiteLoader,WorldEditCUI" />
-	<property name="project" value="WorldEditCUILiteLoaderAdapter" />
+	<property name="upstream" value="LiteLoader" />
+	<property name="project" value="WorldEditCUI" />
 	
 	<!-- MD5 exclusion set to use -->
 	<property name="md5set" value="liteloader" />
@@ -23,8 +23,9 @@
     <property name="md5" location="${mcp.dir}/md5" />
     <property name="mc.src" location="${mcp.dir}/src/mcp" />
 
-	<property name="dist.dir" location="./dist" />
-	<property name="stage.dir" location="./stage/${ant.project.name}/${version}" />
+    <property name="build" location="${mcp.dir}/build" />
+    <property name="dist.dir" location="${build}/dist" />
+    <property name="stage.dir" location="${build}/stage/${ant.project.name}/${version}" />
     <property name="filetype" value="litemod" />
 
 	<property name="python" location="${mcp.dir}/runtime/bin/python/python_mcp.exe" />
@@ -107,7 +108,7 @@
         <echo level="info" message="Obfuscating classes" />
 
 		<exec executable="${python}" dir="${mcp.dir}">
-			<arg value="runtime/reobfuscate.py" />
+			<arg value="runtime/reobfuscate17.py" />
             <arg value="--client" />
 			<arg value="%*" />
 		</exec>
@@ -135,13 +136,12 @@
             <param name="lib" value="${project}" />
         </antcall>
 		
-		<unjar src="${eclipse}/WorldEditCUI/lib/snakeyaml-1.9.jar" dest="${stage.dir}" overwrite="true">
-			<patternset>
-				<exclude name="**/META-INF/**" />
-			</patternset>
-		</unjar>
-		
-		<echo file="${stage.dir}/version.txt" append="false" message="${litemodversion}" />
+        <buildnumber file="${eclipse}/WorldEditCUI/build/buildnumber.txt" />
+
+        <concat destfile="${stage.dir}/litemod.json" append="false">
+            <fileset file="${eclipse}/WorldEditCUI/build/litemod.template.json" />
+            <filterchain><expandproperties /></filterchain>
+        </concat>
 	</target>
 
 	<target name="litemod" description="Build the litemod file">

@@ -1,13 +1,16 @@
 package wecui.config;
 
 import java.io.File;
-import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 
 import wecui.InitializationFactory;
-import wecui.WorldEditCUI;
 import wecui.render.LineColor;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.mumfrey.liteloader.core.LiteLoader;
 
 /**
  * Stores and reads WorldEditCUI settings
@@ -15,135 +18,125 @@ import wecui.render.LineColor;
  * @author yetanotherx
  * 
  */
-public class CUIConfiguration implements InitializationFactory {
+public class CUIConfiguration implements InitializationFactory
+{
+	private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
+	
+	protected boolean debugMode = false;
+	protected boolean ignoreUpdates = false;
+	
+	private Colour cuboidGridColor = new Colour("#CC3333");
+	private Colour cuboidEdgeColor = new Colour("#CC4C4C");
+	private Colour cuboidFirstPointColor = new Colour("#33CC33");
+	private Colour cuboidSecondPointColor = new Colour("#3333CC");
+	private Colour polyGridColor = new Colour("#CC3333");
+	private Colour polyEdgeColor = new Colour("#CC4C4C");
+	private Colour polyPointColor = new Colour("#33CCCC");
+	private Colour ellipsoidGridColor = new Colour("#CC4C4C");
+	private Colour ellipsoidPointColor = new Colour("#CCCC33");
+	private Colour cylinderGridColor = new Colour("#CC3333");
+	private Colour cylinderEdgeColor = new Colour("#CC4C4C");
+	private Colour cylinderPointColor = new Colour("#CC33CC");
+	
+	/**
+	 * Copies the default config file to the proper directory if it does not
+	 * exist. It then reads the file and sets each variable to the proper value.
+	 */
+	@Override
+	public void initialize()
+	{
+		this.cuboidGridColor        = Colour.setDefault(this.cuboidGridColor,        "#CC3333");
+		this.cuboidEdgeColor        = Colour.setDefault(this.cuboidEdgeColor,        "#CC4C4C");
+		this.cuboidFirstPointColor  = Colour.setDefault(this.cuboidFirstPointColor,  "#33CC33");
+		this.cuboidSecondPointColor = Colour.setDefault(this.cuboidSecondPointColor, "#3333CC");
+		this.polyGridColor          = Colour.setDefault(this.polyGridColor,          "#CC3333");
+		this.polyEdgeColor          = Colour.setDefault(this.polyEdgeColor,          "#CC4C4C");
+		this.polyPointColor         = Colour.setDefault(this.polyPointColor,         "#33CCCC");
+		this.ellipsoidGridColor     = Colour.setDefault(this.ellipsoidGridColor,     "#CC4C4C");
+		this.ellipsoidPointColor    = Colour.setDefault(this.ellipsoidPointColor,    "#CCCC33");
+		this.cylinderGridColor      = Colour.setDefault(this.cylinderGridColor,      "#CC3333");
+		this.cylinderEdgeColor      = Colour.setDefault(this.cylinderEdgeColor,      "#CC4C4C");
+		this.cylinderPointColor     = Colour.setDefault(this.cylinderPointColor,     "#CC33CC");
+		
+		LineColor.CUBOIDBOX.setColor(this.cuboidEdgeColor);
+		LineColor.CUBOIDGRID.setColor(this.cuboidGridColor);
+		LineColor.CUBOIDPOINT1.setColor(this.cuboidFirstPointColor);
+		LineColor.CUBOIDPOINT2.setColor(this.cuboidSecondPointColor);
+		LineColor.POLYGRID.setColor(this.polyGridColor);
+		LineColor.POLYBOX.setColor(this.polyEdgeColor);
+		LineColor.POLYPOINT.setColor(this.polyPointColor);
+		LineColor.ELLIPSOIDGRID.setColor(this.ellipsoidGridColor);
+		LineColor.ELLIPSOIDCENTER.setColor(this.ellipsoidPointColor);
+		LineColor.CYLINDERGRID.setColor(this.cylinderGridColor);
+		LineColor.CYLINDERBOX.setColor(this.cylinderEdgeColor);
+		LineColor.CYLINDERCENTER.setColor(this.cylinderPointColor);
+		
+		this.save();
+	}
+	
+	public boolean isDebugMode()
+	{
+		return this.debugMode;
+	}
+	
+	public boolean ignoreUpdates()
+	{
+		return this.ignoreUpdates;
+	}
+	
+	public static CUIConfiguration create()
+	{
+		File jsonFile = new File(LiteLoader.getCommonConfigFolder(), "worldeditcui.config.json");
+		
+		if (jsonFile.exists())
+		{
+			FileReader fileReader = null;
+			
+			try
+			{
+				fileReader = new FileReader(jsonFile);
+				CUIConfiguration config = CUIConfiguration.gson.fromJson(fileReader, CUIConfiguration.class);
+				return config;
+			}
+			catch (IOException ex)
+			{
+				ex.printStackTrace();
+			}
+			finally
+			{
+				try
+				{
+					if (fileReader != null)
+						fileReader.close();
+				}
+				catch (IOException ex)
+				{
+				}
+			}
+		}
+		
+		return new CUIConfiguration();
+	}
 
-    protected WorldEditCUI controller;
-    protected boolean debugMode = false;
-    protected boolean ignoreUpdates = false;
-    protected String cuboidGridColor = "#CC3333";
-    protected String cuboidEdgeColor = "#CC4C4C";
-    protected String cuboidFirstPointColor = "#33CC33";
-    protected String cuboidSecondPointColor = "#3333CC";
-    protected String polyGridColor = "#CC3333";
-    protected String polyEdgeColor = "#CC4C4C";
-    protected String polyPointColor = "#33CCCC";
-    protected String ellipsoidGridColor = "#CC4C4C";
-    protected String ellipsoidPointColor = "#CCCC33";
-    protected String cylinderGridColor = "#CC3333";
-    protected String cylinderEdgeColor = "#CC4C4C";
-    protected String cylinderPointColor = "#CC33CC";
-    protected String updateFile = "http://update.liteloader.com/wecui.version";
-    protected Configuration config = null;
-
-    public CUIConfiguration(WorldEditCUI controller) {
-        this.controller = controller;
-    }
-
-    /**
-     * Copies the default config file to the proper directory if it does not
-     * exist. It then reads the file and sets each variable to the proper value.
-     */
-    @Override
-    public void initialize() {
-
-        File file = new File(WorldEditCUI.getWorldEditCUIDir(), "Configuration.yml");
-        file.getParentFile().mkdirs();
-
-        if (!file.exists()) {
-            InputStream input = CUIConfiguration.class.getResourceAsStream("/Configuration.yml");
-            if (input != null) {
-                FileOutputStream output = null;
-
-                try {
-                    output = new FileOutputStream(file);
-                    byte[] buf = new byte[8192];
-                    int length = 0;
-                    while ((length = input.read(buf)) > 0) {
-                        output.write(buf, 0, length);
-                    }
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } finally {
-                    try {
-                        input.close();
-                    } catch (IOException e) {
-                    }
-
-                    try {
-                        if (output != null) {
-                            output.close();
-                        }
-                    } catch (IOException e) {
-                    }
-                }
-            }
-        }
-
-        this.config = new Configuration(file);
-        this.config.load();
-
-        this.debugMode = this.config.getBoolean("debug", this.debugMode);
-        this.ignoreUpdates = this.config.getBoolean("ignoreUpdates", this.ignoreUpdates);
-
-        this.cuboidGridColor = this.parseColor(this.config.getString("colors.cuboidGrid"), this.cuboidGridColor);
-        this.cuboidEdgeColor = this.parseColor(this.config.getString("colors.cuboidEdge"), this.cuboidEdgeColor);
-        this.cuboidFirstPointColor = this.parseColor(this.config.getString("colors.cuboidFirstPoint"), this.cuboidFirstPointColor);
-        this.cuboidSecondPointColor = this.parseColor(this.config.getString("colors.cuboidSecondPoint"), this.cuboidSecondPointColor);
-        this.polyGridColor = this.parseColor(this.config.getString("colors.polyGrid"), this.polyGridColor);
-        this.polyEdgeColor = this.parseColor(this.config.getString("colors.polyEdge"), this.polyEdgeColor);
-        this.polyPointColor = this.parseColor(this.config.getString("colors.polyPoint"), this.polyPointColor);
-        this.ellipsoidGridColor = this.parseColor(this.config.getString("colors.ellipsoidGrid"), this.ellipsoidGridColor);
-        this.ellipsoidPointColor = this.parseColor(this.config.getString("colors.ellipsoidPoint"), this.ellipsoidPointColor);
-        this.cylinderGridColor = this.parseColor(this.config.getString("colors.cylinderGrid"), this.cylinderGridColor);
-        this.cylinderEdgeColor = this.parseColor(this.config.getString("colors.cylinderEdge"), this.cylinderEdgeColor);
-        this.cylinderPointColor = this.parseColor(this.config.getString("colors.cylinderPoint"), this.cylinderPointColor);
-
-        LineColor.CUBOIDBOX.setColor(this.cuboidEdgeColor);
-        LineColor.CUBOIDGRID.setColor(this.cuboidGridColor);
-        LineColor.CUBOIDPOINT1.setColor(this.cuboidFirstPointColor);
-        LineColor.CUBOIDPOINT2.setColor(this.cuboidSecondPointColor);
-        LineColor.POLYGRID.setColor(this.polyGridColor);
-        LineColor.POLYBOX.setColor(this.polyEdgeColor);
-        LineColor.POLYPOINT.setColor(this.polyPointColor);
-        LineColor.ELLIPSOIDGRID.setColor(this.ellipsoidGridColor);
-        LineColor.ELLIPSOIDCENTER.setColor(this.ellipsoidPointColor);
-        LineColor.CYLINDERGRID.setColor(this.cylinderGridColor);
-        LineColor.CYLINDERBOX.setColor(this.cylinderEdgeColor);
-        LineColor.CYLINDERCENTER.setColor(this.cylinderPointColor);
-
-        this.updateFile = this.config.getString("updateFile", this.updateFile);
-    }
-
-    /**
-     * Validates a user-entered color code. Ensures that color is not null, it
-     * starts with #, that it has all 6 digits, and that each hex code is valid.
-     * @param color
-     * @param def
-     * @return 
-     */
-    protected String parseColor(String color, String def) {
-        if (color == null) {
-            return def;
-        } else if (!color.startsWith("#")) {
-            return def;
-        } else if (color.length() != 7) {
-            return def;
-        }
-
-        // Replaced some bloody stupid code with regex
-        return (color.matches("(?i)^[0-9a-f]{6}$")) ? color : def;
-    }
-
-    public boolean isDebugMode() {
-        return this.debugMode;
-    }
-
-    public boolean ignoreUpdates() {
-        return this.ignoreUpdates;
-    }
-
-    public String getUpdateFile() {
-        return this.updateFile;
-    }
+	public void save()
+	{
+		File jsonFile = new File(LiteLoader.getCommonConfigFolder(), "worldeditcui.config.json");
+		
+		FileWriter fileWriter = null;
+		
+		try
+		{
+			fileWriter = new FileWriter(jsonFile);
+			CUIConfiguration.gson.toJson(this, fileWriter);
+		}
+		catch (IOException ex) { ex.printStackTrace(); }
+		finally
+		{
+			try
+			{
+				if (fileWriter != null) fileWriter.close();
+			}
+			catch (IOException ex) { ex.printStackTrace(); }
+		}
+	}
 }

@@ -7,6 +7,8 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.mumfrey.liteloader.core.LiteLoader;
+
 import wecui.exception.InitializationException;
 import wecui.util.ConsoleLogFormatter;
 
@@ -38,7 +40,7 @@ public class CUIDebug implements InitializationFactory {
         logger.addHandler(handler);
 
         try {
-            this.debugFile = new File(WorldEditCUI.getWorldEditCUIDir(), "WorldEditCUI-debug.txt");
+            this.debugFile = new File(LiteLoader.getCommonConfigFolder(), "worldeditcui.debug.log");
             this.debugMode = this.controller.getConfiguration().isDebugMode();
 
             if (this.debugMode) {

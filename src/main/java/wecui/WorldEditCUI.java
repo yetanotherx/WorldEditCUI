@@ -1,18 +1,12 @@
 package wecui;
 
-import java.io.File;
-
-import com.mumfrey.liteloader.core.LiteLoader;
-
-import net.minecraft.src.Minecraft;
+import net.minecraft.client.Minecraft;
 import wecui.config.CUIConfiguration;
 import wecui.event.CUIEvent;
 import wecui.event.ChannelEvent;
-import wecui.event.ChatCommandEvent;
 import wecui.event.WorldRenderEvent;
 import wecui.event.listeners.CUIListener;
 import wecui.event.listeners.ChannelListener;
-import wecui.event.listeners.WorldEditCommandListener;
 import wecui.event.listeners.WorldRenderListener;
 import wecui.exception.InitializationException;
 import wecui.fevents.EventManager;
@@ -32,9 +26,7 @@ import wecui.render.region.CuboidRegion;
  */
 public class WorldEditCUI {
 
-    public static final String VERSION = "1.5.2";
-    public static final String MCVERSION = "1.5.2";
-    public static final int protocolVersion = 2;
+    public static final int protocolVersion = 3;
     protected Minecraft minecraft;
     protected EventManager eventManager;
     protected BaseRegion selection;
@@ -49,7 +41,7 @@ public class WorldEditCUI {
     public void initialize() {
         this.eventManager = new EventManager(this);
         this.selection = new CuboidRegion(this);
-        this.configuration = new CUIConfiguration(this);
+        this.configuration = CUIConfiguration.create();
         this.debugger = new CUIDebug(this);
         //this.localPlugin = new LocalPlugin(this);
 
@@ -71,10 +63,6 @@ public class WorldEditCUI {
         CUIEvent.handlers.register(new CUIListener(this), Order.Default);
         ChannelEvent.handlers.register(new ChannelListener(this), Order.Default);
         WorldRenderEvent.handlers.register(new WorldRenderListener(this), Order.Default);
-
-        WorldEditCommandListener commListener = new WorldEditCommandListener(this);
-        ChatCommandEvent.getHandlers("worldedit").register(commListener, Order.Default);
-        ChatCommandEvent.getHandlers("we").register(commListener, Order.Default);
     }
 
     public CUIConfiguration getConfiguration() {
@@ -101,14 +89,6 @@ public class WorldEditCUI {
         this.eventManager = eventManager;
     }
 
-    /*public LocalPlugin getLocalPlugin() {
-        return localPlugin;
-    }
-
-    public void setLocalPlugin(LocalPlugin localPlugin) {
-        this.localPlugin = localPlugin;
-    }*/
-
     public Minecraft getMinecraft() {
         return this.minecraft;
     }
@@ -124,13 +104,4 @@ public class WorldEditCUI {
     public void setSelection(BaseRegion selection) {
         this.selection = selection;
     }
-
-    public static String getVersion() {
-        return VERSION + " for Minecraft version " + MCVERSION;
-    }
-
-	public static File getWorldEditCUIDir()
-	{
-		return new File(LiteLoader.getInstance().getModsFolder(), "WorldEditCUI");
-	}
 }

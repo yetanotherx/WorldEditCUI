@@ -5,13 +5,13 @@ import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.List;
 
-import net.minecraft.src.Minecraft;
-import net.minecraft.src.EntityPlayerSP;
-import net.minecraft.src.NetHandler;
-import net.minecraft.src.OpenGlHelper;
-import net.minecraft.src.Packet1Login;
-import net.minecraft.src.RenderHelper;
-import net.minecraft.src.WorldClient;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.client.multiplayer.WorldClient;
+import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.network.INetHandler;
+import net.minecraft.network.play.server.S01PacketJoinGame;
 import wecui.event.ChannelEvent;
 import wecui.event.WorldRenderEvent;
 import wecui.render.region.CuboidRegion;
@@ -20,10 +20,12 @@ import com.mumfrey.liteloader.InitCompleteListener;
 import com.mumfrey.liteloader.PluginChannelListener;
 import com.mumfrey.liteloader.PostRenderListener;
 import com.mumfrey.liteloader.core.LiteLoader;
+import com.mumfrey.liteloader.core.PluginChannels;
 
 public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelListener, PostRenderListener
 {
-    protected WorldEditCUI controller;
+    private static final String CHANNEL_WECUI = "WECUI";
+	protected WorldEditCUI controller;
     protected WorldClient lastWorld;
     protected EntityPlayerSP lastPlayer;
     protected boolean gameStarted = false;
@@ -53,16 +55,16 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 	}
 
 	@Override
-	public void onLogin(NetHandler netHandler, Packet1Login loginPacket)
+	public void onLogin(INetHandler netHandler, S01PacketJoinGame loginPacket)
 	{
 		byte[] buffer = ("v|" + WorldEditCUI.protocolVersion).getBytes(UTF_8_CHARSET);
-		LiteLoader.getInstance().sendPluginChannelMessage("WECUI", buffer);
+		PluginChannels.sendMessage(CHANNEL_WECUI, buffer);
 	}
 
 	@Override
 	public List<String> getChannels()
 	{
-		return Arrays.asList(new String[] { "WECUI" });
+		return Arrays.asList(new String[] { CHANNEL_WECUI });
 	}
 
 	@Override
@@ -84,10 +86,7 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 	            if (!this.gameStarted) {
 	                this.gameStarted = true;
 
-	                new Updater(this.controller).start();
 	                this.controller.setSelection(new CuboidRegion(this.controller));
-
-//	                DataPacketList.register(this.controller);
 	            }
 	        }
 		}
@@ -96,13 +95,13 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 	@Override
 	public String getName()
 	{
-		return "WorldEditCUI by yetanotherx";
+		return "WorldEditCUI";
 	}
 
 	@Override
 	public String getVersion()
 	{
-		return "1.6.2_00_lite";
+		return "1.7.2";
 	}
 
 	@Override
@@ -118,7 +117,5 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 	@Override
 	public void onPostRender(float partialTicks)
 	{
-		// TODO Auto-generated method stub
-		
 	}
 }

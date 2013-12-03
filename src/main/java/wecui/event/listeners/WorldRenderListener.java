@@ -1,6 +1,6 @@
 package wecui.event.listeners;
 
-import net.minecraft.src.EntityClientPlayerMP;
+import net.minecraft.client.entity.EntityClientPlayerMP;
 
 import org.lwjgl.opengl.GL11;
 

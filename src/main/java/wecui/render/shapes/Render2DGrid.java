@@ -2,7 +2,7 @@ package wecui.render.shapes;
 
 import java.util.List;
 
-import net.minecraft.src.Tessellator;
+import net.minecraft.client.renderer.Tessellator;
 
 import org.lwjgl.opengl.GL11;
 

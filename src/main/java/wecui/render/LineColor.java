@@ -2,6 +2,8 @@ package wecui.render;
 
 import org.lwjgl.opengl.GL11;
 
+import wecui.config.Colour;
+
 /**
  * Stores color data for each type of line.
  * 
@@ -35,8 +37,8 @@ public enum LineColor {
         this.hidden = new LineInfo(3.0f, r, g, b, 0.2f, GL11.GL_GEQUAL);
     }
 
-    private LineColor(String hex) {
-        this.setColor(hex);
+    private LineColor(Colour colour) {
+        this.setColor(colour);
     }
 
     public LineInfo getHidden() {
@@ -55,16 +57,9 @@ public enum LineColor {
      * Parses a hex string (#FFFFFF) into each color, and makes a LineInfo.
      * @param hex 
      */
-    public void setColor(String hex) {
-        Integer r = Integer.parseInt(hex.substring(1, 3), 16);
-        Integer g = Integer.parseInt(hex.substring(3, 5), 16);
-        Integer b = Integer.parseInt(hex.substring(5, 7), 16);
+    public void setColor(Colour colour) {
 
-        float rF = r.floatValue() / 256.0F;
-        float gF = g.floatValue() / 256.0F;
-        float bF = b.floatValue() / 256.0F;
-
-        this.normal = new LineInfo(3.0f, rF, gF, bF, 0.8f, GL11.GL_LESS);
-        this.hidden = new LineInfo(3.0f, rF, gF, bF, 0.2f, GL11.GL_GEQUAL);
+        this.normal = new LineInfo(3.0f, colour.red(), colour.green(), colour.blue(), 0.8f, GL11.GL_LESS);
+        this.hidden = new LineInfo(3.0f, colour.red(), colour.green(), colour.blue(), 0.2f, GL11.GL_GEQUAL);
     }
 }
