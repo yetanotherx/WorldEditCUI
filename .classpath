@@ -4,10 +4,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Client"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/LiteLoader"/>
-	<classpathentry kind="lib" path="lib/snakeyaml-1.9.jar"/>
-	<classpathentry kind="lib" path="/Client/jars/bin/jinput.jar"/>
-	<classpathentry kind="lib" path="/Client/jars/bin/lwjgl_util.jar" sourcepath="/Client/lwjgl"/>
-	<classpathentry kind="lib" path="/Client/jars/bin/lwjgl.jar" sourcepath="/Client/lwjgl"/>
-	<classpathentry kind="lib" path="/Client/jars/bin/minecraft.jar"/>
+	<classpathentry kind="lib" path="/Client/jars/libraries/org/lwjgl/lwjgl/lwjgl/2.9.0/lwjgl-2.9.0.jar"/>
+	<classpathentry kind="lib" path="/Client/jars/libraries/com/google/code/gson/gson/2.2.4/gson-2.2.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
