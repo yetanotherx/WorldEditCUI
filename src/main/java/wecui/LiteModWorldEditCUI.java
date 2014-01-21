@@ -5,37 +5,52 @@ import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.List;
 
+import org.lwjgl.input.Keyboard;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.network.INetHandler;
 import net.minecraft.network.play.server.S01PacketJoinGame;
 import wecui.event.ChannelEvent;
 import wecui.event.WorldRenderEvent;
+import wecui.gui.WorldEditCUIConfigPanel;
 import wecui.render.region.CuboidRegion;
 
+import com.mumfrey.liteloader.Configurable;
 import com.mumfrey.liteloader.InitCompleteListener;
 import com.mumfrey.liteloader.PluginChannelListener;
 import com.mumfrey.liteloader.PostRenderListener;
+import com.mumfrey.liteloader.core.ClientPluginChannels;
 import com.mumfrey.liteloader.core.LiteLoader;
-import com.mumfrey.liteloader.core.PluginChannels;
+import com.mumfrey.liteloader.core.PluginChannels.ChannelPolicy;
+import com.mumfrey.liteloader.modconfig.ConfigPanel;
+import com.mumfrey.liteloader.util.ModUtilities;
 
-public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelListener, PostRenderListener
+public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelListener, PostRenderListener, Configurable
 {
     private static final String CHANNEL_WECUI = "WECUI";
-	protected WorldEditCUI controller;
-    protected WorldClient lastWorld;
-    protected EntityPlayerSP lastPlayer;
-    protected boolean gameStarted = false;
-    public final static Charset UTF_8_CHARSET = Charset.forName("UTF-8");
-    protected int entityUpdateTickCount = 0;
-    protected WorldRenderEvent event;
+    private final static Charset UTF_8_CHARSET = Charset.forName("UTF-8");
+    
+	private WorldEditCUI controller;
+    private WorldClient lastWorld;
+    private EntityPlayerSP lastPlayer;
+    private boolean gameStarted = false;
+    private WorldRenderEvent event;
 
+    private KeyBinding keyBindToggleUI = new KeyBinding("wecui.keys.toggle", Keyboard.KEY_NONE, "wecui.keys.category");
+    private KeyBinding keyBindClearSel = new KeyBinding("wecui.keys.clear", Keyboard.KEY_NONE, "wecui.keys.category");
+    
+    private boolean visible = true;
+    
 	@Override
 	public void init(File configPath)
 	{
+		ModUtilities.registerKey(this.keyBindToggleUI);
+		ModUtilities.registerKey(this.keyBindClearSel);
 	}
 	
 	@Override
@@ -55,10 +70,19 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 	}
 
 	@Override
-	public void onLogin(INetHandler netHandler, S01PacketJoinGame loginPacket)
+	public void onJoinGame(INetHandler netHandler, S01PacketJoinGame loginPacket)
+	{
+		this.visible = true;
+		this.helo();
+	}
+
+	/**
+	 * 
+	 */
+	private void helo()
 	{
 		byte[] buffer = ("v|" + WorldEditCUI.protocolVersion).getBytes(UTF_8_CHARSET);
-		PluginChannels.sendMessage(CHANNEL_WECUI, buffer);
+		ClientPluginChannels.sendMessage(CHANNEL_WECUI, buffer, ChannelPolicy.DISPATCH_ALWAYS);
 	}
 
 	@Override
@@ -77,6 +101,19 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 	@Override
 	public void onTick(Minecraft mc, float partialTicks, boolean inGame, boolean clock)
 	{
+		if (inGame && mc.currentScreen == null)
+		{
+			if (this.keyBindToggleUI.isPressed())
+			{
+				this.visible = !this.visible;
+			}
+			
+			if (this.keyBindClearSel.isPressed())
+			{
+				if (mc.thePlayer != null) mc.thePlayer.sendChatMessage("//sel");
+			}
+		}
+		
 		if (inGame && clock && this.controller != null)
 		{
 	        if (mc.theWorld != this.lastWorld || mc.thePlayer != this.lastPlayer) {
@@ -87,6 +124,7 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 	                this.gameStarted = true;
 
 	                this.controller.setSelection(new CuboidRegion(this.controller));
+	        		this.helo();
 	            }
 	        }
 		}
@@ -101,21 +139,35 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 	@Override
 	public String getVersion()
 	{
-		return "1.7.2";
+		return "1.7.2_02";
+	}
+	
+	@Override
+	public Class<? extends ConfigPanel> getConfigPanelClass()
+	{
+		return WorldEditCUIConfigPanel.class;
 	}
 
 	@Override
 	public void onPostRenderEntities(float partialTicks)
 	{
-        RenderHelper.disableStandardItemLighting();
-        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240, 240);
-        this.event.setPartialTick(partialTicks);
-        this.controller.getEventManager().callEvent(this.event);
-        RenderHelper.enableStandardItemLighting();
+		if (this.visible && this.event != null)
+		{
+	        RenderHelper.disableStandardItemLighting();
+	        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240, 240);
+	        this.event.setPartialTick(partialTicks);
+	        this.controller.getEventManager().callEvent(this.event);
+	        RenderHelper.enableStandardItemLighting();
+		}
 	}
 
 	@Override
 	public void onPostRender(float partialTicks)
 	{
+	}
+	
+	public WorldEditCUI getController()
+	{
+		return this.controller;
 	}
 }

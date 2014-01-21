@@ -4,9 +4,9 @@
 	<taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
 	
     <!-- Versions !!IMPORTANT -->
-	<property name="version" value="1.7.2" />
-    <property name="mcversion" value="1.7.2" />
-    <property name="litemodversion" value="1.7.2" />
+	<property name="version" value="1.7.2_02" />
+    <property name="mcversion" value="1.7.2_02" />
+    <property name="litemodversion" value="1.7.2_02" />
     <property name="author" value="yetanotherx, Mumfrey, TomyLobo" />
 
     <!-- Project definitions and dependencies -->
@@ -18,13 +18,13 @@
 	
 	<property name="mcp.dir" location="../../.." />
     <property name="eclipse" location="${mcp.dir}/eclipse" />
-    <property name="src" location="${mcp.dir}/src/minecraft" />
     <property name="temp" location="${mcp.dir}/temp" />
     <property name="md5" location="${mcp.dir}/md5" />
-    <property name="mc.src" location="${mcp.dir}/src/mcp" />
+    <property name="mc.src" location="${mcp.dir}/src/minecraft" />
 
     <property name="build" location="${mcp.dir}/build" />
     <property name="dist.dir" location="${build}/dist" />
+    <property name="src" location="${build}/src" />
     <property name="stage.dir" location="${build}/stage/${ant.project.name}/${version}" />
     <property name="filetype" value="litemod" />
 
@@ -97,9 +97,13 @@
 	<target name="recompile" description="MCP recompile">
         <echo level="info" message="Compiling projects" />
 
+        <echo append="false" file="${temp}/build.cfg" message="[OUTPUT]&#x0A;SrcClient = build/src" />
+		
 		<exec executable="${python}" dir="${mcp.dir}">
 			<arg value="runtime/recompile.py" />
 			<arg value="--client" />
+            <arg value="--config" />
+            <arg value="${temp}/build.cfg" />
 			<arg value="%*" />
 		</exec>
 	</target>
@@ -108,7 +112,7 @@
         <echo level="info" message="Obfuscating classes" />
 
 		<exec executable="${python}" dir="${mcp.dir}">
-			<arg value="runtime/reobfuscate17.py" />
+			<arg value="runtime/reobfuscate.py" />
             <arg value="--client" />
 			<arg value="%*" />
 		</exec>
@@ -125,8 +129,7 @@
 
 		<copy todir="${stage.dir}">
 			<fileset dir="${mcp.dir}/reobf/minecraft" excludes=".svn/**, *.txt">
-                <exclude name="**/net/eq2online/permissions/mod"/>
-                <exclude name="**/LiteModClientPermissions.class"/>
+                <exclude name="*.class"/>
 			</fileset>
 		</copy>
 

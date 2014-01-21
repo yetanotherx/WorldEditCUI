@@ -26,13 +26,14 @@ public class CuboidRegion extends BaseRegion {
     @Override
     public void render() {
         if (this.firstPoint != null && this.secondPoint != null) {
-            this.firstPoint.render();
-            this.secondPoint.render();
 
             Vector3[] bounds = this.calcBounds();
-            new Render3DBox(LineColor.CUBOIDBOX, bounds[0], bounds[1]).render();
             new Render3DGrid(LineColor.CUBOIDGRID, bounds[0], bounds[1]).render();
+            new Render3DBox(LineColor.CUBOIDBOX, bounds[0], bounds[1]).render();
 
+            this.firstPoint.render();
+            this.secondPoint.render();
+            
         } else if (this.firstPoint != null) {
             this.firstPoint.render();
         } else if (this.secondPoint != null) {

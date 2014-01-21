@@ -31,7 +31,8 @@ public class WorldRenderListener implements Listener<WorldRenderEvent> {
     public void onEvent(WorldRenderEvent event) {
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         GL11.glEnable(GL11.GL_BLEND);
-        //GL11.glDisable(GL11.GL_ALPHA_TEST);
+        GL11.glEnable(GL11.GL_ALPHA_TEST);
+        GL11.glAlphaFunc(GL11.GL_GREATER, 0.0F);
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         GL11.glDepthMask(false);
         GL11.glPushMatrix();
@@ -53,7 +54,7 @@ public class WorldRenderListener implements Listener<WorldRenderEvent> {
         GL11.glDepthMask(true);
         GL11.glEnable(GL11.GL_TEXTURE_2D);
         GL11.glDisable(GL11.GL_BLEND);
-        //GL11.glEnable(GL11.GL_ALPHA_TEST);
+        GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
     }
 
 	private double getPlayerXGuess(float renderTick)

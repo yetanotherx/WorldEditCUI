@@ -27,13 +27,12 @@ import wecui.render.region.CuboidRegion;
 public class WorldEditCUI {
 
     public static final int protocolVersion = 3;
-    protected Minecraft minecraft;
-    protected EventManager eventManager;
-    protected BaseRegion selection;
-    protected CUIDebug debugger;
-    protected CUIConfiguration configuration;
-    //protected LocalPlugin localPlugin;
-
+    private Minecraft minecraft;
+    private EventManager eventManager;
+    private BaseRegion selection;
+    private CUIDebug debugger;
+    private CUIConfiguration configuration;
+    
     public WorldEditCUI(Minecraft minecraft) {
         this.minecraft = minecraft;
     }

@@ -1,0 +1,20 @@
+wecui.options.title=WorldEditCUI Options
+
+wecui.keys.toggle=Toggle CUI visibility
+wecui.keys.clear=Clear WorldEdit selection
+wecui.keys.category=WorldEditCUI
+
+gui.ok=OK
+
+colour.cuboidedge=Cuboid Edge Colour
+colour.cuboidgrid=Cuboid Grid Colour
+colour.cuboidpoint1=Cuboid First Point Colour
+colour.cuboidpoint2=Cuboid Second Point Colour
+colour.polygrid=Polygon Grid Colour
+colour.polyedge=Polygon Edge Colour
+colour.polypoint=Polygon Point Colour
+colour.ellipsoidgrid=Ellipsoid Grid Colour
+colour.ellipsoidpoint=Ellipsoid Centre Point Colour
+colour.cylindergrid=Cylinder Grid Colour
+colour.cylinderedge=Cylinder Edge Colour
+colour.cylinderpoint=Cylinder Centre Point Colour

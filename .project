@@ -25,6 +25,11 @@
 			<type>2</type>
 			<locationURI>PROJECT_LOC/src/main/resources</locationURI>
 		</link>
+		<link>
+			<name>resources</name>
+			<type>2</type>
+			<locationURI>PROJECT_LOC/src/main/resources</locationURI>
+		</link>
 	</linkedResources>
 	<variableList>
 		<variable>
