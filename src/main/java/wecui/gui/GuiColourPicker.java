@@ -21,8 +21,8 @@ import org.lwjgl.input.Keyboard;
 public class GuiColourPicker extends GuiControl
 {
 	public static final ResourceLocation COLOURPICKER_CHECKER = new ResourceLocation("wecui", "textures/gui/checker.png");
-	public static final ResourceLocation COLOURPICKER_PICKER  = new ResourceLocation("wecui", "textures/gui/picker.png");
-
+	public static final ResourceLocation COLOURPICKER_PICKER = new ResourceLocation("wecui", "textures/gui/picker.png");
+	
 	/**
 	 * Indices into the hsb array 
 	 */
@@ -78,12 +78,13 @@ public class GuiColourPicker extends GuiControl
 		Color colour = new Color(initialColour);
 		this.hsb = Color.RGBtoHSB(colour.getRed(), colour.getGreen(), colour.getBlue(), null);
 		this.opacity = initialColour & 0xFF000000;
-		if (this.opacity == 0x01000000) this.opacity = 0;
+		if (this.opacity == 0x01000000)
+			this.opacity = 0;
 		
 		this.fontRenderer = minecraft.fontRenderer;
-		this.txtRed   = new GuiTextField(this.fontRenderer, this.field_146128_h + 188, this.field_146129_i + 10, 32, 16);
+		this.txtRed = new GuiTextField(this.fontRenderer, this.field_146128_h + 188, this.field_146129_i + 10, 32, 16);
 		this.txtGreen = new GuiTextField(this.fontRenderer, this.field_146128_h + 188, this.field_146129_i + 30, 32, 16);
-		this.txtBlue  = new GuiTextField(this.fontRenderer, this.field_146128_h + 188, this.field_146129_i + 50, 32, 16);
+		this.txtBlue = new GuiTextField(this.fontRenderer, this.field_146128_h + 188, this.field_146129_i + 50, 32, 16);
 		this.txtAlpha = new GuiTextField(this.fontRenderer, this.field_146128_h + 188, this.field_146129_i + 70, 32, 16);
 		
 		this.txtRed.func_146203_f(3);
@@ -91,13 +92,13 @@ public class GuiColourPicker extends GuiControl
 		this.txtBlue.func_146203_f(3);
 		this.txtAlpha.func_146203_f(3);
 		
-		this.rectHSArea = new Rectangle(this.field_146128_h + 10,  this.field_146129_i + 10, 128, 128);
-		this.rectBArea  = new Rectangle(this.field_146128_h + 143, this.field_146129_i + 10, 15, 128);
-		this.rectAArea  = new Rectangle(this.field_146128_h + 163, this.field_146129_i + 10, 15, 128);
+		this.rectHSArea = new Rectangle(this.field_146128_h + 10, this.field_146129_i + 10, 128, 128);
+		this.rectBArea = new Rectangle(this.field_146128_h + 143, this.field_146129_i + 10, 15, 128);
+		this.rectAArea = new Rectangle(this.field_146128_h + 163, this.field_146129_i + 10, 15, 128);
 		
 		this.btnOk = new GuiControl(minecraft, 0, this.field_146128_h + 9, this.field_146129_i + 145, 55, 20, I18n.format("gui.ok"));
 		this.btnCancel = new GuiControl(minecraft, 1, this.field_146128_h + 70, this.field_146129_i + 145, 65, 20, I18n.format("gui.cancel"));
-
+		
 		this.updateColour();
 	}
 	
@@ -112,27 +113,27 @@ public class GuiColourPicker extends GuiControl
 		int rgb = opacity | (0xFFFFFF & Color.HSBtoRGB(this.hsb[H], this.hsb[S], this.hsb[B]));
 		return rgb;
 	}
-
+	
 	@Override
 	protected void drawControl(Minecraft minecraft, int mouseX, int mouseY)
 	{
 		this.mouseDragged(minecraft, mouseX, mouseY);
-
+		
 		// Calculate coordinates for the selectors
 		int hPos = this.field_146128_h + 10 + (int)(128F * this.hsb[H]);
 		int sPos = this.field_146129_i + 10 + (128 - (int)(128F * this.hsb[S]));
 		int bPos = this.field_146129_i + 10 + (128 - (int)(128F * this.hsb[B]));
-		int aPos = this.field_146129_i + 10 + ((256 - ((this.opacity >> 24) & 0xFF)) / 2) ;
+		int aPos = this.field_146129_i + 10 + ((256 - ((this.opacity >> 24) & 0xFF)) / 2);
 		
 		// Calculate B colour
 		int brightness = Color.HSBtoRGB(this.hsb[H], this.hsb[S], 1.0F) | 0xFF000000;
 		
 		// Draw backgrounds
-		drawRect(this.field_146128_h, this.field_146129_i, this.field_146128_h + this.field_146120_f, this.field_146129_i + this.field_146121_g, 0xAA000000);			// Background
-		drawRect(this.field_146128_h + 9,   this.field_146129_i + 9,   this.field_146128_h + 139, this.field_146129_i + 139, 0xFFA0A0A0); 	// HS background
-		drawRect(this.field_146128_h + 142, this.field_146129_i + 9,   this.field_146128_h + 159, this.field_146129_i + 139, 0xFFA0A0A0);	// B background
-		drawRect(this.field_146128_h + 162, this.field_146129_i + 9,   this.field_146128_h + 179, this.field_146129_i + 139, 0xFFA0A0A0);	// A background
-		drawRect(this.field_146128_h + 187, this.field_146129_i + 105, this.field_146128_h + 221, this.field_146129_i + 139, 0xFFA0A0A0);	// Preview background
+		drawRect(this.field_146128_h, this.field_146129_i, this.field_146128_h + this.field_146120_f, this.field_146129_i + this.field_146121_g, 0xAA000000); // Background
+		drawRect(this.field_146128_h + 9, this.field_146129_i + 9, this.field_146128_h + 139, this.field_146129_i + 139, 0xFFA0A0A0); // HS background
+		drawRect(this.field_146128_h + 142, this.field_146129_i + 9, this.field_146128_h + 159, this.field_146129_i + 139, 0xFFA0A0A0); // B background
+		drawRect(this.field_146128_h + 162, this.field_146129_i + 9, this.field_146128_h + 179, this.field_146129_i + 139, 0xFFA0A0A0); // A background
+		drawRect(this.field_146128_h + 187, this.field_146129_i + 105, this.field_146128_h + 221, this.field_146129_i + 139, 0xFFA0A0A0); // Preview background
 		
 		// Draw colour picker
 		this.mc.getTextureManager().bindTexture(GuiColourPicker.COLOURPICKER_PICKER);
@@ -144,7 +145,7 @@ public class GuiColourPicker extends GuiControl
 		this.drawGradientRect(this.field_146128_h + 143, this.field_146129_i + 10, this.field_146128_h + 158, this.field_146129_i + 138, brightness, 0xFF000000);
 		this.drawRotText(this.fontRenderer, "Luminosity", this.field_146128_h + 150, this.field_146129_i + 74, 0xFF000000, false);
 		drawRect(this.field_146128_h + 142, bPos - 1, this.field_146128_h + 159, bPos + 1, 0xFFFFFFFF);
-
+		
 		// Draw opacity bar
 		this.drawGradientRect(this.field_146128_h + 163, this.field_146129_i + 10, this.field_146128_h + 178, this.field_146129_i + 138, 0xFFFFFFFF, 0xFF000000);
 		this.drawRotText(this.fontRenderer, "Opacity", this.field_146128_h + 170, this.field_146129_i + 74, 0xFF000000, false);
@@ -155,7 +156,7 @@ public class GuiColourPicker extends GuiControl
 		glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		this.drawTexturedModalRect(this.field_146128_h + 188, this.field_146129_i + 106, this.field_146128_h + 220, this.field_146129_i + 138, 0, 0, 1024, 1024);
 		drawRect(this.field_146128_h + 188, this.field_146129_i + 106, this.field_146128_h + 220, this.field_146129_i + 138, this.rgb);
-
+		
 		// Draw text boxes
 		this.txtRed.drawTextBox();
 		this.txtGreen.drawTextBox();
@@ -190,9 +191,9 @@ public class GuiColourPicker extends GuiControl
 		int currentBlue = this.rgb & 0xFF;
 		int currentOpacity = (this.opacity >> 24) & 0xFF;
 		
-		currentRed     = (int)clamp(this.tryParseInt(this.txtRed.getText(),   currentRed),     0, 255);
-		currentGreen   = (int)clamp(this.tryParseInt(this.txtGreen.getText(), currentGreen),   0, 255);
-		currentBlue    = (int)clamp(this.tryParseInt(this.txtBlue.getText(),  currentBlue),    0, 255);
+		currentRed = (int)clamp(this.tryParseInt(this.txtRed.getText(), currentRed), 0, 255);
+		currentGreen = (int)clamp(this.tryParseInt(this.txtGreen.getText(), currentGreen), 0, 255);
+		currentBlue = (int)clamp(this.tryParseInt(this.txtBlue.getText(), currentBlue), 0, 255);
 		currentOpacity = (int)clamp(this.tryParseInt(this.txtAlpha.getText(), currentOpacity), 0, 255);
 		
 		this.hsb = Color.RGBtoHSB(currentRed, currentGreen, currentBlue, null);
@@ -206,7 +207,10 @@ public class GuiColourPicker extends GuiControl
 		{
 			return Integer.parseInt(text);
 		}
-		catch (Exception ex) { return "".equals(text) ? 0 : defaultValue; } 
+		catch (Exception ex)
+		{
+			return "".equals(text) ? 0 : defaultValue;
+		}
 	}
 	
 	/* (non-Javadoc)
@@ -236,7 +240,7 @@ public class GuiColourPicker extends GuiControl
 			this.updateColour();
 		}
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see net.minecraft.src.GuiButton#mousePressed(net.minecraft.src.Minecraft, int, int)
 	 */
@@ -254,7 +258,7 @@ public class GuiColourPicker extends GuiControl
 			
 			if (this.rectHSArea.contains(mouseX, mouseY))
 				this.draggingHS = true;
-
+			
 			if (this.rectBArea.contains(mouseX, mouseY))
 				this.draggingB = true;
 			
@@ -275,7 +279,7 @@ public class GuiColourPicker extends GuiControl
 		
 		return false;
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see net.minecraft.src.GuiButton#mouseReleased(int, int)
 	 */
@@ -329,7 +333,7 @@ public class GuiColourPicker extends GuiControl
 		
 		return true;
 	}
-
+	
 	public static float clamp(float value, float min, float max)
 	{
 		return Math.min(Math.max(value, min), max);

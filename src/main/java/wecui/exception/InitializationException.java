@@ -7,14 +7,17 @@ package wecui.exception;
  * @author yetanotherx
  * 
  */
-public class InitializationException extends Exception {
-
-    private static final long serialVersionUID = 1L;
-
-    public InitializationException(String string) {
-        super(string);
-    }
-
-    public InitializationException() {
-    }
+public class InitializationException extends Exception
+{
+	
+	private static final long serialVersionUID = 1L;
+	
+	public InitializationException(String string)
+	{
+		super(string);
+	}
+	
+	public InitializationException()
+	{
+	}
 }

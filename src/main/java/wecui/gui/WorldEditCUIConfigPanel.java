@@ -33,25 +33,25 @@ public class WorldEditCUIConfigPanel extends Gui implements ConfigPanel
 	{
 		this.mc = Minecraft.getMinecraft();
 	}
-
+	
 	@Override
 	public String getPanelTitle()
 	{
 		return I18n.format("wecui.options.title");
 	}
-
+	
 	@Override
 	public int getContentHeight()
 	{
 		return LineColor.values().length * 24;
 	}
-
+	
 	@Override
 	public void onPanelShown(ConfigPanelHost host)
 	{
 		this.mod = host.getMod();
 		
-    	ScaledResolution scaledresolution = new ScaledResolution(this.mc.gameSettings, this.mc.displayWidth, this.mc.displayHeight);
+		ScaledResolution scaledresolution = new ScaledResolution(this.mc.gameSettings, this.mc.displayWidth, this.mc.displayHeight);
 		GuiControl.setScreenSizeAndScale(host.getWidth(), this.getContentHeight(), scaledresolution.getScaleFactor());
 		
 		this.controlList.clear();
@@ -70,12 +70,12 @@ public class WorldEditCUIConfigPanel extends Gui implements ConfigPanel
 				this.colourButtonList.add((GuiColourButton)control);
 		}
 	}
-
+	
 	@Override
 	public void onPanelResize(ConfigPanelHost host)
 	{
 	}
-
+	
 	@Override
 	public void onPanelHidden()
 	{
@@ -83,15 +83,15 @@ public class WorldEditCUIConfigPanel extends Gui implements ConfigPanel
 		{
 			colourButton.save();
 		}
-
+		
 		this.mod.getController().getConfiguration().save();
 	}
-
+	
 	@Override
 	public void onTick(ConfigPanelHost host)
 	{
 	}
-
+	
 	@Override
 	public void drawPanel(ConfigPanelHost host, int mouseX, int mouseY, float partialTicks)
 	{
@@ -105,7 +105,7 @@ public class WorldEditCUIConfigPanel extends Gui implements ConfigPanel
 			colourButton.drawPicker(this.mc, mouseX, mouseY);
 		}
 	}
-
+	
 	@Override
 	public void mousePressed(ConfigPanelHost host, int mouseX, int mouseY, int mouseButton)
 	{
@@ -124,19 +124,19 @@ public class WorldEditCUIConfigPanel extends Gui implements ConfigPanel
 			}
 		}
 	}
-
+	
 	private void actionPerformed(GuiControl control)
 	{
 		if (control.id >= 100)
 		{
 			LineColor lineColour = LineColor.values()[control.id - 100];
 			lineColour.setDefaultColour();
-
+			
 			for (GuiColourButton colourButton : this.colourButtonList)
 				colourButton.updateColour(lineColour);
 		}
 	}
-
+	
 	@Override
 	public void mouseReleased(ConfigPanelHost host, int mouseX, int mouseY, int mouseButton)
 	{
@@ -146,12 +146,12 @@ public class WorldEditCUIConfigPanel extends Gui implements ConfigPanel
 			this.activeControl = null;
 		}
 	}
-
+	
 	@Override
 	public void mouseMoved(ConfigPanelHost host, int mouseX, int mouseY)
 	{
 	}
-
+	
 	@Override
 	public void keyPressed(ConfigPanelHost host, char keyChar, int keyCode)
 	{
@@ -166,26 +166,26 @@ public class WorldEditCUIConfigPanel extends Gui implements ConfigPanel
 			colourButton.keyTyped(keyChar, keyCode);
 		}
 	}
-
+	
 	/**
 	 * Enable OpenGL clipping planes (uses planes 2, 3, 4 and 5)
 	 */
 	protected final void enableClipping()
-    {
-    	glEnable(GL_CLIP_PLANE2);
+	{
+		glEnable(GL_CLIP_PLANE2);
 		glEnable(GL_CLIP_PLANE3);
 		glEnable(GL_CLIP_PLANE4);
 		glEnable(GL_CLIP_PLANE5);
-    }
-    
+	}
+	
 	/**
 	 * Disable OpenGL clipping planes (uses planes 2, 3, 4 and 5)
 	 */
 	protected final void disableClipping()
-    {
-        glDisable(GL_CLIP_PLANE5);
-        glDisable(GL_CLIP_PLANE4);
-        glDisable(GL_CLIP_PLANE3);
-        glDisable(GL_CLIP_PLANE2);
-    }
+	{
+		glDisable(GL_CLIP_PLANE5);
+		glDisable(GL_CLIP_PLANE4);
+		glDisable(GL_CLIP_PLANE3);
+		glDisable(GL_CLIP_PLANE2);
+	}
 }

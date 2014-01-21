@@ -1,12 +1,11 @@
 package wecui.event.listeners;
 
+import static org.lwjgl.opengl.GL11.*;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
-
-import org.lwjgl.opengl.GL11;
-
+import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.RenderHelper;
 import wecui.WorldEditCUI;
-import wecui.event.WorldRenderEvent;
-import wecui.fevents.Listener;
 
 /**
  * Listener for WorldRenderEvent
@@ -15,63 +14,68 @@ import wecui.fevents.Listener;
  * @author yetanotherx
  * 
  */
-public class WorldRenderListener implements Listener<WorldRenderEvent> {
-
-    private WorldEditCUI controller;
-
-    public WorldRenderListener(WorldEditCUI controller) {
-        this.controller = controller;
-    }
-
-    /**
-     * Renders the current selection if it exists
-     * @param event 
-     */
-    @Override
-    public void onEvent(WorldRenderEvent event) {
-        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        GL11.glEnable(GL11.GL_BLEND);
-        GL11.glEnable(GL11.GL_ALPHA_TEST);
-        GL11.glAlphaFunc(GL11.GL_GREATER, 0.0F);
-        GL11.glDisable(GL11.GL_TEXTURE_2D);
-        GL11.glDepthMask(false);
-        GL11.glPushMatrix();
-
-        try {
-            GL11.glTranslated(-this.getPlayerXGuess(event.getPartialTick()),
-                    -this.getPlayerYGuess(event.getPartialTick()),
-                    -this.getPlayerZGuess(event.getPartialTick()));
-            GL11.glColor3f(1.0f, 1.0f, 1.0f);
-            if (this.controller.getSelection() != null) {
-                this.controller.getSelection().render();
-            }
-        } catch (Exception e) {
-        }
-
-        GL11.glDepthFunc(GL11.GL_LEQUAL);
-        GL11.glPopMatrix();
-
-        GL11.glDepthMask(true);
-        GL11.glEnable(GL11.GL_TEXTURE_2D);
-        GL11.glDisable(GL11.GL_BLEND);
-        GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
-    }
-
-	private double getPlayerXGuess(float renderTick)
+public class WorldRenderListener
+{
+	private WorldEditCUI controller;
+	
+	private Minecraft minecraft;
+	
+	public WorldRenderListener(WorldEditCUI controller, Minecraft minecraft)
 	{
-		EntityClientPlayerMP thePlayer = this.controller.getMinecraft().thePlayer;
+		this.controller = controller;
+		this.minecraft = minecraft;
+	}
+	
+	public void onRender(float partialTicks)
+	{
+		RenderHelper.disableStandardItemLighting();
+		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240, 240);
+		
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glEnable(GL_BLEND);
+		glEnable(GL_ALPHA_TEST);
+		glAlphaFunc(GL_GREATER, 0.0F);
+		glDisable(GL_TEXTURE_2D);
+		glDepthMask(false);
+		glPushMatrix();
+		
+		try
+		{
+			EntityClientPlayerMP thePlayer = this.minecraft.thePlayer;
+			glTranslated(-this.getPlayerXGuess(thePlayer, partialTicks), -this.getPlayerYGuess(thePlayer, partialTicks), -this.getPlayerZGuess(thePlayer, partialTicks));
+			glColor3f(1.0f, 1.0f, 1.0f);
+			if (this.controller.getSelection() != null)
+			{
+				this.controller.getSelection().render();
+			}
+		}
+		catch (Exception e)
+		{
+		}
+		
+		glDepthFunc(GL_LEQUAL);
+		glPopMatrix();
+		
+		glDepthMask(true);
+		glEnable(GL_TEXTURE_2D);
+		glDisable(GL_BLEND);
+		glAlphaFunc(GL_GREATER, 0.1F);
+
+		RenderHelper.enableStandardItemLighting();
+	}
+	
+	private double getPlayerXGuess(EntityClientPlayerMP thePlayer, float renderTick)
+	{
 		return thePlayer.prevPosX + ((thePlayer.posX - thePlayer.prevPosX) * renderTick);
 	}
 	
-	private double getPlayerYGuess(float renderTick)
+	private double getPlayerYGuess(EntityClientPlayerMP thePlayer, float renderTick)
 	{
-		EntityClientPlayerMP thePlayer = this.controller.getMinecraft().thePlayer;
 		return thePlayer.prevPosY + ((thePlayer.posY - thePlayer.prevPosY) * renderTick);
 	}
 	
-	private double getPlayerZGuess(float renderTick)
+	private double getPlayerZGuess(EntityClientPlayerMP thePlayer, float renderTick)
 	{
-		EntityClientPlayerMP thePlayer = this.controller.getMinecraft().thePlayer;
 		return thePlayer.prevPosZ + ((thePlayer.posZ - thePlayer.prevPosZ) * renderTick);
 	}
 }

@@ -8,31 +8,35 @@ import wecui.WorldEditCUI;
  * @author lahwran
  * @author yetanotherx
  */
-public class CUICylinderEvent extends CUIBaseEvent {
-
-    public CUICylinderEvent(WorldEditCUI controller, String[] args) {
-        super(controller, args);
-    }
-
-    @Override
-    public CUIEventType getEventType() {
-        return CUIEventType.CYLINDER;
-    }
-
-    @Override
-    public String run() {
-
-        int x = this.getInt(0);
-        int y = this.getInt(1);
-        int z = this.getInt(2);
-        double radX = this.getDouble(3);
-        double radZ = this.getDouble(4);
-        
-        this.controller.getSelection().setCylinderCenter(x, y, z);
-        this.controller.getSelection().setCylinderRadius(radX, radZ);
-
-        this.controller.getDebugger().debug("Setting center/radius");
-
-        return null;
-    }
+public class CUICylinderEvent extends CUIBaseEvent
+{
+	
+	public CUICylinderEvent(WorldEditCUI controller, String[] args)
+	{
+		super(controller, args);
+	}
+	
+	@Override
+	public CUIEventType getEventType()
+	{
+		return CUIEventType.CYLINDER;
+	}
+	
+	@Override
+	public String run()
+	{
+		
+		int x = this.getInt(0);
+		int y = this.getInt(1);
+		int z = this.getInt(2);
+		double radX = this.getDouble(3);
+		double radZ = this.getDouble(4);
+		
+		this.controller.getSelection().setCylinderCenter(x, y, z);
+		this.controller.getSelection().setCylinderRadius(radX, radZ);
+		
+		this.controller.getDebugger().debug("Setting center/radius");
+		
+		return null;
+	}
 }

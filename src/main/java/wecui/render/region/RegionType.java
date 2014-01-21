@@ -5,12 +5,11 @@ package wecui.render.region;
  * 
  * @author yetanotherx
  */
-public enum RegionType {
-    
-    CUBOID,
-    POLYGON,
-    ELLIPSOID,
-    CYLINDER,
-    POLYHEDRON
-    
+public enum RegionType
+{
+	CUBOID,
+	POLYGON,
+	ELLIPSOID,
+	CYLINDER,
+	POLYHEDRON
 }

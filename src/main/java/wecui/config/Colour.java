@@ -4,7 +4,7 @@ public class Colour
 {
 	private String hex;
 	private transient String defaultColour;
-
+	
 	public Colour(String defaultColour)
 	{
 		this.hex = defaultColour;
@@ -60,17 +60,20 @@ public class Colour
 		
 		return (colour.matches("(?i)^#[0-9a-f]{6,8}$")) ? colour : def;
 	}
-
+	
 	public void setHex(String hex)
 	{
-		if (hex.length() < 8) hex = "00000000".substring(0, 8 - hex.length()) + hex;
+		if (hex.length() < 8)
+			hex = "00000000".substring(0, 8 - hex.length()) + hex;
 		this.hex = "#" + hex;
 	}
-
+	
 	public String getHex()
 	{
-		if (this.hex == null) this.hex = this.defaultColour;
-		if (this.hex.length() == 7) this.hex = this.hex + "CC";
+		if (this.hex == null)
+			this.hex = this.defaultColour;
+		if (this.hex.length() == 7)
+			this.hex = this.hex + "CC";
 		return this.hex;
 	}
 	
@@ -79,23 +82,23 @@ public class Colour
 		String hex = this.getHex();
 		return (int)Long.parseLong(hex.substring(7, 9) + hex.substring(1, 7), 16);
 	}
-
+	
 	public float red()
 	{
 		String hex = this.getHex();
-        return (((Integer)Integer.parseInt(hex.substring(1, 3), 16)).floatValue() / 256.0F);
+		return (((Integer)Integer.parseInt(hex.substring(1, 3), 16)).floatValue() / 256.0F);
 	}
-
+	
 	public float green()
 	{
 		String hex = this.getHex();
-        return (((Integer)Integer.parseInt(hex.substring(3, 5), 16)).floatValue() / 256.0F);
+		return (((Integer)Integer.parseInt(hex.substring(3, 5), 16)).floatValue() / 256.0F);
 	}
-
+	
 	public float blue()
 	{
 		String hex = this.getHex();
-        return (((Integer)Integer.parseInt(hex.substring(5, 7), 16)).floatValue() / 256.0F);
+		return (((Integer)Integer.parseInt(hex.substring(5, 7), 16)).floatValue() / 256.0F);
 	}
 	
 	public float alpha()
@@ -103,7 +106,7 @@ public class Colour
 		String hex = this.getHex();
 		return (((Integer)Integer.parseInt(hex.substring(7, 9), 16)).floatValue() / 256.0F);
 	}
-
+	
 	public Colour copyFrom(Colour other)
 	{
 		this.hex = other.getHex();
