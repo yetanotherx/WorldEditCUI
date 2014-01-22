@@ -5,7 +5,7 @@
 	
     <!-- Versions !!IMPORTANT -->
 	<property name="version" value="1.7.2_02" />
-    <property name="mcversion" value="1.7.2_02" />
+    <property name="mcversion" value="1.7.2" />
     <property name="litemodversion" value="1.7.2_02" />
     <property name="author" value="yetanotherx, Mumfrey, TomyLobo" />
 
