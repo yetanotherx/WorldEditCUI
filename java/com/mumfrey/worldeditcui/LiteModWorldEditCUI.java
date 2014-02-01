@@ -36,7 +36,6 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 	private WorldEditCUI controller;
 	private WorldClient lastWorld;
 	private EntityPlayerSP lastPlayer;
-	private boolean gameStarted = false;
 	
 	private KeyBinding keyBindToggleUI = new KeyBinding("wecui.keys.toggle", Keyboard.KEY_NONE, "wecui.keys.category");
 	private KeyBinding keyBindClearSel = new KeyBinding("wecui.keys.clear", Keyboard.KEY_NONE, "wecui.keys.category");
@@ -75,6 +74,7 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 	public void onJoinGame(INetHandler netHandler, S01PacketJoinGame loginPacket)
 	{
 		this.visible = true;
+		this.controller.getDebugger().debug("Joined game, sending initial handshake");
 		this.helo();
 	}
 	
@@ -128,13 +128,10 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 				this.lastWorld = mc.theWorld;
 				this.lastPlayer = mc.thePlayer;
 				
-				if (!this.gameStarted)
-				{
-					this.gameStarted = true;
-					
-					this.controller.setSelection(new CuboidRegion(this.controller));
-					this.helo();
-				}
+				this.controller.getDebugger().debug("World change detected, sending new handshake");
+				this.controller.setSelection(new CuboidRegion(this.controller));
+				this.helo();
+				if (mc.thePlayer != null) mc.thePlayer.sendChatMessage("/we cui"); //Tricks WE to send the current selection	
 			}
 		}
 	}
