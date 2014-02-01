@@ -131,7 +131,7 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 				this.controller.getDebugger().debug("World change detected, sending new handshake");
 				this.controller.setSelection(new CuboidRegion(this.controller));
 				this.helo();
-				mc.thePlayer.sendChatMessage("/we cui"); //Tricks WE to send the current selection	
+				if (mc.thePlayer != null) mc.thePlayer.sendChatMessage("/we cui"); //Tricks WE to send the current selection	
 			}
 		}
 	}
