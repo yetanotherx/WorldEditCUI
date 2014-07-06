@@ -27,8 +27,8 @@ public class CUIEventPolygon extends CUIEvent
 	@Override
 	public String raise()
 	{
-		final int[] vertexIds = new int[args.length];
-		for (int i = 0; i < args.length; ++i)
+		final int[] vertexIds = new int[this.args.length];
+		for (int i = 0; i < this.args.length; ++i)
 		{
 			vertexIds[i] = this.getInt(i);
 		}

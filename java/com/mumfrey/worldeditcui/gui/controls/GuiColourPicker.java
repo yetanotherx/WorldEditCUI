@@ -81,23 +81,23 @@ public class GuiColourPicker extends GuiControl
 		if (this.opacity == 0x01000000)
 			this.opacity = 0;
 		
-		this.fontRenderer = minecraft.fontRenderer;
-		this.txtRed = new GuiTextField(this.fontRenderer, this.field_146128_h + 188, this.field_146129_i + 10, 32, 16);
-		this.txtGreen = new GuiTextField(this.fontRenderer, this.field_146128_h + 188, this.field_146129_i + 30, 32, 16);
-		this.txtBlue = new GuiTextField(this.fontRenderer, this.field_146128_h + 188, this.field_146129_i + 50, 32, 16);
-		this.txtAlpha = new GuiTextField(this.fontRenderer, this.field_146128_h + 188, this.field_146129_i + 70, 32, 16);
+		this.fontRenderer = minecraft.fontRendererObj;
+		this.txtRed = new GuiTextField(this.fontRenderer, this.xPosition + 188, this.yPosition + 10, 32, 16);
+		this.txtGreen = new GuiTextField(this.fontRenderer, this.xPosition + 188, this.yPosition + 30, 32, 16);
+		this.txtBlue = new GuiTextField(this.fontRenderer, this.xPosition + 188, this.yPosition + 50, 32, 16);
+		this.txtAlpha = new GuiTextField(this.fontRenderer, this.xPosition + 188, this.yPosition + 70, 32, 16);
 		
-		this.txtRed.func_146203_f(3);
-		this.txtGreen.func_146203_f(3);
-		this.txtBlue.func_146203_f(3);
-		this.txtAlpha.func_146203_f(3);
+		this.txtRed.setMaxStringLength(3);
+		this.txtGreen.setMaxStringLength(3);
+		this.txtBlue.setMaxStringLength(3);
+		this.txtAlpha.setMaxStringLength(3);
 		
-		this.rectHSArea = new Rectangle(this.field_146128_h + 10, this.field_146129_i + 10, 128, 128);
-		this.rectBArea = new Rectangle(this.field_146128_h + 143, this.field_146129_i + 10, 15, 128);
-		this.rectAArea = new Rectangle(this.field_146128_h + 163, this.field_146129_i + 10, 15, 128);
+		this.rectHSArea = new Rectangle(this.xPosition + 10, this.yPosition + 10, 128, 128);
+		this.rectBArea = new Rectangle(this.xPosition + 143, this.yPosition + 10, 15, 128);
+		this.rectAArea = new Rectangle(this.xPosition + 163, this.yPosition + 10, 15, 128);
 		
-		this.btnOk = new GuiControl(minecraft, 0, this.field_146128_h + 9, this.field_146129_i + 145, 55, 20, I18n.format("gui.ok"));
-		this.btnCancel = new GuiControl(minecraft, 1, this.field_146128_h + 70, this.field_146129_i + 145, 65, 20, I18n.format("gui.cancel"));
+		this.btnOk = new GuiControl(minecraft, 0, this.xPosition + 9, this.yPosition + 145, 55, 20, I18n.format("gui.ok"));
+		this.btnCancel = new GuiControl(minecraft, 1, this.xPosition + 70, this.yPosition + 145, 65, 20, I18n.format("gui.cancel"));
 		
 		this.updateColour();
 	}
@@ -120,42 +120,42 @@ public class GuiColourPicker extends GuiControl
 		this.mouseDragged(minecraft, mouseX, mouseY);
 		
 		// Calculate coordinates for the selectors
-		int hPos = this.field_146128_h + 10 + (int)(128F * this.hsb[H]);
-		int sPos = this.field_146129_i + 10 + (128 - (int)(128F * this.hsb[S]));
-		int bPos = this.field_146129_i + 10 + (128 - (int)(128F * this.hsb[B]));
-		int aPos = this.field_146129_i + 10 + ((256 - ((this.opacity >> 24) & 0xFF)) / 2);
+		int hPos = this.xPosition + 10 + (int)(128F * this.hsb[H]);
+		int sPos = this.yPosition + 10 + (128 - (int)(128F * this.hsb[S]));
+		int bPos = this.yPosition + 10 + (128 - (int)(128F * this.hsb[B]));
+		int aPos = this.yPosition + 10 + ((256 - ((this.opacity >> 24) & 0xFF)) / 2);
 		
 		// Calculate B colour
 		int brightness = Color.HSBtoRGB(this.hsb[H], this.hsb[S], 1.0F) | 0xFF000000;
 		
 		// Draw backgrounds
-		drawRect(this.field_146128_h, this.field_146129_i, this.field_146128_h + this.field_146120_f, this.field_146129_i + this.field_146121_g, 0xAA000000); // Background
-		drawRect(this.field_146128_h + 9, this.field_146129_i + 9, this.field_146128_h + 139, this.field_146129_i + 139, 0xFFA0A0A0); // HS background
-		drawRect(this.field_146128_h + 142, this.field_146129_i + 9, this.field_146128_h + 159, this.field_146129_i + 139, 0xFFA0A0A0); // B background
-		drawRect(this.field_146128_h + 162, this.field_146129_i + 9, this.field_146128_h + 179, this.field_146129_i + 139, 0xFFA0A0A0); // A background
-		drawRect(this.field_146128_h + 187, this.field_146129_i + 105, this.field_146128_h + 221, this.field_146129_i + 139, 0xFFA0A0A0); // Preview background
+		drawRect(this.xPosition, this.yPosition, this.xPosition + this.width, this.yPosition + this.height, 0xAA000000); // Background
+		drawRect(this.xPosition + 9, this.yPosition + 9, this.xPosition + 139, this.yPosition + 139, 0xFFA0A0A0); // HS background
+		drawRect(this.xPosition + 142, this.yPosition + 9, this.xPosition + 159, this.yPosition + 139, 0xFFA0A0A0); // B background
+		drawRect(this.xPosition + 162, this.yPosition + 9, this.xPosition + 179, this.yPosition + 139, 0xFFA0A0A0); // A background
+		drawRect(this.xPosition + 187, this.yPosition + 105, this.xPosition + 221, this.yPosition + 139, 0xFFA0A0A0); // Preview background
 		
 		// Draw colour picker
 		this.mc.getTextureManager().bindTexture(GuiColourPicker.COLOURPICKER_PICKER);
 		glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.drawTexturedModalRect(this.field_146128_h + 10, this.field_146129_i + 10, this.field_146128_h + 138, this.field_146129_i + 138, 0, 0, 256, 256);
+		this.drawTexturedModalRect(this.xPosition + 10, this.yPosition + 10, this.xPosition + 138, this.yPosition + 138, 0, 0, 256, 256);
 		this.drawCrossHair(hPos, sPos, 5, 1, 0xFF000000);
 		
 		// Draw brightness bar
-		this.drawGradientRect(this.field_146128_h + 143, this.field_146129_i + 10, this.field_146128_h + 158, this.field_146129_i + 138, brightness, 0xFF000000);
-		this.drawRotText(this.fontRenderer, "Luminosity", this.field_146128_h + 150, this.field_146129_i + 74, 0xFF000000, false);
-		drawRect(this.field_146128_h + 142, bPos - 1, this.field_146128_h + 159, bPos + 1, 0xFFFFFFFF);
+		this.drawGradientRect(this.xPosition + 143, this.yPosition + 10, this.xPosition + 158, this.yPosition + 138, brightness, 0xFF000000);
+		this.drawRotText(this.fontRenderer, "Luminosity", this.xPosition + 150, this.yPosition + 74, 0xFF000000, false);
+		drawRect(this.xPosition + 142, bPos - 1, this.xPosition + 159, bPos + 1, 0xFFFFFFFF);
 		
 		// Draw opacity bar
-		this.drawGradientRect(this.field_146128_h + 163, this.field_146129_i + 10, this.field_146128_h + 178, this.field_146129_i + 138, 0xFFFFFFFF, 0xFF000000);
-		this.drawRotText(this.fontRenderer, "Opacity", this.field_146128_h + 170, this.field_146129_i + 74, 0xFF000000, false);
-		drawRect(this.field_146128_h + 162, aPos - 1, this.field_146128_h + 179, aPos + 1, 0xFFFFFFFF);
+		this.drawGradientRect(this.xPosition + 163, this.yPosition + 10, this.xPosition + 178, this.yPosition + 138, 0xFFFFFFFF, 0xFF000000);
+		this.drawRotText(this.fontRenderer, "Opacity", this.xPosition + 170, this.yPosition + 74, 0xFF000000, false);
+		drawRect(this.xPosition + 162, aPos - 1, this.xPosition + 179, aPos + 1, 0xFFFFFFFF);
 		
 		// Draw preview
 		this.mc.getTextureManager().bindTexture(GuiColourPicker.COLOURPICKER_CHECKER);
 		glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.drawTexturedModalRect(this.field_146128_h + 188, this.field_146129_i + 106, this.field_146128_h + 220, this.field_146129_i + 138, 0, 0, 1024, 1024);
-		drawRect(this.field_146128_h + 188, this.field_146129_i + 106, this.field_146128_h + 220, this.field_146129_i + 138, this.rgb);
+		this.drawTexturedModalRect(this.xPosition + 188, this.yPosition + 106, this.xPosition + 220, this.yPosition + 138, 0, 0, 1024, 1024);
+		drawRect(this.xPosition + 188, this.yPosition + 106, this.xPosition + 220, this.yPosition + 138, this.rgb);
 		
 		// Draw text boxes
 		this.txtRed.drawTextBox();
@@ -223,20 +223,20 @@ public class GuiColourPicker extends GuiControl
 		
 		if (this.draggingHS)
 		{
-			this.hsb[H] = clamp(mouseX - this.field_146128_h - 10, 0, 128) / 128F;
-			this.hsb[S] = (128F - clamp(mouseY - this.field_146129_i - 10, 0, 128)) / 128F;
+			this.hsb[H] = clamp(mouseX - this.xPosition - 10, 0, 128) / 128F;
+			this.hsb[S] = (128F - clamp(mouseY - this.yPosition - 10, 0, 128)) / 128F;
 			this.updateColour();
 		}
 		
 		if (this.draggingB)
 		{
-			this.hsb[B] = (128F - clamp(mouseY - this.field_146129_i - 10, 0, 128)) / 128F;
+			this.hsb[B] = (128F - clamp(mouseY - this.yPosition - 10, 0, 128)) / 128F;
 			this.updateColour();
 		}
 		
 		if (this.draggingA)
 		{
-			this.opacity = (mouseY - this.field_146129_i < 11) ? 0xFF000000 : (((128 - (int)clamp(mouseY - this.field_146129_i - 10, 0, 128)) << 25) & 0xFF000000);
+			this.opacity = (mouseY - this.yPosition < 11) ? 0xFF000000 : (((128 - (int)clamp(mouseY - this.yPosition - 10, 0, 128)) << 25) & 0xFF000000);
 			this.updateColour();
 		}
 	}

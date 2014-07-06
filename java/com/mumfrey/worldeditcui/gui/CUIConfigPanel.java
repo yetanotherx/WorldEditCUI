@@ -21,6 +21,8 @@ import com.mumfrey.worldeditcui.render.LineColour;
 
 public class CUIConfigPanel extends Gui implements ConfigPanel
 {
+	private static final int CONTROL_SPACING = 24;
+
 	private Minecraft mc;
 	
 	private LiteModWorldEditCUI mod;
@@ -45,7 +47,7 @@ public class CUIConfigPanel extends Gui implements ConfigPanel
 	@Override
 	public int getContentHeight()
 	{
-		return LineColour.values().length * 24;
+		return LineColour.values().length * CUIConfigPanel.CONTROL_SPACING;
 	}
 	
 	@Override
@@ -53,7 +55,7 @@ public class CUIConfigPanel extends Gui implements ConfigPanel
 	{
 		this.mod = host.getMod();
 		
-		ScaledResolution scaledresolution = new ScaledResolution(this.mc.gameSettings, this.mc.displayWidth, this.mc.displayHeight);
+		ScaledResolution scaledresolution = new ScaledResolution(this.mc, this.mc.displayWidth, this.mc.displayHeight);
 		GuiControl.setScreenSizeAndScale(host.getWidth(), this.getContentHeight(), scaledresolution.getScaleFactor());
 		
 		this.controlList.clear();
@@ -61,8 +63,8 @@ public class CUIConfigPanel extends Gui implements ConfigPanel
 		
 		for (LineColour colour : LineColour.values())
 		{
-			this.controlList.add(new GuiColourButton(this.mc, nextId, 10, nextId * 24, 40, 20, colour));
-			this.controlList.add(new GuiControl(this.mc, 100 + nextId, 220, nextId * 24, 60, 20, "Reset"));
+			this.controlList.add(new GuiColourButton(this.mc, nextId, 10, nextId * CUIConfigPanel.CONTROL_SPACING, 40, 20, colour));
+			this.controlList.add(new GuiControl(this.mc, 100 + nextId, 220, nextId * CUIConfigPanel.CONTROL_SPACING, 60, 20, "Reset"));
 			nextId++;
 		}
 		

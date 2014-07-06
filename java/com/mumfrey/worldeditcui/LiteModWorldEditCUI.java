@@ -22,7 +22,6 @@ import com.mumfrey.liteloader.core.ClientPluginChannels;
 import com.mumfrey.liteloader.core.LiteLoader;
 import com.mumfrey.liteloader.core.PluginChannels.ChannelPolicy;
 import com.mumfrey.liteloader.modconfig.ConfigPanel;
-import com.mumfrey.liteloader.util.ModUtilities;
 import com.mumfrey.worldeditcui.event.listeners.CUIListenerChannel;
 import com.mumfrey.worldeditcui.event.listeners.CUIListenerWorldRender;
 import com.mumfrey.worldeditcui.gui.CUIConfigPanel;
@@ -48,8 +47,8 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 	@Override
 	public void init(File configPath)
 	{
-		ModUtilities.registerKey(this.keyBindToggleUI);
-		ModUtilities.registerKey(this.keyBindClearSel);
+		LiteLoader.getInput().registerKeyBinding(this.keyBindToggleUI);
+		LiteLoader.getInput().registerKeyBinding(this.keyBindClearSel);
 	}
 	
 	@Override
@@ -131,7 +130,7 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 				this.controller.getDebugger().debug("World change detected, sending new handshake");
 				this.controller.setSelection(new CuboidRegion(this.controller));
 				this.helo();
-				if (mc.thePlayer != null) mc.thePlayer.sendChatMessage("/we cui"); //Tricks WE to send the current selection	
+				if (mc.thePlayer != null) mc.thePlayer.sendChatMessage("/we cui"); //Tricks WE to send the current selection
 			}
 		}
 	}
@@ -145,7 +144,7 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 	@Override
 	public String getVersion()
 	{
-		return "1.7.2_02";
+		return "1.7.10_00";
 	}
 	
 	@Override

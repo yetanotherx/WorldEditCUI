@@ -4,9 +4,9 @@
 	<taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
 	
     <!-- Versions !!IMPORTANT -->
-	<property name="version" value="1.7.2_02" />
-    <property name="mcversion" value="1.7.2" />
-    <property name="litemodversion" value="1.7.2_02" />
+	<property name="version" value="1.7.10_00" />
+    <property name="mcversion" value="1.7.10" />
+    <property name="litemodversion" value="1.7.10" />
     <property name="author" value="yetanotherx, Mumfrey, TomyLobo" />
 
     <!-- Project definitions and dependencies -->
@@ -40,7 +40,7 @@
 	
 	<target name="contributesource" description="Contribute an upstream project source code to the source path">
 		<echo level="info" message="Contributing project ${lib}" />
-        <copy todir="${src}" verbose="false" overwrite="true" failonerror="false">
+	    <copy todir="${src}" verbose="false" overwrite="true" failonerror="false">
             <fileset dir="${eclipse}/${lib}/java" />
         </copy>
         <copy todir="${src}" verbose="false" overwrite="true" failonerror="false">

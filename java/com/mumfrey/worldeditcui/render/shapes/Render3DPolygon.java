@@ -35,7 +35,7 @@ public class Render3DPolygon
 			
 			tess.startDrawing(GL_LINE_LOOP);
 			tempColour.prepareColour();
-			for (Vector3 vertex : vertices)
+			for (Vector3 vertex : this.vertices)
 			{
 				tess.addVertex(vertex.getX(), vertex.getY(), vertex.getZ());
 			}

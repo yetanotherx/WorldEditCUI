@@ -67,7 +67,7 @@ public class PolyhedronRegion extends BaseRegion
 		final Vector3[] face = new Vector3[vertexIds.length];
 		for (int i = 0; i < vertexIds.length; ++i)
 		{
-			final PointCube vertex = vertices.get(vertexIds[i]);
+			final PointCube vertex = this.vertices.get(vertexIds[i]);
 			if (vertex == null)
 			{
 				// This should never happen
@@ -76,7 +76,7 @@ public class PolyhedronRegion extends BaseRegion
 			
 			face[i] = vertex.getPoint().add(half);
 		}
-		faces.add(face);
+		this.faces.add(face);
 	}
 	
 	@Override
