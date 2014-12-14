@@ -1,13 +1,12 @@
 package com.mumfrey.worldeditcui.event.listeners;
 
-import static org.lwjgl.opengl.GL11.*;
-
-import com.mumfrey.worldeditcui.WorldEditCUI;
-
+import static com.mumfrey.liteloader.gl.GL.*;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
+
+import com.mumfrey.worldeditcui.WorldEditCUI;
 
 /**
  * Listener for WorldRenderEvent
@@ -34,16 +33,16 @@ public class CUIListenerWorldRender
 		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240, 240);
 		
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glEnable(GL_BLEND);
-		glEnable(GL_ALPHA_TEST);
+		glEnableBlend();
+		glEnableAlphaTest();
 		glAlphaFunc(GL_GREATER, 0.0F);
-		glDisable(GL_TEXTURE_2D);
+		glDisableTexture2D();
 		glDepthMask(false);
 		glPushMatrix();
 		
 		try
 		{
-			EntityClientPlayerMP thePlayer = this.minecraft.thePlayer;
+			EntityPlayerSP thePlayer = this.minecraft.thePlayer;
 			glTranslated(-this.getPlayerXGuess(thePlayer, partialTicks), -this.getPlayerYGuess(thePlayer, partialTicks), -this.getPlayerZGuess(thePlayer, partialTicks));
 			glColor3f(1.0f, 1.0f, 1.0f);
 			if (this.controller.getSelection() != null)
@@ -59,24 +58,24 @@ public class CUIListenerWorldRender
 		glPopMatrix();
 		
 		glDepthMask(true);
-		glEnable(GL_TEXTURE_2D);
-		glDisable(GL_BLEND);
+		glEnableTexture2D();
+		glDisableBlend();
 		glAlphaFunc(GL_GREATER, 0.1F);
 
 		RenderHelper.enableStandardItemLighting();
 	}
 	
-	private double getPlayerXGuess(EntityClientPlayerMP thePlayer, float renderTick)
+	private double getPlayerXGuess(EntityPlayerSP thePlayer, float renderTick)
 	{
 		return thePlayer.prevPosX + ((thePlayer.posX - thePlayer.prevPosX) * renderTick);
 	}
 	
-	private double getPlayerYGuess(EntityClientPlayerMP thePlayer, float renderTick)
+	private double getPlayerYGuess(EntityPlayerSP thePlayer, float renderTick)
 	{
 		return thePlayer.prevPosY + ((thePlayer.posY - thePlayer.prevPosY) * renderTick);
 	}
 	
-	private double getPlayerZGuess(EntityClientPlayerMP thePlayer, float renderTick)
+	private double getPlayerZGuess(EntityPlayerSP thePlayer, float renderTick)
 	{
 		return thePlayer.prevPosZ + ((thePlayer.posZ - thePlayer.prevPosZ) * renderTick);
 	}

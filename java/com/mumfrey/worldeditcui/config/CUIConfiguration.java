@@ -26,6 +26,8 @@ public class CUIConfiguration implements InitializationFactory
 	private boolean debugMode = false;
 	private boolean ignoreUpdates = false;
 	
+	private boolean promiscuous = false;
+	
 	private Colour cuboidGridColor        = new Colour("#CC3333CC");
 	private Colour cuboidEdgeColor        = new Colour("#CC4C4CCC");
 	private Colour cuboidFirstPointColor  = new Colour("#33CC33CC");
@@ -85,6 +87,16 @@ public class CUIConfiguration implements InitializationFactory
 		return this.ignoreUpdates;
 	}
 	
+	public boolean isPromiscuous()
+	{
+		return this.promiscuous;
+	}
+	
+	public void setPromiscuous(boolean promiscuous)
+	{
+		this.promiscuous = promiscuous;
+	}
+	
 	public static CUIConfiguration create()
 	{
 		File jsonFile = new File(LiteLoader.getCommonConfigFolder(), CUIConfiguration.CONFIG_FILE_NAME);
@@ -99,7 +111,7 @@ public class CUIConfiguration implements InitializationFactory
 				CUIConfiguration config = CUIConfiguration.gson.fromJson(fileReader, CUIConfiguration.class);
 				return config;
 			}
-			catch (IOException ex)
+			catch (Exception ex)
 			{
 				ex.printStackTrace();
 			}
@@ -127,7 +139,7 @@ public class CUIConfiguration implements InitializationFactory
 			fileWriter = new FileWriter(jsonFile);
 			CUIConfiguration.gson.toJson(this, fileWriter);
 		}
-		catch (IOException ex)
+		catch (Exception ex)
 		{
 			ex.printStackTrace();
 		}

@@ -1,6 +1,6 @@
 package com.mumfrey.worldeditcui.render;
 
-import static org.lwjgl.opengl.GL11.*;
+import static com.mumfrey.liteloader.gl.GL.*;
 
 /**
  * Stores data about a line that can be rendered

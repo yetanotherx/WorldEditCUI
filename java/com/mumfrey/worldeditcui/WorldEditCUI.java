@@ -20,7 +20,8 @@ import com.mumfrey.worldeditcui.render.region.CuboidRegion;
  */
 public class WorldEditCUI
 {
-	public static final int protocolVersion = 3;
+	public static final int PROTOCOL_VERSION = 3;
+	
 	private BaseRegion selection;
 	private CUIDebug debugger;
 	private CUIConfiguration configuration;

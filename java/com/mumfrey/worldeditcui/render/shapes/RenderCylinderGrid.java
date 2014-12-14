@@ -5,7 +5,8 @@ import com.mumfrey.worldeditcui.render.LineInfo;
 import com.mumfrey.worldeditcui.render.points.PointCube;
 
 import net.minecraft.client.renderer.Tessellator;
-import static org.lwjgl.opengl.GL11.*;
+import net.minecraft.client.renderer.WorldRenderer;
+import static com.mumfrey.liteloader.gl.GL.*;
 
 /**
  * Draws the grid lines around a cylindrical region
@@ -36,7 +37,9 @@ public class RenderCylinderGrid
 	
 	public void render()
 	{
-		Tessellator tess = Tessellator.instance;
+		Tessellator tessellator = Tessellator.getInstance();
+		WorldRenderer worldRenderer = tessellator.getWorldRenderer();
+		
 		for (LineInfo tempColour : this.colour.getColours())
 		{
 			tempColour.prepareRender();
@@ -51,29 +54,29 @@ public class RenderCylinderGrid
 			for (double tempX = negRadiusX; tempX <= posRadiusX; ++tempX)
 			{
 				double tempZ = this.radZ * Math.cos(Math.asin(tempX / this.radX));
-				tess.startDrawing(GL_LINE_LOOP);
+				worldRenderer.startDrawing(GL_LINE_LOOP);
 				tempColour.prepareColour();
 				
-				tess.addVertex(this.centerX + tempX, tmaxY, this.centerZ + tempZ);
-				tess.addVertex(this.centerX + tempX, tmaxY, this.centerZ - tempZ);
-				tess.addVertex(this.centerX + tempX, tminY, this.centerZ - tempZ);
-				tess.addVertex(this.centerX + tempX, tminY, this.centerZ + tempZ);
+				worldRenderer.addVertex(this.centerX + tempX, tmaxY, this.centerZ + tempZ);
+				worldRenderer.addVertex(this.centerX + tempX, tmaxY, this.centerZ - tempZ);
+				worldRenderer.addVertex(this.centerX + tempX, tminY, this.centerZ - tempZ);
+				worldRenderer.addVertex(this.centerX + tempX, tminY, this.centerZ + tempZ);
 				
-				tess.draw();
+				tessellator.draw();
 			}
 			
 			for (double tempZ = negRadiusZ; tempZ <= posRadiusZ; ++tempZ)
 			{
 				double tempX = this.radX * Math.sin(Math.acos(tempZ / this.radZ));
-				tess.startDrawing(GL_LINE_LOOP);
+				worldRenderer.startDrawing(GL_LINE_LOOP);
 				tempColour.prepareColour();
 				
-				tess.addVertex(this.centerX + tempX, tmaxY, this.centerZ + tempZ);
-				tess.addVertex(this.centerX - tempX, tmaxY, this.centerZ + tempZ);
-				tess.addVertex(this.centerX - tempX, tminY, this.centerZ + tempZ);
-				tess.addVertex(this.centerX + tempX, tminY, this.centerZ + tempZ);
+				worldRenderer.addVertex(this.centerX + tempX, tmaxY, this.centerZ + tempZ);
+				worldRenderer.addVertex(this.centerX - tempX, tmaxY, this.centerZ + tempZ);
+				worldRenderer.addVertex(this.centerX - tempX, tminY, this.centerZ + tempZ);
+				worldRenderer.addVertex(this.centerX + tempX, tminY, this.centerZ + tempZ);
 				
-				tess.draw();
+				tessellator.draw();
 			}
 		}
 	}

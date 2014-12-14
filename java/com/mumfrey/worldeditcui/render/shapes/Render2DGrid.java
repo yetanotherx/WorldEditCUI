@@ -7,7 +7,8 @@ import com.mumfrey.worldeditcui.render.LineInfo;
 import com.mumfrey.worldeditcui.render.points.PointRectangle;
 
 import net.minecraft.client.renderer.Tessellator;
-import static org.lwjgl.opengl.GL11.*;
+import net.minecraft.client.renderer.WorldRenderer;
+import static com.mumfrey.liteloader.gl.GL.*;
 
 /**
  * Draws the grid for a polygon region
@@ -41,21 +42,22 @@ public class Render2DGrid
 	
 	protected void drawPoly(double height)
 	{
-		Tessellator tess = Tessellator.instance;
+		Tessellator tessellator = Tessellator.getInstance();
+		WorldRenderer worldRenderer = tessellator.getWorldRenderer();
 		for (LineInfo tempColour : this.colour.getColours())
 		{
 			tempColour.prepareRender();
 			
-			tess.startDrawing(GL_LINE_LOOP);
+			worldRenderer.startDrawing(GL_LINE_LOOP);
 			tempColour.prepareColour();
 			for (PointRectangle point : this.points)
 			{
 				if (point != null)
 				{
-					tess.addVertex(point.getPoint().getX() + 0.5, height, point.getPoint().getY() + 0.5);
+					worldRenderer.addVertex(point.getPoint().getX() + 0.5, height, point.getPoint().getY() + 0.5);
 				}
 			}
-			tess.draw();
+			tessellator.draw();
 		}
 	}
 }

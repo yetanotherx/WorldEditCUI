@@ -1,6 +1,6 @@
 package com.mumfrey.worldeditcui.gui.controls;
 
-import static org.lwjgl.opengl.GL11.*;
+import static com.mumfrey.liteloader.gl.GL.*;
 
 import com.mumfrey.worldeditcui.render.LineColour;
 

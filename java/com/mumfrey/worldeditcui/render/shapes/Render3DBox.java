@@ -5,7 +5,8 @@ import com.mumfrey.worldeditcui.render.LineInfo;
 import com.mumfrey.worldeditcui.util.Vector3;
 
 import net.minecraft.client.renderer.Tessellator;
-import static org.lwjgl.opengl.GL11.*;
+import net.minecraft.client.renderer.WorldRenderer;
+import static com.mumfrey.liteloader.gl.GL.*;
 
 /**
  * Draws a rectangular prism around 2 corners
@@ -29,7 +30,8 @@ public class Render3DBox
 	
 	public void render()
 	{
-		Tessellator tess = Tessellator.instance;
+		Tessellator tessellator = Tessellator.getInstance();
+		WorldRenderer worldRenderer = tessellator.getWorldRenderer();
 		double x1 = this.first.getX();
 		double y1 = this.first.getY();
 		double z1 = this.first.getZ();
@@ -42,40 +44,40 @@ public class Render3DBox
 			tempColour.prepareRender();
 			
 			// Draw bottom face
-			tess.startDrawing(GL_LINE_LOOP);
+			worldRenderer.startDrawing(GL_LINE_LOOP);
 			tempColour.prepareColour();
-			tess.addVertex(x1, y1, z1);
-			tess.addVertex(x2, y1, z1);
-			tess.addVertex(x2, y1, z2);
-			tess.addVertex(x1, y1, z2);
-			tess.draw();
+			worldRenderer.addVertex(x1, y1, z1);
+			worldRenderer.addVertex(x2, y1, z1);
+			worldRenderer.addVertex(x2, y1, z2);
+			worldRenderer.addVertex(x1, y1, z2);
+			tessellator.draw();
 			
 			// Draw top face
-			tess.startDrawing(GL_LINE_LOOP);
+			worldRenderer.startDrawing(GL_LINE_LOOP);
 			tempColour.prepareColour();
-			tess.addVertex(x1, y2, z1);
-			tess.addVertex(x2, y2, z1);
-			tess.addVertex(x2, y2, z2);
-			tess.addVertex(x1, y2, z2);
-			tess.draw();
+			worldRenderer.addVertex(x1, y2, z1);
+			worldRenderer.addVertex(x2, y2, z1);
+			worldRenderer.addVertex(x2, y2, z2);
+			worldRenderer.addVertex(x1, y2, z2);
+			tessellator.draw();
 			
 			// Draw join top and bottom faces
-			tess.startDrawing(GL_LINES);
+			worldRenderer.startDrawing(GL_LINES);
 			tempColour.prepareColour();
 			
-			tess.addVertex(x1, y1, z1);
-			tess.addVertex(x1, y2, z1);
+			worldRenderer.addVertex(x1, y1, z1);
+			worldRenderer.addVertex(x1, y2, z1);
 			
-			tess.addVertex(x2, y1, z1);
-			tess.addVertex(x2, y2, z1);
+			worldRenderer.addVertex(x2, y1, z1);
+			worldRenderer.addVertex(x2, y2, z1);
 			
-			tess.addVertex(x2, y1, z2);
-			tess.addVertex(x2, y2, z2);
+			worldRenderer.addVertex(x2, y1, z2);
+			worldRenderer.addVertex(x2, y2, z2);
 			
-			tess.addVertex(x1, y1, z2);
-			tess.addVertex(x1, y2, z2);
+			worldRenderer.addVertex(x1, y1, z2);
+			worldRenderer.addVertex(x1, y2, z2);
 			
-			tess.draw();
+			tessellator.draw();
 		}
 	}
 }

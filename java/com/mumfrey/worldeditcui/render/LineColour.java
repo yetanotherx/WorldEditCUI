@@ -3,7 +3,7 @@ package com.mumfrey.worldeditcui.render;
 import com.mumfrey.worldeditcui.config.Colour;
 
 import net.minecraft.client.resources.I18n;
-import static org.lwjgl.opengl.GL11.*;
+import static com.mumfrey.liteloader.gl.GL.*;
 
 /**
  * Stores colour data for each type of line.

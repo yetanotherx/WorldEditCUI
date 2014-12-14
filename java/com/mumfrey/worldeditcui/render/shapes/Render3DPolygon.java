@@ -5,7 +5,8 @@ import com.mumfrey.worldeditcui.render.LineInfo;
 import com.mumfrey.worldeditcui.util.Vector3;
 
 import net.minecraft.client.renderer.Tessellator;
-import static org.lwjgl.opengl.GL11.*;
+import net.minecraft.client.renderer.WorldRenderer;
+import static com.mumfrey.liteloader.gl.GL.*;
 
 /**
  * Draws a polygon
@@ -27,19 +28,20 @@ public class Render3DPolygon
 	
 	public void render()
 	{
-		Tessellator tess = Tessellator.instance;
+		Tessellator tessellator = Tessellator.getInstance();
+		WorldRenderer worldRenderer = tessellator.getWorldRenderer();
 		
 		for (LineInfo tempColour : this.colour.getColours())
 		{
 			tempColour.prepareRender();
 			
-			tess.startDrawing(GL_LINE_LOOP);
+			worldRenderer.startDrawing(GL_LINE_LOOP);
 			tempColour.prepareColour();
 			for (Vector3 vertex : this.vertices)
 			{
-				tess.addVertex(vertex.getX(), vertex.getY(), vertex.getZ());
+				worldRenderer.addVertex(vertex.getX(), vertex.getY(), vertex.getZ());
 			}
-			tess.draw();
+			tessellator.draw();
 		}
 	}
 }

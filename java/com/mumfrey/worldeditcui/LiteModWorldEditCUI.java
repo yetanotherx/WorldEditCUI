@@ -1,21 +1,27 @@
 package com.mumfrey.worldeditcui;
 
+import io.netty.buffer.Unpooled;
+
 import java.io.File;
-import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.List;
 
-import org.lwjgl.input.Keyboard;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.network.INetHandler;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.play.server.S01PacketJoinGame;
 
+import org.lwjgl.input.Keyboard;
+
+import com.google.common.base.Charsets;
+import com.mojang.realmsclient.dto.RealmsServer;
 import com.mumfrey.liteloader.Configurable;
 import com.mumfrey.liteloader.InitCompleteListener;
+import com.mumfrey.liteloader.JoinGameListener;
 import com.mumfrey.liteloader.PluginChannelListener;
 import com.mumfrey.liteloader.PostRenderListener;
 import com.mumfrey.liteloader.core.ClientPluginChannels;
@@ -27,10 +33,11 @@ import com.mumfrey.worldeditcui.event.listeners.CUIListenerWorldRender;
 import com.mumfrey.worldeditcui.gui.CUIConfigPanel;
 import com.mumfrey.worldeditcui.render.region.CuboidRegion;
 
-public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelListener, PostRenderListener, Configurable
+public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelListener, PostRenderListener, Configurable, JoinGameListener
 {
+	private static final int DELAYED_HELO_TICKS = 10;
+
 	private static final String CHANNEL_WECUI = "WECUI";
-	private final static Charset UTF_8_CHARSET = Charset.forName("UTF-8");
 	
 	private WorldEditCUI controller;
 	private WorldClient lastWorld;
@@ -43,6 +50,8 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 	
 	private CUIListenerWorldRender worldRenderListener;
 	private CUIListenerChannel channelListener;
+	
+	private int delayedHelo = 0;
 	
 	@Override
 	public void init(File configPath)
@@ -70,7 +79,7 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 	}
 	
 	@Override
-	public void onJoinGame(INetHandler netHandler, S01PacketJoinGame loginPacket)
+	public void onJoinGame(INetHandler netHandler, S01PacketJoinGame loginPacket, ServerData serverData, RealmsServer realmsServer)
 	{
 		this.visible = true;
 		this.controller.getDebugger().debug("Joined game, sending initial handshake");
@@ -82,7 +91,8 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 	 */
 	private void helo()
 	{
-		byte[] buffer = ("v|" + WorldEditCUI.protocolVersion).getBytes(UTF_8_CHARSET);
+		PacketBuffer buffer = new PacketBuffer(Unpooled.buffer());
+		buffer.writeString("v|" + WorldEditCUI.PROTOCOL_VERSION);
 		ClientPluginChannels.sendMessage(CHANNEL_WECUI, buffer, ChannelPolicy.DISPATCH_ALWAYS);
 	}
 	
@@ -93,12 +103,21 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 	}
 	
 	@Override
-	public void onCustomPayload(String channel, int length, byte[] data)
+	public void onCustomPayload(String channel, PacketBuffer data)
 	{
 		try
 		{
-			String payload = new String(data, LiteModWorldEditCUI.UTF_8_CHARSET);
-			this.channelListener.onMessage(payload);
+			int readableBytes = data.readableBytes();
+			if (readableBytes > 0)
+			{
+				byte[] payload = new byte[readableBytes];
+				data.readBytes(payload);
+				this.channelListener.onMessage(new String(payload, Charsets.UTF_8));
+			}
+			else
+			{
+				this.controller.getDebugger().debug("Warning, invalid (zero length) payload received from server");
+			}
 		}
 		catch (Exception ex) {}
 	}
@@ -130,7 +149,24 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 				this.controller.getDebugger().debug("World change detected, sending new handshake");
 				this.controller.setSelection(new CuboidRegion(this.controller));
 				this.helo();
-				if (mc.thePlayer != null) mc.thePlayer.sendChatMessage("/we cui"); //Tricks WE to send the current selection
+				this.delayedHelo = LiteModWorldEditCUI.DELAYED_HELO_TICKS;
+				if (mc.thePlayer != null && this.controller.getConfiguration().isPromiscuous())
+				{
+					mc.thePlayer.sendChatMessage("/we cui"); //Tricks WE to send the current selection
+				}
+			}
+			
+			if (this.delayedHelo > 0)
+			{
+				this.delayedHelo--;
+				if (this.delayedHelo == 0)
+				{
+					this.helo();
+					if (LiteLoader.getClientPluginChannels().isRemoteChannelRegistered(CHANNEL_WECUI) && mc.thePlayer != null)
+					{
+						mc.thePlayer.sendChatMessage("/we cui");
+					}
+				}
 			}
 		}
 	}
@@ -144,7 +180,7 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 	@Override
 	public String getVersion()
 	{
-		return "1.7.10_00";
+		return "1.8.0_00";
 	}
 	
 	@Override
@@ -156,6 +192,11 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 	@Override
 	public void onPostRenderEntities(float partialTicks)
 	{
+	}
+	
+	@Override
+	public void onPostRender(float partialTicks)
+	{
 		if (this.visible)
 		{
 			try
@@ -164,11 +205,6 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 			}
 			catch (Exception ex) {}
 		}
-	}
-	
-	@Override
-	public void onPostRender(float partialTicks)
-	{
 	}
 	
 	public WorldEditCUI getController()

@@ -7,7 +7,8 @@ import com.mumfrey.worldeditcui.render.LineInfo;
 import com.mumfrey.worldeditcui.render.points.PointRectangle;
 
 import net.minecraft.client.renderer.Tessellator;
-import static org.lwjgl.opengl.GL11.*;
+import net.minecraft.client.renderer.WorldRenderer;
+import static com.mumfrey.liteloader.gl.GL.*;
 
 /**
  * Draws the top and bottom rings of a polygon region
@@ -33,24 +34,25 @@ public class Render2DBox
 	
 	public void render()
 	{
-		Tessellator tess = Tessellator.instance;
+		Tessellator tessellator = Tessellator.getInstance();
+		WorldRenderer worldRenderer = tessellator.getWorldRenderer();
 		double off = 0.03;
 		for (LineInfo tempColour : this.colour.getColours())
 		{
 			tempColour.prepareRender();
 			
-			tess.startDrawing(GL_LINES);
+			worldRenderer.startDrawing(GL_LINES);
 			tempColour.prepareColour();
 			
 			for (PointRectangle point : this.points)
 			{
 				if (point != null)
 				{
-					tess.addVertex(point.getPoint().getX() + 0.5, this.min + off, point.getPoint().getY() + 0.5);
-					tess.addVertex(point.getPoint().getX() + 0.5, this.max + 1 + off, point.getPoint().getY() + 0.5);
+					worldRenderer.addVertex(point.getPoint().getX() + 0.5, this.min + off, point.getPoint().getY() + 0.5);
+					worldRenderer.addVertex(point.getPoint().getX() + 0.5, this.max + 1 + off, point.getPoint().getY() + 0.5);
 				}
 			}
-			tess.draw();
+			tessellator.draw();
 		}
 	}
 }

@@ -6,7 +6,8 @@ import com.mumfrey.worldeditcui.render.points.PointCube;
 import com.mumfrey.worldeditcui.util.Vector3;
 
 import net.minecraft.client.renderer.Tessellator;
-import static org.lwjgl.opengl.GL11.*;
+import net.minecraft.client.renderer.WorldRenderer;
+import static com.mumfrey.liteloader.gl.GL.*;
 
 /**
  * Draws an ellipsoid shape around a center point.
@@ -47,11 +48,13 @@ public class RenderEllipsoid
 	
 	protected void drawXZPlane(LineInfo colour)
 	{
-		Tessellator tess = Tessellator.instance;
+		Tessellator tessellator = Tessellator.getInstance();
+		WorldRenderer worldRenderer = tessellator.getWorldRenderer();
+
 		int yRad = (int)Math.floor(this.radii.getY());
 		for (int yBlock = -yRad; yBlock < yRad; yBlock++)
 		{
-			tess.startDrawing(GL_LINE_LOOP);
+			worldRenderer.startDrawing(GL_LINE_LOOP);
 			colour.prepareColour();
 			
 			for (int i = 0; i <= 40; i++)
@@ -60,12 +63,12 @@ public class RenderEllipsoid
 				double tempX = this.radii.getX() * Math.cos(tempTheta) * Math.cos(Math.asin(yBlock / this.radii.getY()));
 				double tempZ = this.radii.getZ() * Math.sin(tempTheta) * Math.cos(Math.asin(yBlock / this.radii.getY()));
 				
-				tess.addVertex(this.centerX + tempX, this.centerY + yBlock, this.centerZ + tempZ);
+				worldRenderer.addVertex(this.centerX + tempX, this.centerY + yBlock, this.centerZ + tempZ);
 			}
-			tess.draw();
+			tessellator.draw();
 		}
 		
-		tess.startDrawing(GL_LINE_LOOP);
+		worldRenderer.startDrawing(GL_LINE_LOOP);
 		colour.prepareColour();
 		
 		for (int i = 0; i <= 40; i++)
@@ -74,18 +77,20 @@ public class RenderEllipsoid
 			double tempX = this.radii.getX() * Math.cos(tempTheta);
 			double tempZ = this.radii.getZ() * Math.sin(tempTheta);
 			
-			tess.addVertex(this.centerX + tempX, this.centerY, this.centerZ + tempZ);
+			worldRenderer.addVertex(this.centerX + tempX, this.centerY, this.centerZ + tempZ);
 		}
-		tess.draw();
+		tessellator.draw();
 	}
 	
 	protected void drawYZPlane(LineInfo colour)
 	{
-		Tessellator tess = Tessellator.instance;
+		Tessellator tessellator = Tessellator.getInstance();
+		WorldRenderer worldRenderer = tessellator.getWorldRenderer();
+
 		int xRad = (int)Math.floor(this.radii.getX());
 		for (int xBlock = -xRad; xBlock < xRad; xBlock++)
 		{
-			tess.startDrawing(GL_LINE_LOOP);
+			worldRenderer.startDrawing(GL_LINE_LOOP);
 			colour.prepareColour();
 			
 			for (int i = 0; i <= 40; i++)
@@ -94,12 +99,12 @@ public class RenderEllipsoid
 				double tempY = this.radii.getY() * Math.cos(tempTheta) * Math.sin(Math.acos(xBlock / this.radii.getX()));
 				double tempZ = this.radii.getZ() * Math.sin(tempTheta) * Math.sin(Math.acos(xBlock / this.radii.getX()));
 				
-				tess.addVertex(this.centerX + xBlock, this.centerY + tempY, this.centerZ + tempZ);
+				worldRenderer.addVertex(this.centerX + xBlock, this.centerY + tempY, this.centerZ + tempZ);
 			}
-			tess.draw();
+			tessellator.draw();
 		}
 		
-		tess.startDrawing(GL_LINE_LOOP);
+		worldRenderer.startDrawing(GL_LINE_LOOP);
 		colour.prepareColour();
 		
 		for (int i = 0; i <= 40; i++)
@@ -108,18 +113,20 @@ public class RenderEllipsoid
 			double tempY = this.radii.getY() * Math.cos(tempTheta);
 			double tempZ = this.radii.getZ() * Math.sin(tempTheta);
 			
-			tess.addVertex(this.centerX, this.centerY + tempY, this.centerZ + tempZ);
+			worldRenderer.addVertex(this.centerX, this.centerY + tempY, this.centerZ + tempZ);
 		}
-		tess.draw();
+		tessellator.draw();
 	}
 	
 	protected void drawXYPlane(LineInfo colour)
 	{
-		Tessellator tess = Tessellator.instance;
+		Tessellator tessellator = Tessellator.getInstance();
+		WorldRenderer worldRenderer = tessellator.getWorldRenderer();
+
 		int zRad = (int)Math.floor(this.radii.getZ());
 		for (int zBlock = -zRad; zBlock < zRad; zBlock++)
 		{
-			tess.startDrawing(GL_LINE_LOOP);
+			worldRenderer.startDrawing(GL_LINE_LOOP);
 			colour.prepareColour();
 			
 			for (int i = 0; i <= 40; i++)
@@ -128,12 +135,12 @@ public class RenderEllipsoid
 				double tempX = this.radii.getX() * Math.sin(tempTheta) * Math.sin(Math.acos(zBlock / this.radii.getZ()));
 				double tempY = this.radii.getY() * Math.cos(tempTheta) * Math.sin(Math.acos(zBlock / this.radii.getZ()));
 				
-				tess.addVertex(this.centerX + tempX, this.centerY + tempY, this.centerZ + zBlock);
+				worldRenderer.addVertex(this.centerX + tempX, this.centerY + tempY, this.centerZ + zBlock);
 			}
-			tess.draw();
+			tessellator.draw();
 		}
 		
-		tess.startDrawing(GL_LINE_LOOP);
+		worldRenderer.startDrawing(GL_LINE_LOOP);
 		colour.prepareColour();
 		
 		for (int i = 0; i <= 40; i++)
@@ -142,8 +149,8 @@ public class RenderEllipsoid
 			double tempX = this.radii.getX() * Math.cos(tempTheta);
 			double tempY = this.radii.getY() * Math.sin(tempTheta);
 			
-			tess.addVertex(this.centerX + tempX, this.centerY + tempY, this.centerZ);
+			worldRenderer.addVertex(this.centerX + tempX, this.centerY + tempY, this.centerZ);
 		}
-		tess.draw();
+		tessellator.draw();
 	}
 }

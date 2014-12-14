@@ -18,3 +18,8 @@ colour.ellipsoidpoint=Ellipsoid Centre Point Colour
 colour.cylindergrid=Cylinder Grid Colour
 colour.cylinderedge=Cylinder Edge Colour
 colour.cylinderpoint=Cylinder Centre Point Colour
+
+gui.options.compat.title=Compatibility Options
+gui.options.compat.spammy=Promiscuous Mode (send /we cui all the time)
+gui.options.colours.title=Display Colours
+

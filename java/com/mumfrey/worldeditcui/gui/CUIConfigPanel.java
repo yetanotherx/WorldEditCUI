@@ -1,7 +1,5 @@
 package com.mumfrey.worldeditcui.gui;
 
-import static org.lwjgl.opengl.GL11.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,12 +7,15 @@ import org.lwjgl.input.Keyboard;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.resources.I18n;
 
+import com.mumfrey.liteloader.client.gui.GuiCheckbox;
 import com.mumfrey.liteloader.modconfig.ConfigPanel;
 import com.mumfrey.liteloader.modconfig.ConfigPanelHost;
 import com.mumfrey.worldeditcui.LiteModWorldEditCUI;
+import com.mumfrey.worldeditcui.config.CUIConfiguration;
 import com.mumfrey.worldeditcui.gui.controls.GuiColourButton;
 import com.mumfrey.worldeditcui.gui.controls.GuiControl;
 import com.mumfrey.worldeditcui.render.LineColour;
@@ -27,11 +28,13 @@ public class CUIConfigPanel extends Gui implements ConfigPanel
 	
 	private LiteModWorldEditCUI mod;
 	
-	private List<GuiControl> controlList = new ArrayList<GuiControl>();
+	private List<GuiButton> controlList = new ArrayList<GuiButton>();
 	
 	private List<GuiColourButton> colourButtonList = new ArrayList<GuiColourButton>();
 	
-	private GuiControl activeControl;
+	private GuiButton activeControl;
+	
+	private GuiCheckbox chkPromiscuous;
 	
 	public CUIConfigPanel()
 	{
@@ -60,15 +63,18 @@ public class CUIConfigPanel extends Gui implements ConfigPanel
 		
 		this.controlList.clear();
 		int nextId = 0;
+		int top = 64;
 		
 		for (LineColour colour : LineColour.values())
 		{
-			this.controlList.add(new GuiColourButton(this.mc, nextId, 10, nextId * CUIConfigPanel.CONTROL_SPACING, 40, 20, colour));
-			this.controlList.add(new GuiControl(this.mc, 100 + nextId, 220, nextId * CUIConfigPanel.CONTROL_SPACING, 60, 20, "Reset"));
+			this.controlList.add(new GuiColourButton(this.mc, nextId, 24, top + nextId * CUIConfigPanel.CONTROL_SPACING, 40, 20, colour));
+			this.controlList.add(new GuiControl(this.mc, 100 + nextId, 234, top + nextId * CUIConfigPanel.CONTROL_SPACING, 60, 20, "Reset"));
 			nextId++;
 		}
 		
-		for (GuiControl control : this.controlList)
+		this.controlList.add(this.chkPromiscuous = new GuiCheckbox(nextId, 24, 26, I18n.format("gui.options.compat.spammy")));
+		
+		for (GuiButton control : this.controlList)
 		{
 			if (control instanceof GuiColourButton)
 				this.colourButtonList.add((GuiColourButton)control);
@@ -88,7 +94,9 @@ public class CUIConfigPanel extends Gui implements ConfigPanel
 			colourButton.save();
 		}
 		
-		this.mod.getController().getConfiguration().save();
+		CUIConfiguration config = this.mod.getController().getConfiguration();
+		config.setPromiscuous(this.chkPromiscuous.checked);
+		config.save();
 	}
 	
 	@Override
@@ -99,7 +107,10 @@ public class CUIConfigPanel extends Gui implements ConfigPanel
 	@Override
 	public void drawPanel(ConfigPanelHost host, int mouseX, int mouseY, float partialTicks)
 	{
-		for (GuiControl control : this.controlList)
+		this.drawString(this.mc.fontRendererObj, I18n.format("gui.options.compat.title"),  10, 10, 0xFFFFFF55);
+		this.drawString(this.mc.fontRendererObj, I18n.format("gui.options.colours.title"), 10, 48, 0xFFFFFF55);
+		
+		for (GuiButton control : this.controlList)
 		{
 			control.drawButton(this.mc, mouseX, mouseY);
 		}
@@ -115,7 +126,7 @@ public class CUIConfigPanel extends Gui implements ConfigPanel
 	{
 		boolean makeActive = true;
 		
-		for (GuiControl control : this.controlList)
+		for (GuiButton control : this.controlList)
 		{
 			if (control.mousePressed(this.mc, mouseX, mouseY))
 			{
@@ -129,8 +140,14 @@ public class CUIConfigPanel extends Gui implements ConfigPanel
 		}
 	}
 	
-	private void actionPerformed(GuiControl control)
+	private void actionPerformed(GuiButton control)
 	{
+		if (control instanceof GuiCheckbox)
+		{
+			GuiCheckbox chk = (GuiCheckbox)control;
+			chk.checked = !chk.checked;
+		}
+		
 		if (control.id >= 100)
 		{
 			LineColour lineColour = LineColour.values()[control.id - 100];
@@ -169,27 +186,5 @@ public class CUIConfigPanel extends Gui implements ConfigPanel
 		{
 			colourButton.keyTyped(keyChar, keyCode);
 		}
-	}
-	
-	/**
-	 * Enable OpenGL clipping planes (uses planes 2, 3, 4 and 5)
-	 */
-	protected final void enableClipping()
-	{
-		glEnable(GL_CLIP_PLANE2);
-		glEnable(GL_CLIP_PLANE3);
-		glEnable(GL_CLIP_PLANE4);
-		glEnable(GL_CLIP_PLANE5);
-	}
-	
-	/**
-	 * Disable OpenGL clipping planes (uses planes 2, 3, 4 and 5)
-	 */
-	protected final void disableClipping()
-	{
-		glDisable(GL_CLIP_PLANE5);
-		glDisable(GL_CLIP_PLANE4);
-		glDisable(GL_CLIP_PLANE3);
-		glDisable(GL_CLIP_PLANE2);
 	}
 }

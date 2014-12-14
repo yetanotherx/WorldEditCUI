@@ -5,7 +5,8 @@ import com.mumfrey.worldeditcui.render.LineInfo;
 import com.mumfrey.worldeditcui.util.Vector3;
 
 import net.minecraft.client.renderer.Tessellator;
-import static org.lwjgl.opengl.GL11.*;
+import net.minecraft.client.renderer.WorldRenderer;
+import static com.mumfrey.liteloader.gl.GL.*;
 
 /**
  * Draws the grid for a region between
@@ -29,7 +30,8 @@ public class Render3DGrid
 	
 	public void render()
 	{
-		Tessellator tess = Tessellator.instance;
+		Tessellator tessellator = Tessellator.getInstance();
+		WorldRenderer worldRenderer = tessellator.getWorldRenderer();
 		double x1 = this.first.getX();
 		double y1 = this.first.getY();
 		double z1 = this.first.getZ();
@@ -41,7 +43,7 @@ public class Render3DGrid
 		{
 			tempColour.prepareRender();
 			
-			tess.startDrawing(GL_LINES);
+			worldRenderer.startDrawing(GL_LINES);
 			tempColour.prepareColour();
 			
 			double x, y, z;
@@ -55,8 +57,8 @@ public class Render3DGrid
 			{
 				for (double yoff = 0; yoff + y <= y2; yoff += offsetSize)
 				{
-					tess.addVertex(x1, y + yoff, z);
-					tess.addVertex(x2, y + yoff, z);
+					worldRenderer.addVertex(x1, y + yoff, z);
+					worldRenderer.addVertex(x2, y + yoff, z);
 				}
 			}
 			
@@ -66,8 +68,8 @@ public class Render3DGrid
 			{
 				for (double yoff = 0; yoff + y <= y2; yoff += offsetSize)
 				{
-					tess.addVertex(x1, y + yoff, z);
-					tess.addVertex(x2, y + yoff, z);
+					worldRenderer.addVertex(x1, y + yoff, z);
+					worldRenderer.addVertex(x2, y + yoff, z);
 				}
 			}
 			
@@ -77,8 +79,8 @@ public class Render3DGrid
 			{
 				for (double yoff = 0; yoff + y <= y2; yoff += offsetSize)
 				{
-					tess.addVertex(x, y + yoff, z1);
-					tess.addVertex(x, y + yoff, z2);
+					worldRenderer.addVertex(x, y + yoff, z1);
+					worldRenderer.addVertex(x, y + yoff, z2);
 				}
 			}
 			
@@ -88,8 +90,8 @@ public class Render3DGrid
 			{
 				for (double yoff = 0; yoff + y <= y2; yoff += offsetSize)
 				{
-					tess.addVertex(x, y + yoff, z1);
-					tess.addVertex(x, y + yoff, z2);
+					worldRenderer.addVertex(x, y + yoff, z1);
+					worldRenderer.addVertex(x, y + yoff, z2);
 				}
 			}
 			
@@ -100,8 +102,8 @@ public class Render3DGrid
 			{
 				for (double xoff = 0; xoff + x <= x2; xoff += offsetSize)
 				{
-					tess.addVertex(x + xoff, y1, z);
-					tess.addVertex(x + xoff, y2, z);
+					worldRenderer.addVertex(x + xoff, y1, z);
+					worldRenderer.addVertex(x + xoff, y2, z);
 				}
 			}
 			// Zmax XY plane, x axis
@@ -110,8 +112,8 @@ public class Render3DGrid
 			{
 				for (double xoff = 0; xoff + x <= x2; xoff += offsetSize)
 				{
-					tess.addVertex(x + xoff, y1, z);
-					tess.addVertex(x + xoff, y2, z);
+					worldRenderer.addVertex(x + xoff, y1, z);
+					worldRenderer.addVertex(x + xoff, y2, z);
 				}
 			}
 			// Ymin XZ plane, x axis
@@ -120,8 +122,8 @@ public class Render3DGrid
 			{
 				for (double xoff = 0; xoff + x <= x2; xoff += offsetSize)
 				{
-					tess.addVertex(x + xoff, y, z1);
-					tess.addVertex(x + xoff, y, z2);
+					worldRenderer.addVertex(x + xoff, y, z1);
+					worldRenderer.addVertex(x + xoff, y, z2);
 				}
 			}
 			// Ymax XZ plane, x axis
@@ -130,8 +132,8 @@ public class Render3DGrid
 			{
 				for (double xoff = 0; xoff + x <= x2; xoff += offsetSize)
 				{
-					tess.addVertex(x + xoff, y, z1);
-					tess.addVertex(x + xoff, y, z2);
+					worldRenderer.addVertex(x + xoff, y, z1);
+					worldRenderer.addVertex(x + xoff, y, z2);
 				}
 			}
 			
@@ -142,8 +144,8 @@ public class Render3DGrid
 			{
 				for (double zoff = 0; zoff + z <= z2; zoff += offsetSize)
 				{
-					tess.addVertex(x1, y, z + zoff);
-					tess.addVertex(x2, y, z + zoff);
+					worldRenderer.addVertex(x1, y, z + zoff);
+					worldRenderer.addVertex(x2, y, z + zoff);
 				}
 			}
 			// Ymax XZ plane, z axis
@@ -152,8 +154,8 @@ public class Render3DGrid
 			{
 				for (double zoff = 0; zoff + z <= z2; zoff += offsetSize)
 				{
-					tess.addVertex(x1, y, z + zoff);
-					tess.addVertex(x2, y, z + zoff);
+					worldRenderer.addVertex(x1, y, z + zoff);
+					worldRenderer.addVertex(x2, y, z + zoff);
 				}
 			}
 			// Xmin YZ plane, z axis
@@ -162,8 +164,8 @@ public class Render3DGrid
 			{
 				for (double zoff = 0; zoff + z <= z2; zoff += offsetSize)
 				{
-					tess.addVertex(x, y1, z + zoff);
-					tess.addVertex(x, y2, z + zoff);
+					worldRenderer.addVertex(x, y1, z + zoff);
+					worldRenderer.addVertex(x, y2, z + zoff);
 				}
 			}
 			// Xmax YZ plane, z axis
@@ -172,12 +174,12 @@ public class Render3DGrid
 			{
 				for (double zoff = 0; zoff + z <= z2; zoff += offsetSize)
 				{
-					tess.addVertex(x, y1, z + zoff);
-					tess.addVertex(x, y2, z + zoff);
+					worldRenderer.addVertex(x, y1, z + zoff);
+					worldRenderer.addVertex(x, y2, z + zoff);
 				}
 			}
 			
-			tess.draw();
+			tessellator.draw();
 		}
 	}
 }

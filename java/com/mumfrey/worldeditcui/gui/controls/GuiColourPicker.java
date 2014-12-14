@@ -1,6 +1,6 @@
 package com.mumfrey.worldeditcui.gui.controls;
 
-import static org.lwjgl.opengl.GL11.*;
+import static com.mumfrey.liteloader.gl.GL.*;
 
 import java.awt.Color;
 import java.awt.Rectangle;
@@ -82,10 +82,10 @@ public class GuiColourPicker extends GuiControl
 			this.opacity = 0;
 		
 		this.fontRenderer = minecraft.fontRendererObj;
-		this.txtRed = new GuiTextField(this.fontRenderer, this.xPosition + 188, this.yPosition + 10, 32, 16);
-		this.txtGreen = new GuiTextField(this.fontRenderer, this.xPosition + 188, this.yPosition + 30, 32, 16);
-		this.txtBlue = new GuiTextField(this.fontRenderer, this.xPosition + 188, this.yPosition + 50, 32, 16);
-		this.txtAlpha = new GuiTextField(this.fontRenderer, this.xPosition + 188, this.yPosition + 70, 32, 16);
+		this.txtRed = new GuiTextField(0, this.fontRenderer, this.xPosition + 188, this.yPosition + 10, 32, 16);
+		this.txtGreen = new GuiTextField(1, this.fontRenderer, this.xPosition + 188, this.yPosition + 30, 32, 16);
+		this.txtBlue = new GuiTextField(2, this.fontRenderer, this.xPosition + 188, this.yPosition + 50, 32, 16);
+		this.txtAlpha = new GuiTextField(3, this.fontRenderer, this.xPosition + 188, this.yPosition + 70, 32, 16);
 		
 		this.txtRed.setMaxStringLength(3);
 		this.txtGreen.setMaxStringLength(3);

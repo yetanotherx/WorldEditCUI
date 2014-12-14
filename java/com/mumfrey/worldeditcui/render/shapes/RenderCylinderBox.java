@@ -5,7 +5,8 @@ import com.mumfrey.worldeditcui.render.LineInfo;
 import com.mumfrey.worldeditcui.render.points.PointCube;
 
 import net.minecraft.client.renderer.Tessellator;
-import static org.lwjgl.opengl.GL11.*;
+import net.minecraft.client.renderer.WorldRenderer;
+import static com.mumfrey.liteloader.gl.GL.*;
 
 /**
  * Draws the top and bottom circles around a cylindrical region
@@ -36,7 +37,9 @@ public class RenderCylinderBox
 	
 	public void render()
 	{
-		Tessellator tess = Tessellator.instance;
+		Tessellator tessellator = Tessellator.getInstance();
+		WorldRenderer worldRenderer = tessellator.getWorldRenderer();
+
 		for (LineInfo tempColour : this.colour.getColours())
 		{
 			tempColour.prepareRender();
@@ -44,7 +47,7 @@ public class RenderCylinderBox
 			double twoPi = Math.PI * 2;
 			for (int yBlock : new int[] { this.minY, this.maxY + 1 })
 			{
-				tess.startDrawing(GL_LINE_LOOP);
+				worldRenderer.startDrawing(GL_LINE_LOOP);
 				tempColour.prepareColour();
 				
 				for (int i = 0; i <= 75; i++)
@@ -53,9 +56,9 @@ public class RenderCylinderBox
 					double tempX = this.radX * Math.cos(tempTheta);
 					double tempZ = this.radZ * Math.sin(tempTheta);
 					
-					tess.addVertex(this.centerX + tempX, yBlock, this.centerZ + tempZ);
+					worldRenderer.addVertex(this.centerX + tempX, yBlock, this.centerZ + tempZ);
 				}
-				tess.draw();
+				tessellator.draw();
 			}
 		}
 	}
