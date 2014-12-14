@@ -92,7 +92,8 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 	private void helo()
 	{
 		PacketBuffer buffer = new PacketBuffer(Unpooled.buffer());
-		buffer.writeString("v|" + WorldEditCUI.PROTOCOL_VERSION);
+		String message = "v|" + WorldEditCUI.PROTOCOL_VERSION;
+		buffer.writeBytes(message.getBytes(Charsets.UTF_8));
 		ClientPluginChannels.sendMessage(CHANNEL_WECUI, buffer, ChannelPolicy.DISPATCH_ALWAYS);
 	}
 	
@@ -180,7 +181,7 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 	@Override
 	public String getVersion()
 	{
-		return "1.8.0_00";
+		return "1.8.0_01";
 	}
 	
 	@Override
