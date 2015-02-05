@@ -16,9 +16,11 @@ import com.mumfrey.worldeditcui.util.Vector3m;
  */
 public class CuboidRegion extends BaseRegion
 {
-	
 	protected PointCube firstPoint;
 	protected PointCube secondPoint;
+	
+	private Render3DGrid grid;
+	private Render3DBox box;
 	
 	public CuboidRegion(WorldEditCUI controller)
 	{
@@ -26,26 +28,22 @@ public class CuboidRegion extends BaseRegion
 	}
 	
 	@Override
-	public void render()
+	public void render(Vector3 cameraPos)
 	{
 		if (this.firstPoint != null && this.secondPoint != null)
 		{
-			
-			Vector3[] bounds = this.calcBounds();
-			new Render3DGrid(LineColour.CUBOIDGRID, bounds[0], bounds[1]).render();
-			new Render3DBox(LineColour.CUBOIDBOX, bounds[0], bounds[1]).render();
-			
-			this.firstPoint.render();
-			this.secondPoint.render();
-			
+			this.grid.render(cameraPos);
+			this.box.render(cameraPos);
+			this.firstPoint.render(cameraPos);
+			this.secondPoint.render(cameraPos);
 		}
 		else if (this.firstPoint != null)
 		{
-			this.firstPoint.render();
+			this.firstPoint.render(cameraPos);
 		}
 		else if (this.secondPoint != null)
 		{
-			this.secondPoint.render();
+			this.secondPoint.render(cameraPos);
 		}
 	}
 	
@@ -61,6 +59,13 @@ public class CuboidRegion extends BaseRegion
 		{
 			this.secondPoint = new PointCube(x, y, z);
 			this.secondPoint.setColour(LineColour.CUBOIDPOINT2);
+		}
+		
+		if (this.firstPoint != null && this.secondPoint != null)
+		{
+			Vector3[] bounds = this.calcBounds();
+			this.grid = new Render3DGrid(LineColour.CUBOIDGRID, bounds[0], bounds[1]);
+			this.box = new Render3DBox(LineColour.CUBOIDBOX, bounds[0], bounds[1]);
 		}
 	}
 	

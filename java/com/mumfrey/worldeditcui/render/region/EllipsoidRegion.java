@@ -15,8 +15,10 @@ import com.mumfrey.worldeditcui.util.Vector3;
 public class EllipsoidRegion extends BaseRegion
 {
 	
-	protected PointCube center;
+	protected PointCube centre;
 	protected Vector3 radii;
+	
+	private RenderEllipsoid ellipsoid;
 	
 	public EllipsoidRegion(WorldEditCUI controller)
 	{
@@ -24,32 +26,40 @@ public class EllipsoidRegion extends BaseRegion
 	}
 	
 	@Override
-	public void render()
+	public void render(Vector3 cameraPos)
 	{
-		if (this.center != null && this.radii != null)
+		if (this.centre != null && this.radii != null)
 		{
-			this.center.render();
-			
-			new RenderEllipsoid(LineColour.ELLIPSOIDGRID, this.center, this.radii).render();
-			
+			this.centre.render(cameraPos);
+			this.ellipsoid.render(cameraPos);
 		}
-		else if (this.center != null)
+		else if (this.centre != null)
 		{
-			this.center.render();
+			this.centre.render(cameraPos);
 		}
 	}
 	
 	@Override
 	public void setEllipsoidCenter(int x, int y, int z)
 	{
-		this.center = new PointCube(x, y, z);
-		this.center.setColour(LineColour.ELLIPSOIDCENTER);
+		this.centre = new PointCube(x, y, z);
+		this.centre.setColour(LineColour.ELLIPSOIDCENTER);
+		this.update();
 	}
 	
 	@Override
 	public void setEllipsoidRadii(double x, double y, double z)
 	{
 		this.radii = new Vector3(x, y, z);
+		this.update();
+	}
+
+	private void update()
+	{
+		if (this.centre != null && this.radii != null)
+		{
+			this.ellipsoid = new RenderEllipsoid(LineColour.ELLIPSOIDGRID, this.centre, this.radii);
+		}
 	}
 	
 	@Override

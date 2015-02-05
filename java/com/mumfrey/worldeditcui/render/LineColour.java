@@ -80,7 +80,7 @@ public enum LineColour
 	public void updateColour()
 	{
 		this.normal = new LineInfo(3.0f, this.colour.red(), this.colour.green(), this.colour.blue(), this.colour.alpha(), GL_LESS);
-		this.hidden = new LineInfo(3.0f, this.colour.red(), this.colour.green(), this.colour.blue(), this.colour.alpha() * 0.25F, GL_GEQUAL);
+		this.hidden = new LineInfo(3.0f, this.colour.red() * 0.75F, this.colour.green() * 0.75F, this.colour.blue() * 0.75F, this.colour.alpha() * 0.25F, GL_GEQUAL);
 	}
 	
 	public void setDefaultColour()

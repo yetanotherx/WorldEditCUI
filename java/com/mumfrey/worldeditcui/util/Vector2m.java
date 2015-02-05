@@ -64,7 +64,7 @@ public class Vector2m extends Vector2
 	}
 	
 	@Override
-	public Vector2 scale(float scale)
+	public Vector2 scale(double scale)
 	{
 		this.x *= scale;
 		this.z *= scale;
@@ -73,7 +73,7 @@ public class Vector2m extends Vector2
 	
 	public Vector2 cross(Vector2 that)
 	{
-		float tmp = this.z;
+		double tmp = this.z;
 		this.z = -this.x;
 		this.x = tmp;
 		return this;
@@ -138,7 +138,7 @@ public class Vector2m extends Vector2
 	@Override
 	public Vector2 normalize()
 	{
-		float length = this.length();
+		double length = this.length();
 		this.x *= 1 / length;
 		this.z *= 1 / length;
 		return this;

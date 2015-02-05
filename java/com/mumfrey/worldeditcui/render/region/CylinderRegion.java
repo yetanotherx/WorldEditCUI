@@ -6,6 +6,7 @@ import com.mumfrey.worldeditcui.render.points.PointCube;
 import com.mumfrey.worldeditcui.render.shapes.RenderCylinderBox;
 import com.mumfrey.worldeditcui.render.shapes.RenderCylinderCircles;
 import com.mumfrey.worldeditcui.render.shapes.RenderCylinderGrid;
+import com.mumfrey.worldeditcui.util.Vector3;
 
 /**
  * Main controller for a cylinder-type region
@@ -21,39 +22,33 @@ public class CylinderRegion extends BaseRegion
 	protected int minY = 0;
 	protected int maxY = 0;
 	
+	private RenderCylinderCircles circles;
+	private RenderCylinderGrid grid;
+	private RenderCylinderBox box;
+	
 	public CylinderRegion(WorldEditCUI controller)
 	{
 		super(controller);
 	}
 	
 	@Override
-	public void render()
+	public void render(Vector3 cameraPos)
 	{
 		if (this.center != null)
 		{
-			this.center.render();
-			
-			int tMin = this.minY;
-			int tMax = this.maxY;
-			
-			if (this.minY == 0 || this.maxY == 0)
-			{
-				tMin = (int)this.center.getPoint().getY();
-				tMax = (int)this.center.getPoint().getY();
-			}
-			
-			new RenderCylinderCircles(LineColour.CYLINDERGRID, this.center, this.radX, this.radZ, tMin, tMax).render();
-			new RenderCylinderGrid(LineColour.CYLINDERGRID, this.center, this.radX, this.radZ, tMin, tMax).render();
-			new RenderCylinderBox(LineColour.CYLINDERBOX, this.center, this.radX, this.radZ, tMin, tMax).render();
-			
+			this.center.render(cameraPos);
+			this.circles.render(cameraPos);
+			this.grid.render(cameraPos);
+			this.box.render(cameraPos);
 		}
 	}
-	
+
 	@Override
 	public void setCylinderCenter(int x, int y, int z)
 	{
 		this.center = new PointCube(x, y, z);
 		this.center.setColour(LineColour.CYLINDERCENTER);
+		this.update();
 	}
 	
 	@Override
@@ -61,6 +56,7 @@ public class CylinderRegion extends BaseRegion
 	{
 		this.radX = x;
 		this.radZ = z;
+		this.update();
 	}
 	
 	@Override
@@ -68,6 +64,23 @@ public class CylinderRegion extends BaseRegion
 	{
 		this.minY = min;
 		this.maxY = max;
+		this.update();
+	}
+	
+	private void update()
+	{
+		int tMin = this.minY;
+		int tMax = this.maxY;
+		
+		if (this.minY == 0 || this.maxY == 0)
+		{
+			tMin = (int)this.center.getPoint().getY();
+			tMax = (int)this.center.getPoint().getY();
+		}
+		
+		this.circles = new RenderCylinderCircles(LineColour.CYLINDERGRID, this.center, this.radX, this.radZ, tMin, tMax);
+		this.grid = new RenderCylinderGrid(LineColour.CYLINDERGRID, this.center, this.radX, this.radZ, tMin, tMax);
+		this.box = new RenderCylinderBox(LineColour.CYLINDERBOX, this.center, this.radX, this.radZ, tMin, tMax);
 	}
 	
 	@Override

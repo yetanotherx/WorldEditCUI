@@ -3,6 +3,7 @@ package com.mumfrey.worldeditcui.render.points;
 import com.mumfrey.worldeditcui.render.LineColour;
 import com.mumfrey.worldeditcui.render.shapes.Render3DBox;
 import com.mumfrey.worldeditcui.util.Vector2;
+import com.mumfrey.worldeditcui.util.Vector3;
 
 /**
  * Stores data about a prism surrounding two
@@ -29,13 +30,13 @@ public class PointRectangle
 		this.point = new Vector2(x, z);
 	}
 	
-	public void render(int min, int max)
+	public void render(Vector3 cameraPos, int min, int max)
 	{
 		float off = 0.03f;
 		Vector2 minVec = new Vector2(off, off);
 		Vector2 maxVec = new Vector2(off + 1, off + 1);
 		
-		new Render3DBox(this.colour, this.point.subtract(minVec).toVector3(min - off), this.point.add(maxVec).toVector3(max + 1 + off)).render();
+		new Render3DBox(this.colour, this.point.subtract(minVec).toVector3(min - off), this.point.add(maxVec).toVector3(max + 1 + off)).render(cameraPos);
 	}
 	
 	public Vector2 getPoint()

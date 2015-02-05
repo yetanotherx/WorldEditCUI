@@ -5,6 +5,8 @@ import java.util.List;
 import com.mumfrey.worldeditcui.render.LineColour;
 import com.mumfrey.worldeditcui.render.LineInfo;
 import com.mumfrey.worldeditcui.render.points.PointRectangle;
+import com.mumfrey.worldeditcui.util.Vector2;
+import com.mumfrey.worldeditcui.util.Vector3;
 
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
@@ -31,16 +33,16 @@ public class Render2DGrid
 		this.max = max;
 	}
 	
-	public void render()
+	public void render(Vector3 cameraPos)
 	{
 		double off = 0.03;
 		for (double height = this.min; height <= this.max + 1; height++)
 		{
-			this.drawPoly(height + off);
+			this.drawPoly(cameraPos, height + off);
 		}
 	}
 	
-	protected void drawPoly(double height)
+	protected void drawPoly(Vector3 cameraPos, double height)
 	{
 		Tessellator tessellator = Tessellator.getInstance();
 		WorldRenderer worldRenderer = tessellator.getWorldRenderer();
@@ -54,7 +56,10 @@ public class Render2DGrid
 			{
 				if (point != null)
 				{
-					worldRenderer.addVertex(point.getPoint().getX() + 0.5, height, point.getPoint().getY() + 0.5);
+					Vector2 pos = point.getPoint();
+					double x = pos.getX() - cameraPos.getX();
+					double z = pos.getY() - cameraPos.getZ();
+					worldRenderer.addVertex(x + 0.5, height - cameraPos.getY(), z + 0.5);
 				}
 			}
 			tessellator.draw();

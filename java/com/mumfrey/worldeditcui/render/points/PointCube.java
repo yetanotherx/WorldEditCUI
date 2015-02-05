@@ -15,32 +15,29 @@ import com.mumfrey.worldeditcui.util.Vector3;
  */
 public class PointCube
 {
+	private static final double OFF = 0.03f;
 	
+	private static final Vector3 MIN_VEC = new Vector3(PointCube.OFF, PointCube.OFF, PointCube.OFF);
+	private static final Vector3 MAX_VEC = new Vector3(PointCube.OFF + 1, PointCube.OFF + 1, PointCube.OFF + 1);
+
 	protected Vector3 point;
 	protected LineColour colour = LineColour.CUBOIDPOINT1;
 	
-	public PointCube(Vector3 point)
-	{
-		this.point = point;
-	}
-	
-	public PointCube(int x, int y, int z)
-	{
-		this.point = new Vector3(x, y, z);
-	}
+	private Render3DBox box;
 	
 	public PointCube(double x, double y, double z)
 	{
-		this.point = new Vector3(x, y, z);
+		this(new Vector3(x, y, z));
 	}
 	
-	public void render()
+	public PointCube(Vector3 point)
 	{
-		double off = 0.03f;
-		Vector3 minVec = new Vector3(off, off, off);
-		Vector3 maxVec = new Vector3(off + 1, off + 1, off + 1);
-		
-		new Render3DBox(this.colour, this.point.subtract(minVec), this.point.add(maxVec)).render();
+		this.setPoint(point);
+	}
+	
+	public void render(Vector3 cameraPos)
+	{
+		this.box.render(cameraPos);
 	}
 	
 	public Vector3 getPoint()
@@ -51,8 +48,9 @@ public class PointCube
 	public void setPoint(Vector3 point)
 	{
 		this.point = point;
+		this.update();
 	}
-	
+
 	public LineColour getColour()
 	{
 		return this.colour;
@@ -61,5 +59,11 @@ public class PointCube
 	public void setColour(LineColour colour)
 	{
 		this.colour = colour;
+		this.update();
+	}
+
+	private void update()
+	{
+		this.box = new Render3DBox(this.colour, this.point.subtract(MIN_VEC), this.point.add(MAX_VEC));
 	}
 }

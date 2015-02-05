@@ -23,6 +23,7 @@ import com.mumfrey.worldeditcui.render.LineColour;
 public class CUIConfigPanel extends Gui implements ConfigPanel
 {
 	private static final int CONTROL_SPACING = 24;
+	private static final int CONTROL_TOP = 80;
 
 	private Minecraft mc;
 	
@@ -34,7 +35,7 @@ public class CUIConfigPanel extends Gui implements ConfigPanel
 	
 	private GuiButton activeControl;
 	
-	private GuiCheckbox chkPromiscuous;
+	private GuiCheckbox chkPromiscuous, chkAlwaysOnTop;
 	
 	public CUIConfigPanel()
 	{
@@ -50,7 +51,7 @@ public class CUIConfigPanel extends Gui implements ConfigPanel
 	@Override
 	public int getContentHeight()
 	{
-		return LineColour.values().length * CUIConfigPanel.CONTROL_SPACING;
+		return LineColour.values().length * CUIConfigPanel.CONTROL_SPACING + CUIConfigPanel.CONTROL_TOP;
 	}
 	
 	@Override
@@ -63,7 +64,7 @@ public class CUIConfigPanel extends Gui implements ConfigPanel
 		
 		this.controlList.clear();
 		int nextId = 0;
-		int top = 64;
+		int top = CUIConfigPanel.CONTROL_TOP;
 		
 		for (LineColour colour : LineColour.values())
 		{
@@ -73,12 +74,17 @@ public class CUIConfigPanel extends Gui implements ConfigPanel
 		}
 		
 		this.controlList.add(this.chkPromiscuous = new GuiCheckbox(nextId, 24, 26, I18n.format("gui.options.compat.spammy")));
+		this.controlList.add(this.chkAlwaysOnTop = new GuiCheckbox(nextId, 24, 42, I18n.format("gui.options.compat.ontop")));
 		
 		for (GuiButton control : this.controlList)
 		{
 			if (control instanceof GuiColourButton)
 				this.colourButtonList.add((GuiColourButton)control);
 		}
+
+		CUIConfiguration config = this.mod.getController().getConfiguration();
+		this.chkPromiscuous.checked = config.isPromiscuous();
+		this.chkAlwaysOnTop.checked = config.isAlwaysOnTop();
 	}
 	
 	@Override
@@ -96,6 +102,7 @@ public class CUIConfigPanel extends Gui implements ConfigPanel
 		
 		CUIConfiguration config = this.mod.getController().getConfiguration();
 		config.setPromiscuous(this.chkPromiscuous.checked);
+		config.setAlwaysOnTop(this.chkAlwaysOnTop.checked);
 		config.save();
 	}
 	
@@ -108,7 +115,7 @@ public class CUIConfigPanel extends Gui implements ConfigPanel
 	public void drawPanel(ConfigPanelHost host, int mouseX, int mouseY, float partialTicks)
 	{
 		this.drawString(this.mc.fontRendererObj, I18n.format("gui.options.compat.title"),  10, 10, 0xFFFFFF55);
-		this.drawString(this.mc.fontRendererObj, I18n.format("gui.options.colours.title"), 10, 48, 0xFFFFFF55);
+		this.drawString(this.mc.fontRendererObj, I18n.format("gui.options.colours.title"), 10, 64, 0xFFFFFF55);
 		
 		for (GuiButton control : this.controlList)
 		{

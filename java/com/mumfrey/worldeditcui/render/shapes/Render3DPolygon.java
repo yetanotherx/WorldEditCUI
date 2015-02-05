@@ -26,7 +26,7 @@ public class Render3DPolygon
 		this.vertices = vertices;
 	}
 	
-	public void render()
+	public void render(Vector3 cameraPos)
 	{
 		Tessellator tessellator = Tessellator.getInstance();
 		WorldRenderer worldRenderer = tessellator.getWorldRenderer();
@@ -39,7 +39,7 @@ public class Render3DPolygon
 			tempColour.prepareColour();
 			for (Vector3 vertex : this.vertices)
 			{
-				worldRenderer.addVertex(vertex.getX(), vertex.getY(), vertex.getZ());
+				worldRenderer.addVertex(vertex.getX() - cameraPos.getX(), vertex.getY() - cameraPos.getY(), vertex.getZ() - cameraPos.getZ());
 			}
 			tessellator.draw();
 		}

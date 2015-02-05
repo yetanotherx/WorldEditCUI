@@ -28,6 +28,7 @@ import com.mumfrey.liteloader.core.ClientPluginChannels;
 import com.mumfrey.liteloader.core.LiteLoader;
 import com.mumfrey.liteloader.core.PluginChannels.ChannelPolicy;
 import com.mumfrey.liteloader.modconfig.ConfigPanel;
+import com.mumfrey.worldeditcui.config.CUIConfiguration;
 import com.mumfrey.worldeditcui.event.listeners.CUIListenerChannel;
 import com.mumfrey.worldeditcui.event.listeners.CUIListenerWorldRender;
 import com.mumfrey.worldeditcui.gui.CUIConfigPanel;
@@ -47,6 +48,7 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 	private KeyBinding keyBindClearSel = new KeyBinding("wecui.keys.clear", Keyboard.KEY_NONE, "wecui.keys.category");
 	
 	private boolean visible = true;
+	private boolean alwaysOnTop = false;
 	
 	private CUIListenerWorldRender worldRenderListener;
 	private CUIListenerChannel channelListener;
@@ -130,7 +132,15 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 		{
 			if (this.keyBindToggleUI.isPressed())
 			{
-				this.visible = !this.visible;
+				if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
+				{
+					CUIConfiguration config = this.controller.getConfiguration();
+					config.setAlwaysOnTop(!config.isAlwaysOnTop());
+				}
+				else
+				{
+					this.visible = !this.visible;
+				}
 			}
 			
 			if (this.keyBindClearSel.isPressed())
@@ -142,6 +152,9 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 		
 		if (inGame && clock && this.controller != null)
 		{
+			CUIConfiguration config = this.controller.getConfiguration();
+			this.alwaysOnTop = config.isAlwaysOnTop();
+				
 			if (mc.theWorld != this.lastWorld || mc.thePlayer != this.lastPlayer)
 			{
 				this.lastWorld = mc.theWorld;
@@ -151,7 +164,7 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 				this.controller.setSelection(new CuboidRegion(this.controller));
 				this.helo();
 				this.delayedHelo = LiteModWorldEditCUI.DELAYED_HELO_TICKS;
-				if (mc.thePlayer != null && this.controller.getConfiguration().isPromiscuous())
+				if (mc.thePlayer != null && config.isPromiscuous())
 				{
 					mc.thePlayer.sendChatMessage("/we cui"); //Tricks WE to send the current selection
 				}
@@ -181,7 +194,7 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 	@Override
 	public String getVersion()
 	{
-		return "1.8.0_01";
+		return "1.8.0_02";
 	}
 	
 	@Override
@@ -193,18 +206,18 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 	@Override
 	public void onPostRenderEntities(float partialTicks)
 	{
+		if (this.visible && !this.alwaysOnTop)
+		{
+			this.worldRenderListener.onRender(partialTicks);
+		}
 	}
 	
 	@Override
 	public void onPostRender(float partialTicks)
 	{
-		if (this.visible)
+		if (this.visible && this.alwaysOnTop)
 		{
-			try
-			{
-				this.worldRenderListener.onRender(partialTicks);
-			}
-			catch (Exception ex) {}
+			this.worldRenderListener.onRender(partialTicks);
 		}
 	}
 	

@@ -8,6 +8,7 @@ import com.mumfrey.worldeditcui.render.LineColour;
 import com.mumfrey.worldeditcui.render.points.PointRectangle;
 import com.mumfrey.worldeditcui.render.shapes.Render2DBox;
 import com.mumfrey.worldeditcui.render.shapes.Render2DGrid;
+import com.mumfrey.worldeditcui.util.Vector3;
 
 /**
  * Main controller for a polygon-type region
@@ -22,27 +23,29 @@ public class PolygonRegion extends BaseRegion
 	protected int min;
 	protected int max;
 	
+	private Render2DBox box;
+	private Render2DGrid grid;
+	
 	public PolygonRegion(WorldEditCUI controller)
 	{
 		super(controller);
 	}
 	
 	@Override
-	public void render()
+	public void render(Vector3 cameraPos)
 	{
-		if (this.points == null)
+		if (this.points.size() < 1)
 		{
 			return;
 		}
 		
 		for (PointRectangle point : this.points)
 		{
-			point.render(this.min, this.max);
+			point.render(cameraPos, this.min, this.max);
 		}
 		
-		new Render2DBox(LineColour.POLYBOX, this.points, this.min, this.max).render();
-		new Render2DGrid(LineColour.POLYGRID, this.points, this.min, this.max).render();
-		
+		this.box.render(cameraPos);
+		this.grid.render(cameraPos);
 	}
 	
 	@Override
@@ -50,6 +53,7 @@ public class PolygonRegion extends BaseRegion
 	{
 		this.min = min;
 		this.max = max;
+		this.update();
 	}
 	
 	@Override
@@ -69,6 +73,16 @@ public class PolygonRegion extends BaseRegion
 				this.points.add(null);
 			}
 			this.points.add(point);
+		}
+		this.update();
+	}
+	
+	private void update()
+	{
+		if (this.points.size() > 0)
+		{
+			this.box = new Render2DBox(LineColour.POLYBOX, this.points, this.min, this.max);
+			this.grid = new Render2DGrid(LineColour.POLYGRID, this.points, this.min, this.max);
 		}
 	}
 	

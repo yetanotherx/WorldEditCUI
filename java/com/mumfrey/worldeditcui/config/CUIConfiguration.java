@@ -25,8 +25,8 @@ public class CUIConfiguration implements InitializationFactory
 	
 	private boolean debugMode = false;
 	private boolean ignoreUpdates = false;
-	
 	private boolean promiscuous = false;
+	private boolean alwaysOnTop = false;
 	
 	private Colour cuboidGridColor        = new Colour("#CC3333CC");
 	private Colour cuboidEdgeColor        = new Colour("#CC4C4CCC");
@@ -95,6 +95,16 @@ public class CUIConfiguration implements InitializationFactory
 	public void setPromiscuous(boolean promiscuous)
 	{
 		this.promiscuous = promiscuous;
+	}
+	
+	public boolean isAlwaysOnTop()
+	{
+		return this.alwaysOnTop;
+	}
+	
+	public void setAlwaysOnTop(boolean alwaysOnTop)
+	{
+		this.alwaysOnTop = alwaysOnTop;
 	}
 	
 	public static CUIConfiguration create()

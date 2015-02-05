@@ -20,25 +20,27 @@ public class PolyhedronRegion extends BaseRegion
 	protected List<PointCube> vertices = new ArrayList<PointCube>();
 	protected List<Vector3[]> faces = new ArrayList<Vector3[]>();
 	
+	private List<Render3DPolygon> faceRenders = new ArrayList<Render3DPolygon>();
+	
 	public PolyhedronRegion(WorldEditCUI controller)
 	{
 		super(controller);
 	}
 	
 	@Override
-	public void render()
+	public void render(Vector3 cameraPos)
 	{
 		for (PointCube vertex : this.vertices)
 		{
-			vertex.render();
+			vertex.render(cameraPos);
 		}
 		
-		for (Vector3[] face : this.faces)
+		for (Render3DPolygon face : this.faceRenders)
 		{
-			new Render3DPolygon(LineColour.POLYBOX, face).render();
+			face.render(cameraPos);
 		}
 	}
-	
+
 	@Override
 	public void setCuboidPoint(int id, double x, double y, double z)
 	{
@@ -77,6 +79,17 @@ public class PolyhedronRegion extends BaseRegion
 			face[i] = vertex.getPoint().add(half);
 		}
 		this.faces.add(face);
+		this.update();
+	}
+	
+	private void update()
+	{
+		this.faceRenders.clear();
+		
+		for (Vector3[] face : this.faces)
+		{
+			this.faceRenders.add(new Render3DPolygon(LineColour.POLYBOX, face));
+		}
 	}
 	
 	@Override

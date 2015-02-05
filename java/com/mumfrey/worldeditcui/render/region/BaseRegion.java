@@ -3,6 +3,7 @@ package com.mumfrey.worldeditcui.render.region;
 import com.mumfrey.worldeditcui.InitializationFactory;
 import com.mumfrey.worldeditcui.WorldEditCUI;
 import com.mumfrey.worldeditcui.exceptions.InvalidSelectionTypeException;
+import com.mumfrey.worldeditcui.util.Vector3;
 
 /**
  * Base region storage class. Provides
@@ -27,7 +28,7 @@ public abstract class BaseRegion implements InitializationFactory
 	{
 	}
 	
-	public abstract void render();
+	public abstract void render(Vector3 cameraPos);
 	
 	public void setCuboidPoint(int id, double x, double y, double z)
 	{

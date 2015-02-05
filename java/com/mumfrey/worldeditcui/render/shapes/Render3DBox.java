@@ -28,16 +28,16 @@ public class Render3DBox
 		this.second = second;
 	}
 	
-	public void render()
+	public void render(Vector3 cameraPos)
 	{
 		Tessellator tessellator = Tessellator.getInstance();
 		WorldRenderer worldRenderer = tessellator.getWorldRenderer();
-		double x1 = this.first.getX();
-		double y1 = this.first.getY();
-		double z1 = this.first.getZ();
-		double x2 = this.second.getX();
-		double y2 = this.second.getY();
-		double z2 = this.second.getZ();
+		double x1 = this.first.getX() - cameraPos.getX(); 
+		double y1 = this.first.getY() - cameraPos.getY(); 
+		double z1 = this.first.getZ() - cameraPos.getZ(); 
+		double x2 = this.second.getX() - cameraPos.getX();
+		double y2 = this.second.getY() - cameraPos.getY();
+		double z2 = this.second.getZ() - cameraPos.getZ();
 		
 		for (LineInfo tempColour : this.colour.getColours())
 		{

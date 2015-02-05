@@ -21,22 +21,25 @@ public class RenderEllipsoid
 	protected PointCube center;
 	protected Vector3 radii;
 	protected final static double twoPi = Math.PI * 2;
-	protected double centerX;
-	protected double centerY;
-	protected double centerZ;
+	protected double centreX;
+	protected double centreY;
+	protected double centreZ;
 	
-	public RenderEllipsoid(LineColour colour, PointCube center, Vector3 radii)
+	public RenderEllipsoid(LineColour colour, PointCube centre, Vector3 radii)
 	{
 		this.colour = colour;
-		this.center = center;
+		this.center = centre;
 		this.radii = radii;
-		this.centerX = center.getPoint().getX() + 0.5;
-		this.centerY = center.getPoint().getY() + 0.5;
-		this.centerZ = center.getPoint().getZ() + 0.5;
+		this.centreX = centre.getPoint().getX() + 0.5;
+		this.centreY = centre.getPoint().getY() + 0.5;
+		this.centreZ = centre.getPoint().getZ() + 0.5;
 	}
 	
-	public void render()
+	public void render(Vector3 cameraPos)
 	{
+		glPushMatrix();
+		glTranslated(this.centreX - cameraPos.getX(), this.centreY - cameraPos.getY(), this.centreZ - cameraPos.getZ());
+		
 		for (LineInfo tempColour : this.colour.getColours())
 		{
 			tempColour.prepareRender();
@@ -44,6 +47,8 @@ public class RenderEllipsoid
 			this.drawYZPlane(tempColour);
 			this.drawXYPlane(tempColour);
 		}
+		
+		glPopMatrix();
 	}
 	
 	protected void drawXZPlane(LineInfo colour)
@@ -63,7 +68,7 @@ public class RenderEllipsoid
 				double tempX = this.radii.getX() * Math.cos(tempTheta) * Math.cos(Math.asin(yBlock / this.radii.getY()));
 				double tempZ = this.radii.getZ() * Math.sin(tempTheta) * Math.cos(Math.asin(yBlock / this.radii.getY()));
 				
-				worldRenderer.addVertex(this.centerX + tempX, this.centerY + yBlock, this.centerZ + tempZ);
+				worldRenderer.addVertex(tempX, yBlock, tempZ);
 			}
 			tessellator.draw();
 		}
@@ -77,7 +82,7 @@ public class RenderEllipsoid
 			double tempX = this.radii.getX() * Math.cos(tempTheta);
 			double tempZ = this.radii.getZ() * Math.sin(tempTheta);
 			
-			worldRenderer.addVertex(this.centerX + tempX, this.centerY, this.centerZ + tempZ);
+			worldRenderer.addVertex(tempX, 0.0, tempZ);
 		}
 		tessellator.draw();
 	}
@@ -99,7 +104,7 @@ public class RenderEllipsoid
 				double tempY = this.radii.getY() * Math.cos(tempTheta) * Math.sin(Math.acos(xBlock / this.radii.getX()));
 				double tempZ = this.radii.getZ() * Math.sin(tempTheta) * Math.sin(Math.acos(xBlock / this.radii.getX()));
 				
-				worldRenderer.addVertex(this.centerX + xBlock, this.centerY + tempY, this.centerZ + tempZ);
+				worldRenderer.addVertex(xBlock, tempY, tempZ);
 			}
 			tessellator.draw();
 		}
@@ -113,7 +118,7 @@ public class RenderEllipsoid
 			double tempY = this.radii.getY() * Math.cos(tempTheta);
 			double tempZ = this.radii.getZ() * Math.sin(tempTheta);
 			
-			worldRenderer.addVertex(this.centerX, this.centerY + tempY, this.centerZ + tempZ);
+			worldRenderer.addVertex(0.0, tempY, tempZ);
 		}
 		tessellator.draw();
 	}
@@ -135,7 +140,7 @@ public class RenderEllipsoid
 				double tempX = this.radii.getX() * Math.sin(tempTheta) * Math.sin(Math.acos(zBlock / this.radii.getZ()));
 				double tempY = this.radii.getY() * Math.cos(tempTheta) * Math.sin(Math.acos(zBlock / this.radii.getZ()));
 				
-				worldRenderer.addVertex(this.centerX + tempX, this.centerY + tempY, this.centerZ + zBlock);
+				worldRenderer.addVertex(tempX, tempY, zBlock);
 			}
 			tessellator.draw();
 		}
@@ -149,7 +154,7 @@ public class RenderEllipsoid
 			double tempX = this.radii.getX() * Math.cos(tempTheta);
 			double tempY = this.radii.getY() * Math.sin(tempTheta);
 			
-			worldRenderer.addVertex(this.centerX + tempX, this.centerY + tempY, this.centerZ);
+			worldRenderer.addVertex(tempX, tempY, 0.0);
 		}
 		tessellator.draw();
 	}

@@ -21,5 +21,6 @@ colour.cylinderpoint=Cylinder Centre Point Colour
 
 gui.options.compat.title=Compatibility Options
 gui.options.compat.spammy=Promiscuous Mode (send /we cui all the time)
+gui.options.compat.ontop=Always on top (mod compatibility)
 gui.options.colours.title=Display Colours
 

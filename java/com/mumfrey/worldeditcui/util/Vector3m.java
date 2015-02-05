@@ -8,7 +8,7 @@ package com.mumfrey.worldeditcui.util;
 public class Vector3m extends Vector3
 {
 	
-	public Vector3m(float x, float y, float z)
+	public Vector3m(double x, double y, double z)
 	{
 		super(x, y, z);
 	}
@@ -27,17 +27,17 @@ public class Vector3m extends Vector3
 	{
 	}
 	
-	public void setZ(float z)
+	public void setZ(double z)
 	{
 		this.z = z;
 	}
 	
-	public void setY(float y)
+	public void setY(double y)
 	{
 		this.y = y;
 	}
 	
-	public void setX(float x)
+	public void setX(double x)
 	{
 		this.x = x;
 	}
@@ -82,7 +82,7 @@ public class Vector3m extends Vector3
 	 */
 	
 	@Override
-	public Vector3 scale(float scale)
+	public Vector3 scale(double scale)
 	{
 		this.x *= scale;
 		this.y *= scale;
@@ -116,9 +116,9 @@ public class Vector3m extends Vector3
 	@Override
 	public Vector3 ceil()
 	{
-		this.x = (float)Math.ceil(this.x);
-		this.y = (float)Math.ceil(this.y);
-		this.z = (float)Math.ceil(this.z);
+		this.x = Math.ceil(this.x);
+		this.y = Math.ceil(this.y);
+		this.z = Math.ceil(this.z);
 		return this;
 	}
 	
@@ -131,9 +131,9 @@ public class Vector3m extends Vector3
 	@Override
 	public Vector3 floor()
 	{
-		this.x = (float)Math.floor(this.x);
-		this.y = (float)Math.floor(this.y);
-		this.z = (float)Math.floor(this.z);
+		this.x = Math.floor(this.x);
+		this.y = Math.floor(this.y);
+		this.z = Math.floor(this.z);
 		return this;
 	}
 	
@@ -176,10 +176,10 @@ public class Vector3m extends Vector3
 	@Override
 	public Vector3 normalize()
 	{
-		float length = this.length();
-		this.x *= 1 / length;
-		this.y *= 1 / length;
-		this.z *= 1 / length;
+		double lengthReciprocal = 1.0 / this.length();
+		this.x *= lengthReciprocal;
+		this.y *= lengthReciprocal;
+		this.z *= lengthReciprocal;
 		return this;
 	}
 }

@@ -1,5 +1,7 @@
 package com.mumfrey.worldeditcui.util;
 
+import net.minecraft.entity.Entity;
+
 /**
  * Represents a 3d vector.
  */
@@ -38,7 +40,22 @@ public class Vector3 implements Comparable<Vector3>
 	 * Unit Vector with all elements set to 1. (1, 1, 1)
 	 */
 	public final static Vector3 ONE = new Vector3(1, 1, 1);
-	protected float x, y, z;
+	protected double x, y, z;
+	
+	/**
+	 * Constructs a new Vector3 for the specified entity's position
+	 * 
+	 * @param entity
+	 * @param partialTicks
+	 */
+	public Vector3(Entity entity, double partialTicks)
+	{
+		this(
+			entity.prevPosX + ((entity.posX - entity.prevPosX) * partialTicks),
+			entity.prevPosY + ((entity.posY - entity.prevPosY) * partialTicks),
+			entity.prevPosZ + ((entity.posZ - entity.prevPosZ) * partialTicks)
+		);
+	}
 	
 	/**
 	 * Constructs a new Vector3 with the given x, y, z
@@ -47,7 +64,7 @@ public class Vector3 implements Comparable<Vector3>
 	 * @param y
 	 * @param z
 	 */
-	public Vector3(float x, float y, float z)
+	public Vector3(double x, double y, double z)
 	{
 		this.x = x;
 		this.y = y;
@@ -63,7 +80,7 @@ public class Vector3 implements Comparable<Vector3>
 	 */
 	public Vector3(Double x, Double y, Double z)
 	{
-		this(x.floatValue(), y.floatValue(), z.floatValue());
+		this(x.doubleValue(), y.doubleValue(), z.doubleValue());
 	}
 	
 	/**
@@ -90,7 +107,7 @@ public class Vector3 implements Comparable<Vector3>
 	 * @param vector
 	 * @param z
 	 */
-	public Vector3(Vector2 vector, float z)
+	public Vector3(Vector2 vector, double z)
 	{
 		this(vector.getX(), vector.getY(), z);
 	}
@@ -105,17 +122,17 @@ public class Vector3 implements Comparable<Vector3>
 		this(vector, 0);
 	}
 	
-	public float getX()
+	public double getX()
 	{
 		return this.x;
 	}
 	
-	public float getY()
+	public double getY()
 	{
 		return this.y;
 	}
 	
-	public float getZ()
+	public double getZ()
 	{
 		return this.z;
 	}
@@ -148,7 +165,7 @@ public class Vector3 implements Comparable<Vector3>
 	 * @param scale
 	 * @return
 	 */
-	public Vector3 scale(float scale)
+	public Vector3 scale(double scale)
 	{
 		return Vector3.scale(this, scale);
 	}
@@ -159,7 +176,7 @@ public class Vector3 implements Comparable<Vector3>
 	 * @param that
 	 * @return
 	 */
-	public float dot(Vector3 that)
+	public double dot(Vector3 that)
 	{
 		return Vector3.dot(this, that);
 	}
@@ -272,7 +289,7 @@ public class Vector3 implements Comparable<Vector3>
 	 *
 	 * @return
 	 */
-	public float lengthSquared()
+	public double lengthSquared()
 	{
 		return Vector3.lengthSquared(this);
 	}
@@ -283,7 +300,7 @@ public class Vector3 implements Comparable<Vector3>
 	 *
 	 * @return
 	 */
-	public float length()
+	public double length()
 	{
 		return Vector3.length(this);
 	}
@@ -293,7 +310,7 @@ public class Vector3 implements Comparable<Vector3>
 	 * 
 	 * @return 
 	 */
-	public float fastLength()
+	public double fastLength()
 	{
 		return Vector3.fastLength(this);
 	}
@@ -313,7 +330,7 @@ public class Vector3 implements Comparable<Vector3>
 	 *
 	 * @return
 	 */
-	public float[] toArray()
+	public double[] toArray()
 	{
 		return Vector3.toArray(this);
 	}
@@ -356,9 +373,9 @@ public class Vector3 implements Comparable<Vector3>
 	 * @param a
 	 * @return
 	 */
-	public static float length(Vector3 a)
+	public static double length(Vector3 a)
 	{
-		return (float)Math.sqrt(lengthSquared(a));
+		return Math.sqrt(lengthSquared(a));
 	}
 	
 	/**
@@ -367,9 +384,9 @@ public class Vector3 implements Comparable<Vector3>
 	 * @param a
 	 * @return 
 	 */
-	public static float fastLength(Vector3 a)
+	public static double fastLength(Vector3 a)
 	{
-		return (float)Math.sqrt(lengthSquared(a));
+		return Math.sqrt(lengthSquared(a));
 	}
 	
 	/**
@@ -378,7 +395,7 @@ public class Vector3 implements Comparable<Vector3>
 	 * @param a
 	 * @return
 	 */
-	public static float lengthSquared(Vector3 a)
+	public static double lengthSquared(Vector3 a)
 	{
 		return Vector3.dot(a, a);
 	}
@@ -425,7 +442,7 @@ public class Vector3 implements Comparable<Vector3>
 	 * @param b
 	 * @return
 	 */
-	public static Vector3 scale(Vector3 a, float b)
+	public static Vector3 scale(Vector3 a, double b)
 	{
 		return new Vector3(a.getX() * b, a.getY() * b, a.getZ() * b);
 	}
@@ -437,7 +454,7 @@ public class Vector3 implements Comparable<Vector3>
 	 * @param b
 	 * @return
 	 */
-	public static float dot(Vector3 a, Vector3 b)
+	public static double dot(Vector3 a, Vector3 b)
 	{
 		return a.getX() * b.getX() + a.getY() * b.getY() + a.getZ() * b.getZ();
 	}
@@ -591,14 +608,14 @@ public class Vector3 implements Comparable<Vector3>
 	}
 	
 	/**
-	 * Returns a new float array that is {x, y, z}
+	 * Returns a new double array that is {x, y, z}
 	 *
 	 * @param a
 	 * @return
 	 */
-	public static float[] toArray(Vector3 a)
+	public static double[] toArray(Vector3 a)
 	{
-		return new float[] { a.getX(), a.getY(), a.getZ() };
+		return new double[] { a.getX(), a.getY(), a.getZ() };
 	}
 	
 	/**

@@ -2,11 +2,11 @@ package com.mumfrey.worldeditcui.event.listeners;
 
 import static com.mumfrey.liteloader.gl.GL.*;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
 
 import com.mumfrey.worldeditcui.WorldEditCUI;
+import com.mumfrey.worldeditcui.util.Vector3;
 
 /**
  * Listener for WorldRenderEvent
@@ -29,54 +29,44 @@ public class CUIListenerWorldRender
 	
 	public void onRender(float partialTicks)
 	{
-		RenderHelper.disableStandardItemLighting();
-		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240, 240);
-		
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glEnableBlend();
-		glEnableAlphaTest();
-		glAlphaFunc(GL_GREATER, 0.0F);
-		glDisableTexture2D();
-		glDepthMask(false);
-		glPushMatrix();
-		
 		try
 		{
-			EntityPlayerSP thePlayer = this.minecraft.thePlayer;
-			glTranslated(-this.getPlayerXGuess(thePlayer, partialTicks), -this.getPlayerYGuess(thePlayer, partialTicks), -this.getPlayerZGuess(thePlayer, partialTicks));
-			glColor3f(1.0f, 1.0f, 1.0f);
-			if (this.controller.getSelection() != null)
+			RenderHelper.disableStandardItemLighting();
+			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240, 240);
+			
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			glEnableBlend();
+			glEnableAlphaTest();
+			glAlphaFunc(GL_GREATER, 0.0F);
+			glDisableTexture2D();
+			glEnableDepthTest();
+			glDepthMask(false);
+			glPushMatrix();
+			glDisableFog();
+			
+			try
 			{
-				this.controller.getSelection().render();
+				Vector3 cameraPos = new Vector3(this.minecraft.getRenderViewEntity(), partialTicks); 
+				glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
+				if (this.controller.getSelection() != null)
+				{
+					this.controller.getSelection().render(cameraPos);
+				}
 			}
+			catch (Exception e)
+			{
+			}
+			
+			glDepthFunc(GL_LEQUAL);
+			glPopMatrix();
+			
+			glDepthMask(true);
+			glEnableTexture2D();
+			glDisableBlend();
+			glAlphaFunc(GL_GREATER, 0.1F);
 		}
-		catch (Exception e)
-		{
-		}
-		
-		glDepthFunc(GL_LEQUAL);
-		glPopMatrix();
-		
-		glDepthMask(true);
-		glEnableTexture2D();
-		glDisableBlend();
-		glAlphaFunc(GL_GREATER, 0.1F);
+		catch (Exception ex) {}
 
 		RenderHelper.enableStandardItemLighting();
-	}
-	
-	private double getPlayerXGuess(EntityPlayerSP thePlayer, float renderTick)
-	{
-		return thePlayer.prevPosX + ((thePlayer.posX - thePlayer.prevPosX) * renderTick);
-	}
-	
-	private double getPlayerYGuess(EntityPlayerSP thePlayer, float renderTick)
-	{
-		return thePlayer.prevPosY + ((thePlayer.posY - thePlayer.prevPosY) * renderTick);
-	}
-	
-	private double getPlayerZGuess(EntityPlayerSP thePlayer, float renderTick)
-	{
-		return thePlayer.prevPosZ + ((thePlayer.posZ - thePlayer.prevPosZ) * renderTick);
 	}
 }

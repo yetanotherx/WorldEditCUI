@@ -25,7 +25,7 @@ public class Vector2 implements Comparable<Vector2>
 	 * Represents a unit vector (1,1)
 	 */
 	public static Vector2 ONE = new Vector2(1, 1);
-	protected float x, z;
+	protected double x, z;
 	
 	/**
 	 * Construct and Initialized a Vector2 from the given x, y
@@ -33,7 +33,7 @@ public class Vector2 implements Comparable<Vector2>
 	 * @param x the x coordinate
 	 * @param y the y coordinate
 	 */
-	public Vector2(float x, float y)
+	public Vector2(double x, double y)
 	{
 		this.x = x;
 		this.z = y;
@@ -47,7 +47,7 @@ public class Vector2 implements Comparable<Vector2>
 	 */
 	public Vector2(Double x, Double y)
 	{
-		this(x.floatValue(), y.floatValue());
+		this(x.doubleValue(), y.doubleValue());
 	}
 	
 	/**
@@ -73,7 +73,7 @@ public class Vector2 implements Comparable<Vector2>
 	 *
 	 * @return The X coordinate
 	 */
-	public float getX()
+	public double getX()
 	{
 		return this.x;
 	}
@@ -83,7 +83,7 @@ public class Vector2 implements Comparable<Vector2>
 	 *
 	 * @return The Y coordinate
 	 */
-	public float getY()
+	public double getY()
 	{
 		return this.z;
 	}
@@ -116,7 +116,7 @@ public class Vector2 implements Comparable<Vector2>
 	 * @param scale The amount to scale by
 	 * @return A new Vector2 scaled by the amount.
 	 */
-	public Vector2 scale(float scale)
+	public Vector2 scale(double scale)
 	{
 		return Vector2.scale(this, scale);
 	}
@@ -128,7 +128,7 @@ public class Vector2 implements Comparable<Vector2>
 	 * @param that The Vector2 to dot with this.
 	 * @return The dot product
 	 */
-	public float dot(Vector2 that)
+	public double dot(Vector2 that)
 	{
 		return Vector2.dot(this, that);
 	}
@@ -165,7 +165,7 @@ public class Vector2 implements Comparable<Vector2>
 	 * @param y Y value to use in the new Vector3.
 	 * @return 
 	 */
-	public Vector3 toVector3(float y)
+	public Vector3 toVector3(double y)
 	{
 		return Vector2.toVector3(this, y);
 	}
@@ -178,7 +178,7 @@ public class Vector2 implements Comparable<Vector2>
 	 * @param y Y value to use in the new Vector3m.
 	 * @return 
 	 */
-	public Vector3m toVector3m(float y)
+	public Vector3m toVector3m(double y)
 	{
 		return Vector2.toVector3m(this, y);
 	}
@@ -265,7 +265,7 @@ public class Vector2 implements Comparable<Vector2>
 	 *
 	 * @return the squared length
 	 */
-	public float lengthSquared()
+	public double lengthSquared()
 	{
 		return Vector2.lengthSquared(this);
 	}
@@ -276,7 +276,7 @@ public class Vector2 implements Comparable<Vector2>
 	 *
 	 * @return the length of this vector2
 	 */
-	public float length()
+	public double length()
 	{
 		return Vector2.length(this);
 	}
@@ -297,7 +297,7 @@ public class Vector2 implements Comparable<Vector2>
 	 *
 	 * @return The array containing this Vector2
 	 */
-	public float[] toArray()
+	public double[] toArray()
 	{
 		return Vector2.toArray(this);
 	}
@@ -327,9 +327,9 @@ public class Vector2 implements Comparable<Vector2>
 	 * @param a The Vector2 to calculate the length of
 	 * @return The length of the Vector2
 	 */
-	public static float length(Vector2 a)
+	public static double length(Vector2 a)
 	{
-		return (float)Math.sqrt(lengthSquared(a));
+		return Math.sqrt(lengthSquared(a));
 	}
 	
 	/**
@@ -338,7 +338,7 @@ public class Vector2 implements Comparable<Vector2>
 	 * @param a the Vector2 to calculate the length squared
 	 * @return the length squared of the Vector2
 	 */
-	public static float lengthSquared(Vector2 a)
+	public static double lengthSquared(Vector2 a)
 	{
 		return Vector2.dot(a, a);
 	}
@@ -385,7 +385,7 @@ public class Vector2 implements Comparable<Vector2>
 	 * @param b
 	 * @return
 	 */
-	public static Vector2 scale(Vector2 a, float b)
+	public static Vector2 scale(Vector2 a, double b)
 	{
 		return new Vector2(a.getX() * b, a.getY() * b);
 	}
@@ -398,7 +398,7 @@ public class Vector2 implements Comparable<Vector2>
 	 * @param b
 	 * @return
 	 */
-	public static float dot(Vector2 a, Vector2 b)
+	public static double dot(Vector2 a, Vector2 b)
 	{
 		return a.getX() * b.getX() + a.getY() * b.getY();
 	}
@@ -438,7 +438,7 @@ public class Vector2 implements Comparable<Vector2>
 	 * @param y Y value of the new Vector3
 	 * @return 
 	 */
-	public static Vector3 toVector3(Vector2 o, float y)
+	public static Vector3 toVector3(Vector2 o, double y)
 	{
 		return new Vector3(o.x, y, o.z);
 	}
@@ -452,7 +452,7 @@ public class Vector2 implements Comparable<Vector2>
 	 * @param y Y value of the new Vector3
 	 * @return 
 	 */
-	public static Vector3m toVector3m(Vector2 o, float y)
+	public static Vector3m toVector3m(Vector2 o, double y)
 	{
 		return new Vector3m(o.x, y, o.z);
 	}
@@ -546,9 +546,9 @@ public class Vector2 implements Comparable<Vector2>
 	 *
 	 * @return The array containing the Vector2
 	 */
-	public static float[] toArray(Vector2 a)
+	public static double[] toArray(Vector2 a)
 	{
-		return new float[] { a.getX(), a.getY() };
+		return new double[] { a.getX(), a.getY() };
 	}
 	
 	/**
