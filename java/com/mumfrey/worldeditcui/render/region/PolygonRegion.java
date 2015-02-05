@@ -41,7 +41,10 @@ public class PolygonRegion extends BaseRegion
 		
 		for (PointRectangle point : this.points)
 		{
-			point.render(cameraPos, this.min, this.max);
+			if (point != null)
+			{
+				point.render(cameraPos);
+			}
 		}
 		
 		this.box.render(cameraPos);
@@ -61,6 +64,7 @@ public class PolygonRegion extends BaseRegion
 	{
 		PointRectangle point = new PointRectangle(x, z);
 		point.setColour(LineColour.POLYPOINT);
+		point.setMinMax(this.min, this.max);
 		
 		if (id < this.points.size())
 		{
@@ -81,6 +85,14 @@ public class PolygonRegion extends BaseRegion
 	{
 		if (this.points.size() > 0)
 		{
+			for (PointRectangle point : this.points)
+			{
+				if (point != null)
+				{
+					point.setMinMax(this.min, this.max);
+				}
+			}
+			
 			this.box = new Render2DBox(LineColour.POLYBOX, this.points, this.min, this.max);
 			this.grid = new Render2DGrid(LineColour.POLYGRID, this.points, this.min, this.max);
 		}
@@ -92,3 +104,4 @@ public class PolygonRegion extends BaseRegion
 		return RegionType.POLYGON;
 	}
 }
+

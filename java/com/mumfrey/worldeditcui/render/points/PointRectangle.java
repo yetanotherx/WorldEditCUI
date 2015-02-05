@@ -16,27 +16,30 @@ import com.mumfrey.worldeditcui.util.Vector3;
  */
 public class PointRectangle
 {
+	private static final double OFF = 0.03;
+	private static final Vector2 MIN_VEC = new Vector2(PointRectangle.OFF, PointRectangle.OFF);
+	private static final Vector2 MAX_VEC = new Vector2(PointRectangle.OFF + 1, PointRectangle.OFF + 1);
 	
 	protected Vector2 point;
 	protected LineColour colour = LineColour.POLYPOINT;
 	
-	public PointRectangle(Vector2 point)
-	{
-		this.point = point;
-	}
+	private int min, max;
+	
+	private Render3DBox box;
 	
 	public PointRectangle(int x, int z)
 	{
-		this.point = new Vector2(x, z);
+		this(new Vector2(x, z));
 	}
 	
-	public void render(Vector3 cameraPos, int min, int max)
+	public PointRectangle(Vector2 point)
 	{
-		float off = 0.03f;
-		Vector2 minVec = new Vector2(off, off);
-		Vector2 maxVec = new Vector2(off + 1, off + 1);
-		
-		new Render3DBox(this.colour, this.point.subtract(minVec).toVector3(min - off), this.point.add(maxVec).toVector3(max + 1 + off)).render(cameraPos);
+		this.setPoint(point);
+	}
+	
+	public void render(Vector3 cameraPos)
+	{
+		this.box.render(cameraPos);
 	}
 	
 	public Vector2 getPoint()
@@ -57,5 +60,27 @@ public class PointRectangle
 	public void setColour(LineColour colour)
 	{
 		this.colour = colour;
+	}
+	
+	public void setMinMax(int min, int max)
+	{
+		this.min = min;
+		this.max = max;
+		this.update();
+	}
+
+	public int getMin()
+	{
+		return this.min;
+	}
+
+	public int getMax()
+	{
+		return this.max;
+	}
+	
+	private void update()
+	{
+		this.box = new Render3DBox(this.colour, this.point.subtract(PointRectangle.MIN_VEC).toVector3(this.min - 0.03f), this.point.add(PointRectangle.MAX_VEC).toVector3(this.max + 1 + 0.03f));
 	}
 }
