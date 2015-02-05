@@ -8,7 +8,7 @@ import java.io.IOException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mumfrey.liteloader.core.LiteLoader;
-import com.mumfrey.worldeditcui.InitializationFactory;
+import com.mumfrey.worldeditcui.InitialisationFactory;
 import com.mumfrey.worldeditcui.render.LineColour;
 
 /**
@@ -17,7 +17,7 @@ import com.mumfrey.worldeditcui.render.LineColour;
  * @author yetanotherx
  * 
  */
-public class CUIConfiguration implements InitializationFactory
+public class CUIConfiguration implements InitialisationFactory
 {
 	private static final String CONFIG_FILE_NAME = "worldeditcui.config.json";
 
@@ -46,7 +46,7 @@ public class CUIConfiguration implements InitializationFactory
 	 * exist. It then reads the file and sets each variable to the proper value.
 	 */
 	@Override
-	public void initialize()
+	public void initialise()
 	{
 		this.cuboidGridColor        = Colour.setDefault(this.cuboidGridColor,        "#CC3333CC");
 		this.cuboidEdgeColor        = Colour.setDefault(this.cuboidEdgeColor,        "#CC4C4CCC");
@@ -69,10 +69,10 @@ public class CUIConfiguration implements InitializationFactory
 		LineColour.POLYBOX.setColour(this.polyEdgeColor);
 		LineColour.POLYPOINT.setColour(this.polyPointColor);
 		LineColour.ELLIPSOIDGRID.setColour(this.ellipsoidGridColor);
-		LineColour.ELLIPSOIDCENTER.setColour(this.ellipsoidPointColor);
+		LineColour.ELLIPSOIDCENTRE.setColour(this.ellipsoidPointColor);
 		LineColour.CYLINDERGRID.setColour(this.cylinderGridColor);
 		LineColour.CYLINDERBOX.setColour(this.cylinderEdgeColor);
-		LineColour.CYLINDERCENTER.setColour(this.cylinderPointColor);
+		LineColour.CYLINDERCENTRE.setColour(this.cylinderPointColor);
 		
 		this.save();
 	}

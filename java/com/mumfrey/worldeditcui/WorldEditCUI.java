@@ -3,7 +3,7 @@ package com.mumfrey.worldeditcui;
 import com.mumfrey.worldeditcui.config.CUIConfiguration;
 import com.mumfrey.worldeditcui.debug.CUIDebug;
 import com.mumfrey.worldeditcui.event.CUIEventDispatcher;
-import com.mumfrey.worldeditcui.exceptions.InitializationException;
+import com.mumfrey.worldeditcui.exceptions.InitialisationException;
 import com.mumfrey.worldeditcui.render.CUISelectionProvider;
 import com.mumfrey.worldeditcui.render.region.BaseRegion;
 import com.mumfrey.worldeditcui.render.region.CuboidRegion;
@@ -28,7 +28,7 @@ public class WorldEditCUI
 	private CUIEventDispatcher dispatcher;
 	private CUISelectionProvider selectionProvider;
 	
-	public void initialize()
+	public void initialise()
 	{
 		this.selection = new CuboidRegion(this);
 		this.configuration = CUIConfiguration.create();
@@ -38,13 +38,13 @@ public class WorldEditCUI
 		
 		try
 		{
-			this.selection.initialize();
-			this.configuration.initialize();
-			this.debugger.initialize();
-			this.dispatcher.initialize();
-			this.selectionProvider.initialize();
+			this.selection.initialise();
+			this.configuration.initialise();
+			this.debugger.initialise();
+			this.dispatcher.initialise();
+			this.selectionProvider.initialise();
 		}
-		catch (InitializationException e)
+		catch (InitialisationException e)
 		{
 			e.printStackTrace();
 			return;

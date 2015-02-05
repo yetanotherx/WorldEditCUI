@@ -16,7 +16,7 @@ import com.mumfrey.worldeditcui.util.Vector3;
 public class CylinderRegion extends BaseRegion
 {
 	
-	protected PointCube center;
+	protected PointCube centre;
 	protected double radX = 0;
 	protected double radZ = 0;
 	protected int minY = 0;
@@ -34,9 +34,9 @@ public class CylinderRegion extends BaseRegion
 	@Override
 	public void render(Vector3 cameraPos)
 	{
-		if (this.center != null)
+		if (this.centre != null)
 		{
-			this.center.render(cameraPos);
+			this.centre.render(cameraPos);
 			this.circles.render(cameraPos);
 			this.grid.render(cameraPos);
 			this.box.render(cameraPos);
@@ -46,8 +46,8 @@ public class CylinderRegion extends BaseRegion
 	@Override
 	public void setCylinderCenter(int x, int y, int z)
 	{
-		this.center = new PointCube(x, y, z);
-		this.center.setColour(LineColour.CYLINDERCENTER);
+		this.centre = new PointCube(x, y, z);
+		this.centre.setColour(LineColour.CYLINDERCENTRE);
 		this.update();
 	}
 	
@@ -74,13 +74,13 @@ public class CylinderRegion extends BaseRegion
 		
 		if (this.minY == 0 || this.maxY == 0)
 		{
-			tMin = (int)this.center.getPoint().getY();
-			tMax = (int)this.center.getPoint().getY();
+			tMin = (int)this.centre.getPoint().getY();
+			tMax = (int)this.centre.getPoint().getY();
 		}
 		
-		this.circles = new RenderCylinderCircles(LineColour.CYLINDERGRID, this.center, this.radX, this.radZ, tMin, tMax);
-		this.grid = new RenderCylinderGrid(LineColour.CYLINDERGRID, this.center, this.radX, this.radZ, tMin, tMax);
-		this.box = new RenderCylinderBox(LineColour.CYLINDERBOX, this.center, this.radX, this.radZ, tMin, tMax);
+		this.circles = new RenderCylinderCircles(LineColour.CYLINDERGRID, this.centre, this.radX, this.radZ, tMin, tMax);
+		this.grid = new RenderCylinderGrid(LineColour.CYLINDERGRID, this.centre, this.radX, this.radZ, tMin, tMax);
+		this.box = new RenderCylinderBox(LineColour.CYLINDERBOX, this.centre, this.radX, this.radZ, tMin, tMax);
 	}
 	
 	@Override

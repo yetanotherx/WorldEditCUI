@@ -37,7 +37,7 @@ public class CUIEventCylinder extends CUIEvent
 		this.controller.getSelection().setCylinderCenter(x, y, z);
 		this.controller.getSelection().setCylinderRadius(radX, radZ);
 		
-		this.controller.getDebugger().debug("Setting center/radius");
+		this.controller.getDebugger().debug("Setting centre/radius");
 		
 		return null;
 	}

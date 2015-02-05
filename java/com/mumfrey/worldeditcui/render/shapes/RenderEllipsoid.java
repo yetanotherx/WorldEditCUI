@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.WorldRenderer;
 import static com.mumfrey.liteloader.gl.GL.*;
 
 /**
- * Draws an ellipsoid shape around a center point.
+ * Draws an ellipsoid shape around a centre point.
  * 
  * @author yetanotherx
  */
@@ -18,7 +18,7 @@ public class RenderEllipsoid
 {
 	
 	protected LineColour colour;
-	protected PointCube center;
+	protected PointCube centre;
 	protected Vector3 radii;
 	protected final static double twoPi = Math.PI * 2;
 	protected double centreX;
@@ -28,7 +28,7 @@ public class RenderEllipsoid
 	public RenderEllipsoid(LineColour colour, PointCube centre, Vector3 radii)
 	{
 		this.colour = colour;
-		this.center = centre;
+		this.centre = centre;
 		this.radii = radii;
 		this.centreX = centre.getPoint().getX() + 0.5;
 		this.centreY = centre.getPoint().getY() + 0.5;

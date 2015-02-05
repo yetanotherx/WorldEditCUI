@@ -1,6 +1,6 @@
 package com.mumfrey.worldeditcui.render.region;
 
-import com.mumfrey.worldeditcui.InitializationFactory;
+import com.mumfrey.worldeditcui.InitialisationFactory;
 import com.mumfrey.worldeditcui.WorldEditCUI;
 import com.mumfrey.worldeditcui.exceptions.InvalidSelectionTypeException;
 import com.mumfrey.worldeditcui.util.Vector3;
@@ -13,7 +13,7 @@ import com.mumfrey.worldeditcui.util.Vector3;
  * @author yetanotherx
  * @author lahwran
  */
-public abstract class BaseRegion implements InitializationFactory
+public abstract class BaseRegion implements InitialisationFactory
 {
 	
 	protected WorldEditCUI controller;
@@ -24,7 +24,7 @@ public abstract class BaseRegion implements InitializationFactory
 	}
 	
 	@Override
-	public void initialize()
+	public void initialise()
 	{
 	}
 	

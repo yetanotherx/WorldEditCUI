@@ -4,15 +4,15 @@ import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.mumfrey.worldeditcui.InitializationFactory;
+import com.mumfrey.worldeditcui.InitialisationFactory;
 import com.mumfrey.worldeditcui.WorldEditCUI;
-import com.mumfrey.worldeditcui.exceptions.InitializationException;
+import com.mumfrey.worldeditcui.exceptions.InitialisationException;
 
 /**
  *
  * @author Adam Mummery-Smith
  */
-public class CUIEventDispatcher implements InitializationFactory
+public class CUIEventDispatcher implements InitialisationFactory
 {
 	private WorldEditCUI controller;
 	
@@ -24,7 +24,7 @@ public class CUIEventDispatcher implements InitializationFactory
 	}
 
 	@Override
-	public void initialize() throws InitializationException
+	public void initialise() throws InitialisationException
 	{
 		for (CUIEventType eventType : CUIEventType.values())
 		{

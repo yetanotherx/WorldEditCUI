@@ -26,10 +26,10 @@ public enum LineColour
 	POLYBOX        ("colour.polyedge",       new Colour("#CC4C4CCC")),
 	POLYPOINT      ("colour.polypoint",      new Colour("#33CCCCCC")),
 	ELLIPSOIDGRID  ("colour.ellipsoidgrid",  new Colour("#CC4C4CCC")),
-	ELLIPSOIDCENTER("colour.ellipsoidpoint", new Colour("#CCCC33CC")),
+	ELLIPSOIDCENTRE("colour.ellipsoidpoint", new Colour("#CCCC33CC")),
 	CYLINDERGRID   ("colour.cylindergrid",   new Colour("#CC3333CC")),
 	CYLINDERBOX    ("colour.cylinderedge",   new Colour("#CC4C4CCC")),
-	CYLINDERCENTER ("colour.cylinderpoint",  new Colour("#CC33CCCC"));
+	CYLINDERCENTRE ("colour.cylinderpoint",  new Colour("#CC33CCCC"));
 	
 	private String displayName;
 	

@@ -43,7 +43,7 @@ public class EllipsoidRegion extends BaseRegion
 	public void setEllipsoidCenter(int x, int y, int z)
 	{
 		this.centre = new PointCube(x, y, z);
-		this.centre.setColour(LineColour.ELLIPSOIDCENTER);
+		this.centre.setColour(LineColour.ELLIPSOIDCENTRE);
 		this.update();
 	}
 	

@@ -45,7 +45,7 @@ public class CUIEventEllipsoid extends CUIEvent
 			this.controller.getSelection().setEllipsoidRadii(x, y, z);
 		}
 		
-		this.controller.getDebugger().debug("Setting center/radius");
+		this.controller.getDebugger().debug("Setting centre/radius");
 		
 		return null;
 	}

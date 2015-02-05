@@ -74,7 +74,7 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 	public void onInitCompleted(Minecraft minecraft, LiteLoader loader)
 	{
 		this.controller = new WorldEditCUI();
-		this.controller.initialize();
+		this.controller.initialise();
 		
 		this.worldRenderListener = new CUIListenerWorldRender(this.controller, minecraft);
 		this.channelListener = new CUIListenerChannel(this.controller);

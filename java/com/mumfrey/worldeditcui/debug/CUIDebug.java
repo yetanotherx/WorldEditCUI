@@ -8,9 +8,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.mumfrey.liteloader.core.LiteLoader;
-import com.mumfrey.worldeditcui.InitializationFactory;
+import com.mumfrey.worldeditcui.InitialisationFactory;
 import com.mumfrey.worldeditcui.WorldEditCUI;
-import com.mumfrey.worldeditcui.exceptions.InitializationException;
+import com.mumfrey.worldeditcui.exceptions.InitialisationException;
 import com.mumfrey.worldeditcui.util.ConsoleLogFormatter;
 
 /**
@@ -19,7 +19,7 @@ import com.mumfrey.worldeditcui.util.ConsoleLogFormatter;
  * @author yetanotherx
  * 
  */
-public class CUIDebug implements InitializationFactory
+public class CUIDebug implements InitialisationFactory
 {
 	
 	protected WorldEditCUI controller;
@@ -33,7 +33,7 @@ public class CUIDebug implements InitializationFactory
 	}
 	
 	@Override
-	public void initialize() throws InitializationException
+	public void initialise() throws InitialisationException
 	{
 		
 		ConsoleLogFormatter formatter = new ConsoleLogFormatter();
@@ -59,7 +59,7 @@ public class CUIDebug implements InitializationFactory
 		catch (IOException e)
 		{
 			e.printStackTrace(System.err);
-			throw new InitializationException();
+			throw new InitialisationException();
 		}
 		
 	}

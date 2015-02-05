@@ -4,9 +4,9 @@ import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.mumfrey.worldeditcui.InitializationFactory;
+import com.mumfrey.worldeditcui.InitialisationFactory;
 import com.mumfrey.worldeditcui.WorldEditCUI;
-import com.mumfrey.worldeditcui.exceptions.InitializationException;
+import com.mumfrey.worldeditcui.exceptions.InitialisationException;
 import com.mumfrey.worldeditcui.render.region.BaseRegion;
 import com.mumfrey.worldeditcui.render.region.RegionType;
 
@@ -14,7 +14,7 @@ import com.mumfrey.worldeditcui.render.region.RegionType;
  *
  * @author Adam Mummery-Smith
  */
-public class CUISelectionProvider implements InitializationFactory
+public class CUISelectionProvider implements InitialisationFactory
 {
 	private Map<String, Constructor<? extends BaseRegion>> regionConstructors = new HashMap<String, Constructor<? extends BaseRegion>>();
 
@@ -26,7 +26,7 @@ public class CUISelectionProvider implements InitializationFactory
 	}
 
 	@Override
-	public void initialize() throws InitializationException
+	public void initialise() throws InitialisationException
 	{
 		for (RegionType regionType : RegionType.values())
 		{

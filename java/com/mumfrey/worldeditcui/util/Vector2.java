@@ -28,7 +28,7 @@ public class Vector2 implements Comparable<Vector2>
 	protected double x, z;
 	
 	/**
-	 * Construct and Initialized a Vector2 from the given x, y
+	 * Construct and Initialised a Vector2 from the given x, y
 	 *
 	 * @param x the x coordinate
 	 * @param y the y coordinate
@@ -40,7 +40,7 @@ public class Vector2 implements Comparable<Vector2>
 	}
 	
 	/**
-	 * Construct and Initialized a Vector2 from the given x, y
+	 * Construct and Initialised a Vector2 from the given x, y
 	 *
 	 * @param x the x coordinate
 	 * @param y the y coordinate
@@ -51,7 +51,7 @@ public class Vector2 implements Comparable<Vector2>
 	}
 	
 	/**
-	 * Construct and Initialized a Vector2 to (0,0)
+	 * Construct and Initialised a Vector2 to (0,0)
 	 */
 	public Vector2()
 	{
@@ -59,7 +59,7 @@ public class Vector2 implements Comparable<Vector2>
 	}
 	
 	/**
-	 * Construct and Initialized a Vector2 from an old Vector2
+	 * Construct and Initialised a Vector2 from an old Vector2
 	 * 
 	 * @param original 
 	 */

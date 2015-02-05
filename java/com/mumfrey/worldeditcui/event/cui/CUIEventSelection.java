@@ -32,7 +32,7 @@ public class CUIEventSelection extends CUIEvent
 		
 		if (selection != null)
 		{
-			selection.initialize();
+			selection.initialise();
 		}
 		
 		this.controller.setSelection(selection);
