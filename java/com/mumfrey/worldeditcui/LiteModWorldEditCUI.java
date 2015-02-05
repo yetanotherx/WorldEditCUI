@@ -10,6 +10,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.client.multiplayer.WorldClient;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.network.INetHandler;
 import net.minecraft.network.PacketBuffer;
@@ -208,7 +209,9 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 	{
 		if (this.visible && !this.alwaysOnTop)
 		{
+			RenderHelper.disableStandardItemLighting();
 			this.worldRenderListener.onRender(partialTicks);
+			RenderHelper.enableStandardItemLighting();
 		}
 	}
 	

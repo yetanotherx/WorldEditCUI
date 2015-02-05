@@ -3,7 +3,6 @@ package com.mumfrey.worldeditcui.event.listeners;
 import static com.mumfrey.liteloader.gl.GL.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.RenderHelper;
 
 import com.mumfrey.worldeditcui.WorldEditCUI;
 import com.mumfrey.worldeditcui.util.Vector3;
@@ -31,7 +30,6 @@ public class CUIListenerWorldRender
 	{
 		try
 		{
-			RenderHelper.disableStandardItemLighting();
 			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240, 240);
 			
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -66,7 +64,5 @@ public class CUIListenerWorldRender
 			glAlphaFunc(GL_GREATER, 0.1F);
 		}
 		catch (Exception ex) {}
-
-		RenderHelper.enableStandardItemLighting();
 	}
 }
