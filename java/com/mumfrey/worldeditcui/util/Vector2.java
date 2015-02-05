@@ -146,18 +146,6 @@ public class Vector2 implements Comparable<Vector2>
 	}
 	
 	/**
-	 * Returns a Vector3m object with a y-value of 0.
-	 * The x of this Vector2 becomes the x of the Vector3m,
-	 * the y of this Vector2 becomes the z of the Vector3m.
-	 * 
-	 * @return 
-	 */
-	public Vector3m toVector3m()
-	{
-		return Vector2.toVector3m(this);
-	}
-	
-	/**
 	 * Returns a Vector3 object with the given y value.
 	 * The x of this Vector2 becomes the x of the Vector3,
 	 * the y of this Vector2 becomes the z of the Vector3.
@@ -168,19 +156,6 @@ public class Vector2 implements Comparable<Vector2>
 	public Vector3 toVector3(double y)
 	{
 		return Vector2.toVector3(this, y);
-	}
-	
-	/**
-	 * Returns a Vector3m object with the given y value.
-	 * The x of this Vector2 becomes the x of the Vector3m,
-	 * the y of this Vector2 becomes the z of the Vector3m.
-	 * 
-	 * @param y Y value to use in the new Vector3m.
-	 * @return 
-	 */
-	public Vector3m toVector3m(double y)
-	{
-		return Vector2.toVector3m(this, y);
 	}
 	
 	/**
@@ -417,19 +392,6 @@ public class Vector2 implements Comparable<Vector2>
 	}
 	
 	/**
-	 * Returns a Vector3m object with a y-value of 0.
-	 * The x of the Vector2 becomes the x of the Vector3m,
-	 * the y of the Vector2 becomes the z of the Vector3m.
-	 * 
-	 * @param o Vector2 to use as the x/z values
-	 * @return 
-	 */
-	public static Vector3m toVector3m(Vector2 o)
-	{
-		return new Vector3m(o.x, 0, o.z);
-	}
-	
-	/**
 	 * Returns a Vector3 object with the given y-value.
 	 * The x of the Vector2 becomes the x of the Vector3,
 	 * the y of the Vector2 becomes the z of the Vector3.
@@ -441,20 +403,6 @@ public class Vector2 implements Comparable<Vector2>
 	public static Vector3 toVector3(Vector2 o, double y)
 	{
 		return new Vector3(o.x, y, o.z);
-	}
-	
-	/**
-	 * Returns a Vector3m object with the given y-value.
-	 * The x of the Vector2 becomes the x of the Vector3m,
-	 * the y of the Vector2 becomes the z of the Vector3m.
-	 * 
-	 * @param o Vector2 to use as the x/z values
-	 * @param y Y value of the new Vector3
-	 * @return 
-	 */
-	public static Vector3m toVector3m(Vector2 o, double y)
-	{
-		return new Vector3m(o.x, y, o.z);
 	}
 	
 	/**

@@ -2,6 +2,7 @@ package com.mumfrey.worldeditcui.render.shapes;
 
 import com.mumfrey.worldeditcui.render.LineColour;
 import com.mumfrey.worldeditcui.render.LineInfo;
+import com.mumfrey.worldeditcui.util.BoundingBox;
 import com.mumfrey.worldeditcui.util.Vector3;
 
 import net.minecraft.client.renderer.Tessellator;
@@ -20,6 +21,11 @@ public class Render3DBox
 	protected LineColour colour;
 	protected Vector3 first;
 	protected Vector3 second;
+	
+	public Render3DBox(LineColour colour, BoundingBox region)
+	{
+		this(colour, region.getMin(), region.getMax());
+	}
 	
 	public Render3DBox(LineColour colour, Vector3 first, Vector3 second)
 	{
