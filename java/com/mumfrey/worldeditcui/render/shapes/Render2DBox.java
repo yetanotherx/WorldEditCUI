@@ -9,7 +9,7 @@ import com.mumfrey.worldeditcui.util.Vector2;
 import com.mumfrey.worldeditcui.util.Vector3;
 
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.VertexBuffer;
 import static com.mumfrey.liteloader.gl.GL.*;
 
 /**
@@ -37,13 +37,13 @@ public class Render2DBox
 	public void render(Vector3 cameraPos)
 	{
 		Tessellator tessellator = Tessellator.getInstance();
-		WorldRenderer worldRenderer = tessellator.getWorldRenderer();
+		VertexBuffer buf = tessellator.getBuffer();
 		double off = 0.03 - cameraPos.getY();
 		for (LineInfo tempColour : this.colour.getColours())
 		{
 			tempColour.prepareRender();
 			
-			worldRenderer.startDrawing(GL_LINES);
+			buf.begin(GL_LINES, VF_POSITION);
 			tempColour.prepareColour();
 			
 			for (PointRectangle point : this.points)
@@ -53,8 +53,8 @@ public class Render2DBox
 					Vector2 pos = point.getPoint();
 					double x = pos.getX() - cameraPos.getX();
 					double z = pos.getY() - cameraPos.getZ();
-					worldRenderer.addVertex(x + 0.5, this.min + off, z + 0.5);
-					worldRenderer.addVertex(x + 0.5, this.max + 1 + off, z + 0.5);
+					buf.pos(x + 0.5, this.min + off, z + 0.5).endVertex();
+					buf.pos(x + 0.5, this.max + 1 + off, z + 0.5).endVertex();
 				}
 			}
 			tessellator.draw();

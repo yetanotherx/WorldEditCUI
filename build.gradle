@@ -1,0 +1,48 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven {
+            name = "sonatype"
+            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.1-SNAPSHOT'
+    }
+}
+
+apply plugin: 'net.minecraftforge.gradle.liteloader'
+
+version = "1.9.0_00"
+group = "com.mumfrey.worldeditcui"
+archivesBaseName = "worldeditcui"
+
+minecraft {
+    version = "1.9"
+    mappings = "snapshot_20160410"
+    runDir = "run"
+}
+
+sourceSets {
+    main {
+        java.srcDir 'java'
+        resources.srcDir 'res'
+    }
+}
+
+litemod {
+    json {
+        author = "yetanotherx, Mumfrey, TomyLobo"
+        mcversion = "1.9"
+        description = "Client-side user interface for WorldEdit"
+    }
+}
+
+jar {
+    from litemod.outputs
+}

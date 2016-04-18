@@ -14,7 +14,7 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.network.INetHandler;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.network.play.server.S01PacketJoinGame;
+import net.minecraft.network.play.server.SPacketJoinGame;
 
 import org.lwjgl.input.Keyboard;
 
@@ -82,7 +82,7 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 	}
 	
 	@Override
-	public void onJoinGame(INetHandler netHandler, S01PacketJoinGame loginPacket, ServerData serverData, RealmsServer realmsServer)
+	public void onJoinGame(INetHandler netHandler, SPacketJoinGame loginPacket, ServerData serverData, RealmsServer realmsServer)
 	{
 		this.visible = true;
 		this.controller.getDebugger().debug("Joined game, sending initial handshake");
@@ -195,7 +195,7 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 	@Override
 	public String getVersion()
 	{
-		return "1.8.0_03";
+		return "1.9.0_00";
 	}
 	
 	@Override

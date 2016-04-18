@@ -6,7 +6,7 @@ import com.mumfrey.worldeditcui.util.BoundingBox;
 import com.mumfrey.worldeditcui.util.Vector3;
 
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.VertexBuffer;
 import static com.mumfrey.liteloader.gl.GL.*;
 
 /**
@@ -37,7 +37,7 @@ public class Render3DBox
 	public void render(Vector3 cameraPos)
 	{
 		Tessellator tessellator = Tessellator.getInstance();
-		WorldRenderer worldRenderer = tessellator.getWorldRenderer();
+		VertexBuffer buf = tessellator.getBuffer();
 		double x1 = this.first.getX() - cameraPos.getX(); 
 		double y1 = this.first.getY() - cameraPos.getY(); 
 		double z1 = this.first.getZ() - cameraPos.getZ(); 
@@ -50,38 +50,38 @@ public class Render3DBox
 			tempColour.prepareRender();
 			
 			// Draw bottom face
-			worldRenderer.startDrawing(GL_LINE_LOOP);
+			buf.begin(GL_LINE_LOOP, VF_POSITION);
 			tempColour.prepareColour();
-			worldRenderer.addVertex(x1, y1, z1);
-			worldRenderer.addVertex(x2, y1, z1);
-			worldRenderer.addVertex(x2, y1, z2);
-			worldRenderer.addVertex(x1, y1, z2);
+			buf.pos(x1, y1, z1).endVertex();
+			buf.pos(x2, y1, z1).endVertex();
+			buf.pos(x2, y1, z2).endVertex();
+			buf.pos(x1, y1, z2).endVertex();
 			tessellator.draw();
 			
 			// Draw top face
-			worldRenderer.startDrawing(GL_LINE_LOOP);
+			buf.begin(GL_LINE_LOOP, VF_POSITION);
 			tempColour.prepareColour();
-			worldRenderer.addVertex(x1, y2, z1);
-			worldRenderer.addVertex(x2, y2, z1);
-			worldRenderer.addVertex(x2, y2, z2);
-			worldRenderer.addVertex(x1, y2, z2);
+			buf.pos(x1, y2, z1).endVertex();
+			buf.pos(x2, y2, z1).endVertex();
+			buf.pos(x2, y2, z2).endVertex();
+			buf.pos(x1, y2, z2).endVertex();
 			tessellator.draw();
 			
 			// Draw join top and bottom faces
-			worldRenderer.startDrawing(GL_LINES);
+			buf.begin(GL_LINES, VF_POSITION);
 			tempColour.prepareColour();
 			
-			worldRenderer.addVertex(x1, y1, z1);
-			worldRenderer.addVertex(x1, y2, z1);
+			buf.pos(x1, y1, z1).endVertex();
+			buf.pos(x1, y2, z1).endVertex();
 			
-			worldRenderer.addVertex(x2, y1, z1);
-			worldRenderer.addVertex(x2, y2, z1);
+			buf.pos(x2, y1, z1).endVertex();
+			buf.pos(x2, y2, z1).endVertex();
 			
-			worldRenderer.addVertex(x2, y1, z2);
-			worldRenderer.addVertex(x2, y2, z2);
+			buf.pos(x2, y1, z2).endVertex();
+			buf.pos(x2, y2, z2).endVertex();
 			
-			worldRenderer.addVertex(x1, y1, z2);
-			worldRenderer.addVertex(x1, y2, z2);
+			buf.pos(x1, y1, z2).endVertex();
+			buf.pos(x1, y2, z2).endVertex();
 			
 			tessellator.draw();
 		}
