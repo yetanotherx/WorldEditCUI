@@ -25,6 +25,7 @@ import com.mumfrey.liteloader.InitCompleteListener;
 import com.mumfrey.liteloader.JoinGameListener;
 import com.mumfrey.liteloader.PluginChannelListener;
 import com.mumfrey.liteloader.PostRenderListener;
+import com.mumfrey.liteloader.Tickable;
 import com.mumfrey.liteloader.core.ClientPluginChannels;
 import com.mumfrey.liteloader.core.LiteLoader;
 import com.mumfrey.liteloader.core.PluginChannels.ChannelPolicy;
@@ -35,7 +36,7 @@ import com.mumfrey.worldeditcui.event.listeners.CUIListenerWorldRender;
 import com.mumfrey.worldeditcui.gui.CUIConfigPanel;
 import com.mumfrey.worldeditcui.render.region.CuboidRegion;
 
-public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelListener, PostRenderListener, Configurable, JoinGameListener
+public class LiteModWorldEditCUI implements Tickable, InitCompleteListener, PluginChannelListener, PostRenderListener, Configurable, JoinGameListener
 {
 	private static final int DELAYED_HELO_TICKS = 10;
 
@@ -195,7 +196,7 @@ public class LiteModWorldEditCUI implements InitCompleteListener, PluginChannelL
 	@Override
 	public String getVersion()
 	{
-		return "1.9.4_00";
+		return "1.9.4_01";
 	}
 	
 	@Override

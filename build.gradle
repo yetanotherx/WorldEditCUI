@@ -18,7 +18,7 @@ buildscript {
 
 apply plugin: 'net.minecraftforge.gradle.liteloader'
 
-version = "1.9.4_00"
+version = "1.9.4_01"
 group = "com.mumfrey.worldeditcui"
 archivesBaseName = "worldeditcui"
 
