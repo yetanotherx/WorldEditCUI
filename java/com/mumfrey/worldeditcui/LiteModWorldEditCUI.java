@@ -147,8 +147,8 @@ public class LiteModWorldEditCUI implements Tickable, InitCompleteListener, Plug
 			
 			if (this.keyBindClearSel.isPressed())
 			{
-				if (mc.thePlayer != null)
-					mc.thePlayer.sendChatMessage("//sel");
+				if (mc.player != null)
+					mc.player.sendChatMessage("//sel");
 			}
 		}
 		
@@ -157,18 +157,18 @@ public class LiteModWorldEditCUI implements Tickable, InitCompleteListener, Plug
 			CUIConfiguration config = this.controller.getConfiguration();
 			this.alwaysOnTop = config.isAlwaysOnTop();
 				
-			if (mc.theWorld != this.lastWorld || mc.thePlayer != this.lastPlayer)
+			if (mc.world != this.lastWorld || mc.player != this.lastPlayer)
 			{
-				this.lastWorld = mc.theWorld;
-				this.lastPlayer = mc.thePlayer;
+				this.lastWorld = mc.world;
+				this.lastPlayer = mc.player;
 				
 				this.controller.getDebugger().debug("World change detected, sending new handshake");
 				this.controller.setSelection(new CuboidRegion(this.controller));
 				this.helo();
 				this.delayedHelo = LiteModWorldEditCUI.DELAYED_HELO_TICKS;
-				if (mc.thePlayer != null && config.isPromiscuous())
+				if (mc.player != null && config.isPromiscuous())
 				{
-					mc.thePlayer.sendChatMessage("/we cui"); //Tricks WE to send the current selection
+					mc.player.sendChatMessage("/we cui"); //Tricks WE to send the current selection
 				}
 			}
 			
@@ -178,9 +178,9 @@ public class LiteModWorldEditCUI implements Tickable, InitCompleteListener, Plug
 				if (this.delayedHelo == 0)
 				{
 					this.helo();
-					if (LiteLoader.getClientPluginChannels().isRemoteChannelRegistered(CHANNEL_WECUI) && mc.thePlayer != null)
+					if (LiteLoader.getClientPluginChannels().isRemoteChannelRegistered(CHANNEL_WECUI) && mc.player != null)
 					{
-						mc.thePlayer.sendChatMessage("/we cui");
+						mc.player.sendChatMessage("/we cui");
 					}
 				}
 			}
@@ -196,7 +196,7 @@ public class LiteModWorldEditCUI implements Tickable, InitCompleteListener, Plug
 	@Override
 	public String getVersion()
 	{
-		return "1.10_00";
+		return "1.11_00";
 	}
 	
 	@Override
