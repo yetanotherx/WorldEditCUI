@@ -24,7 +24,7 @@ archivesBaseName = "worldeditcui"
 
 minecraft {
     version = "1.11"
-    mappings = "snapshot_custom"
+    mappings = "snapshot_20161124"
     runDir = "run"
 }
 
@@ -38,7 +38,7 @@ sourceSets {
 litemod {
     json {
         author = "yetanotherx, Mumfrey, TomyLobo"
-        mcversion = "1.11"
+        mcversion = "1.11.r1"
         description = "Client-side user interface for WorldEdit"
     }
 }
