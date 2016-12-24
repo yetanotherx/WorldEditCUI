@@ -18,12 +18,12 @@ buildscript {
 
 apply plugin: 'net.minecraftforge.gradle.liteloader'
 
-version = "1.11_00"
+version = "1.11.2_00"
 group = "com.mumfrey.worldeditcui"
 archivesBaseName = "worldeditcui"
 
 minecraft {
-    version = "1.11"
+    version = "1.11.2"
     mappings = "snapshot_20161124"
     runDir = "run"
 }
@@ -38,7 +38,7 @@ sourceSets {
 litemod {
     json {
         author = "yetanotherx, Mumfrey, TomyLobo"
-        mcversion = "1.11.r1"
+        mcversion = "1.11.r2"
         description = "Client-side user interface for WorldEdit"
     }
 }
