@@ -4,7 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
+import net.minecraft.client.renderer.BufferBuilder;
 import static com.mumfrey.liteloader.gl.GL.*;
 
 /**
@@ -97,9 +97,9 @@ public class GuiControl extends GuiButton
 	 * @param mouseY Mouse Y coordinate
 	 */
 	@Override
-	public final void drawButton(Minecraft minecraft, int mouseX, int mouseY)
+	public final void func_191745_a(Minecraft minecraft, int mouseX, int mouseY, float partialTicks) // drawButton
 	{
-		this.drawControl(minecraft, mouseX, mouseY);
+		this.drawControl(minecraft, mouseX, mouseY, partialTicks);
 	}
 	
 	/**
@@ -109,9 +109,9 @@ public class GuiControl extends GuiButton
 	 * @param mouseX Mouse X coordinate
 	 * @param mouseY Mouse Y coordinate
 	 */
-	protected void drawControl(Minecraft minecraft, int mouseX, int mouseY)
+	protected void drawControl(Minecraft minecraft, int mouseX, int mouseY, float partialTicks)
 	{
-		super.drawButton(minecraft, mouseX, mouseY);
+		super.func_191745_a(minecraft, mouseX, mouseY, partialTicks);
 	}
 	
 	/**
@@ -201,7 +201,7 @@ public class GuiControl extends GuiButton
 		glLineWidth(width);
 		
 		Tessellator tessellator = Tessellator.getInstance();
-		VertexBuffer buf = tessellator.getBuffer();
+		BufferBuilder buf = tessellator.getBuffer();
 		buf.begin(GL_LINES, VF_POSITION);
 		buf.pos(x1, y1, 0).endVertex();
 		buf.pos(x2, y2, 0).endVertex();
@@ -270,7 +270,7 @@ public class GuiControl extends GuiButton
 		
 		// Draw the line
 		Tessellator tessellator = Tessellator.getInstance();
-		VertexBuffer buf = tessellator.getBuffer();
+		BufferBuilder buf = tessellator.getBuffer();
 		buf.begin(GL_QUADS, VF_POSITION);
 		buf.pos(x1, y2, z).endVertex();
 		buf.pos(x2, y2, z).endVertex();
@@ -321,7 +321,7 @@ public class GuiControl extends GuiButton
 	public void drawTexturedModalRectRot(int x, int y, int x2, int y2, int u, int v, int u2, int v2)
 	{
 		Tessellator tessellator = Tessellator.getInstance();
-		VertexBuffer buf = tessellator.getBuffer();
+		BufferBuilder buf = tessellator.getBuffer();
 		buf.begin(GL_QUADS, VF_POSITION_TEX);
 		buf.pos(x2, y2, this.zLevel).tex((float)(u) * texMapScale, (float)(v2) * texMapScale).endVertex();
 		buf.pos(x2, y, this.zLevel).tex((float)(u2) * texMapScale, (float)(v2) * texMapScale).endVertex();
@@ -344,7 +344,7 @@ public class GuiControl extends GuiButton
 	public void drawTexturedModalRectRot(int x, int y, int u, int v, int width, int height)
 	{
 		Tessellator tessellator = Tessellator.getInstance();
-		VertexBuffer buf = tessellator.getBuffer();
+		BufferBuilder buf = tessellator.getBuffer();
 		buf.begin(GL_QUADS, VF_POSITION_TEX);
 		buf.pos(x + height, y + width, this.zLevel).tex((float)(u) * texMapScale, (float)(v + height) * texMapScale).endVertex();
 		buf.pos(x + height, y, this.zLevel).tex((float)(u + width) * texMapScale, (float)(v + height) * texMapScale).endVertex();
@@ -505,7 +505,7 @@ public class GuiControl extends GuiButton
 		
 		// Draw the frame
 		Tessellator tessellator = Tessellator.getInstance();
-		VertexBuffer buf = tessellator.getBuffer();
+		BufferBuilder buf = tessellator.getBuffer();
 		
 		buf.begin(GL_LINES, VF_POSITION);
 		buf.pos(x - size, y, 0).endVertex();
@@ -585,7 +585,7 @@ public class GuiControl extends GuiButton
 	public void drawTexturedModalRect(int x, int y, int x2, int y2, int u, int v, int u2, int v2)
 	{
 		Tessellator tessellator = Tessellator.getInstance();
-		VertexBuffer buf = tessellator.getBuffer();
+		BufferBuilder buf = tessellator.getBuffer();
 		buf.begin(GL_QUADS, VF_POSITION_TEX);
 		buf.pos(x, y2, this.zLevel).tex((float)(u) * texMapScale, (float)(v2) * texMapScale).endVertex();
 		buf.pos(x2, y2, this.zLevel).tex((float)(u2) * texMapScale, (float)(v2) * texMapScale).endVertex();
@@ -609,7 +609,7 @@ public class GuiControl extends GuiButton
 	public void drawTexturedModalRectF(int x, int y, int x2, int y2, float u, float v, float u2, float v2)
 	{
 		Tessellator tessellator = Tessellator.getInstance();
-		VertexBuffer buf = tessellator.getBuffer();
+		BufferBuilder buf = tessellator.getBuffer();
 		buf.begin(GL_QUADS, VF_POSITION_TEX);
 		buf.pos(x, y2, this.zLevel).tex(u, v2).endVertex();
 		buf.pos(x2, y2, this.zLevel).tex(u2, v2).endVertex();
@@ -633,7 +633,7 @@ public class GuiControl extends GuiButton
 	public void drawTexturedModalRect(int x, int y, int u, int v, int width, int height, float texMapScale)
 	{
 		Tessellator tessellator = Tessellator.getInstance();
-		VertexBuffer buf = tessellator.getBuffer();
+		BufferBuilder buf = tessellator.getBuffer();
 		buf.begin(GL_QUADS, VF_POSITION_TEX);
 		buf.pos(x + 0, y + height, this.zLevel).tex((float)(u + 0) * texMapScale, (float)(v + height) * texMapScale).endVertex();
 		buf.pos(x + width, y + height, this.zLevel).tex((float)(u + width) * texMapScale, (float)(v + height) * texMapScale).endVertex();

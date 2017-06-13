@@ -196,7 +196,7 @@ public class LiteModWorldEditCUI implements Tickable, InitCompleteListener, Plug
 	@Override
 	public String getVersion()
 	{
-		return "1.11.2_00";
+		return "1.12_00";
 	}
 	
 	@Override

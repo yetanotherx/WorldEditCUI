@@ -114,17 +114,17 @@ public class CUIConfigPanel extends Gui implements ConfigPanel
 	@Override
 	public void drawPanel(ConfigPanelHost host, int mouseX, int mouseY, float partialTicks)
 	{
-		this.drawString(this.mc.fontRendererObj, I18n.format("gui.options.compat.title"),  10, 10, 0xFFFFFF55);
-		this.drawString(this.mc.fontRendererObj, I18n.format("gui.options.colours.title"), 10, 64, 0xFFFFFF55);
+		this.drawString(this.mc.fontRenderer, I18n.format("gui.options.compat.title"),  10, 10, 0xFFFFFF55);
+		this.drawString(this.mc.fontRenderer, I18n.format("gui.options.colours.title"), 10, 64, 0xFFFFFF55);
 		
 		for (GuiButton control : this.controlList)
 		{
-			control.drawButton(this.mc, mouseX, mouseY);
+			control.func_191745_a(this.mc, mouseX, mouseY, partialTicks); // drawButton
 		}
 		
 		for (GuiColourButton colourButton : this.colourButtonList)
 		{
-			colourButton.drawPicker(this.mc, mouseX, mouseY);
+			colourButton.drawPicker(this.mc, mouseX, mouseY, partialTicks);
 		}
 	}
 	

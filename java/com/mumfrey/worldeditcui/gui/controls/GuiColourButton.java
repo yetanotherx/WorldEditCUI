@@ -53,37 +53,37 @@ public class GuiColourButton extends GuiControl
 	}
 	
 	@Override
-	public void drawControl(Minecraft minecraft, int mouseX, int mouseY)
+	public void drawControl(Minecraft minecraft, int mouseX, int mouseY, float partialTicks)
 	{
 		if (this.visible)
 		{
-			boolean mouseOver = mouseX >= this.xPosition && mouseY >= this.yPosition && mouseX < this.xPosition + this.width && mouseY < this.yPosition + this.height;
+			boolean mouseOver = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
 			int borderColour = mouseOver || this.picker != null ? 0xFFFFFFFF : 0xFFA0A0A0;
 			
-			drawRect(this.xPosition, this.yPosition, this.xPosition + this.width, this.yPosition + this.height, borderColour);
+			drawRect(this.x, this.y, this.x + this.width, this.y + this.height, borderColour);
 			
 			int v = Math.min(Math.max((int)(((float)this.height / (float)this.width) * 1024F), 256), 1024);
 			
 			minecraft.getTextureManager().bindTexture(GuiColourPicker.COLOURPICKER_CHECKER);
 			glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			this.drawTexturedModalRect(this.xPosition + 1, this.yPosition + 1, this.xPosition + this.width - 1, this.yPosition + this.height - 1, 0, 0, 1024, v);
+			this.drawTexturedModalRect(this.x + 1, this.y + 1, this.x + this.width - 1, this.y + this.height - 1, 0, 0, 1024, v);
 			
-			drawRect(this.xPosition + 1, this.yPosition + 1, this.xPosition + this.width - 1, this.yPosition + this.height - 1, this.colour);
+			drawRect(this.x + 1, this.y + 1, this.x + this.width - 1, this.y + this.height - 1, this.colour);
 			
 			this.mouseDragged(minecraft, mouseX, mouseY);
 			
 			if (this.displayString != null && this.displayString.length() > 0)
 			{
-				this.drawString(minecraft.fontRendererObj, this.displayString, this.xPosition + this.width + 8, this.yPosition + (this.height - 8) / 2, 0xFFFFFFFF);
+				this.drawString(minecraft.fontRenderer, this.displayString, this.x + this.width + 8, this.y + (this.height - 8) / 2, 0xFFFFFFFF);
 			}
 		}
 	}
 	
-	public void drawPicker(Minecraft minecraft, int mouseX, int mouseY)
+	public void drawPicker(Minecraft minecraft, int mouseX, int mouseY, float partialTicks)
 	{
 		if (this.visible && this.picker != null)
 		{
-			this.picker.drawButton(minecraft, mouseX, mouseY);
+			this.picker.func_191745_a(minecraft, mouseX, mouseY, partialTicks); // drawButton
 			
 			if (this.picker.getDialogResult() == DialogResult.OK)
 			{
@@ -132,8 +132,8 @@ public class GuiColourButton extends GuiControl
 		{
 			if (pressed)
 			{
-				int xPos = Math.min(this.xPosition + this.width, GuiControl.lastScreenWidth - 233);
-				int yPos = Math.min(this.yPosition, GuiControl.lastScreenHeight - 175);
+				int xPos = Math.min(this.x + this.width, GuiControl.lastScreenWidth - 233);
+				int yPos = Math.min(this.y, GuiControl.lastScreenHeight - 175);
 				
 				this.picker = new GuiColourPicker(minecraft, 1, xPos, yPos, this.colour, "Choose colour");
 				this.pickerClicked = false;

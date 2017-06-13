@@ -6,7 +6,7 @@ import com.mumfrey.worldeditcui.render.points.PointCube;
 import com.mumfrey.worldeditcui.util.Vector3;
 
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
+import net.minecraft.client.renderer.BufferBuilder;
 import static com.mumfrey.liteloader.gl.GL.*;
 
 /**
@@ -39,7 +39,7 @@ public class RenderCylinderCircles
 	public void render(Vector3 cameraPos)
 	{
 		Tessellator tessellator = Tessellator.getInstance();
-		VertexBuffer buf = tessellator.getBuffer();
+		BufferBuilder buf = tessellator.getBuffer();
 
 		double xPos = this.centreX - cameraPos.getX();
 		double zPos = this.centreZ - cameraPos.getZ();

@@ -9,7 +9,7 @@ import com.mumfrey.worldeditcui.util.Vector2;
 import com.mumfrey.worldeditcui.util.Vector3;
 
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
+import net.minecraft.client.renderer.BufferBuilder;
 import static com.mumfrey.liteloader.gl.GL.*;
 
 /**
@@ -45,7 +45,7 @@ public class Render2DGrid
 	protected void drawPoly(Vector3 cameraPos, double height)
 	{
 		Tessellator tessellator = Tessellator.getInstance();
-		VertexBuffer buf = tessellator.getBuffer();
+		BufferBuilder buf = tessellator.getBuffer();
 		for (LineInfo tempColour : this.colour.getColours())
 		{
 			tempColour.prepareRender();

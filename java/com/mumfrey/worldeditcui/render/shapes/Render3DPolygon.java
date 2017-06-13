@@ -5,7 +5,7 @@ import com.mumfrey.worldeditcui.render.LineInfo;
 import com.mumfrey.worldeditcui.util.Vector3;
 
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
+import net.minecraft.client.renderer.BufferBuilder;
 import static com.mumfrey.liteloader.gl.GL.*;
 
 /**
@@ -29,7 +29,7 @@ public class Render3DPolygon
 	public void render(Vector3 cameraPos)
 	{
 		Tessellator tessellator = Tessellator.getInstance();
-		VertexBuffer buf = tessellator.getBuffer();
+		BufferBuilder buf = tessellator.getBuffer();
 		
 		for (LineInfo tempColour : this.colour.getColours())
 		{

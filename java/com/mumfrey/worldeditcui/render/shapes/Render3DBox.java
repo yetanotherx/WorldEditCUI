@@ -6,7 +6,7 @@ import com.mumfrey.worldeditcui.util.BoundingBox;
 import com.mumfrey.worldeditcui.util.Vector3;
 
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
+import net.minecraft.client.renderer.BufferBuilder;
 import static com.mumfrey.liteloader.gl.GL.*;
 
 /**
@@ -37,7 +37,7 @@ public class Render3DBox
 	public void render(Vector3 cameraPos)
 	{
 		Tessellator tessellator = Tessellator.getInstance();
-		VertexBuffer buf = tessellator.getBuffer();
+		BufferBuilder buf = tessellator.getBuffer();
 		double x1 = this.first.getX() - cameraPos.getX(); 
 		double y1 = this.first.getY() - cameraPos.getY(); 
 		double z1 = this.first.getZ() - cameraPos.getZ(); 

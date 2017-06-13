@@ -6,7 +6,7 @@ import com.mumfrey.worldeditcui.render.points.PointCube;
 import com.mumfrey.worldeditcui.util.Vector3;
 
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
+import net.minecraft.client.renderer.BufferBuilder;
 import static com.mumfrey.liteloader.gl.GL.*;
 
 /**
@@ -54,7 +54,7 @@ public class RenderEllipsoid
 	protected void drawXZPlane(LineInfo colour)
 	{
 		Tessellator tessellator = Tessellator.getInstance();
-		VertexBuffer buf = tessellator.getBuffer();
+		BufferBuilder buf = tessellator.getBuffer();
 
 		int yRad = (int)Math.floor(this.radii.getY());
 		for (int yBlock = -yRad; yBlock < yRad; yBlock++)
@@ -90,7 +90,7 @@ public class RenderEllipsoid
 	protected void drawYZPlane(LineInfo colour)
 	{
 		Tessellator tessellator = Tessellator.getInstance();
-		VertexBuffer buf = tessellator.getBuffer();
+		BufferBuilder buf = tessellator.getBuffer();
 
 		int xRad = (int)Math.floor(this.radii.getX());
 		for (int xBlock = -xRad; xBlock < xRad; xBlock++)
@@ -126,7 +126,7 @@ public class RenderEllipsoid
 	protected void drawXYPlane(LineInfo colour)
 	{
 		Tessellator tessellator = Tessellator.getInstance();
-		VertexBuffer buf = tessellator.getBuffer();
+		BufferBuilder buf = tessellator.getBuffer();
 
 		int zRad = (int)Math.floor(this.radii.getZ());
 		for (int zBlock = -zRad; zBlock < zRad; zBlock++)

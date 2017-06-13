@@ -81,23 +81,23 @@ public class GuiColourPicker extends GuiControl
 		if (this.opacity == 0x01000000)
 			this.opacity = 0;
 		
-		this.fontRenderer = minecraft.fontRendererObj;
-		this.txtRed = new GuiTextField(0, this.fontRenderer, this.xPosition + 188, this.yPosition + 10, 32, 16);
-		this.txtGreen = new GuiTextField(1, this.fontRenderer, this.xPosition + 188, this.yPosition + 30, 32, 16);
-		this.txtBlue = new GuiTextField(2, this.fontRenderer, this.xPosition + 188, this.yPosition + 50, 32, 16);
-		this.txtAlpha = new GuiTextField(3, this.fontRenderer, this.xPosition + 188, this.yPosition + 70, 32, 16);
+		this.fontRenderer = minecraft.fontRenderer;
+		this.txtRed = new GuiTextField(0, this.fontRenderer, this.x + 188, this.y + 10, 32, 16);
+		this.txtGreen = new GuiTextField(1, this.fontRenderer, this.x + 188, this.y + 30, 32, 16);
+		this.txtBlue = new GuiTextField(2, this.fontRenderer, this.x + 188, this.y + 50, 32, 16);
+		this.txtAlpha = new GuiTextField(3, this.fontRenderer, this.x + 188, this.y + 70, 32, 16);
 		
 		this.txtRed.setMaxStringLength(3);
 		this.txtGreen.setMaxStringLength(3);
 		this.txtBlue.setMaxStringLength(3);
 		this.txtAlpha.setMaxStringLength(3);
 		
-		this.rectHSArea = new Rectangle(this.xPosition + 10, this.yPosition + 10, 128, 128);
-		this.rectBArea = new Rectangle(this.xPosition + 143, this.yPosition + 10, 15, 128);
-		this.rectAArea = new Rectangle(this.xPosition + 163, this.yPosition + 10, 15, 128);
+		this.rectHSArea = new Rectangle(this.x + 10, this.y + 10, 128, 128);
+		this.rectBArea = new Rectangle(this.x + 143, this.y + 10, 15, 128);
+		this.rectAArea = new Rectangle(this.x + 163, this.y + 10, 15, 128);
 		
-		this.btnOk = new GuiControl(minecraft, 0, this.xPosition + 9, this.yPosition + 145, 55, 20, I18n.format("gui.ok"));
-		this.btnCancel = new GuiControl(minecraft, 1, this.xPosition + 70, this.yPosition + 145, 65, 20, I18n.format("gui.cancel"));
+		this.btnOk = new GuiControl(minecraft, 0, this.x + 9, this.y + 145, 55, 20, I18n.format("gui.ok"));
+		this.btnCancel = new GuiControl(minecraft, 1, this.x + 70, this.y + 145, 65, 20, I18n.format("gui.cancel"));
 		
 		this.updateColour();
 	}
@@ -115,47 +115,47 @@ public class GuiColourPicker extends GuiControl
 	}
 	
 	@Override
-	protected void drawControl(Minecraft minecraft, int mouseX, int mouseY)
+	protected void drawControl(Minecraft minecraft, int mouseX, int mouseY, float partialTicks)
 	{
 		this.mouseDragged(minecraft, mouseX, mouseY);
 		
 		// Calculate coordinates for the selectors
-		int hPos = this.xPosition + 10 + (int)(128F * this.hsb[H]);
-		int sPos = this.yPosition + 10 + (128 - (int)(128F * this.hsb[S]));
-		int bPos = this.yPosition + 10 + (128 - (int)(128F * this.hsb[B]));
-		int aPos = this.yPosition + 10 + ((256 - ((this.opacity >> 24) & 0xFF)) / 2);
+		int hPos = this.x + 10 + (int)(128F * this.hsb[H]);
+		int sPos = this.y + 10 + (128 - (int)(128F * this.hsb[S]));
+		int bPos = this.y + 10 + (128 - (int)(128F * this.hsb[B]));
+		int aPos = this.y + 10 + ((256 - ((this.opacity >> 24) & 0xFF)) / 2);
 		
 		// Calculate B colour
 		int brightness = Color.HSBtoRGB(this.hsb[H], this.hsb[S], 1.0F) | 0xFF000000;
 		
 		// Draw backgrounds
-		drawRect(this.xPosition, this.yPosition, this.xPosition + this.width, this.yPosition + this.height, 0xAA000000); // Background
-		drawRect(this.xPosition + 9, this.yPosition + 9, this.xPosition + 139, this.yPosition + 139, 0xFFA0A0A0); // HS background
-		drawRect(this.xPosition + 142, this.yPosition + 9, this.xPosition + 159, this.yPosition + 139, 0xFFA0A0A0); // B background
-		drawRect(this.xPosition + 162, this.yPosition + 9, this.xPosition + 179, this.yPosition + 139, 0xFFA0A0A0); // A background
-		drawRect(this.xPosition + 187, this.yPosition + 105, this.xPosition + 221, this.yPosition + 139, 0xFFA0A0A0); // Preview background
+		drawRect(this.x, this.y, this.x + this.width, this.y + this.height, 0xAA000000); // Background
+		drawRect(this.x + 9, this.y + 9, this.x + 139, this.y + 139, 0xFFA0A0A0); // HS background
+		drawRect(this.x + 142, this.y + 9, this.x + 159, this.y + 139, 0xFFA0A0A0); // B background
+		drawRect(this.x + 162, this.y + 9, this.x + 179, this.y + 139, 0xFFA0A0A0); // A background
+		drawRect(this.x + 187, this.y + 105, this.x + 221, this.y + 139, 0xFFA0A0A0); // Preview background
 		
 		// Draw colour picker
 		this.mc.getTextureManager().bindTexture(GuiColourPicker.COLOURPICKER_PICKER);
 		glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.drawTexturedModalRect(this.xPosition + 10, this.yPosition + 10, this.xPosition + 138, this.yPosition + 138, 0, 0, 256, 256);
+		this.drawTexturedModalRect(this.x + 10, this.y + 10, this.x + 138, this.y + 138, 0, 0, 256, 256);
 		this.drawCrossHair(hPos, sPos, 5, 1, 0xFF000000);
 		
 		// Draw brightness bar
-		this.drawGradientRect(this.xPosition + 143, this.yPosition + 10, this.xPosition + 158, this.yPosition + 138, brightness, 0xFF000000);
-		this.drawRotText(this.fontRenderer, "Luminosity", this.xPosition + 150, this.yPosition + 74, 0xFF000000, false);
-		drawRect(this.xPosition + 142, bPos - 1, this.xPosition + 159, bPos + 1, 0xFFFFFFFF);
+		this.drawGradientRect(this.x + 143, this.y + 10, this.x + 158, this.y + 138, brightness, 0xFF000000);
+		this.drawRotText(this.fontRenderer, "Luminosity", this.x + 150, this.y + 74, 0xFF000000, false);
+		drawRect(this.x + 142, bPos - 1, this.x + 159, bPos + 1, 0xFFFFFFFF);
 		
 		// Draw opacity bar
-		this.drawGradientRect(this.xPosition + 163, this.yPosition + 10, this.xPosition + 178, this.yPosition + 138, 0xFFFFFFFF, 0xFF000000);
-		this.drawRotText(this.fontRenderer, "Opacity", this.xPosition + 170, this.yPosition + 74, 0xFF000000, false);
-		drawRect(this.xPosition + 162, aPos - 1, this.xPosition + 179, aPos + 1, 0xFFFFFFFF);
+		this.drawGradientRect(this.x + 163, this.y + 10, this.x + 178, this.y + 138, 0xFFFFFFFF, 0xFF000000);
+		this.drawRotText(this.fontRenderer, "Opacity", this.x + 170, this.y + 74, 0xFF000000, false);
+		drawRect(this.x + 162, aPos - 1, this.x + 179, aPos + 1, 0xFFFFFFFF);
 		
 		// Draw preview
 		this.mc.getTextureManager().bindTexture(GuiColourPicker.COLOURPICKER_CHECKER);
 		glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.drawTexturedModalRect(this.xPosition + 188, this.yPosition + 106, this.xPosition + 220, this.yPosition + 138, 0, 0, 1024, 1024);
-		drawRect(this.xPosition + 188, this.yPosition + 106, this.xPosition + 220, this.yPosition + 138, this.rgb);
+		this.drawTexturedModalRect(this.x + 188, this.y + 106, this.x + 220, this.y + 138, 0, 0, 1024, 1024);
+		drawRect(this.x + 188, this.y + 106, this.x + 220, this.y + 138, this.rgb);
 		
 		// Draw text boxes
 		this.txtRed.drawTextBox();
@@ -163,8 +163,8 @@ public class GuiColourPicker extends GuiControl
 		this.txtBlue.drawTextBox();
 		this.txtAlpha.drawTextBox();
 		
-		this.btnOk.drawButton(minecraft, mouseX, mouseY);
-		this.btnCancel.drawButton(minecraft, mouseX, mouseY);
+		this.btnOk.func_191745_a(minecraft, mouseX, mouseY, partialTicks); // drawButton
+		this.btnCancel.func_191745_a(minecraft, mouseX, mouseY, partialTicks); // drawButton
 	}
 	
 	public void updateCursorCounter()
@@ -223,20 +223,20 @@ public class GuiColourPicker extends GuiControl
 		
 		if (this.draggingHS)
 		{
-			this.hsb[H] = clamp(mouseX - this.xPosition - 10, 0, 128) / 128F;
-			this.hsb[S] = (128F - clamp(mouseY - this.yPosition - 10, 0, 128)) / 128F;
+			this.hsb[H] = clamp(mouseX - this.x - 10, 0, 128) / 128F;
+			this.hsb[S] = (128F - clamp(mouseY - this.y - 10, 0, 128)) / 128F;
 			this.updateColour();
 		}
 		
 		if (this.draggingB)
 		{
-			this.hsb[B] = (128F - clamp(mouseY - this.yPosition - 10, 0, 128)) / 128F;
+			this.hsb[B] = (128F - clamp(mouseY - this.y - 10, 0, 128)) / 128F;
 			this.updateColour();
 		}
 		
 		if (this.draggingA)
 		{
-			this.opacity = (mouseY - this.yPosition < 11) ? 0xFF000000 : (((128 - (int)clamp(mouseY - this.yPosition - 10, 0, 128)) << 25) & 0xFF000000);
+			this.opacity = (mouseY - this.y < 11) ? 0xFF000000 : (((128 - (int)clamp(mouseY - this.y - 10, 0, 128)) << 25) & 0xFF000000);
 			this.updateColour();
 		}
 	}
