@@ -17,9 +17,9 @@ public enum RegionType
 	
 	private final String name;
 	
-	private final Class<? extends BaseRegion> regionClass;
+	private final Class<? extends Region> regionClass;
 	
-	private RegionType(String key, String name, Class<? extends BaseRegion> regionClass)
+	private RegionType(String key, String name, Class<? extends Region> regionClass)
 	{
 		this.key = key;
 		this.name = name;
@@ -36,7 +36,7 @@ public enum RegionType
 		return this.name;
 	}
 	
-	public Class<? extends BaseRegion> getRegionClass()
+	public Class<? extends Region> getRegionClass()
 	{
 		return this.regionClass;
 	}

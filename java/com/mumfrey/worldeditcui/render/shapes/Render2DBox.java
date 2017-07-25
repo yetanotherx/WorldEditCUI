@@ -2,7 +2,7 @@ package com.mumfrey.worldeditcui.render.shapes;
 
 import java.util.List;
 
-import com.mumfrey.worldeditcui.render.LineColour;
+import com.mumfrey.worldeditcui.render.RenderColour;
 import com.mumfrey.worldeditcui.render.LineInfo;
 import com.mumfrey.worldeditcui.render.points.PointRectangle;
 import com.mumfrey.worldeditcui.util.Vector2;
@@ -17,23 +17,22 @@ import static com.mumfrey.liteloader.gl.GL.*;
  * 
  * @author yetanotherx
  * @author lahwran
+ * @author Adam Mummery-Smith
  */
-public class Render2DBox
+public class Render2DBox extends RenderRegion
 {
+	private List<PointRectangle> points;
+	private int min, max;
 	
-	protected LineColour colour;
-	protected List<PointRectangle> points;
-	protected int min;
-	protected int max;
-	
-	public Render2DBox(LineColour colour, List<PointRectangle> points, int min, int max)
+	public Render2DBox(RenderColour colour, List<PointRectangle> points, int min, int max)
 	{
-		this.colour = colour;
+		super(colour);
 		this.points = points;
 		this.min = min;
 		this.max = max;
 	}
 	
+	@Override
 	public void render(Vector3 cameraPos)
 	{
 		Tessellator tessellator = Tessellator.getInstance();

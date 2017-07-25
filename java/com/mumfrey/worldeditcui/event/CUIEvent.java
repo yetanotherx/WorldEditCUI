@@ -7,18 +7,19 @@ import com.mumfrey.worldeditcui.WorldEditCUI;
  * Base event for CUI events, handles parameter validation and running the logic
  * 
  * @author yetanotherx
- * 
+ * @author Adam Mummery-Smith
  */
 public abstract class CUIEvent
 {
+	protected final WorldEditCUI controller;
+	protected final String[] params;
+	protected final boolean multi;
 	
-	protected WorldEditCUI controller;
-	protected String[] args;
-	
-	public CUIEvent(WorldEditCUI controller, String[] args)
+	public CUIEvent(CUIEventArgs args)
 	{
-		this.controller = controller;
-		this.args = args;
+		this.controller = args.getController();
+		this.params = args.getParams();
+		this.multi = args.isMulti();
 	}
 	
 	public abstract String raise();
@@ -41,14 +42,14 @@ public abstract class CUIEvent
 		
 		if (max == min)
 		{
-			if (this.args.length != max)
+			if (this.params.length != max)
 			{
 				return false;
 			}
 		}
 		else
 		{
-			if (this.args.length > max || this.args.length < min)
+			if (this.params.length > max || this.params.length < min)
 			{
 				return false;
 			}
@@ -58,16 +59,16 @@ public abstract class CUIEvent
 		
 	}
 	
-	public final void prepare()
+	public void prepare()
 	{
-		if (this.controller == null || this.args == null)
+		if (this.controller == null || this.params == null)
 		{
 			throw new IllegalStateException("Controller and parameters must both be set.");
 		}
 		
 		if (!this.isValid())
 		{
-			String message = String.format("Invalid number of parameters. %s event requires %s parameters but received %s [%s]", this.getEventName(), this.getRequiredParameterString(), this.args.length, Joiner.on(", ").join(this.args));
+			String message = String.format("Invalid number of parameters. %s event requires %s parameters but received %s [%s]", this.getEventName(), this.getRequiredParameterString(), this.params.length, Joiner.on(", ").join(this.params));
 			throw new IllegalArgumentException(message);
 		}
 	}
@@ -84,16 +85,16 @@ public abstract class CUIEvent
 
 	public int getInt(int index)
 	{
-		return (int)Float.parseFloat(this.args[index]);
+		return (int)Float.parseFloat(this.params[index]);
 	}
 	
 	public double getDouble(int index)
 	{
-		return Double.parseDouble(this.args[index]);
+		return Double.parseDouble(this.params[index]);
 	}
 	
 	public String getString(int index)
 	{
-		return this.args[index];
+		return this.params[index];
 	}
 }

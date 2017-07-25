@@ -12,7 +12,7 @@ import com.mumfrey.worldeditcui.util.Vector3;
  * 
  * @author lahwran
  * @author yetanotherx
- * 
+ * @author Adam Mummery-Smith
  */
 public class CUIListenerWorldRender
 {
@@ -46,10 +46,7 @@ public class CUIListenerWorldRender
 			{
 				Vector3 cameraPos = new Vector3(this.minecraft.getRenderViewEntity(), partialTicks); 
 				glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
-				if (this.controller.getSelection() != null)
-				{
-					this.controller.getSelection().render(cameraPos);
-				}
+				this.controller.renderSelections(cameraPos);
 			}
 			catch (Exception e)
 			{

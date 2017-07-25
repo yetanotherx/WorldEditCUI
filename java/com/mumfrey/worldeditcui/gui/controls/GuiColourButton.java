@@ -2,7 +2,7 @@ package com.mumfrey.worldeditcui.gui.controls;
 
 import static com.mumfrey.liteloader.gl.GL.*;
 
-import com.mumfrey.worldeditcui.render.LineColour;
+import com.mumfrey.worldeditcui.render.ConfiguredColour;
 
 import net.minecraft.client.Minecraft;
 
@@ -18,13 +18,13 @@ public class GuiColourButton extends GuiControl
 	 */
 	private int colour = 0xFF000000;
 	
-	private LineColour lineColour;
+	private ConfiguredColour lineColour;
 	
 	private GuiColourPicker picker;
 	
 	private boolean pickerClicked = false;
 	
-	public GuiColourButton(Minecraft minecraft, int id, int xPosition, int yPosition, int controlWidth, int controlHeight, LineColour lineColour)
+	public GuiColourButton(Minecraft minecraft, int id, int xPosition, int yPosition, int controlWidth, int controlHeight, ConfiguredColour lineColour)
 	{
 		super(minecraft, id, xPosition, yPosition, controlWidth, controlHeight, lineColour.getDisplayName());
 		this.lineColour = lineColour;
@@ -34,7 +34,7 @@ public class GuiColourButton extends GuiControl
 	/**
 	 * @param lineColour
 	 */
-	public void updateColour(LineColour lineColour)
+	public void updateColour(ConfiguredColour lineColour)
 	{
 		if (lineColour == this.lineColour)
 		{
@@ -83,7 +83,7 @@ public class GuiColourButton extends GuiControl
 	{
 		if (this.visible && this.picker != null)
 		{
-			this.picker.func_191745_a(minecraft, mouseX, mouseY, partialTicks); // drawButton
+			this.picker.drawButton(minecraft, mouseX, mouseY, partialTicks);
 			
 			if (this.picker.getDialogResult() == DialogResult.OK)
 			{

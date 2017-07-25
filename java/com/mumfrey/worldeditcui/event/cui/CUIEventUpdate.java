@@ -1,7 +1,7 @@
 package com.mumfrey.worldeditcui.event.cui;
 
-import com.mumfrey.worldeditcui.WorldEditCUI;
 import com.mumfrey.worldeditcui.event.CUIEvent;
+import com.mumfrey.worldeditcui.event.CUIEventArgs;
 import com.mumfrey.worldeditcui.event.CUIEventType;
 
 /**
@@ -9,13 +9,13 @@ import com.mumfrey.worldeditcui.event.CUIEventType;
  * 
  * @author lahwran
  * @author yetanotherx
+ * @author Adam Mummery-Smith
  */
 public class CUIEventUpdate extends CUIEvent
 {
-	
-	public CUIEventUpdate(WorldEditCUI controller, String[] args)
+	public CUIEventUpdate(CUIEventArgs args)
 	{
-		super(controller, args);
+		super(args);
 	}
 	
 	@Override

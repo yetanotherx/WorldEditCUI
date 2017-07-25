@@ -6,15 +6,13 @@ import com.mumfrey.worldeditcui.event.CUIEventType;
 import com.mumfrey.worldeditcui.render.region.Region;
 
 /**
- * Called when resize event is received
+ * Called when grid spacing event is received
  * 
- * @author lahwran
- * @author yetanotherx
  * @author Adam Mummery-Smith
  */
-public class CUIEventBounds extends CUIEvent
+public class CUIEventGrid extends CUIEvent
 {
-	public CUIEventBounds(CUIEventArgs args)
+	public CUIEventGrid(CUIEventArgs args)
 	{
 		super(args);
 	}
@@ -22,24 +20,31 @@ public class CUIEventBounds extends CUIEvent
 	@Override
 	public CUIEventType getEventType()
 	{
-		return CUIEventType.MINMAX;
+		return CUIEventType.GRID;
+	}
+	
+	@Override
+	public void prepare()
+	{
+		if (!this.multi)
+		{
+			throw new IllegalStateException("GRID event is not valid for non-multi selections");
+		}
+		
+		super.prepare();
 	}
 	
 	@Override
 	public String raise()
 	{
-		Region selection = this.controller.getSelection(this.multi);
+		Region selection = this.controller.getSelection(true);
 		if (selection == null)
 		{
 			this.controller.getDebugger().debug("No active multi selection.");
 			return null;
 		}
 		
-		int min = this.getInt(0);
-		int max = this.getInt(1);
-		selection.setMinMax(min, max);
-		this.controller.getDebugger().debug("Expanding/contracting selection.");
-		
+		selection.setGridSpacing(this.getDouble(0));
 		return null;
 	}
 }

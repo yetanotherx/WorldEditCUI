@@ -1,18 +1,19 @@
 package com.mumfrey.worldeditcui.render.points;
 
-import com.mumfrey.worldeditcui.render.LineColour;
+import com.mumfrey.worldeditcui.render.RenderColour;
+import com.mumfrey.worldeditcui.render.ConfiguredColour;
 import com.mumfrey.worldeditcui.render.shapes.Render3DBox;
 import com.mumfrey.worldeditcui.util.Vector2;
 import com.mumfrey.worldeditcui.util.Vector3;
 
 /**
- * Stores data about a prism surrounding two
- * blocks in the world. Used to store info
- * about the selector blocks for polys. Keeps 
- * track of colour, x/y/z values, and rendering.
+ * Stores data about a prism surrounding two blocks in the world. Used to store
+ * info about the selector blocks for polys. Keeps track of colour, x/y/z
+ * values, and rendering.
  * 
  * @author yetanotherx
  * @author lahwran
+ * @author Adam Mummery-Smith
  */
 public class PointRectangle
 {
@@ -21,7 +22,7 @@ public class PointRectangle
 	private static final Vector2 MAX_VEC = new Vector2(PointRectangle.OFF + 1, PointRectangle.OFF + 1);
 	
 	protected Vector2 point;
-	protected LineColour colour = LineColour.POLYPOINT;
+	protected RenderColour colour = ConfiguredColour.POLYPOINT;
 	
 	private int min, max;
 	
@@ -52,12 +53,12 @@ public class PointRectangle
 		this.point = point;
 	}
 	
-	public LineColour getColour()
+	public RenderColour getColour()
 	{
 		return this.colour;
 	}
 	
-	public void setColour(LineColour colour)
+	public void setColour(RenderColour colour)
 	{
 		this.colour = colour;
 	}

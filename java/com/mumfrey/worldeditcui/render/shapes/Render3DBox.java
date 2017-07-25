@@ -1,39 +1,61 @@
 package com.mumfrey.worldeditcui.render.shapes;
 
-import com.mumfrey.worldeditcui.render.LineColour;
+import static com.mumfrey.liteloader.gl.GL.*;
+
+import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.Tessellator;
+
+import com.mumfrey.worldeditcui.render.RenderColour;
 import com.mumfrey.worldeditcui.render.LineInfo;
 import com.mumfrey.worldeditcui.util.BoundingBox;
+import com.mumfrey.worldeditcui.util.Observable;
 import com.mumfrey.worldeditcui.util.Vector3;
-
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.BufferBuilder;
-import static com.mumfrey.liteloader.gl.GL.*;
 
 /**
  * Draws a rectangular prism around 2 corners
  * 
  * @author yetanotherx
  * @author lahwran
+ * @author Adam Mummery-Smith
  */
-public class Render3DBox
+public class Render3DBox extends RenderRegion
 {
+	private Vector3 first, second;
 	
-	protected LineColour colour;
-	protected Vector3 first;
-	protected Vector3 second;
-	
-	public Render3DBox(LineColour colour, BoundingBox region)
+	public Render3DBox(RenderColour colour, BoundingBox region)
 	{
 		this(colour, region.getMin(), region.getMax());
+		if (region.isDynamic())
+		{
+			region.addObserver(this);
+		}
 	}
 	
-	public Render3DBox(LineColour colour, Vector3 first, Vector3 second)
+	public Render3DBox(RenderColour colour, Vector3 first, Vector3 second)
 	{
-		this.colour = colour;
+		super(colour);
 		this.first = first;
 		this.second = second;
 	}
 	
+	@Override
+	public void notifyChanged(Observable<?> source)
+	{
+		this.setPosition((BoundingBox)source);
+	}
+	
+	public void setPosition(BoundingBox region)
+	{
+		this.setPosition(region.getMin(), region.getMax());
+	}
+	
+	public void setPosition(Vector3 first, Vector3 second)
+	{
+		this.first = first;
+		this.second = second;
+	}
+	
+	@Override
 	public void render(Vector3 cameraPos)
 	{
 		Tessellator tessellator = Tessellator.getInstance();

@@ -1,23 +1,23 @@
 package com.mumfrey.worldeditcui.render.shapes;
 
-import com.mumfrey.worldeditcui.render.LineColour;
+import static com.mumfrey.liteloader.gl.GL.*;
+
+import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.Tessellator;
+
+import com.mumfrey.worldeditcui.render.RenderColour;
 import com.mumfrey.worldeditcui.render.LineInfo;
 import com.mumfrey.worldeditcui.render.points.PointCube;
 import com.mumfrey.worldeditcui.util.Vector3;
-
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.BufferBuilder;
-import static com.mumfrey.liteloader.gl.GL.*;
 
 /**
  * Draws an ellipsoid shape around a centre point.
  * 
  * @author yetanotherx
+ * @author Adam Mummery-Smith
  */
-public class RenderEllipsoid
+public class RenderEllipsoid extends RenderRegion
 {
-	
-	protected LineColour colour;
 	protected PointCube centre;
 	protected Vector3 radii;
 	protected final static double twoPi = Math.PI * 2;
@@ -25,9 +25,9 @@ public class RenderEllipsoid
 	protected double centreY;
 	protected double centreZ;
 	
-	public RenderEllipsoid(LineColour colour, PointCube centre, Vector3 radii)
+	public RenderEllipsoid(RenderColour colour, PointCube centre, Vector3 radii)
 	{
-		this.colour = colour;
+		super(colour);
 		this.centre = centre;
 		this.radii = radii;
 		this.centreX = centre.getPoint().getX() + 0.5;
@@ -35,6 +35,7 @@ public class RenderEllipsoid
 		this.centreZ = centre.getPoint().getZ() + 0.5;
 	}
 	
+	@Override
 	public void render(Vector3 cameraPos)
 	{
 		glPushMatrix();

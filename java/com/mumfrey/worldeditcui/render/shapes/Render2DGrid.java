@@ -1,38 +1,39 @@
 package com.mumfrey.worldeditcui.render.shapes;
 
+import static com.mumfrey.liteloader.gl.GL.*;
+
 import java.util.List;
 
-import com.mumfrey.worldeditcui.render.LineColour;
+import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.Tessellator;
+
+import com.mumfrey.worldeditcui.render.RenderColour;
 import com.mumfrey.worldeditcui.render.LineInfo;
 import com.mumfrey.worldeditcui.render.points.PointRectangle;
 import com.mumfrey.worldeditcui.util.Vector2;
 import com.mumfrey.worldeditcui.util.Vector3;
-
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.BufferBuilder;
-import static com.mumfrey.liteloader.gl.GL.*;
 
 /**
  * Draws the grid for a polygon region
  * 
  * @author yetanotherx
  * @author lahwran
+ * @author Adam Mummery-Smith
  */
-public class Render2DGrid
+public class Render2DGrid extends RenderRegion
 {
-	protected LineColour colour;
-	protected List<PointRectangle> points;
-	protected int min;
-	protected int max;
+	private List<PointRectangle> points;
+	private int min, max;
 	
-	public Render2DGrid(LineColour colour, List<PointRectangle> points, int min, int max)
+	public Render2DGrid(RenderColour colour, List<PointRectangle> points, int min, int max)
 	{
-		this.colour = colour;
+		super(colour);
 		this.points = points;
 		this.min = min;
 		this.max = max;
 	}
 	
+	@Override
 	public void render(Vector3 cameraPos)
 	{
 		double off = 0.03;

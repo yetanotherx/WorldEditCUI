@@ -1,12 +1,17 @@
 package com.mumfrey.worldeditcui;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.UUID;
+
 import com.mumfrey.worldeditcui.config.CUIConfiguration;
 import com.mumfrey.worldeditcui.debug.CUIDebug;
 import com.mumfrey.worldeditcui.event.CUIEventDispatcher;
 import com.mumfrey.worldeditcui.exceptions.InitialisationException;
 import com.mumfrey.worldeditcui.render.CUISelectionProvider;
-import com.mumfrey.worldeditcui.render.region.BaseRegion;
 import com.mumfrey.worldeditcui.render.region.CuboidRegion;
+import com.mumfrey.worldeditcui.render.region.Region;
+import com.mumfrey.worldeditcui.util.Vector3;
 
 /**
  * Main controller class. Uses a pseudo-JavaBeans paradigm. The only real
@@ -17,12 +22,14 @@ import com.mumfrey.worldeditcui.render.region.CuboidRegion;
  * TODO: Add ability to flash selection
  *  
  * @author yetanotherx
+ * @author Adam Mummery-Smith
  */
 public class WorldEditCUI
 {
-	public static final int PROTOCOL_VERSION = 3;
+	public static final int PROTOCOL_VERSION = 4;
 	
-	private BaseRegion selection;
+	private final Map<UUID, Region> regions = new LinkedHashMap<UUID, Region>();
+	private Region selection, activeRegion;
 	private CUIDebug debugger;
 	private CUIConfiguration configuration;
 	private CUIEventDispatcher dispatcher;
@@ -71,13 +78,57 @@ public class WorldEditCUI
 		return this.debugger;
 	}
 	
-	public BaseRegion getSelection()
+	public void clear()
 	{
-		return this.selection;
+		this.clearSelection();
+		this.clearRegions();
 	}
 	
-	public void setSelection(BaseRegion selection)
+	public void clearSelection()
 	{
-		this.selection = selection;
+		this.selection = new CuboidRegion(this);
+	}
+	
+	public void clearRegions()
+	{
+		this.activeRegion = null;
+		this.regions.clear();
+	}
+	
+	public Region getSelection(boolean multi)
+	{
+		return multi ? this.activeRegion : this.selection;
+	}
+	
+	public void setSelection(UUID id, Region region)
+	{
+		if (id == null)
+		{
+			this.selection = region;
+			return;
+		}
+
+		if (region == null)
+		{
+			this.regions.remove(id);
+			this.activeRegion = null;
+			return;
+		}
+		
+		this.regions.put(id, region);
+		this.activeRegion = region;
+	}
+
+	public void renderSelections(Vector3 cameraPos)
+	{
+		if (this.selection != null)
+		{
+			this.selection.render(cameraPos);
+		}
+		
+		for (Region region : this.regions.values())
+		{
+			region.render(cameraPos);
+		}
 	}
 }

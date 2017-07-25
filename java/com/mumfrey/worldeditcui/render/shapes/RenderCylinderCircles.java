@@ -1,23 +1,23 @@
 package com.mumfrey.worldeditcui.render.shapes;
 
-import com.mumfrey.worldeditcui.render.LineColour;
+import static com.mumfrey.liteloader.gl.GL.*;
+
+import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.Tessellator;
+
+import com.mumfrey.worldeditcui.render.RenderColour;
 import com.mumfrey.worldeditcui.render.LineInfo;
 import com.mumfrey.worldeditcui.render.points.PointCube;
 import com.mumfrey.worldeditcui.util.Vector3;
-
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.BufferBuilder;
-import static com.mumfrey.liteloader.gl.GL.*;
 
 /**
  * Draws the circles around a cylindrical region
  * 
  * @author yetanotherx
+ * @author Adam Mummery-Smith
  */
-public class RenderCylinderCircles
+public class RenderCylinderCircles extends RenderRegion
 {
-	
-	protected LineColour colour;
 	protected double radX = 0;
 	protected double radZ = 0;
 	protected int minY;
@@ -25,9 +25,9 @@ public class RenderCylinderCircles
 	protected double centreX;
 	protected double centreZ;
 	
-	public RenderCylinderCircles(LineColour colour, PointCube centre, double radX, double radZ, int minY, int maxY)
+	public RenderCylinderCircles(RenderColour colour, PointCube centre, double radX, double radZ, int minY, int maxY)
 	{
-		this.colour = colour;
+		super(colour);
 		this.radX = radX;
 		this.radZ = radZ;
 		this.minY = minY;
@@ -35,7 +35,8 @@ public class RenderCylinderCircles
 		this.centreX = centre.getPoint().getX() + 0.5;
 		this.centreZ = centre.getPoint().getZ() + 0.5;
 	}
-	
+
+	@Override
 	public void render(Vector3 cameraPos)
 	{
 		Tessellator tessellator = Tessellator.getInstance();

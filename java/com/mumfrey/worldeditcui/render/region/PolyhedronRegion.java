@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mumfrey.worldeditcui.WorldEditCUI;
-import com.mumfrey.worldeditcui.render.LineColour;
+import com.mumfrey.worldeditcui.render.ConfiguredColour;
 import com.mumfrey.worldeditcui.render.points.PointCube;
 import com.mumfrey.worldeditcui.render.shapes.Render3DPolygon;
 import com.mumfrey.worldeditcui.util.Vector3;
@@ -13,18 +13,20 @@ import com.mumfrey.worldeditcui.util.Vector3;
  * Main controller for a polygon-type region
  * 
  * @author TomyLobo
+ * @author Adam Mummery-Smith
  */
-public class PolyhedronRegion extends BaseRegion
+public class PolyhedronRegion extends Region
 {
+	private static final Vector3 HALF = new Vector3(0.5, 0.5, 0.5);
 	
-	protected List<PointCube> vertices = new ArrayList<PointCube>();
-	protected List<Vector3[]> faces = new ArrayList<Vector3[]>();
+	private List<PointCube> vertices = new ArrayList<PointCube>();
+	private List<Vector3[]> faces = new ArrayList<Vector3[]>();
 	
 	private List<Render3DPolygon> faceRenders = new ArrayList<Render3DPolygon>();
 	
 	public PolyhedronRegion(WorldEditCUI controller)
 	{
-		super(controller);
+		super(controller, ConfiguredColour.POLYBOX, ConfiguredColour.POLYPOINT, ConfiguredColour.CUBOIDPOINT1);
 	}
 	
 	@Override
@@ -44,8 +46,8 @@ public class PolyhedronRegion extends BaseRegion
 	@Override
 	public void setCuboidPoint(int id, double x, double y, double z)
 	{
-		final PointCube vertex = new PointCube(x, y, z);
-		vertex.setColour(id == 0 ? LineColour.CUBOIDPOINT1 : LineColour.POLYPOINT);
+		final PointCube vertex = new PointCube(x, y, z).setId(id);
+		vertex.setColour(id == 0 ? this.colours[2] : this.colours[1]);
 		
 		if (id < this.vertices.size())
 		{
@@ -61,8 +63,6 @@ public class PolyhedronRegion extends BaseRegion
 		}
 	}
 	
-	private static final Vector3 half = new Vector3(0.5, 0.5, 0.5);
-	
 	@Override
 	public void addPolygon(int[] vertexIds)
 	{
@@ -76,7 +76,7 @@ public class PolyhedronRegion extends BaseRegion
 				return;
 			}
 			
-			face[i] = vertex.getPoint().add(half);
+			face[i] = vertex.getPoint().add(HALF);
 		}
 		this.faces.add(face);
 		this.update();
@@ -88,10 +88,24 @@ public class PolyhedronRegion extends BaseRegion
 		
 		for (Vector3[] face : this.faces)
 		{
-			this.faceRenders.add(new Render3DPolygon(LineColour.POLYBOX, face));
+			this.faceRenders.add(new Render3DPolygon(this.colours[0], face));
 		}
 	}
 	
+	@Override
+	protected void updateColours()
+	{
+		for (PointCube vertex : this.vertices)
+		{
+			vertex.setColour(vertex.getId() == 0 ? this.colours[2] : this.colours[1]);
+		}
+		
+		for (Render3DPolygon face : this.faceRenders)
+		{
+			face.setColour(this.colours[0]);
+		}
+	}
+
 	@Override
 	public RegionType getType()
 	{

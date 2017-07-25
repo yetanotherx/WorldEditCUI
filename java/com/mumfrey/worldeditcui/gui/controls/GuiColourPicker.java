@@ -163,8 +163,8 @@ public class GuiColourPicker extends GuiControl
 		this.txtBlue.drawTextBox();
 		this.txtAlpha.drawTextBox();
 		
-		this.btnOk.func_191745_a(minecraft, mouseX, mouseY, partialTicks); // drawButton
-		this.btnCancel.func_191745_a(minecraft, mouseX, mouseY, partialTicks); // drawButton
+		this.btnOk.drawButton(minecraft, mouseX, mouseY, partialTicks);
+		this.btnCancel.drawButton(minecraft, mouseX, mouseY, partialTicks);
 	}
 	
 	public void updateCursorCounter()

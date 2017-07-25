@@ -1,31 +1,32 @@
 package com.mumfrey.worldeditcui.render.shapes;
 
-import com.mumfrey.worldeditcui.render.LineColour;
+import static com.mumfrey.liteloader.gl.GL.*;
+
+import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.Tessellator;
+
+import com.mumfrey.worldeditcui.render.RenderColour;
 import com.mumfrey.worldeditcui.render.LineInfo;
 import com.mumfrey.worldeditcui.util.Vector3;
-
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.BufferBuilder;
-import static com.mumfrey.liteloader.gl.GL.*;
 
 /**
  * Draws a polygon
  * 
  * @author yetanotherx
  * @author lahwran
+ * @author Adam Mummery-Smith
  */
-public class Render3DPolygon
+public class Render3DPolygon extends RenderRegion
 {
+	private Vector3[] vertices;
 	
-	protected LineColour colour;
-	protected Vector3[] vertices;
-	
-	public Render3DPolygon(LineColour colour, Vector3... vertices)
+	public Render3DPolygon(RenderColour colour, Vector3... vertices)
 	{
-		this.colour = colour;
+		super(colour);
 		this.vertices = vertices;
 	}
 	
+	@Override
 	public void render(Vector3 cameraPos)
 	{
 		Tessellator tessellator = Tessellator.getInstance();

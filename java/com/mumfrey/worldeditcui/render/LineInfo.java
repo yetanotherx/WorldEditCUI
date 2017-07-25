@@ -57,4 +57,9 @@ public class LineInfo
 	{
 		glColor4f(this.red, this.green, this.blue, this.alpha);
 	}
+	
+	public void prepareColour(float tint)
+	{
+	    glColor4f(this.red, this.green, this.blue, this.alpha * tint);
+	}
 }
