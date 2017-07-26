@@ -61,7 +61,7 @@ public class PointCube extends Observable<BoundingBox>
 		this.box.render(cameraPos);
 	}
 
-	public void updatePoint()
+	public void updatePoint(float partialTicks)
 	{
 	}
 

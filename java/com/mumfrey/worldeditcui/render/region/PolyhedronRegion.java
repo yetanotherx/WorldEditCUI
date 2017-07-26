@@ -30,7 +30,7 @@ public class PolyhedronRegion extends Region
 	}
 	
 	@Override
-	public void render(Vector3 cameraPos)
+	public void render(Vector3 cameraPos, float partialTicks)
 	{
 		for (PointCube vertex : this.vertices)
 		{

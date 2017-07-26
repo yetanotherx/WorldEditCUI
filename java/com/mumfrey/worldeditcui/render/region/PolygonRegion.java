@@ -31,7 +31,7 @@ public class PolygonRegion extends Region
 	}
 	
 	@Override
-	public void render(Vector3 cameraPos)
+	public void render(Vector3 cameraPos, float partialTicks)
 	{
 		if (this.points.size() < 1)
 		{

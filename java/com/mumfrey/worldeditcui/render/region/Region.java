@@ -5,6 +5,7 @@ import com.mumfrey.worldeditcui.WorldEditCUI;
 import com.mumfrey.worldeditcui.exceptions.InvalidSelectionTypeException;
 import com.mumfrey.worldeditcui.render.RenderColour;
 import com.mumfrey.worldeditcui.util.Vector3;
+import net.minecraft.entity.Entity;
 
 /**
  * Base region storage class. Provides
@@ -32,7 +33,7 @@ public abstract class Region implements InitialisationFactory
 	{
 	}
 	
-	public abstract void render(Vector3 cameraPos);
+	public abstract void render(Vector3 cameraPos, float partialTicks);
 	
 	public RenderColour[] getDefaultColours()
 	{
@@ -62,7 +63,7 @@ public abstract class Region implements InitialisationFactory
 		throw new InvalidSelectionTypeException(this.getType().getName(), "setCuboidPoint");
 	}
 	
-	public void setCuboidVertexLatch(int id)
+	public void setCuboidVertexLatch(int id, Entity entity, double traceDistance)
 	{
 		throw new InvalidSelectionTypeException(this.getType().getName(), "setCuboidVertexLatch");
 	}

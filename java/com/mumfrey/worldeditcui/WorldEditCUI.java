@@ -119,16 +119,16 @@ public class WorldEditCUI
 		this.activeRegion = region;
 	}
 
-	public void renderSelections(Vector3 cameraPos)
+	public void renderSelections(Vector3 cameraPos, float partialTicks)
 	{
 		if (this.selection != null)
 		{
-			this.selection.render(cameraPos);
+			this.selection.render(cameraPos, partialTicks);
 		}
 		
 		for (Region region : this.regions.values())
 		{
-			region.render(cameraPos);
+			region.render(cameraPos, partialTicks);
 		}
 	}
 }

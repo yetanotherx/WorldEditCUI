@@ -1,8 +1,5 @@
 package com.mumfrey.worldeditcui.render.region;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
-
 import com.mumfrey.worldeditcui.WorldEditCUI;
 import com.mumfrey.worldeditcui.render.ConfiguredColour;
 import com.mumfrey.worldeditcui.render.points.PointCube;
@@ -11,6 +8,7 @@ import com.mumfrey.worldeditcui.render.shapes.Render3DBox;
 import com.mumfrey.worldeditcui.render.shapes.Render3DGrid;
 import com.mumfrey.worldeditcui.util.BoundingBox;
 import com.mumfrey.worldeditcui.util.Vector3;
+import net.minecraft.entity.Entity;
 
 /**
  * Main controller for a cuboid-type region
@@ -34,12 +32,12 @@ public class CuboidRegion extends Region
 	}
 	
 	@Override
-	public void render(Vector3 cameraPos)
+	public void render(Vector3 cameraPos, float partialTicks)
 	{
 		if (this.points[0] != null && this.points[1] != null)
 		{
-			this.points[0].updatePoint();
-			this.points[1].updatePoint();
+			this.points[0].updatePoint(partialTicks);
+			this.points[1].updatePoint(partialTicks);
 			
 			this.grid.render(cameraPos);
 			this.box.render(cameraPos);
@@ -49,12 +47,12 @@ public class CuboidRegion extends Region
 		}
 		else if (this.points[0] != null)
 		{
-		    this.points[0].updatePoint();
+		    this.points[0].updatePoint(partialTicks);
 			this.points[0].render(cameraPos);
 		}
 		else if (this.points[1] != null)
 		{
-		    this.points[1].updatePoint();
+		    this.points[1].updatePoint(partialTicks);
 			this.points[1].render(cameraPos);
 		}
 	}
@@ -81,12 +79,11 @@ public class CuboidRegion extends Region
 	}
 	
 	@Override
-	public void setCuboidVertexLatch(int id)
+	public void setCuboidVertexLatch(int id, Entity entity, double traceDistance)
 	{
 		if (id < 2)
 		{
-			Entity renderViewEntity = Minecraft.getMinecraft().getRenderViewEntity();
-			this.points[id] = new PointCubeTracking(renderViewEntity).setColour(this.colours[2]);
+			this.points[id] = new PointCubeTracking(entity, traceDistance).setColour(this.colours[2]);
 		}
 		
 		this.updateBounds();
