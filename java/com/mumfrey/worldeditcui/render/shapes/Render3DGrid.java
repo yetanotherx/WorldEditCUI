@@ -117,9 +117,8 @@ public class Render3DGrid extends RenderRegion
 			buf.begin(GL_LINES, VF_POSITION);
 			tempColour.prepareColour();
 			
-			for (double yoff = 0; yoff + y1 <= y2; yoff += this.spacing)
+			for (double y = Math.max(y1, -cullAt); y <= y2 && y <= cullAt; y += this.spacing)
 			{
-				double y = y1 + yoff;
 				buf.pos(x1, y, z2).endVertex();
 				buf.pos(x2, y, z2).endVertex();
 				buf.pos(x1, y, z1).endVertex();
@@ -130,12 +129,9 @@ public class Render3DGrid extends RenderRegion
 				buf.pos(x2, y, z2).endVertex();
 			}
 			
-			for (double xoff = 0; xoff + x1 <= x2; xoff += this.spacing)
+			for (double x = Math.max(x1, -cullAt); x <= x2 && x <= cullAt; x += this.spacing)
 			{
-				double x = x1 + xoff;
 //				boolean major = xoff % 10 == 0;
-				if (x < -cullAt) continue;
-				if (x > cullAt) break;
 				buf.pos(x, y1, z1).endVertex();
 				buf.pos(x, y2, z1).endVertex();
 				buf.pos(x, y1, z2).endVertex();
@@ -146,12 +142,9 @@ public class Render3DGrid extends RenderRegion
 				buf.pos(x, y1, z2).endVertex();
 			}
 			
-			for (double zoff = 0; zoff + z1 <= z2; zoff += this.spacing)
+			for (double z = Math.max(z1, -cullAt); z <= z2 && z <= cullAt; z += this.spacing)
 			{
-				double z = z1 + zoff;
 //				boolean major = zoff % 10 == 0;
-				if (z < -cullAt) continue;
-				if (z > cullAt) break;
 				buf.pos(x1, y1, z).endVertex();
 				buf.pos(x2, y1, z).endVertex();
 				buf.pos(x1, y2, z).endVertex();
