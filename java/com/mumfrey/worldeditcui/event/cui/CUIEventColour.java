@@ -4,12 +4,12 @@ import com.mumfrey.worldeditcui.config.Colour;
 import com.mumfrey.worldeditcui.event.CUIEvent;
 import com.mumfrey.worldeditcui.event.CUIEventArgs;
 import com.mumfrey.worldeditcui.event.CUIEventType;
-import com.mumfrey.worldeditcui.render.CustomColour;
-import com.mumfrey.worldeditcui.render.RenderColour;
+import com.mumfrey.worldeditcui.render.CustomStyle;
+import com.mumfrey.worldeditcui.render.RenderStyle;
 import com.mumfrey.worldeditcui.render.region.Region;
 
 /**
- * Called when colour event is received
+ * Called when style event is received
  * 
  * @author Adam Mummery-Smith
  */
@@ -47,21 +47,21 @@ public class CUIEventColour extends CUIEvent
 			return null;
 		}
 		
-		RenderColour[] defaultColours = selection.getDefaultColours();
-		RenderColour[] colours = new RenderColour[defaultColours.length];
+		RenderStyle[] defaultStyles = selection.getDefaultStyles();
+		RenderStyle[] styles = new RenderStyle[defaultStyles.length];
 
-		for (int i = 0; i < defaultColours.length; i++)
+		for (int i = 0; i < defaultStyles.length; i++)
 		{
 			String str = this.getString(i);
 			if (!str.startsWith("#"))
 			{
 				str = "#" + str;
 			}
-			colours[i] = new CustomColour(Colour.parse(str, defaultColours[i].getColour()));
+			styles[i] = new CustomStyle(Colour.parse(str, defaultStyles[i].getColour()));
 			
 		}
 		
-		selection.setColours(colours);
+		selection.setStyles(styles);
 		return null;
 	}
 }

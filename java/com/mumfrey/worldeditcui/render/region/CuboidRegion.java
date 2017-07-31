@@ -28,7 +28,7 @@ public class CuboidRegion extends Region
 	
 	public CuboidRegion(WorldEditCUI controller)
 	{
-		super(controller, ConfiguredColour.CUBOIDBOX, ConfiguredColour.CUBOIDGRID, ConfiguredColour.CUBOIDPOINT1, ConfiguredColour.CUBOIDPOINT2);
+		super(controller, ConfiguredColour.CUBOIDBOX.style(), ConfiguredColour.CUBOIDGRID.style(), ConfiguredColour.CUBOIDPOINT1.style(), ConfiguredColour.CUBOIDPOINT2.style());
 	}
 	
 	@Override
@@ -47,12 +47,12 @@ public class CuboidRegion extends Region
 		}
 		else if (this.points[0] != null)
 		{
-		    this.points[0].updatePoint(partialTicks);
+			this.points[0].updatePoint(partialTicks);
 			this.points[0].render(cameraPos);
 		}
 		else if (this.points[1] != null)
 		{
-		    this.points[1].updatePoint(partialTicks);
+			this.points[1].updatePoint(partialTicks);
 			this.points[1].render(cameraPos);
 		}
 	}
@@ -72,7 +72,7 @@ public class CuboidRegion extends Region
 	{
 		if (id < 2)
 		{
-			this.points[id] = new PointCube(x, y, z).setColour(this.colours[2]);
+			this.points[id] = new PointCube(x, y, z).setStyle(this.styles[2]);
 		}
 		
 		this.updateBounds();
@@ -83,7 +83,7 @@ public class CuboidRegion extends Region
 	{
 		if (id < 2)
 		{
-			this.points[id] = new PointCubeTracking(entity, traceDistance).setColour(this.colours[2]);
+			this.points[id] = new PointCubeTracking(entity, traceDistance).setStyle(this.styles[2]);
 		}
 		
 		this.updateBounds();
@@ -94,32 +94,32 @@ public class CuboidRegion extends Region
 		if (this.points[0] != null && this.points[1] != null)
 		{
 			BoundingBox bounds = new BoundingBox(this.points[0], this.points[1]);
-			this.grid = new Render3DGrid(this.colours[1], bounds).setSpacing(this.spacing);
-			this.box = new Render3DBox(this.colours[0], bounds);
+			this.grid = new Render3DGrid(this.styles[1], bounds).setSpacing(this.spacing);
+			this.box = new Render3DBox(this.styles[0], bounds);
 		}
 	}
 	
 	@Override
-	protected void updateColours()
+	protected void updateStyles()
 	{
 		if (this.box != null)
 		{
-			this.box.setColour(this.colours[0]);
+			this.box.setStyle(this.styles[0]);
 		}
 		
 		if (this.grid != null)
 		{
-			this.grid.setColour(this.colours[1]);
+			this.grid.setStyle(this.styles[1]);
 		}
 		
 		if (this.points[0] != null)
 		{
-			this.points[0].setColour(this.colours[2]);
+			this.points[0].setStyle(this.styles[2]);
 		}
 		
 		if (this.points[1] != null)
 		{
-			this.points[1].setColour(this.colours[3]);
+			this.points[1].setStyle(this.styles[3]);
 		}
 	}
 	

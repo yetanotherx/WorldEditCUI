@@ -161,14 +161,14 @@ public class GuiControl extends GuiButton
 	}
 	
 	/**
-	 * Draws a line between two points with the specified width and colour
+	 * Draws a line between two points with the specified width and style
 	 * 
 	 * @param x1 Origin x coordinate
 	 * @param y1 Origin y coordinate
 	 * @param x2 End x coordinate
 	 * @param y2 End y coordinate
 	 * @param width Line width in pixels
-	 * @param colour Line colour
+	 * @param style Line style
 	 */
 	public static void drawLine(int x1, int y1, int x2, int y2, int width, int colour)
 	{
@@ -183,7 +183,7 @@ public class GuiControl extends GuiButton
 	 * @param x2 End x position
 	 * @param y2 End y position
 	 * @param width Line width
-	 * @param colour Line colour
+	 * @param style Line style
 	 */
 	@SuppressWarnings("cast")
 	public static void drawNativeLine(float x1, float y1, float x2, float y2, float width, int colour)
@@ -211,7 +211,7 @@ public class GuiControl extends GuiButton
 	}
 	
 	/**
-	 * Draws an arrow between two points with the specified width and colour
+	 * Draws an arrow between two points with the specified width and style
 	 * 
 	 * @param x1 Origin x coordinate
 	 * @param y1 Origin y coordinate
@@ -219,7 +219,7 @@ public class GuiControl extends GuiButton
 	 * @param y2 End y coordinate
 	 * @param width Line width in pixels
 	 * @param arrowHeadSize Size of the arrow head
-	 * @param colour Colour
+	 * @param style Colour
 	 */
 	public static void drawArrow(int x1, int y1, int x2, int y2, int z, int width, int arrowHeadSize, int colour)
 	{
@@ -234,7 +234,7 @@ public class GuiControl extends GuiButton
 	 * @param x2 End x coordinate
 	 * @param y2 End y coordinate
 	 * @param width Line width in pixels
-	 * @param colour Colour
+	 * @param style Colour
 	 * @param arrowHead True to draw an arrow, otherwise draws a line
 	 * @param arrowHeadSize Size of the arrow head
 	 */
@@ -256,7 +256,7 @@ public class GuiControl extends GuiButton
 		y1 = (int)(width * -0.5);
 		y2 = y1 + width;
 		
-		// Calc colour components
+		// Calc style components
 		float f = (float)(colour >> 24 & 0xff) / 255F;
 		float f1 = (float)(colour >> 16 & 0xff) / 255F;
 		float f2 = (float)(colour >> 8 & 0xff) / 255F;
@@ -459,7 +459,7 @@ public class GuiControl extends GuiButton
 	 * @param x
 	 * @param y
 	 * @param width
-	 * @param colour
+	 * @param style
 	 */
 	public static void drawStringWithEllipsis(FontRenderer fontrenderer, String s, int x, int y, int width, int colour)
 	{
@@ -555,7 +555,7 @@ public class GuiControl extends GuiButton
 	 * @param mouseY
 	 * @param screenWidth
 	 * @param screenHeight
-	 * @param colour
+	 * @param style
 	 * @param backgroundColour
 	 */
 	protected void drawTooltip(FontRenderer fontRenderer, String tooltipText, int mouseX, int mouseY, int screenWidth, int screenHeight, int colour, int backgroundColour)

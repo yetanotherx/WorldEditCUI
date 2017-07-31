@@ -26,7 +26,7 @@ public class CylinderRegion extends Region
 	
 	public CylinderRegion(WorldEditCUI controller)
 	{
-		super(controller, ConfiguredColour.CYLINDERBOX, ConfiguredColour.CYLINDERGRID, ConfiguredColour.CYLINDERCENTRE);
+		super(controller, ConfiguredColour.CYLINDERBOX.style(), ConfiguredColour.CYLINDERGRID.style(), ConfiguredColour.CYLINDERCENTRE.style());
 	}
 	
 	@Override
@@ -45,7 +45,7 @@ public class CylinderRegion extends Region
 	public void setCylinderCenter(int x, int y, int z)
 	{
 		this.centre = new PointCube(x, y, z);
-		this.centre.setColour(this.colours[2]);
+		this.centre.setStyle(this.styles[2]);
 		this.update();
 	}
 	
@@ -76,32 +76,32 @@ public class CylinderRegion extends Region
 			tMax = (int)this.centre.getPoint().getY();
 		}
 		
-		this.circles = new RenderCylinderCircles(this.colours[1], this.centre, this.radX, this.radZ, tMin, tMax);
-		this.grid = new RenderCylinderGrid(this.colours[1], this.centre, this.radX, this.radZ, tMin, tMax);
-		this.box = new RenderCylinderBox(this.colours[0], this.centre, this.radX, this.radZ, tMin, tMax);
+		this.circles = new RenderCylinderCircles(this.styles[1], this.centre, this.radX, this.radZ, tMin, tMax);
+		this.grid = new RenderCylinderGrid(this.styles[1], this.centre, this.radX, this.radZ, tMin, tMax);
+		this.box = new RenderCylinderBox(this.styles[0], this.centre, this.radX, this.radZ, tMin, tMax);
 	}
 	
 	@Override
-	protected void updateColours()
+	protected void updateStyles()
 	{
 		if (this.box != null)
 		{
-			this.box.setColour(this.colours[0]);
+			this.box.setStyle(this.styles[0]);
 		}
 		
 		if (this.grid != null)
 		{
-			this.grid.setColour(this.colours[1]);
+			this.grid.setStyle(this.styles[1]);
 		}
 		
 		if (this.circles != null)
 		{
-			this.circles.setColour(this.colours[1]);
+			this.circles.setStyle(this.styles[1]);
 		}
 		
 		if (this.centre != null)
 		{
-			this.centre.setColour(this.colours[2]);
+			this.centre.setStyle(this.styles[2]);
 		}
 	}
 

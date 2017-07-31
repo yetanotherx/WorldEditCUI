@@ -28,7 +28,7 @@ public enum CUIEventType
 	UPDATE   (CUIEventUpdate.class,    "u",    1    ),
 	POLYGON  (CUIEventPolygon.class,   "poly", 3, 99),
 	COLOUR   (CUIEventColour.class,    "col",  4    ),
-	GRID     (CUIEventGrid.class,      "grid", 1    );
+	GRID     (CUIEventGrid.class,      "grid", 1, 2 );
 	
 	private final Class<? extends CUIEvent> eventClass;
 	private final String key;

@@ -7,14 +7,14 @@ import com.mumfrey.worldeditcui.render.ConfiguredColour;
 import net.minecraft.client.Minecraft;
 
 /**
- * Colour picker button control, spawns a colour picker when clicked
+ * Colour picker button control, spawns a style picker when clicked
  * 
  * @author Adam Mummery-Smith
  */
 public class GuiColourButton extends GuiControl
 {
 	/**
-	 * Picker active colour 
+	 * Picker active style 
 	 */
 	private int colour = 0xFF000000;
 	
@@ -135,7 +135,7 @@ public class GuiColourButton extends GuiControl
 				int xPos = Math.min(this.x + this.width, GuiControl.lastScreenWidth - 233);
 				int yPos = Math.min(this.y, GuiControl.lastScreenHeight - 175);
 				
-				this.picker = new GuiColourPicker(minecraft, 1, xPos, yPos, this.colour, "Choose colour");
+				this.picker = new GuiColourPicker(minecraft, 1, xPos, yPos, this.colour, "Choose style");
 				this.pickerClicked = false;
 			}
 			

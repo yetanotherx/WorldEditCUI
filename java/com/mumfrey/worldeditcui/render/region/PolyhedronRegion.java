@@ -26,7 +26,7 @@ public class PolyhedronRegion extends Region
 	
 	public PolyhedronRegion(WorldEditCUI controller)
 	{
-		super(controller, ConfiguredColour.POLYBOX, ConfiguredColour.POLYPOINT, ConfiguredColour.CUBOIDPOINT1);
+		super(controller, ConfiguredColour.POLYBOX.style(), ConfiguredColour.POLYPOINT.style(), ConfiguredColour.CUBOIDPOINT1.style());
 	}
 	
 	@Override
@@ -47,7 +47,7 @@ public class PolyhedronRegion extends Region
 	public void setCuboidPoint(int id, double x, double y, double z)
 	{
 		final PointCube vertex = new PointCube(x, y, z).setId(id);
-		vertex.setColour(id == 0 ? this.colours[2] : this.colours[1]);
+		vertex.setStyle(id == 0 ? this.styles[2] : this.styles[1]);
 		
 		if (id < this.vertices.size())
 		{
@@ -88,21 +88,21 @@ public class PolyhedronRegion extends Region
 		
 		for (Vector3[] face : this.faces)
 		{
-			this.faceRenders.add(new Render3DPolygon(this.colours[0], face));
+			this.faceRenders.add(new Render3DPolygon(this.styles[0], face));
 		}
 	}
 	
 	@Override
-	protected void updateColours()
+	protected void updateStyles()
 	{
 		for (PointCube vertex : this.vertices)
 		{
-			vertex.setColour(vertex.getId() == 0 ? this.colours[2] : this.colours[1]);
+			vertex.setStyle(vertex.getId() == 0 ? this.styles[2] : this.styles[1]);
 		}
 		
 		for (Render3DPolygon face : this.faceRenders)
 		{
-			face.setColour(this.colours[0]);
+			face.setStyle(this.styles[0]);
 		}
 	}
 

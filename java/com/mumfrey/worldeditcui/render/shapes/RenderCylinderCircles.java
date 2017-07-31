@@ -5,8 +5,8 @@ import static com.mumfrey.liteloader.gl.GL.*;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
 
-import com.mumfrey.worldeditcui.render.RenderColour;
-import com.mumfrey.worldeditcui.render.LineInfo;
+import com.mumfrey.worldeditcui.render.RenderStyle;
+import com.mumfrey.worldeditcui.render.LineStyle;
 import com.mumfrey.worldeditcui.render.points.PointCube;
 import com.mumfrey.worldeditcui.util.Vector3;
 
@@ -25,9 +25,9 @@ public class RenderCylinderCircles extends RenderRegion
 	protected double centreX;
 	protected double centreZ;
 	
-	public RenderCylinderCircles(RenderColour colour, PointCube centre, double radX, double radZ, int minY, int maxY)
+	public RenderCylinderCircles(RenderStyle style, PointCube centre, double radX, double radZ, int minY, int maxY)
 	{
-		super(colour);
+		super(style);
 		this.radX = radX;
 		this.radZ = radZ;
 		this.minY = minY;
@@ -45,15 +45,18 @@ public class RenderCylinderCircles extends RenderRegion
 		double xPos = this.centreX - cameraPos.getX();
 		double zPos = this.centreZ - cameraPos.getZ();
 		
-		for (LineInfo tempColour : this.colour.getColours())
+		for (LineStyle line : this.style.getLines())
 		{
-			tempColour.prepareRender();
+			if (!line.prepare(this.style.getRenderType()))
+			{
+				continue;
+			}
 			
 			double twoPi = Math.PI * 2;
 			for (int yBlock = this.minY + 1; yBlock <= this.maxY; yBlock++)
 			{
 				buf.begin(GL_LINE_LOOP, VF_POSITION);
-				tempColour.prepareColour();
+				line.applyColour();
 				
 				for (int i = 0; i <= 75; i++)
 				{

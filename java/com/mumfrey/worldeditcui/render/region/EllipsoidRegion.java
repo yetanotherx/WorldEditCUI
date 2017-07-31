@@ -22,7 +22,7 @@ public class EllipsoidRegion extends Region
 	
 	public EllipsoidRegion(WorldEditCUI controller)
 	{
-		super(controller, ConfiguredColour.ELLIPSOIDGRID, ConfiguredColour.ELLIPSOIDCENTRE);
+		super(controller, ConfiguredColour.ELLIPSOIDGRID.style(), ConfiguredColour.ELLIPSOIDCENTRE.style());
 	}
 	
 	@Override
@@ -43,7 +43,7 @@ public class EllipsoidRegion extends Region
 	public void setEllipsoidCenter(int x, int y, int z)
 	{
 		this.centre = new PointCube(x, y, z);
-		this.centre.setColour(this.colours[1]);
+		this.centre.setStyle(this.styles[1]);
 		this.update();
 	}
 	
@@ -58,21 +58,21 @@ public class EllipsoidRegion extends Region
 	{
 		if (this.centre != null && this.radii != null)
 		{
-			this.ellipsoid = new RenderEllipsoid(this.colours[0], this.centre, this.radii);
+			this.ellipsoid = new RenderEllipsoid(this.styles[0], this.centre, this.radii);
 		}
 	}
 	
 	@Override
-	protected void updateColours()
+	protected void updateStyles()
 	{
 		if (this.ellipsoid != null)
 		{
-			this.ellipsoid.setColour(this.colours[0]);
+			this.ellipsoid.setStyle(this.styles[0]);
 		}
 		
 		if (this.centre != null)
 		{
-			this.centre.setColour(this.colours[1]);
+			this.centre.setStyle(this.styles[1]);
 		}
 	}
 

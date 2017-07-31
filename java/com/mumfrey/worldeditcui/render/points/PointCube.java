@@ -1,7 +1,7 @@
 package com.mumfrey.worldeditcui.render.points;
 
 import com.mumfrey.worldeditcui.render.ConfiguredColour;
-import com.mumfrey.worldeditcui.render.RenderColour;
+import com.mumfrey.worldeditcui.render.RenderStyle;
 import com.mumfrey.worldeditcui.render.shapes.Render3DBox;
 import com.mumfrey.worldeditcui.util.BoundingBox;
 import com.mumfrey.worldeditcui.util.Observable;
@@ -11,7 +11,7 @@ import com.mumfrey.worldeditcui.util.Vector3;
  * Stores data about a cube surrounding a
  * block in the world. Used to store info
  * about the selector blocks. Keeps track
- * of colour, x/y/z values, and rendering.
+ * of style, x/y/z values, and rendering.
  * 
  * @author yetanotherx
  * @author lahwran
@@ -26,7 +26,7 @@ public class PointCube extends Observable<BoundingBox>
 
 	protected int id;
 	protected Vector3 point;
-	protected RenderColour colour = ConfiguredColour.CUBOIDPOINT1;
+	protected RenderStyle style = ConfiguredColour.CUBOIDPOINT1.style();
 	
 	protected Render3DBox box;
 	
@@ -76,20 +76,20 @@ public class PointCube extends Observable<BoundingBox>
 		this.update();
 	}
 
-	public RenderColour getColour()
+	public RenderStyle getStyle()
 	{
-		return this.colour;
+		return this.style;
 	}
 	
-	public PointCube setColour(RenderColour colour)
+	public PointCube setStyle(RenderStyle style)
 	{
-		this.colour = colour;
+		this.style = style;
 		this.update();
 		return this;
 	}
 
 	private void update()
 	{
-		this.box = new Render3DBox(this.colour, this.point.subtract(PointCube.MIN_VEC), this.point.add(PointCube.MAX_VEC));
+		this.box = new Render3DBox(this.style, this.point.subtract(PointCube.MIN_VEC), this.point.add(PointCube.MAX_VEC));
 	}
 }

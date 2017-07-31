@@ -1,6 +1,6 @@
 package com.mumfrey.worldeditcui.render.shapes;
 
-import com.mumfrey.worldeditcui.render.RenderColour;
+import com.mumfrey.worldeditcui.render.RenderStyle;
 import com.mumfrey.worldeditcui.util.Observable;
 import com.mumfrey.worldeditcui.util.Observer;
 import com.mumfrey.worldeditcui.util.Vector3;
@@ -12,16 +12,16 @@ import com.mumfrey.worldeditcui.util.Vector3;
  */
 public abstract class RenderRegion implements Observer
 {
-	protected RenderColour colour;
+	protected RenderStyle style;
 	
-	protected RenderRegion(RenderColour colour)
+	protected RenderRegion(RenderStyle style)
 	{
-		this.colour = colour;
+		this.style = style;
 	}
 
-	public final void setColour(RenderColour colour)
+	public final void setStyle(RenderStyle style)
 	{
-		this.colour = colour;
+		this.style = style;
 	}
 	
 	public abstract void render(Vector3 cameraPos);

@@ -7,8 +7,8 @@ import java.util.List;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
 
-import com.mumfrey.worldeditcui.render.RenderColour;
-import com.mumfrey.worldeditcui.render.LineInfo;
+import com.mumfrey.worldeditcui.render.RenderStyle;
+import com.mumfrey.worldeditcui.render.LineStyle;
 import com.mumfrey.worldeditcui.render.points.PointRectangle;
 import com.mumfrey.worldeditcui.util.Vector2;
 import com.mumfrey.worldeditcui.util.Vector3;
@@ -25,9 +25,9 @@ public class Render2DGrid extends RenderRegion
 	private List<PointRectangle> points;
 	private int min, max;
 	
-	public Render2DGrid(RenderColour colour, List<PointRectangle> points, int min, int max)
+	public Render2DGrid(RenderStyle style, List<PointRectangle> points, int min, int max)
 	{
-		super(colour);
+		super(style);
 		this.points = points;
 		this.min = min;
 		this.max = max;
@@ -47,12 +47,15 @@ public class Render2DGrid extends RenderRegion
 	{
 		Tessellator tessellator = Tessellator.getInstance();
 		BufferBuilder buf = tessellator.getBuffer();
-		for (LineInfo tempColour : this.colour.getColours())
+		for (LineStyle line : this.style.getLines())
 		{
-			tempColour.prepareRender();
+			if (!line.prepare(this.style.getRenderType()))
+			{
+				continue;
+			}
 			
 			buf.begin(GL_LINE_LOOP, VF_POSITION);
-			tempColour.prepareColour();
+			line.applyColour();
 			for (PointRectangle point : this.points)
 			{
 				if (point != null)

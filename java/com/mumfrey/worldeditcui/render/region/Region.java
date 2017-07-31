@@ -3,7 +3,8 @@ package com.mumfrey.worldeditcui.render.region;
 import com.mumfrey.worldeditcui.InitialisationFactory;
 import com.mumfrey.worldeditcui.WorldEditCUI;
 import com.mumfrey.worldeditcui.exceptions.InvalidSelectionTypeException;
-import com.mumfrey.worldeditcui.render.RenderColour;
+import com.mumfrey.worldeditcui.render.RenderStyle;
+import com.mumfrey.worldeditcui.render.RenderStyle.RenderType;
 import com.mumfrey.worldeditcui.util.Vector3;
 import net.minecraft.entity.Entity;
 
@@ -19,13 +20,14 @@ import net.minecraft.entity.Entity;
 public abstract class Region implements InitialisationFactory
 {
 	protected final WorldEditCUI controller;
-	protected final RenderColour[] defaultColours;
-	protected RenderColour[] colours;
+	protected final RenderStyle[] defaultStyles;
+	protected RenderStyle[] styles;
+	protected RenderType renderType = RenderType.ANY;
 	
-	protected Region(WorldEditCUI controller, RenderColour... colours)
+	protected Region(WorldEditCUI controller, RenderStyle... styles)
 	{
 		this.controller = controller;
-		this.colours = this.defaultColours = colours;
+		this.styles = this.defaultStyles = styles;
 	}
 	
 	@Override
@@ -35,23 +37,41 @@ public abstract class Region implements InitialisationFactory
 	
 	public abstract void render(Vector3 cameraPos, float partialTicks);
 	
-	public RenderColour[] getDefaultColours()
+	public RenderStyle[] getDefaultStyles()
 	{
-		return this.defaultColours;
+		return this.defaultStyles;
 	}
 	
-	public void setColours(RenderColour... colours)
+	public void setRenderType(RenderType renderType)
 	{
-		if (colours.length < this.defaultColours.length)
+		this.renderType = renderType;
+		this.updateRenderStyle();
+	}
+	
+	public void setStyles(RenderStyle... styles)
+	{
+		if (styles.length < this.defaultStyles.length)
 		{
-			throw new IllegalArgumentException("Invalid colour palette supplied for " + this.getType().getName() + " region");
+			throw new IllegalArgumentException("Invalid style palette supplied for " + this.getType().getName() + " region");
 		}
 		
-		this.colours = colours;
-		this.updateColours();
+		this.styles = styles;
+		this.updateRenderStyle();
+		this.updateStyles();
 	}
 	
-	protected abstract void updateColours();
+	protected void updateRenderStyle()
+	{
+		for (RenderStyle style : this.styles)
+		{
+			if (style != null)
+			{
+				style.setRenderType(this.renderType);
+			}
+		}
+	}
+
+	protected abstract void updateStyles();
 
 	public void setGridSpacing(double spacing)
 	{

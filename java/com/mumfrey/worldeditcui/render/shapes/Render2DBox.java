@@ -2,8 +2,8 @@ package com.mumfrey.worldeditcui.render.shapes;
 
 import java.util.List;
 
-import com.mumfrey.worldeditcui.render.RenderColour;
-import com.mumfrey.worldeditcui.render.LineInfo;
+import com.mumfrey.worldeditcui.render.RenderStyle;
+import com.mumfrey.worldeditcui.render.LineStyle;
 import com.mumfrey.worldeditcui.render.points.PointRectangle;
 import com.mumfrey.worldeditcui.util.Vector2;
 import com.mumfrey.worldeditcui.util.Vector3;
@@ -24,9 +24,9 @@ public class Render2DBox extends RenderRegion
 	private List<PointRectangle> points;
 	private int min, max;
 	
-	public Render2DBox(RenderColour colour, List<PointRectangle> points, int min, int max)
+	public Render2DBox(RenderStyle style, List<PointRectangle> points, int min, int max)
 	{
-		super(colour);
+		super(style);
 		this.points = points;
 		this.min = min;
 		this.max = max;
@@ -38,12 +38,15 @@ public class Render2DBox extends RenderRegion
 		Tessellator tessellator = Tessellator.getInstance();
 		BufferBuilder buf = tessellator.getBuffer();
 		double off = 0.03 - cameraPos.getY();
-		for (LineInfo tempColour : this.colour.getColours())
+		for (LineStyle line : this.style.getLines())
 		{
-			tempColour.prepareRender();
+			if (!line.prepare(this.style.getRenderType()))
+			{
+				continue;
+			}
 			
 			buf.begin(GL_LINES, VF_POSITION);
-			tempColour.prepareColour();
+			line.applyColour();
 			
 			for (PointRectangle point : this.points)
 			{

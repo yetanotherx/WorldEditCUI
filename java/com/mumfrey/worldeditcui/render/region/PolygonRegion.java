@@ -27,7 +27,7 @@ public class PolygonRegion extends Region
 	
 	public PolygonRegion(WorldEditCUI controller)
 	{
-		super(controller, ConfiguredColour.POLYBOX, ConfiguredColour.POLYGRID, ConfiguredColour.POLYPOINT);
+		super(controller, ConfiguredColour.POLYBOX.style(), ConfiguredColour.POLYGRID.style(), ConfiguredColour.POLYPOINT.style());
 	}
 	
 	@Override
@@ -62,7 +62,7 @@ public class PolygonRegion extends Region
 	public void setPolygonPoint(int id, int x, int z)
 	{
 		PointRectangle point = new PointRectangle(x, z);
-		point.setColour(this.colours[0]);
+		point.setStyle(this.styles[0]);
 		point.setMinMax(this.min, this.max);
 		
 		if (id < this.points.size())
@@ -95,26 +95,26 @@ public class PolygonRegion extends Region
 			}
 		}
 		
-		this.box = new Render2DBox(this.colours[0], this.points, this.min, this.max);
-		this.grid = new Render2DGrid(this.colours[1], this.points, this.min, this.max);
+		this.box = new Render2DBox(this.styles[0], this.points, this.min, this.max);
+		this.grid = new Render2DGrid(this.styles[1], this.points, this.min, this.max);
 	}
 	
 	@Override
-	protected void updateColours()
+	protected void updateStyles()
 	{
 		if (this.box != null) 
 		{
-			this.box.setColour(this.colours[0]);
+			this.box.setStyle(this.styles[0]);
 		}
 		
 		if (this.grid != null)
 		{
-			this.grid.setColour(this.colours[1]);
+			this.grid.setStyle(this.styles[1]);
 		}
 		
 		for (PointRectangle point : this.points)
 		{
-			point.setColour(this.colours[0]);
+			point.setStyle(this.styles[0]);
 		}
 	}
 

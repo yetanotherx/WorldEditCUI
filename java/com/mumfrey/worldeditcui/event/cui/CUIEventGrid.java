@@ -3,6 +3,7 @@ package com.mumfrey.worldeditcui.event.cui;
 import com.mumfrey.worldeditcui.event.CUIEvent;
 import com.mumfrey.worldeditcui.event.CUIEventArgs;
 import com.mumfrey.worldeditcui.event.CUIEventType;
+import com.mumfrey.worldeditcui.render.RenderStyle.RenderType;
 import com.mumfrey.worldeditcui.render.region.Region;
 
 /**
@@ -45,6 +46,14 @@ public class CUIEventGrid extends CUIEvent
 		}
 		
 		selection.setGridSpacing(this.getDouble(0));
+		
+		RenderType renderType = RenderType.ANY;
+		if (this.params.length > 1 && "cull".equalsIgnoreCase(this.getString(1)))
+		{
+			renderType = RenderType.VISIBLE;
+		}
+		
+		selection.setRenderType(renderType);
 		return null;
 	}
 }

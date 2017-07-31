@@ -5,8 +5,8 @@ import static com.mumfrey.liteloader.gl.GL.*;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
 
-import com.mumfrey.worldeditcui.render.RenderColour;
-import com.mumfrey.worldeditcui.render.LineInfo;
+import com.mumfrey.worldeditcui.render.RenderStyle;
+import com.mumfrey.worldeditcui.render.LineStyle;
 import com.mumfrey.worldeditcui.render.points.PointCube;
 import com.mumfrey.worldeditcui.util.Vector3;
 
@@ -25,9 +25,9 @@ public class RenderCylinderGrid extends RenderRegion
 	protected double centreX;
 	protected double centreZ;
 	
-	public RenderCylinderGrid(RenderColour colour, PointCube centre, double radX, double radZ, int minY, int maxY)
+	public RenderCylinderGrid(RenderStyle style, PointCube centre, double radX, double radZ, int minY, int maxY)
 	{
-		super(colour);
+		super(style);
 		this.radX = radX;
 		this.radZ = radZ;
 		this.minY = minY;
@@ -45,9 +45,12 @@ public class RenderCylinderGrid extends RenderRegion
 		double xPos = this.centreX - cameraPos.getX();
 		double zPos = this.centreZ - cameraPos.getZ();
 
-		for (LineInfo tempColour : this.colour.getColours())
+		for (LineStyle line : this.style.getLines())
 		{
-			tempColour.prepareRender();
+			if (!line.prepare(this.style.getRenderType()))
+			{
+				continue;
+			}
 			
 			int tmaxY = this.maxY + 1;
 			int tminY = this.minY;
@@ -60,7 +63,7 @@ public class RenderCylinderGrid extends RenderRegion
 			{
 				double tempZ = this.radZ * Math.cos(Math.asin(tempX / this.radX));
 				buf.begin(GL_LINE_LOOP, VF_POSITION);
-				tempColour.prepareColour();
+				line.applyColour();
 				
 				buf.pos(xPos + tempX, tmaxY - cameraPos.getY(), zPos + tempZ).endVertex();
 				buf.pos(xPos + tempX, tmaxY - cameraPos.getY(), zPos - tempZ).endVertex();
@@ -74,7 +77,7 @@ public class RenderCylinderGrid extends RenderRegion
 			{
 				double tempX = this.radX * Math.sin(Math.acos(tempZ / this.radZ));
 				buf.begin(GL_LINE_LOOP, VF_POSITION);
-				tempColour.prepareColour();
+				line.applyColour();
 				
 				buf.pos(xPos + tempX, tmaxY - cameraPos.getY(), zPos + tempZ).endVertex();
 				buf.pos(xPos - tempX, tmaxY - cameraPos.getY(), zPos + tempZ).endVertex();

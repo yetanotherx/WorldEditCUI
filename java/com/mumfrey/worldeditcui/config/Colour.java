@@ -47,10 +47,10 @@ public class Colour
 	}
 	
 	/**
-	 * Validates a user-entered colour code. Ensures that colour is not null, it
+	 * Validates a user-entered style code. Ensures that style is not null, it
 	 * starts with #, that it has all 6 digits, and that each hex code is valid.
 	 * 
-	 * @param colour
+	 * @param style
 	 * @param def
 	 * @return
 	 */

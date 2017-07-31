@@ -5,8 +5,8 @@ import static com.mumfrey.liteloader.gl.GL.*;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
 
-import com.mumfrey.worldeditcui.render.RenderColour;
-import com.mumfrey.worldeditcui.render.LineInfo;
+import com.mumfrey.worldeditcui.render.RenderStyle;
+import com.mumfrey.worldeditcui.render.LineStyle;
 import com.mumfrey.worldeditcui.render.points.PointCube;
 import com.mumfrey.worldeditcui.util.Vector3;
 
@@ -18,16 +18,16 @@ import com.mumfrey.worldeditcui.util.Vector3;
  */
 public class RenderEllipsoid extends RenderRegion
 {
+	protected final static double TAU = Math.PI * 2.0;
+	
 	protected PointCube centre;
 	protected Vector3 radii;
-	protected final static double twoPi = Math.PI * 2;
-	protected double centreX;
-	protected double centreY;
-	protected double centreZ;
 	
-	public RenderEllipsoid(RenderColour colour, PointCube centre, Vector3 radii)
+	protected double centreX, centreY, centreZ;
+	
+	public RenderEllipsoid(RenderStyle style, PointCube centre, Vector3 radii)
 	{
-		super(colour);
+		super(style);
 		this.centre = centre;
 		this.radii = radii;
 		this.centreX = centre.getPoint().getX() + 0.5;
@@ -41,18 +41,20 @@ public class RenderEllipsoid extends RenderRegion
 		glPushMatrix();
 		glTranslated(this.centreX - cameraPos.getX(), this.centreY - cameraPos.getY(), this.centreZ - cameraPos.getZ());
 		
-		for (LineInfo tempColour : this.colour.getColours())
+		for (LineStyle line : this.style.getLines())
 		{
-			tempColour.prepareRender();
-			this.drawXZPlane(tempColour);
-			this.drawYZPlane(tempColour);
-			this.drawXYPlane(tempColour);
+			if (line.prepare(this.style.getRenderType()))
+			{
+				this.drawXZPlane(line);
+				this.drawYZPlane(line);
+				this.drawXYPlane(line);
+			}
 		}
 		
 		glPopMatrix();
 	}
 	
-	protected void drawXZPlane(LineInfo colour)
+	protected void drawXZPlane(LineStyle line)
 	{
 		Tessellator tessellator = Tessellator.getInstance();
 		BufferBuilder buf = tessellator.getBuffer();
@@ -61,11 +63,11 @@ public class RenderEllipsoid extends RenderRegion
 		for (int yBlock = -yRad; yBlock < yRad; yBlock++)
 		{
 			buf.begin(GL_LINE_LOOP, VF_POSITION);
-			colour.prepareColour();
+			line.applyColour();
 			
 			for (int i = 0; i <= 40; i++)
 			{
-				double tempTheta = i * twoPi / 40;
+				double tempTheta = i * TAU / 40;
 				double tempX = this.radii.getX() * Math.cos(tempTheta) * Math.cos(Math.asin(yBlock / this.radii.getY()));
 				double tempZ = this.radii.getZ() * Math.sin(tempTheta) * Math.cos(Math.asin(yBlock / this.radii.getY()));
 				
@@ -75,11 +77,11 @@ public class RenderEllipsoid extends RenderRegion
 		}
 		
 		buf.begin(GL_LINE_LOOP, VF_POSITION);
-		colour.prepareColour();
+		line.applyColour();
 		
 		for (int i = 0; i <= 40; i++)
 		{
-			double tempTheta = i * twoPi / 40;
+			double tempTheta = i * TAU / 40;
 			double tempX = this.radii.getX() * Math.cos(tempTheta);
 			double tempZ = this.radii.getZ() * Math.sin(tempTheta);
 			
@@ -88,7 +90,7 @@ public class RenderEllipsoid extends RenderRegion
 		tessellator.draw();
 	}
 	
-	protected void drawYZPlane(LineInfo colour)
+	protected void drawYZPlane(LineStyle line)
 	{
 		Tessellator tessellator = Tessellator.getInstance();
 		BufferBuilder buf = tessellator.getBuffer();
@@ -97,11 +99,11 @@ public class RenderEllipsoid extends RenderRegion
 		for (int xBlock = -xRad; xBlock < xRad; xBlock++)
 		{
 			buf.begin(GL_LINE_LOOP, VF_POSITION);
-			colour.prepareColour();
+			line.applyColour();
 			
 			for (int i = 0; i <= 40; i++)
 			{
-				double tempTheta = i * twoPi / 40;
+				double tempTheta = i * TAU / 40;
 				double tempY = this.radii.getY() * Math.cos(tempTheta) * Math.sin(Math.acos(xBlock / this.radii.getX()));
 				double tempZ = this.radii.getZ() * Math.sin(tempTheta) * Math.sin(Math.acos(xBlock / this.radii.getX()));
 				
@@ -111,11 +113,11 @@ public class RenderEllipsoid extends RenderRegion
 		}
 		
 		buf.begin(GL_LINE_LOOP, VF_POSITION);
-		colour.prepareColour();
+		line.applyColour();
 		
 		for (int i = 0; i <= 40; i++)
 		{
-			double tempTheta = i * twoPi / 40;
+			double tempTheta = i * TAU / 40;
 			double tempY = this.radii.getY() * Math.cos(tempTheta);
 			double tempZ = this.radii.getZ() * Math.sin(tempTheta);
 			
@@ -124,7 +126,7 @@ public class RenderEllipsoid extends RenderRegion
 		tessellator.draw();
 	}
 	
-	protected void drawXYPlane(LineInfo colour)
+	protected void drawXYPlane(LineStyle line)
 	{
 		Tessellator tessellator = Tessellator.getInstance();
 		BufferBuilder buf = tessellator.getBuffer();
@@ -133,11 +135,11 @@ public class RenderEllipsoid extends RenderRegion
 		for (int zBlock = -zRad; zBlock < zRad; zBlock++)
 		{
 			buf.begin(GL_LINE_LOOP, VF_POSITION);
-			colour.prepareColour();
+			line.applyColour();
 			
 			for (int i = 0; i <= 40; i++)
 			{
-				double tempTheta = i * twoPi / 40;
+				double tempTheta = i * TAU / 40;
 				double tempX = this.radii.getX() * Math.sin(tempTheta) * Math.sin(Math.acos(zBlock / this.radii.getZ()));
 				double tempY = this.radii.getY() * Math.cos(tempTheta) * Math.sin(Math.acos(zBlock / this.radii.getZ()));
 				
@@ -147,11 +149,11 @@ public class RenderEllipsoid extends RenderRegion
 		}
 		
 		buf.begin(GL_LINE_LOOP, VF_POSITION);
-		colour.prepareColour();
+		line.applyColour();
 		
 		for (int i = 0; i <= 40; i++)
 		{
-			double tempTheta = i * twoPi / 40;
+			double tempTheta = i * TAU / 40;
 			double tempX = this.radii.getX() * Math.cos(tempTheta);
 			double tempY = this.radii.getY() * Math.sin(tempTheta);
 			
