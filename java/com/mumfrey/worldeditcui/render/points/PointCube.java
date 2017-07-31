@@ -8,10 +8,8 @@ import com.mumfrey.worldeditcui.util.Observable;
 import com.mumfrey.worldeditcui.util.Vector3;
 
 /**
- * Stores data about a cube surrounding a
- * block in the world. Used to store info
- * about the selector blocks. Keeps track
- * of style, x/y/z values, and rendering.
+ * Stores data about a cube surrounding a block in the world. Used to store info
+ * about the selector blocks. Keeps track of colour, x/y/z values, and rendering
  * 
  * @author yetanotherx
  * @author lahwran

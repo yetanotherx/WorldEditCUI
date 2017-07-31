@@ -17,20 +17,20 @@ import com.mumfrey.worldeditcui.render.RenderStyle.RenderType;
  * @author lahwran
  * @author Adam Mummery-Smith
  */
-public enum ConfiguredColour // implements RenderStyle
+public enum ConfiguredColour
 {
-	CUBOIDBOX      ("style.cuboidedge",     new Colour("#CC3333CC")),
-	CUBOIDGRID     ("style.cuboidgrid",     new Colour("#CC4C4CCC")),
-	CUBOIDPOINT1   ("style.cuboidpoint1",   new Colour("#33CC33CC")),
-	CUBOIDPOINT2   ("style.cuboidpoint2",   new Colour("#3333CCCC")),
-	POLYGRID       ("style.polygrid",       new Colour("#CC3333CC")),
-	POLYBOX        ("style.polyedge",       new Colour("#CC4C4CCC")),
-	POLYPOINT      ("style.polypoint",      new Colour("#33CCCCCC")),
-	ELLIPSOIDGRID  ("style.ellipsoidgrid",  new Colour("#CC4C4CCC")),
-	ELLIPSOIDCENTRE("style.ellipsoidpoint", new Colour("#CCCC33CC")),
-	CYLINDERGRID   ("style.cylindergrid",   new Colour("#CC3333CC")),
-	CYLINDERBOX    ("style.cylinderedge",   new Colour("#CC4C4CCC")),
-	CYLINDERCENTRE ("style.cylinderpoint",  new Colour("#CC33CCCC"));
+	CUBOIDBOX      ("colour.cuboidedge",     new Colour("#CC3333CC")),
+	CUBOIDGRID     ("colour.cuboidgrid",     new Colour("#CC4C4CCC")),
+	CUBOIDPOINT1   ("colour.cuboidpoint1",   new Colour("#33CC33CC")),
+	CUBOIDPOINT2   ("colour.cuboidpoint2",   new Colour("#3333CCCC")),
+	POLYGRID       ("colour.polygrid",       new Colour("#CC3333CC")),
+	POLYBOX        ("colour.polyedge",       new Colour("#CC4C4CCC")),
+	POLYPOINT      ("colour.polypoint",      new Colour("#33CCCCCC")),
+	ELLIPSOIDGRID  ("colour.ellipsoidgrid",  new Colour("#CC4C4CCC")),
+	ELLIPSOIDCENTRE("colour.ellipsoidpoint", new Colour("#CCCC33CC")),
+	CYLINDERGRID   ("colour.cylindergrid",   new Colour("#CC3333CC")),
+	CYLINDERBOX    ("colour.cylinderedge",   new Colour("#CC4C4CCC")),
+	CYLINDERCENTRE ("colour.cylinderpoint",  new Colour("#CC33CCCC"));
 	
 	class Style implements RenderStyle
 	{

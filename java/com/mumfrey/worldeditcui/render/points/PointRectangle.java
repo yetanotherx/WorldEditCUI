@@ -8,7 +8,7 @@ import com.mumfrey.worldeditcui.util.Vector3;
 
 /**
  * Stores data about a prism surrounding two blocks in the world. Used to store
- * info about the selector blocks for polys. Keeps track of style, x/y/z
+ * info about the selector blocks for polys. Keeps track of colour, x/y/z
  * values, and rendering.
  * 
  * @author yetanotherx

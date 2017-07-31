@@ -29,8 +29,8 @@ public class GuiColourPicker extends GuiControl
 	private static final int H = 0, S = 1, B = 2;
 	
 	/**
-	 * HSB values from Colour.RGBtoHSB, combined with opacity this is the authoritative version of the
-	 * style we are editing
+	 * HSB values from Colour.RGBtoHSB, combined with opacity this is the
+	 * authoritative version of the colour we are editing
 	 */
 	private float[] hsb;
 	
@@ -40,7 +40,8 @@ public class GuiColourPicker extends GuiControl
 	private int rgb;
 	
 	/**
-	 * Current opacity, stored as an offset byte in the usual position, eg. 0xFF << 24
+	 * Current opacity, stored as an offset byte in the usual position,
+	 * eg. 0xFF << 24
 	 */
 	private int opacity;
 	
@@ -125,7 +126,7 @@ public class GuiColourPicker extends GuiControl
 		int bPos = this.y + 10 + (128 - (int)(128F * this.hsb[B]));
 		int aPos = this.y + 10 + ((256 - ((this.opacity >> 24) & 0xFF)) / 2);
 		
-		// Calculate B style
+		// Calculate B colour
 		int brightness = Color.HSBtoRGB(this.hsb[H], this.hsb[S], 1.0F) | 0xFF000000;
 		
 		// Draw backgrounds
@@ -135,7 +136,7 @@ public class GuiColourPicker extends GuiControl
 		drawRect(this.x + 162, this.y + 9, this.x + 179, this.y + 139, 0xFFA0A0A0); // A background
 		drawRect(this.x + 187, this.y + 105, this.x + 221, this.y + 139, 0xFFA0A0A0); // Preview background
 		
-		// Draw style picker
+		// Draw colour picker
 		this.mc.getTextureManager().bindTexture(GuiColourPicker.COLOURPICKER_PICKER);
 		glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		this.drawTexturedModalRect(this.x + 10, this.y + 10, this.x + 138, this.y + 138, 0, 0, 256, 256);

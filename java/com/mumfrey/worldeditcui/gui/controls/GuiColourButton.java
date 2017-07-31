@@ -14,7 +14,7 @@ import net.minecraft.client.Minecraft;
 public class GuiColourButton extends GuiControl
 {
 	/**
-	 * Picker active style 
+	 * Picker active colour 
 	 */
 	private int colour = 0xFF000000;
 	
@@ -135,7 +135,7 @@ public class GuiColourButton extends GuiControl
 				int xPos = Math.min(this.x + this.width, GuiControl.lastScreenWidth - 233);
 				int yPos = Math.min(this.y, GuiControl.lastScreenHeight - 175);
 				
-				this.picker = new GuiColourPicker(minecraft, 1, xPos, yPos, this.colour, "Choose style");
+				this.picker = new GuiColourPicker(minecraft, 1, xPos, yPos, this.colour, "Choose colour");
 				this.pickerClicked = false;
 			}
 			
