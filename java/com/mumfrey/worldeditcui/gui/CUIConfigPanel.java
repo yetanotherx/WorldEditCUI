@@ -161,10 +161,12 @@ public class CUIConfigPanel extends Gui implements ConfigPanel
 		if (control.id >= 100)
 		{
 			ConfiguredColour lineColour = ConfiguredColour.values()[control.id - 100];
-			lineColour.setDefaultColour();
+			lineColour.setDefault();
 			
 			for (GuiColourButton colourButton : this.colourButtonList)
+			{
 				colourButton.updateColour(lineColour);
+			}
 		}
 	}
 	

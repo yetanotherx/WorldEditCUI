@@ -4,13 +4,17 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import net.minecraft.client.Minecraft;
+
 import com.mumfrey.worldeditcui.config.CUIConfiguration;
 import com.mumfrey.worldeditcui.debug.CUIDebug;
 import com.mumfrey.worldeditcui.event.CUIEventDispatcher;
 import com.mumfrey.worldeditcui.exceptions.InitialisationException;
 import com.mumfrey.worldeditcui.render.CUISelectionProvider;
+import com.mumfrey.worldeditcui.render.ConfiguredColour;
 import com.mumfrey.worldeditcui.render.region.CuboidRegion;
 import com.mumfrey.worldeditcui.render.region.Region;
+import com.mumfrey.worldeditcui.render.shapes.RenderChunkBoundary;
 import com.mumfrey.worldeditcui.util.Vector3;
 
 /**
@@ -34,15 +38,17 @@ public class WorldEditCUI
 	private CUIConfiguration configuration;
 	private CUIEventDispatcher dispatcher;
 	private CUISelectionProvider selectionProvider;
+	private RenderChunkBoundary chunkBorderRenderer;
+	private boolean chunkBorders;
 	
-	public void initialise()
+	public void initialise(Minecraft minecraft)
 	{
 		this.selection = new CuboidRegion(this);
 		this.configuration = CUIConfiguration.create();
 		this.debugger = new CUIDebug(this);
 		this.dispatcher = new CUIEventDispatcher(this);
 		this.selectionProvider = new CUISelectionProvider(this);
-		
+
 		try
 		{
 			this.selection.initialise();
@@ -56,6 +62,8 @@ public class WorldEditCUI
 			e.printStackTrace();
 			return;
 		}
+		
+		this.chunkBorderRenderer = new RenderChunkBoundary(ConfiguredColour.CHUNKBOUNDARY.style(), ConfiguredColour.CHUNKGRID.style(), minecraft);
 	}
 
 	public CUIEventDispatcher getDispatcher()
@@ -130,5 +138,15 @@ public class WorldEditCUI
 		{
 			region.render(cameraPos, partialTicks);
 		}
+		
+		if (this.chunkBorders)
+		{
+			this.chunkBorderRenderer.render(cameraPos);
+		}
+	}
+
+	public void toggleChunkBorders()
+	{
+		this.chunkBorders = !this.chunkBorders;
 	}
 }

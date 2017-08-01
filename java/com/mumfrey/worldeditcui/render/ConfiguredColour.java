@@ -30,7 +30,9 @@ public enum ConfiguredColour
 	ELLIPSOIDCENTRE("colour.ellipsoidpoint", new Colour("#CCCC33CC")),
 	CYLINDERGRID   ("colour.cylindergrid",   new Colour("#CC3333CC")),
 	CYLINDERBOX    ("colour.cylinderedge",   new Colour("#CC4C4CCC")),
-	CYLINDERCENTRE ("colour.cylinderpoint",  new Colour("#CC33CCCC"));
+	CYLINDERCENTRE ("colour.cylinderpoint",  new Colour("#CC33CCCC")),
+	CHUNKBOUNDARY  ("colour.chunkboundary",  new Colour("#33CC33CC")),
+	CHUNKGRID      ("colour.chunkgrid",      new Colour("#4CCCAA99"));
 	
 	class Style implements RenderStyle
 	{
@@ -115,10 +117,15 @@ public enum ConfiguredColour
 		return this.lines;
 	}
 	
-	public void setDefaultColour()
+	public void setDefault()
 	{
 		this.colour.copyFrom(this.defaultColour);
 		this.updateLines();
+	}
+	
+	public Colour getDefault()
+	{
+		return this.defaultColour;
 	}
 	
 	public void setColourIntRGBA(int argb)

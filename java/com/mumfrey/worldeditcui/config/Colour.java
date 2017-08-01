@@ -6,8 +6,8 @@ package com.mumfrey.worldeditcui.config;
 public class Colour
 {
 	private String hex;
-	private int argb;
-	private float a, r, g, b;
+	private transient int argb;
+	private transient float a, r, g, b;
 	private transient String defaultColour;
 	private transient boolean woken;
 	

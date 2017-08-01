@@ -2,6 +2,7 @@ wecui.options.title=WorldEditCUI Options
 
 wecui.keys.toggle=Toggle CUI visibility
 wecui.keys.clear=Clear WorldEdit selection
+wecui.keys.chunk=Toggle Chunk Border
 wecui.keys.category=WorldEditCUI
 
 gui.ok=OK
@@ -18,6 +19,8 @@ colour.ellipsoidpoint=Ellipsoid Centre Point Colour
 colour.cylindergrid=Cylinder Grid Colour
 colour.cylinderedge=Cylinder Edge Colour
 colour.cylinderpoint=Cylinder Centre Point Colour
+colour.chunkboundary=Chunk Boundary
+colour.chunkgrid=Chunk Grid
 
 gui.options.compat.title=Compatibility Options
 gui.options.compat.spammy=Promiscuous Mode (send /we cui all the time)

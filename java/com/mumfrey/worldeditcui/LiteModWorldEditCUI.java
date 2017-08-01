@@ -33,6 +33,7 @@ import com.mumfrey.liteloader.core.PluginChannels.ChannelPolicy;
 import com.mumfrey.liteloader.messaging.Message;
 import com.mumfrey.liteloader.messaging.Messenger;
 import com.mumfrey.liteloader.modconfig.ConfigPanel;
+import com.mumfrey.liteloader.util.Input;
 import com.mumfrey.worldeditcui.config.CUIConfiguration;
 import com.mumfrey.worldeditcui.event.listeners.CUIListenerChannel;
 import com.mumfrey.worldeditcui.event.listeners.CUIListenerWorldRender;
@@ -55,6 +56,7 @@ public class LiteModWorldEditCUI implements Tickable, InitCompleteListener, Plug
 	
 	private KeyBinding keyBindToggleUI = new KeyBinding("wecui.keys.toggle", Keyboard.KEY_NONE, "wecui.keys.category");
 	private KeyBinding keyBindClearSel = new KeyBinding("wecui.keys.clear", Keyboard.KEY_NONE, "wecui.keys.category");
+	private KeyBinding keyBindChunkBorder = new KeyBinding("wecui.keys.chunk", Keyboard.KEY_NONE, "wecui.keys.category");
 	
 	private boolean visible = true;
 	private boolean alwaysOnTop = false;
@@ -67,8 +69,10 @@ public class LiteModWorldEditCUI implements Tickable, InitCompleteListener, Plug
 	@Override
 	public void init(File configPath)
 	{
-		LiteLoader.getInput().registerKeyBinding(this.keyBindToggleUI);
-		LiteLoader.getInput().registerKeyBinding(this.keyBindClearSel);
+		Input input = LiteLoader.getInput();
+		input.registerKeyBinding(this.keyBindToggleUI);
+		input.registerKeyBinding(this.keyBindClearSel);
+		input.registerKeyBinding(this.keyBindChunkBorder);
 	}
 	
 	@Override
@@ -83,7 +87,7 @@ public class LiteModWorldEditCUI implements Tickable, InitCompleteListener, Plug
 	public void onInitCompleted(Minecraft minecraft, LiteLoader loader)
 	{
 		this.controller = new WorldEditCUI();
-		this.controller.initialise();
+		this.controller.initialise(minecraft);
 		
 		this.worldRenderListener = new CUIListenerWorldRender(this.controller, minecraft);
 		this.channelListener = new CUIListenerChannel(this.controller);
@@ -188,6 +192,11 @@ public class LiteModWorldEditCUI implements Tickable, InitCompleteListener, Plug
 					mc.player.sendChatMessage("//sel");
 				}
 			}
+			
+			if (this.keyBindChunkBorder.isPressed())
+			{
+				this.controller.toggleChunkBorders();
+			}
 		}
 		
 		if (inGame && clock && this.controller != null)
@@ -234,7 +243,7 @@ public class LiteModWorldEditCUI implements Tickable, InitCompleteListener, Plug
 	@Override
 	public String getVersion()
 	{
-		return "1.12.1-SNAPSHOT";
+		return "1.12_01";
 	}
 	
 	@Override
