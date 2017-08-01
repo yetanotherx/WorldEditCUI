@@ -1,21 +1,32 @@
 package com.mumfrey.worldeditcui.config;
 
+/**
+ * @author Adam Mummery-Smith
+ */
 public class Colour
 {
 	private String hex;
+	private int argb;
+	private float a, r, g, b;
 	private transient String defaultColour;
+	private transient boolean woken;
 	
-	public Colour(String defaultColour)
+	public Colour(String colour)
 	{
-		this.hex = defaultColour;
-		this.defaultColour = defaultColour;
+		this.hex = this.defaultColour = colour;
+		this.update();
 	}
 	
 	public Colour()
 	{
 	}
 	
-	public static Colour setDefault(Colour colour, String defaultColour)
+	public static Colour parse(String colour, Colour defaultColour)
+	{
+		return ((colour = Colour.sanitiseColour(colour, null)) == null) ? defaultColour : new Colour(colour);
+	}
+	
+	public static Colour firstOrDefault(Colour colour, String defaultColour)
 	{
 		if (colour == null)
 		{
@@ -29,21 +40,21 @@ public class Colour
 		}
 		else
 		{
-			colour.hex = Colour.parseColour(colour.hex, defaultColour);
+			colour.hex = Colour.sanitiseColour(colour.hex, defaultColour);
 		}
 		
 		return colour;
 	}
 	
 	/**
-	 * Validates a user-entered colour code. Ensures that colour is not null, it
+	 * Validates a user-entered colour code. Ensures that style is not null, it
 	 * starts with #, that it has all 6 digits, and that each hex code is valid.
 	 * 
 	 * @param colour
 	 * @param def
 	 * @return
 	 */
-	private static String parseColour(String colour, String def)
+	private static String sanitiseColour(String colour, String def)
 	{
 		if (colour == null)
 		{
@@ -64,47 +75,85 @@ public class Colour
 	public void setHex(String hex)
 	{
 		if (hex.length() < 8)
+		{
 			hex = "00000000".substring(0, 8 - hex.length()) + hex;
+		}
+		
 		this.hex = "#" + hex;
+		this.update();
 	}
 	
 	public String getHex()
 	{
 		if (this.hex == null)
+		{
 			this.hex = this.defaultColour;
+			this.update();
+		}
+		
 		if (this.hex.length() == 7)
+		{
 			this.hex = this.hex + "CC";
+			this.update();
+		}
+		
 		return this.hex;
+	}
+	
+	private void update()
+	{
+		String hex = this.getHex();
+		this.argb = (int)Long.parseLong(hex.substring(7, 9) + hex.substring(1, 7), 16);
+		this.r = ((Integer.parseInt(hex.substring(1, 3), 16)) / 256.0F);
+		this.g = ((Integer.parseInt(hex.substring(3, 5), 16)) / 256.0F);
+		this.b = ((Integer.parseInt(hex.substring(5, 7), 16)) / 256.0F);
+		this.a = ((Integer.parseInt(hex.substring(7, 9), 16)) / 256.0F);
+		this.woken = true;
 	}
 	
 	public int getIntARGB()
 	{
-		String hex = this.getHex();
-		return (int)Long.parseLong(hex.substring(7, 9) + hex.substring(1, 7), 16);
+		return this.argb;
 	}
 	
 	public float red()
 	{
-		String hex = this.getHex();
-		return (((Integer)Integer.parseInt(hex.substring(1, 3), 16)).floatValue() / 256.0F);
+		if (!this.woken)
+		{
+			this.update();
+		}
+		
+		return this.r;
 	}
 	
 	public float green()
 	{
-		String hex = this.getHex();
-		return (((Integer)Integer.parseInt(hex.substring(3, 5), 16)).floatValue() / 256.0F);
+		if (!this.woken)
+		{
+			this.update();
+		}
+		
+		return this.g;
 	}
 	
 	public float blue()
 	{
-		String hex = this.getHex();
-		return (((Integer)Integer.parseInt(hex.substring(5, 7), 16)).floatValue() / 256.0F);
+		if (!this.woken)
+		{
+			this.update();
+		}
+		
+		return this.b;
 	}
 	
 	public float alpha()
 	{
-		String hex = this.getHex();
-		return (((Integer)Integer.parseInt(hex.substring(7, 9), 16)).floatValue() / 256.0F);
+		if (!this.woken)
+		{
+			this.update();
+		}
+		
+		return this.a;
 	}
 	
 	public Colour copyFrom(Colour other)

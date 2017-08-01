@@ -9,13 +9,13 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mumfrey.liteloader.core.LiteLoader;
 import com.mumfrey.worldeditcui.InitialisationFactory;
-import com.mumfrey.worldeditcui.render.LineColour;
+import com.mumfrey.worldeditcui.render.ConfiguredColour;
 
 /**
  * Stores and reads WorldEditCUI settings
  * 
  * @author yetanotherx
- * 
+ * @author Adam Mummery-Smith
  */
 public class CUIConfiguration implements InitialisationFactory
 {
@@ -48,31 +48,31 @@ public class CUIConfiguration implements InitialisationFactory
 	@Override
 	public void initialise()
 	{
-		this.cuboidGridColor        = Colour.setDefault(this.cuboidGridColor,        "#CC3333CC");
-		this.cuboidEdgeColor        = Colour.setDefault(this.cuboidEdgeColor,        "#CC4C4CCC");
-		this.cuboidFirstPointColor  = Colour.setDefault(this.cuboidFirstPointColor,  "#33CC33CC");
-		this.cuboidSecondPointColor = Colour.setDefault(this.cuboidSecondPointColor, "#3333CCCC");
-		this.polyGridColor          = Colour.setDefault(this.polyGridColor,          "#CC3333CC");
-		this.polyEdgeColor          = Colour.setDefault(this.polyEdgeColor,          "#CC4C4CCC");
-		this.polyPointColor         = Colour.setDefault(this.polyPointColor,         "#33CCCCCC");
-		this.ellipsoidGridColor     = Colour.setDefault(this.ellipsoidGridColor,     "#CC4C4CCC");
-		this.ellipsoidPointColor    = Colour.setDefault(this.ellipsoidPointColor,    "#CCCC33CC");
-		this.cylinderGridColor      = Colour.setDefault(this.cylinderGridColor,      "#CC3333CC");
-		this.cylinderEdgeColor      = Colour.setDefault(this.cylinderEdgeColor,      "#CC4C4CCC");
-		this.cylinderPointColor     = Colour.setDefault(this.cylinderPointColor,     "#CC33CCCC");
+		this.cuboidGridColor        = Colour.firstOrDefault(this.cuboidGridColor,        "#CC3333CC");
+		this.cuboidEdgeColor        = Colour.firstOrDefault(this.cuboidEdgeColor,        "#CC4C4CCC");
+		this.cuboidFirstPointColor  = Colour.firstOrDefault(this.cuboidFirstPointColor,  "#33CC33CC");
+		this.cuboidSecondPointColor = Colour.firstOrDefault(this.cuboidSecondPointColor, "#3333CCCC");
+		this.polyGridColor          = Colour.firstOrDefault(this.polyGridColor,          "#CC3333CC");
+		this.polyEdgeColor          = Colour.firstOrDefault(this.polyEdgeColor,          "#CC4C4CCC");
+		this.polyPointColor         = Colour.firstOrDefault(this.polyPointColor,         "#33CCCCCC");
+		this.ellipsoidGridColor     = Colour.firstOrDefault(this.ellipsoidGridColor,     "#CC4C4CCC");
+		this.ellipsoidPointColor    = Colour.firstOrDefault(this.ellipsoidPointColor,    "#CCCC33CC");
+		this.cylinderGridColor      = Colour.firstOrDefault(this.cylinderGridColor,      "#CC3333CC");
+		this.cylinderEdgeColor      = Colour.firstOrDefault(this.cylinderEdgeColor,      "#CC4C4CCC");
+		this.cylinderPointColor     = Colour.firstOrDefault(this.cylinderPointColor,     "#CC33CCCC");
 		
-		LineColour.CUBOIDBOX.setColour(this.cuboidEdgeColor);
-		LineColour.CUBOIDGRID.setColour(this.cuboidGridColor);
-		LineColour.CUBOIDPOINT1.setColour(this.cuboidFirstPointColor);
-		LineColour.CUBOIDPOINT2.setColour(this.cuboidSecondPointColor);
-		LineColour.POLYGRID.setColour(this.polyGridColor);
-		LineColour.POLYBOX.setColour(this.polyEdgeColor);
-		LineColour.POLYPOINT.setColour(this.polyPointColor);
-		LineColour.ELLIPSOIDGRID.setColour(this.ellipsoidGridColor);
-		LineColour.ELLIPSOIDCENTRE.setColour(this.ellipsoidPointColor);
-		LineColour.CYLINDERGRID.setColour(this.cylinderGridColor);
-		LineColour.CYLINDERBOX.setColour(this.cylinderEdgeColor);
-		LineColour.CYLINDERCENTRE.setColour(this.cylinderPointColor);
+		ConfiguredColour.CUBOIDBOX.setColour(this.cuboidEdgeColor);
+		ConfiguredColour.CUBOIDGRID.setColour(this.cuboidGridColor);
+		ConfiguredColour.CUBOIDPOINT1.setColour(this.cuboidFirstPointColor);
+		ConfiguredColour.CUBOIDPOINT2.setColour(this.cuboidSecondPointColor);
+		ConfiguredColour.POLYGRID.setColour(this.polyGridColor);
+		ConfiguredColour.POLYBOX.setColour(this.polyEdgeColor);
+		ConfiguredColour.POLYPOINT.setColour(this.polyPointColor);
+		ConfiguredColour.ELLIPSOIDGRID.setColour(this.ellipsoidGridColor);
+		ConfiguredColour.ELLIPSOIDCENTRE.setColour(this.ellipsoidPointColor);
+		ConfiguredColour.CYLINDERGRID.setColour(this.cylinderGridColor);
+		ConfiguredColour.CYLINDERBOX.setColour(this.cylinderEdgeColor);
+		ConfiguredColour.CYLINDERCENTRE.setColour(this.cylinderPointColor);
 		
 		this.save();
 	}

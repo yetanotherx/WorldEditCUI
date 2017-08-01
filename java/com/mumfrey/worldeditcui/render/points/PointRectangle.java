@@ -1,18 +1,19 @@
 package com.mumfrey.worldeditcui.render.points;
 
-import com.mumfrey.worldeditcui.render.LineColour;
+import com.mumfrey.worldeditcui.render.RenderStyle;
+import com.mumfrey.worldeditcui.render.ConfiguredColour;
 import com.mumfrey.worldeditcui.render.shapes.Render3DBox;
 import com.mumfrey.worldeditcui.util.Vector2;
 import com.mumfrey.worldeditcui.util.Vector3;
 
 /**
- * Stores data about a prism surrounding two
- * blocks in the world. Used to store info
- * about the selector blocks for polys. Keeps 
- * track of colour, x/y/z values, and rendering.
+ * Stores data about a prism surrounding two blocks in the world. Used to store
+ * info about the selector blocks for polys. Keeps track of colour, x/y/z
+ * values, and rendering.
  * 
  * @author yetanotherx
  * @author lahwran
+ * @author Adam Mummery-Smith
  */
 public class PointRectangle
 {
@@ -21,7 +22,7 @@ public class PointRectangle
 	private static final Vector2 MAX_VEC = new Vector2(PointRectangle.OFF + 1, PointRectangle.OFF + 1);
 	
 	protected Vector2 point;
-	protected LineColour colour = LineColour.POLYPOINT;
+	protected RenderStyle style = ConfiguredColour.POLYPOINT.style();
 	
 	private int min, max;
 	
@@ -52,14 +53,14 @@ public class PointRectangle
 		this.point = point;
 	}
 	
-	public LineColour getColour()
+	public RenderStyle getStyle()
 	{
-		return this.colour;
+		return this.style;
 	}
 	
-	public void setColour(LineColour colour)
+	public void setStyle(RenderStyle style)
 	{
-		this.colour = colour;
+		this.style = style;
 	}
 	
 	public void setMinMax(int min, int max)
@@ -81,6 +82,6 @@ public class PointRectangle
 	
 	private void update()
 	{
-		this.box = new Render3DBox(this.colour, this.point.subtract(PointRectangle.MIN_VEC).toVector3(this.min - 0.03f), this.point.add(PointRectangle.MAX_VEC).toVector3(this.max + 1 + 0.03f));
+		this.box = new Render3DBox(this.style, this.point.subtract(PointRectangle.MIN_VEC).toVector3(this.min - 0.03f), this.point.add(PointRectangle.MAX_VEC).toVector3(this.max + 1 + 0.03f));
 	}
 }

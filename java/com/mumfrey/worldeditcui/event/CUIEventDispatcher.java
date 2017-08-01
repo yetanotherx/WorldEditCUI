@@ -9,7 +9,6 @@ import com.mumfrey.worldeditcui.WorldEditCUI;
 import com.mumfrey.worldeditcui.exceptions.InitialisationException;
 
 /**
- *
  * @author Adam Mummery-Smith
  */
 public class CUIEventDispatcher implements InitialisationFactory
@@ -31,12 +30,13 @@ public class CUIEventDispatcher implements InitialisationFactory
 			try
 			{
 				Class<? extends CUIEvent> eventClass = eventType.getEventClass();
-				Constructor<? extends CUIEvent> ctor = eventClass.getDeclaredConstructor(WorldEditCUI.class, String[].class);
+				Constructor<? extends CUIEvent> ctor = eventClass.getDeclaredConstructor(CUIEventArgs.class);
 
 				this.eventConstructors.put(eventType.getKey(), ctor);
 			}
 			catch (NoSuchMethodException ex)
 			{
+				ex.printStackTrace();
 				this.controller.getDebugger().debug("Error getting constructor for event " + eventType.getKey());
 			}
 		}
@@ -47,7 +47,13 @@ public class CUIEventDispatcher implements InitialisationFactory
 		try
 		{
 			Constructor<? extends CUIEvent> eventCtor = this.eventConstructors.get(eventArgs.getType());
-			CUIEvent event = eventCtor.newInstance(this.controller, eventArgs.getParams());
+			if (eventCtor == null)
+			{
+				this.controller.getDebugger().debug("No such event " + eventArgs.getType());
+				return;
+			}
+			
+			CUIEvent event = eventCtor.newInstance(eventArgs);
 			event.prepare();
 			
 			String response = event.raise();
@@ -55,10 +61,6 @@ public class CUIEventDispatcher implements InitialisationFactory
 			{
 				this.handleEventResponse(response);
 			}
-		}
-		catch (NullPointerException ex)
-		{
-			this.controller.getDebugger().debug("No such event " + eventArgs.getType());
 		}
 		catch (Exception ex)
 		{

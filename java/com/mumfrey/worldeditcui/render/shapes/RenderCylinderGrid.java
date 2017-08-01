@@ -1,23 +1,23 @@
 package com.mumfrey.worldeditcui.render.shapes;
 
-import com.mumfrey.worldeditcui.render.LineColour;
-import com.mumfrey.worldeditcui.render.LineInfo;
+import static com.mumfrey.liteloader.gl.GL.*;
+
+import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.Tessellator;
+
+import com.mumfrey.worldeditcui.render.RenderStyle;
+import com.mumfrey.worldeditcui.render.LineStyle;
 import com.mumfrey.worldeditcui.render.points.PointCube;
 import com.mumfrey.worldeditcui.util.Vector3;
-
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.BufferBuilder;
-import static com.mumfrey.liteloader.gl.GL.*;
 
 /**
  * Draws the grid lines around a cylindrical region
  * 
  * @author yetanotherx
+ * @author Adam Mummery-Smith
  */
-public class RenderCylinderGrid
+public class RenderCylinderGrid extends RenderRegion
 {
-	
-	protected LineColour colour;
 	protected double radX = 0;
 	protected double radZ = 0;
 	protected int minY;
@@ -25,9 +25,9 @@ public class RenderCylinderGrid
 	protected double centreX;
 	protected double centreZ;
 	
-	public RenderCylinderGrid(LineColour colour, PointCube centre, double radX, double radZ, int minY, int maxY)
+	public RenderCylinderGrid(RenderStyle style, PointCube centre, double radX, double radZ, int minY, int maxY)
 	{
-		this.colour = colour;
+		super(style);
 		this.radX = radX;
 		this.radZ = radZ;
 		this.minY = minY;
@@ -36,6 +36,7 @@ public class RenderCylinderGrid
 		this.centreZ = centre.getPoint().getZ() + 0.5;
 	}
 	
+	@Override
 	public void render(Vector3 cameraPos)
 	{
 		Tessellator tessellator = Tessellator.getInstance();
@@ -44,9 +45,12 @@ public class RenderCylinderGrid
 		double xPos = this.centreX - cameraPos.getX();
 		double zPos = this.centreZ - cameraPos.getZ();
 
-		for (LineInfo tempColour : this.colour.getColours())
+		for (LineStyle line : this.style.getLines())
 		{
-			tempColour.prepareRender();
+			if (!line.prepare(this.style.getRenderType()))
+			{
+				continue;
+			}
 			
 			int tmaxY = this.maxY + 1;
 			int tminY = this.minY;
@@ -59,7 +63,7 @@ public class RenderCylinderGrid
 			{
 				double tempZ = this.radZ * Math.cos(Math.asin(tempX / this.radX));
 				buf.begin(GL_LINE_LOOP, VF_POSITION);
-				tempColour.prepareColour();
+				line.applyColour();
 				
 				buf.pos(xPos + tempX, tmaxY - cameraPos.getY(), zPos + tempZ).endVertex();
 				buf.pos(xPos + tempX, tmaxY - cameraPos.getY(), zPos - tempZ).endVertex();
@@ -73,7 +77,7 @@ public class RenderCylinderGrid
 			{
 				double tempX = this.radX * Math.sin(Math.acos(tempZ / this.radZ));
 				buf.begin(GL_LINE_LOOP, VF_POSITION);
-				tempColour.prepareColour();
+				line.applyColour();
 				
 				buf.pos(xPos + tempX, tmaxY - cameraPos.getY(), zPos + tempZ).endVertex();
 				buf.pos(xPos - tempX, tmaxY - cameraPos.getY(), zPos + tempZ).endVertex();

@@ -17,15 +17,15 @@ import com.mumfrey.worldeditcui.util.ConsoleLogFormatter;
  * Debugging helper class
  * 
  * @author yetanotherx
- * 
+ * @author Adam Mummery-Smith
  */
-public class CUIDebug implements InitialisationFactory
+public final class CUIDebug implements InitialisationFactory
 {
+	private static final Logger logger = Logger.getLogger("WorldEditCUI");
 	
-	protected WorldEditCUI controller;
-	protected File debugFile;
-	protected boolean debugMode = false;
-	protected final static Logger logger = Logger.getLogger("WorldEditCUI");
+	private final WorldEditCUI controller;
+	private File debugFile;
+	private boolean debugMode = false;
 	
 	public CUIDebug(WorldEditCUI controller)
 	{
@@ -40,8 +40,8 @@ public class CUIDebug implements InitialisationFactory
 		ConsoleHandler handler = new ConsoleHandler();
 		handler.setFormatter(formatter);
 		
-		logger.setUseParentHandlers(false);
-		logger.addHandler(handler);
+		CUIDebug.logger.setUseParentHandlers(false);
+		CUIDebug.logger.addHandler(handler);
 		
 		try
 		{
@@ -52,7 +52,7 @@ public class CUIDebug implements InitialisationFactory
 			{
 				FileHandler newHandler = new FileHandler(this.debugFile.getAbsolutePath());
 				newHandler.setFormatter(formatter);
-				logger.addHandler(newHandler);
+				CUIDebug.logger.addHandler(newHandler);
 			}
 			
 		}
@@ -72,17 +72,17 @@ public class CUIDebug implements InitialisationFactory
 	{
 		if (this.debugMode)
 		{
-			logger.info("WorldEditCUI Debug - " + message);
+			CUIDebug.logger.info("WorldEditCUI Debug - " + message);
 		}
 	}
 	
 	public void info(String message)
 	{
-		logger.info(message);
+		CUIDebug.logger.info(message);
 	}
 	
 	public void info(String message, Throwable e)
 	{
-		logger.log(Level.INFO, message, e);
+		CUIDebug.logger.log(Level.INFO, message, e);
 	}
 }

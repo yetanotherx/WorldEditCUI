@@ -9,17 +9,19 @@ import com.mumfrey.worldeditcui.WorldEditCUI;
  * 
  * @author lahwran
  * @author yetanotherx
- *
+ * @author Adam Mummery-Smith
  */
-public class CUIEventArgs
+public final class CUIEventArgs
 {
 	private WorldEditCUI controller;
+	private boolean multi;
 	private String type;
 	private String[] params;
 	
-	public CUIEventArgs(WorldEditCUI controller, String type, String[] params)
+	public CUIEventArgs(WorldEditCUI controller, boolean multi, String type, String[] params)
 	{
 		this.controller = controller;
+		this.multi = multi;
 		this.type = type;
 		
 		if (params.length == 1 && params[0].length() == 0)
@@ -31,14 +33,9 @@ public class CUIEventArgs
 		this.controller.getDebugger().debug("CUI Event (" + type + ") - Params: " + Joiner.on(", ").join(params));
 	}
 	
-	public int getInt(int index)
+	public WorldEditCUI getController()
 	{
-		return (int)Float.parseFloat(this.params[index]);
-	}
-	
-	public String getString(int index)
-	{
-		return this.params[index];
+		return this.controller;
 	}
 	
 	public String[] getParams()
@@ -49,5 +46,10 @@ public class CUIEventArgs
 	public String getType()
 	{
 		return this.type;
+	}
+	
+	public boolean isMulti()
+	{
+		return this.multi;
 	}
 }

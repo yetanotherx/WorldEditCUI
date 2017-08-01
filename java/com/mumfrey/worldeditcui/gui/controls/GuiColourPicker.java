@@ -29,8 +29,8 @@ public class GuiColourPicker extends GuiControl
 	private static final int H = 0, S = 1, B = 2;
 	
 	/**
-	 * HSB values from Colour.RGBtoHSB, combined with opacity this is the authoritative version of the
-	 * colour we are editing
+	 * HSB values from Colour.RGBtoHSB, combined with opacity this is the
+	 * authoritative version of the colour we are editing
 	 */
 	private float[] hsb;
 	
@@ -40,7 +40,8 @@ public class GuiColourPicker extends GuiControl
 	private int rgb;
 	
 	/**
-	 * Current opacity, stored as an offset byte in the usual position, eg. 0xFF << 24
+	 * Current opacity, stored as an offset byte in the usual position,
+	 * eg. 0xFF << 24
 	 */
 	private int opacity;
 	
@@ -163,8 +164,8 @@ public class GuiColourPicker extends GuiControl
 		this.txtBlue.drawTextBox();
 		this.txtAlpha.drawTextBox();
 		
-		this.btnOk.func_191745_a(minecraft, mouseX, mouseY, partialTicks); // drawButton
-		this.btnCancel.func_191745_a(minecraft, mouseX, mouseY, partialTicks); // drawButton
+		this.btnOk.drawButton(minecraft, mouseX, mouseY, partialTicks);
+		this.btnCancel.drawButton(minecraft, mouseX, mouseY, partialTicks);
 	}
 	
 	public void updateCursorCounter()

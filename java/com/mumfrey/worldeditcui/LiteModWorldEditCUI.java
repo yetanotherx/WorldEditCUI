@@ -3,7 +3,6 @@ package com.mumfrey.worldeditcui;
 import io.netty.buffer.Unpooled;
 
 import java.io.File;
-import java.util.Arrays;
 import java.util.List;
 
 import net.minecraft.client.Minecraft;
@@ -19,6 +18,8 @@ import net.minecraft.network.play.server.SPacketJoinGame;
 import org.lwjgl.input.Keyboard;
 
 import com.google.common.base.Charsets;
+import com.google.common.base.Joiner;
+import com.google.common.collect.ImmutableList;
 import com.mojang.realmsclient.dto.RealmsServer;
 import com.mumfrey.liteloader.Configurable;
 import com.mumfrey.liteloader.InitCompleteListener;
@@ -29,14 +30,20 @@ import com.mumfrey.liteloader.Tickable;
 import com.mumfrey.liteloader.core.ClientPluginChannels;
 import com.mumfrey.liteloader.core.LiteLoader;
 import com.mumfrey.liteloader.core.PluginChannels.ChannelPolicy;
+import com.mumfrey.liteloader.messaging.Message;
+import com.mumfrey.liteloader.messaging.Messenger;
 import com.mumfrey.liteloader.modconfig.ConfigPanel;
 import com.mumfrey.worldeditcui.config.CUIConfiguration;
 import com.mumfrey.worldeditcui.event.listeners.CUIListenerChannel;
 import com.mumfrey.worldeditcui.event.listeners.CUIListenerWorldRender;
 import com.mumfrey.worldeditcui.gui.CUIConfigPanel;
-import com.mumfrey.worldeditcui.render.region.CuboidRegion;
 
-public class LiteModWorldEditCUI implements Tickable, InitCompleteListener, PluginChannelListener, PostRenderListener, Configurable, JoinGameListener
+/**
+ * Main litemod entry point
+ * 
+ * @author Adam Mummery-Smith
+ */
+public class LiteModWorldEditCUI implements Tickable, InitCompleteListener, PluginChannelListener, PostRenderListener, Configurable, JoinGameListener, Messenger
 {
 	private static final int DELAYED_HELO_TICKS = 10;
 
@@ -102,9 +109,38 @@ public class LiteModWorldEditCUI implements Tickable, InitCompleteListener, Plug
 	}
 	
 	@Override
+	public List<String> getMessageChannels()
+	{
+		return ImmutableList.<String>of("wecui:wecui");
+	}
+	
+	@Override
+	public void receiveMessage(Message message)
+	{
+		if (message.isChannel("wecui:wecui"))
+		{
+			try
+			{
+				Object value = message.<Object>getValue();
+				if (value instanceof String)
+				{
+					this.channelListener.onMessage((String)value);
+				}
+				else if (value instanceof List)
+				{
+					@SuppressWarnings("unchecked")
+					List<Object> list = (List<Object>)value;
+					this.channelListener.onMessage(Joiner.on('|').join(list));
+				}
+			}
+			catch (Exception ex) {}
+		}
+	}
+	
+	@Override
 	public List<String> getChannels()
 	{
-		return Arrays.asList(new String[] { CHANNEL_WECUI });
+		return ImmutableList.<String>of(LiteModWorldEditCUI.CHANNEL_WECUI);
 	}
 	
 	@Override
@@ -148,7 +184,9 @@ public class LiteModWorldEditCUI implements Tickable, InitCompleteListener, Plug
 			if (this.keyBindClearSel.isPressed())
 			{
 				if (mc.player != null)
+				{
 					mc.player.sendChatMessage("//sel");
+				}
 			}
 		}
 		
@@ -163,7 +201,7 @@ public class LiteModWorldEditCUI implements Tickable, InitCompleteListener, Plug
 				this.lastPlayer = mc.player;
 				
 				this.controller.getDebugger().debug("World change detected, sending new handshake");
-				this.controller.setSelection(new CuboidRegion(this.controller));
+				this.controller.clear();
 				this.helo();
 				this.delayedHelo = LiteModWorldEditCUI.DELAYED_HELO_TICKS;
 				if (mc.player != null && config.isPromiscuous())
@@ -196,7 +234,7 @@ public class LiteModWorldEditCUI implements Tickable, InitCompleteListener, Plug
 	@Override
 	public String getVersion()
 	{
-		return "1.12_00";
+		return "1.12.1-SNAPSHOT";
 	}
 	
 	@Override

@@ -1,21 +1,22 @@
 package com.mumfrey.worldeditcui.event.cui;
 
-import com.mumfrey.worldeditcui.WorldEditCUI;
 import com.mumfrey.worldeditcui.event.CUIEvent;
+import com.mumfrey.worldeditcui.event.CUIEventArgs;
 import com.mumfrey.worldeditcui.event.CUIEventType;
+import com.mumfrey.worldeditcui.render.region.Region;
 
 /**
  * Called when polygon event is received
  * 
  * @author lahwran
  * @author yetanotherx
+ * @author Adam Mummery-Smith
  */
 public class CUIEventPolygon extends CUIEvent
 {
-	
-	public CUIEventPolygon(WorldEditCUI controller, String[] args)
+	public CUIEventPolygon(CUIEventArgs args)
 	{
-		super(controller, args);
+		super(args);
 	}
 	
 	@Override
@@ -27,13 +28,20 @@ public class CUIEventPolygon extends CUIEvent
 	@Override
 	public String raise()
 	{
-		final int[] vertexIds = new int[this.args.length];
-		for (int i = 0; i < this.args.length; ++i)
+		Region selection = this.controller.getSelection(this.multi);
+		if (selection == null)
+		{
+			this.controller.getDebugger().debug("No active multi selection.");
+			return null;
+		}
+
+		final int[] vertexIds = new int[this.params.length];
+		for (int i = 0; i < this.params.length; ++i)
 		{
 			vertexIds[i] = this.getInt(i);
 		}
 		
-		this.controller.getSelection().addPolygon(vertexIds);
+		selection.addPolygon(vertexIds);
 		//this.controller.getDebugger().debug("Setting point #" + id);
 		
 		return null;

@@ -12,7 +12,6 @@ import static com.mumfrey.liteloader.gl.GL.*;
  * which are used by several derived classes
  * 
  * @author Adam Mummery-Smith
- *
  */
 public class GuiControl extends GuiButton
 {
@@ -97,7 +96,7 @@ public class GuiControl extends GuiButton
 	 * @param mouseY Mouse Y coordinate
 	 */
 	@Override
-	public final void func_191745_a(Minecraft minecraft, int mouseX, int mouseY, float partialTicks) // drawButton
+	public final void drawButton(Minecraft minecraft, int mouseX, int mouseY, float partialTicks)
 	{
 		this.drawControl(minecraft, mouseX, mouseY, partialTicks);
 	}
@@ -111,7 +110,7 @@ public class GuiControl extends GuiButton
 	 */
 	protected void drawControl(Minecraft minecraft, int mouseX, int mouseY, float partialTicks)
 	{
-		super.func_191745_a(minecraft, mouseX, mouseY, partialTicks);
+		super.drawButton(minecraft, mouseX, mouseY, partialTicks);
 	}
 	
 	/**

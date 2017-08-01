@@ -18,8 +18,11 @@ import com.mumfrey.worldeditcui.LiteModWorldEditCUI;
 import com.mumfrey.worldeditcui.config.CUIConfiguration;
 import com.mumfrey.worldeditcui.gui.controls.GuiColourButton;
 import com.mumfrey.worldeditcui.gui.controls.GuiControl;
-import com.mumfrey.worldeditcui.render.LineColour;
+import com.mumfrey.worldeditcui.render.ConfiguredColour;
 
+/**
+ * @author Adam Mummery-Smith
+ */
 public class CUIConfigPanel extends Gui implements ConfigPanel
 {
 	private static final int CONTROL_SPACING = 24;
@@ -51,7 +54,7 @@ public class CUIConfigPanel extends Gui implements ConfigPanel
 	@Override
 	public int getContentHeight()
 	{
-		return LineColour.values().length * CUIConfigPanel.CONTROL_SPACING + CUIConfigPanel.CONTROL_TOP;
+		return ConfiguredColour.values().length * CUIConfigPanel.CONTROL_SPACING + CUIConfigPanel.CONTROL_TOP;
 	}
 	
 	@Override
@@ -66,7 +69,7 @@ public class CUIConfigPanel extends Gui implements ConfigPanel
 		int nextId = 0;
 		int top = CUIConfigPanel.CONTROL_TOP;
 		
-		for (LineColour colour : LineColour.values())
+		for (ConfiguredColour colour : ConfiguredColour.values())
 		{
 			this.controlList.add(new GuiColourButton(this.mc, nextId, 24, top + nextId * CUIConfigPanel.CONTROL_SPACING, 40, 20, colour));
 			this.controlList.add(new GuiControl(this.mc, 100 + nextId, 234, top + nextId * CUIConfigPanel.CONTROL_SPACING, 60, 20, "Reset"));
@@ -119,7 +122,7 @@ public class CUIConfigPanel extends Gui implements ConfigPanel
 		
 		for (GuiButton control : this.controlList)
 		{
-			control.func_191745_a(this.mc, mouseX, mouseY, partialTicks); // drawButton
+			control.drawButton(this.mc, mouseX, mouseY, partialTicks);
 		}
 		
 		for (GuiColourButton colourButton : this.colourButtonList)
@@ -157,7 +160,7 @@ public class CUIConfigPanel extends Gui implements ConfigPanel
 		
 		if (control.id >= 100)
 		{
-			LineColour lineColour = LineColour.values()[control.id - 100];
+			ConfiguredColour lineColour = ConfiguredColour.values()[control.id - 100];
 			lineColour.setDefaultColour();
 			
 			for (GuiColourButton colourButton : this.colourButtonList)

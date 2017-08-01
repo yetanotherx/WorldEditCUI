@@ -1,7 +1,7 @@
 package com.mumfrey.worldeditcui.render.region;
 
 import com.mumfrey.worldeditcui.WorldEditCUI;
-import com.mumfrey.worldeditcui.render.LineColour;
+import com.mumfrey.worldeditcui.render.ConfiguredColour;
 import com.mumfrey.worldeditcui.render.points.PointCube;
 import com.mumfrey.worldeditcui.render.shapes.RenderCylinderBox;
 import com.mumfrey.worldeditcui.render.shapes.RenderCylinderCircles;
@@ -12,15 +12,13 @@ import com.mumfrey.worldeditcui.util.Vector3;
  * Main controller for a cylinder-type region
  * 
  * @author yetanotherx
+ * @author Adam Mummery-Smith
  */
-public class CylinderRegion extends BaseRegion
+public class CylinderRegion extends Region
 {
-	
-	protected PointCube centre;
-	protected double radX = 0;
-	protected double radZ = 0;
-	protected int minY = 0;
-	protected int maxY = 0;
+	private PointCube centre;
+	private double radX = 0, radZ = 0;
+	private int minY = 0, maxY = 0;
 	
 	private RenderCylinderCircles circles;
 	private RenderCylinderGrid grid;
@@ -28,11 +26,11 @@ public class CylinderRegion extends BaseRegion
 	
 	public CylinderRegion(WorldEditCUI controller)
 	{
-		super(controller);
+		super(controller, ConfiguredColour.CYLINDERBOX.style(), ConfiguredColour.CYLINDERGRID.style(), ConfiguredColour.CYLINDERCENTRE.style());
 	}
 	
 	@Override
-	public void render(Vector3 cameraPos)
+	public void render(Vector3 cameraPos, float partialTicks)
 	{
 		if (this.centre != null)
 		{
@@ -47,7 +45,7 @@ public class CylinderRegion extends BaseRegion
 	public void setCylinderCenter(int x, int y, int z)
 	{
 		this.centre = new PointCube(x, y, z);
-		this.centre.setColour(LineColour.CYLINDERCENTRE);
+		this.centre.setStyle(this.styles[2]);
 		this.update();
 	}
 	
@@ -78,11 +76,35 @@ public class CylinderRegion extends BaseRegion
 			tMax = (int)this.centre.getPoint().getY();
 		}
 		
-		this.circles = new RenderCylinderCircles(LineColour.CYLINDERGRID, this.centre, this.radX, this.radZ, tMin, tMax);
-		this.grid = new RenderCylinderGrid(LineColour.CYLINDERGRID, this.centre, this.radX, this.radZ, tMin, tMax);
-		this.box = new RenderCylinderBox(LineColour.CYLINDERBOX, this.centre, this.radX, this.radZ, tMin, tMax);
+		this.circles = new RenderCylinderCircles(this.styles[1], this.centre, this.radX, this.radZ, tMin, tMax);
+		this.grid = new RenderCylinderGrid(this.styles[1], this.centre, this.radX, this.radZ, tMin, tMax);
+		this.box = new RenderCylinderBox(this.styles[0], this.centre, this.radX, this.radZ, tMin, tMax);
 	}
 	
+	@Override
+	protected void updateStyles()
+	{
+		if (this.box != null)
+		{
+			this.box.setStyle(this.styles[0]);
+		}
+		
+		if (this.grid != null)
+		{
+			this.grid.setStyle(this.styles[1]);
+		}
+		
+		if (this.circles != null)
+		{
+			this.circles.setStyle(this.styles[1]);
+		}
+		
+		if (this.centre != null)
+		{
+			this.centre.setStyle(this.styles[2]);
+		}
+	}
+
 	@Override
 	public RegionType getType()
 	{

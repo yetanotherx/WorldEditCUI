@@ -7,16 +7,15 @@ import java.util.Map;
 import com.mumfrey.worldeditcui.InitialisationFactory;
 import com.mumfrey.worldeditcui.WorldEditCUI;
 import com.mumfrey.worldeditcui.exceptions.InitialisationException;
-import com.mumfrey.worldeditcui.render.region.BaseRegion;
+import com.mumfrey.worldeditcui.render.region.Region;
 import com.mumfrey.worldeditcui.render.region.RegionType;
 
 /**
- *
  * @author Adam Mummery-Smith
  */
 public class CUISelectionProvider implements InitialisationFactory
 {
-	private Map<String, Constructor<? extends BaseRegion>> regionConstructors = new HashMap<String, Constructor<? extends BaseRegion>>();
+	private Map<String, Constructor<? extends Region>> regionConstructors = new HashMap<String, Constructor<? extends Region>>();
 
 	private WorldEditCUI controller;
 	
@@ -32,8 +31,8 @@ public class CUISelectionProvider implements InitialisationFactory
 		{
 			try
 			{
-				Class<? extends BaseRegion> eventClass = regionType.getRegionClass();
-				Constructor<? extends BaseRegion> ctor = eventClass.getDeclaredConstructor(WorldEditCUI.class);
+				Class<? extends Region> eventClass = regionType.getRegionClass();
+				Constructor<? extends Region> ctor = eventClass.getDeclaredConstructor(WorldEditCUI.class);
 
 				this.regionConstructors.put(regionType.getKey(), ctor);
 			}
@@ -44,12 +43,17 @@ public class CUISelectionProvider implements InitialisationFactory
 		}
 	}
 	
-	public BaseRegion createSelection(String key)
+	public Region createSelection(String key)
 	{
+		if ("clear".equals(key))
+		{
+			return null;
+		}
+		
 		try
 		{
-			Constructor<? extends BaseRegion> regionCtor = this.regionConstructors.get(key);
-			BaseRegion region = regionCtor.newInstance(this.controller);
+			Constructor<? extends Region> regionCtor = this.regionConstructors.get(key);
+			Region region = regionCtor.newInstance(this.controller);
 			return region;
 		}
 		catch (NullPointerException ex)
@@ -58,7 +62,7 @@ public class CUISelectionProvider implements InitialisationFactory
 		}
 		catch (Exception ex)
 		{
-			this.controller.getDebugger().debug("Error creation " + key + " selection: " + ex.getClass().getSimpleName() + " " + ex.getMessage());
+			this.controller.getDebugger().debug("Error creating " + key + " selection: " + ex.getClass().getSimpleName() + " " + ex.getMessage());
 		}
 
 		return null;
