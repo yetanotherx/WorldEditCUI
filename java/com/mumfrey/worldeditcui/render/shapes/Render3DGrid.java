@@ -20,6 +20,7 @@ import com.mumfrey.worldeditcui.util.Vector3;
  */
 public class Render3DGrid extends RenderRegion
 {
+	private static final float CULL_RANGE = 128.0F;
 	public static final double MIN_SPACING = 1.0;
 	
 	private Vector3 first, second;
@@ -111,7 +112,7 @@ public class Render3DGrid extends RenderRegion
 			return;
 		}
 		
-		double cullAt = 128.0F;
+		double cullAt = Render3DGrid.CULL_RANGE * this.spacing;
 		for (LineStyle line : this.style.getLines())
 		{
 			if (!line.prepare(this.style.getRenderType()))
