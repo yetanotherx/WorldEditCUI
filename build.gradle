@@ -38,7 +38,8 @@ litemod {
     json {
         author = "yetanotherx, Mumfrey, TomyLobo"
         mcversion = project.targetVersion
-        description = "Client-side user interface for WorldEdit"
+        description = "Client-side user interface for WorldEdit",
+		revision = project.revision
     }
 }
 
