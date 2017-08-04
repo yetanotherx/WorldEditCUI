@@ -159,6 +159,7 @@ public class Colour
 	public Colour copyFrom(Colour other)
 	{
 		this.hex = other.getHex();
+		this.update();
 		return this;
 	}
 }
