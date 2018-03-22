@@ -25,8 +25,14 @@ import com.mumfrey.worldeditcui.render.ConfiguredColour;
  */
 public class CUIConfigPanel extends Gui implements ConfigPanel
 {
+
+	private static final int COLOUR_OPTION_BASE_ID = 100;
+	
 	private static final int CONTROL_SPACING = 24;
 	private static final int CONTROL_TOP = 80;
+	private static final int CONTROLS_PADDING = 10;
+	private static final int EXTRA_CONTROLS_SPACING = 16;
+	private static final int EXTRA_CONTROLS_HEIGHT = CUIConfigPanel.EXTRA_CONTROLS_SPACING * 2;
 
 	private Minecraft mc;
 	
@@ -38,7 +44,9 @@ public class CUIConfigPanel extends Gui implements ConfigPanel
 	
 	private GuiButton activeControl;
 	
-	private GuiCheckbox chkPromiscuous, chkAlwaysOnTop;
+	private GuiCheckbox chkPromiscuous, chkAlwaysOnTop, chkClearAll;
+	
+	private int colourButtonsBottom;
 	
 	public CUIConfigPanel()
 	{
@@ -54,7 +62,7 @@ public class CUIConfigPanel extends Gui implements ConfigPanel
 	@Override
 	public int getContentHeight()
 	{
-		return ConfiguredColour.values().length * CUIConfigPanel.CONTROL_SPACING + CUIConfigPanel.CONTROL_TOP;
+		return this.colourButtonsBottom + CUIConfigPanel.EXTRA_CONTROLS_HEIGHT + CUIConfigPanel.CONTROLS_PADDING;
 	}
 	
 	@Override
@@ -62,32 +70,35 @@ public class CUIConfigPanel extends Gui implements ConfigPanel
 	{
 		this.mod = host.getMod();
 		
-		ScaledResolution scaledresolution = new ScaledResolution(this.mc);
-		GuiControl.setScreenSizeAndScale(host.getWidth(), this.getContentHeight(), scaledresolution.getScaleFactor());
-		
 		this.controlList.clear();
 		int nextId = 0;
-		int top = CUIConfigPanel.CONTROL_TOP;
-		
 		for (ConfiguredColour colour : ConfiguredColour.values())
 		{
-			this.controlList.add(new GuiColourButton(this.mc, nextId, 24, top + nextId * CUIConfigPanel.CONTROL_SPACING, 40, 20, colour));
-			this.controlList.add(new GuiControl(this.mc, 100 + nextId, 234, top + nextId * CUIConfigPanel.CONTROL_SPACING, 60, 20, "Reset"));
+			this.controlList.add(new GuiColourButton(this.mc, nextId, 24, CUIConfigPanel.CONTROL_TOP + nextId * CUIConfigPanel.CONTROL_SPACING, 40, 20, colour));
+			this.controlList.add(new GuiControl(this.mc, CUIConfigPanel.COLOUR_OPTION_BASE_ID + nextId, 234, CUIConfigPanel.CONTROL_TOP + nextId * CUIConfigPanel.CONTROL_SPACING, 60, 20, "Reset"));
 			nextId++;
 		}
 		
+		this.colourButtonsBottom = CUIConfigPanel.CONTROL_TOP + nextId * CUIConfigPanel.CONTROL_SPACING + CUIConfigPanel.EXTRA_CONTROLS_SPACING;
 		this.controlList.add(this.chkPromiscuous = new GuiCheckbox(nextId, 24, 26, I18n.format("gui.options.compat.spammy")));
 		this.controlList.add(this.chkAlwaysOnTop = new GuiCheckbox(nextId, 24, 42, I18n.format("gui.options.compat.ontop")));
+		this.controlList.add(this.chkClearAll = new GuiCheckbox(nextId, 24, this.colourButtonsBottom + CUIConfigPanel.EXTRA_CONTROLS_SPACING, I18n.format("gui.options.extra.clearall")));
 		
 		for (GuiButton control : this.controlList)
 		{
 			if (control instanceof GuiColourButton)
+			{
 				this.colourButtonList.add((GuiColourButton)control);
+			}
 		}
 
 		CUIConfiguration config = this.mod.getController().getConfiguration();
 		this.chkPromiscuous.checked = config.isPromiscuous();
 		this.chkAlwaysOnTop.checked = config.isAlwaysOnTop();
+		this.chkClearAll.checked = config.isClearAllOnKey();
+	
+		ScaledResolution scaledresolution = new ScaledResolution(this.mc);
+		GuiControl.setScreenSizeAndScale(host.getWidth(), this.getContentHeight(), scaledresolution.getScaleFactor());
 	}
 	
 	@Override
@@ -106,6 +117,7 @@ public class CUIConfigPanel extends Gui implements ConfigPanel
 		CUIConfiguration config = this.mod.getController().getConfiguration();
 		config.setPromiscuous(this.chkPromiscuous.checked);
 		config.setAlwaysOnTop(this.chkAlwaysOnTop.checked);
+		config.setClearAllOnKey(this.chkClearAll.checked);
 		config.save();
 	}
 	
@@ -117,8 +129,9 @@ public class CUIConfigPanel extends Gui implements ConfigPanel
 	@Override
 	public void drawPanel(ConfigPanelHost host, int mouseX, int mouseY, float partialTicks)
 	{
-		this.drawString(this.mc.fontRenderer, I18n.format("gui.options.compat.title"),  10, 10, 0xFFFFFF55);
+		this.drawString(this.mc.fontRenderer, I18n.format("gui.options.compat.title"),  10, CUIConfigPanel.CONTROLS_PADDING, 0xFFFFFF55);
 		this.drawString(this.mc.fontRenderer, I18n.format("gui.options.colours.title"), 10, 64, 0xFFFFFF55);
+		this.drawString(this.mc.fontRenderer, I18n.format("gui.options.extra.title"), 10, this.colourButtonsBottom, 0xFFFFFF55);
 		
 		for (GuiButton control : this.controlList)
 		{
@@ -158,9 +171,9 @@ public class CUIConfigPanel extends Gui implements ConfigPanel
 			chk.checked = !chk.checked;
 		}
 		
-		if (control.id >= 100)
+		if (control.id >= CUIConfigPanel.COLOUR_OPTION_BASE_ID)
 		{
-			ConfiguredColour lineColour = ConfiguredColour.values()[control.id - 100];
+			ConfiguredColour lineColour = ConfiguredColour.values()[control.id - CUIConfigPanel.COLOUR_OPTION_BASE_ID];
 			lineColour.setDefault();
 			
 			for (GuiColourButton colourButton : this.colourButtonList)

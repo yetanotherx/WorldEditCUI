@@ -29,6 +29,7 @@ public final class CUIConfiguration implements InitialisationFactory
 	@Expose private boolean ignoreUpdates = false;
 	@Expose private boolean promiscuous = false;
 	@Expose private boolean alwaysOnTop = false;
+	@Expose private boolean clearAllOnKey = false;
 	
 	@Expose private Colour cuboidGridColor        = ConfiguredColour.CUBOIDBOX.getDefault();
 	@Expose private Colour cuboidEdgeColor        = ConfiguredColour.CUBOIDGRID.getDefault();
@@ -102,6 +103,16 @@ public final class CUIConfiguration implements InitialisationFactory
 	public void setAlwaysOnTop(boolean alwaysOnTop)
 	{
 		this.alwaysOnTop = alwaysOnTop;
+	}
+	
+	public boolean isClearAllOnKey()
+	{
+		return this.clearAllOnKey;
+	}
+	
+	public void setClearAllOnKey(boolean clearAllOnKey)
+	{
+		this.clearAllOnKey = clearAllOnKey;
 	}
 	
 	public static CUIConfiguration create()

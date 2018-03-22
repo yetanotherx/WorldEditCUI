@@ -170,13 +170,15 @@ public class LiteModWorldEditCUI implements Tickable, InitCompleteListener, Plug
 	@Override
 	public void onTick(Minecraft mc, float partialTicks, boolean inGame, boolean clock)
 	{
+		CUIConfiguration config = this.controller.getConfiguration();
+		
 		if (inGame && mc.currentScreen == null)
 		{
+			
 			if (this.keyBindToggleUI.isPressed())
 			{
 				if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
 				{
-					CUIConfiguration config = this.controller.getConfiguration();
 					config.setAlwaysOnTop(!config.isAlwaysOnTop());
 				}
 				else
@@ -191,6 +193,11 @@ public class LiteModWorldEditCUI implements Tickable, InitCompleteListener, Plug
 				{
 					mc.player.sendChatMessage("//sel");
 				}
+				
+				if (config.isClearAllOnKey())
+				{
+					this.controller.clearRegions();
+				}
 			}
 			
 			if (this.keyBindChunkBorder.isPressed())
@@ -201,7 +208,6 @@ public class LiteModWorldEditCUI implements Tickable, InitCompleteListener, Plug
 		
 		if (inGame && clock && this.controller != null)
 		{
-			CUIConfiguration config = this.controller.getConfiguration();
 			this.alwaysOnTop = config.isAlwaysOnTop();
 				
 			if (mc.world != this.lastWorld || mc.player != this.lastPlayer)
