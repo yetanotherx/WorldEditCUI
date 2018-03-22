@@ -72,7 +72,7 @@ public class CuboidRegion extends Region
 	{
 		if (id < 2)
 		{
-			this.points[id] = new PointCube(x, y, z).setStyle(this.styles[2]);
+			this.points[id] = new PointCube(x, y, z).setStyle(this.styles[id+2]);
 		}
 		
 		this.updateBounds();
@@ -83,7 +83,7 @@ public class CuboidRegion extends Region
 	{
 		if (id < 2)
 		{
-			this.points[id] = new PointCubeTracking(entity, traceDistance).setStyle(this.styles[2]);
+			this.points[id] = new PointCubeTracking(entity, traceDistance).setStyle(this.styles[id+2]);
 		}
 		
 		this.updateBounds();
