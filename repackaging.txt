@@ -1,7 +1,0 @@
-renames: 
-  - notch: 
-    wecui: deobf
-  - notch: wecui.vendor.org.yaml.\1
-    wecui: org.yaml.(.*)
-  - notch: wecui.vendor.com.sk89q.\1
-    wecui: com.sk89q.(.*)

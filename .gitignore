@@ -1,11 +1,17 @@
-/target
-/run*
-/build.sh
-/minecraft.jar
-/repackaging/
+# Build #
+#########
+MANIFEST.MF
+dependency-reduced-pom.xml
 
-# Compiled source #
-###################
+# Compiled #
+############
+bin
+build
+dist
+lib
+out
+run
+target
 *.com
 *.class
 *.dll
@@ -13,30 +19,60 @@
 *.o
 *.so
 
+# Databases #
+#############
+*.db
+*.sql
+*.sqlite
+
 # Packages #
 ############
-# it's better to unpack these files and commit the raw source
-# git has its own built in compression methods
 *.7z
 *.dmg
 *.gz
 *.iso
-*.jar
 *.rar
 *.tar
 *.zip
 
-# Logs and databases #
-######################
+# Repository #
+##############
+.git
+
+# Logging #
+###########
+/logs
 *.log
-*.sql
-*.sqlite
 
-# OS generated files #
-######################
-.DS_Store*
+# Misc #
+########
+*.bak
+
+# System #
+##########
+.DS_Store
 ehthumbs.db
-Icon?
 Thumbs.db
+*.bat
+*.sh
 
-*.howto
+# Project #
+###########
+.checkstyle
+.classpath
+.externalToolBuilders
+.gradle
+.nb-gradle
+.idea
+.project
+.settings
+eclipse
+nbproject
+atlassian-ide-plugin.xml
+build.xml
+nb-configuration.xml
+*.iml
+*.ipr
+*.iws
+*.launch
+*.number
